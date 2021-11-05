@@ -25,7 +25,7 @@ cols = 20;
 field = ones(rows, cols);
 
 % ’œ∞≠ŒÔ«¯”Ú
-obsRate = 0.3;
+obsRate = 0.25;
 obsNum = floor(rows*cols*obsRate);
 obsIndex = randi([1,rows*cols],obsNum,1);
 field(obsIndex) = 2;

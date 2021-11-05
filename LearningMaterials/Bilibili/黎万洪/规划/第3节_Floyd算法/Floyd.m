@@ -6,8 +6,8 @@ close all
 
 %% 栅格界面、场景定义
 % 行数和列数
-rows = 10;
-cols = 20;
+rows = 30;
+cols = 30;
 [field,cmap] = defColorMap(rows, cols);
 
 % 起点、终点、障碍物区域

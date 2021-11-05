@@ -6,8 +6,8 @@ close all
 
 %% 栅格界面、场景定义
 % 行数和列数
-rows = 10;
-cols = 20;
+rows = 5;
+cols = 4;
 [field,cmap] = defColorMap(rows, cols);
 
 % 起点、终点、障碍物区域
@@ -100,6 +100,7 @@ while true
     % 判断是否搜索到终点
     if parentNode == goalPos
         closeList(end+1,: ) = [openList(idx_min).node, openList(idx_min).f];
+        openList(idx_min)= [];
         break
     end
 end

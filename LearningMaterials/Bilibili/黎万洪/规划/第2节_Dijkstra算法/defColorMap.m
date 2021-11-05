@@ -14,7 +14,7 @@ colormap(cmap);
 field = ones(rows, cols);
 
 % ’œ∞≠ŒÔ«¯”Ú
-obsRate = 0.3;
+obsRate = 0.5;
 obsNum = floor(rows*cols*obsRate);
 obsIndex = randi([1,rows*cols],obsNum,1);
 field(obsIndex) = 2;

@@ -1,6 +1,7 @@
 % Dijkstra算法
 % 作者：Ally
 % 日期：2020/12/18
+% 有权图/有权有向图/拓扑图
 
 clc
 clear
@@ -54,7 +55,7 @@ while ~isempty(U)
         
         % 找出U集合中节点node_temp的索引值
         idx_temp = find(node_temp == U(:,1));
-        
+
         % 判断是否更新
         if ~isempty(idx_temp)
             if dist_min + nodes_dist{node_min, 3}(i) < U(idx_temp, 2)
@@ -67,13 +68,3 @@ while ~isempty(U)
         end
     end
 end
-        
-        
-        
-    
-    
-
-
-
-
-
