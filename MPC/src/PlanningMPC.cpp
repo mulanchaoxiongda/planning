@@ -160,6 +160,12 @@ ControlCommand PlanningMPC::CalRefTrajectory()
 
     running_time_average_ = running_time_sum_ / (double)loop_counter_;
 
+    p_savedata_->file << "[planning_control_command] "
+                          << " Time "             << sensor_info_.t
+                          << " vc "               << u_optimal_(0)
+                          << " wc "               << u_optimal_(1)
+                          << " Time "             << sensor_info_.t << endl;
+
     ControlCommand result = {u_optimal_(0), u_optimal_(1), sensor_info_.t};
 
     return result;

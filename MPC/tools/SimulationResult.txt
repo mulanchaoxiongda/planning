@@ -75,6 +75,7 @@
 [reference_trajectory_planning]  Time 0.00000000 x_ref 0.66045181 y_ref 0.03438319 yaw_ref 0.10133734 v_ref 0.33074785 w_ref 0.03053607 t_ref 1.90000000 loop_counter 0.00000000
 [reference_trajectory_planning]  Time 0.00000000 x_ref 0.69334654 y_ref 0.03782963 yaw_ref 0.10439095 v_ref 0.33074785 w_ref 0.03053607 t_ref 2.00000000 loop_counter 0.00000000
 [goal_state_planning]  Time 0.00000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.00000000 loop_counter 0.00000000
+[planning_control_command]  Time 0.00000000 vc 0.46908615 wc 0.06980803 Time 0.00000000
 [state_of_robot]  Time 0.01000000 x 0.00469909 y -0.00999978 yaw 0.00004654 v 0.46990861 w 0.00465387 t 0.01000000
 [state_of_robot]  Time 0.02000000 x 0.00939735 y -0.00999914 yaw 0.00013651 v 0.46982637 w 0.00899748 t 0.02000000
 [reference_point]  Time 0.02000000 x_ref 0.00900375 y_ref 0.00000000 yaw_ref 0.00180075 v_ref 0.46132500 w_ref 0.03601500 t 0.02000000
@@ -104,6 +105,7 @@
 [reference_trajectory_planning]  Time 0.02000000 x_ref 0.65707518 y_ref 0.03795595 yaw_ref 0.10613249 v_ref 0.32453103 w_ref 0.02779185 t_ref 1.92000000 loop_counter 1.00000000
 [reference_trajectory_planning]  Time 0.02000000 x_ref 0.68933599 y_ref 0.04148348 yaw_ref 0.10891168 v_ref 0.32453103 w_ref 0.02779184 t_ref 2.02000000 loop_counter 1.00000000
 [goal_state_planning]  Time 0.02000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.02000000 loop_counter 1.00000000
+[planning_control_command]  Time 0.02000000 vc 0.45986082 wc 0.13352404 Time 0.02000000
 [state_of_robot]  Time 0.03000000 x 0.01408565 y -0.00999769 yaw 0.00030951 v 0.46882981 w 0.01729925 t 0.03000000
 [state_of_robot]  Time 0.04000000 x 0.01876498 y -0.00999507 yaw 0.00055998 v 0.46793291 w 0.02504757 t 0.04000000
 [reference_point]  Time 0.04000000 x_ref 0.01800750 y_ref 0.00000000 yaw_ref 0.00360150 v_ref 0.45390000 w_ref 0.07203000 t 0.04000000
@@ -133,6 +135,7 @@
 [reference_trajectory_planning]  Time 0.04000000 x_ref 0.65368191 y_ref 0.04121095 yaw_ref 0.11074951 v_ref 0.31831521 w_ref 0.02455105 t_ref 1.94000000 loop_counter 2.00000000
 [reference_trajectory_planning]  Time 0.04000000 x_ref 0.68530969 y_ref 0.04480674 yaw_ref 0.11320462 v_ref 0.31831521 w_ref 0.02455104 t_ref 2.04000000 loop_counter 2.00000000
 [goal_state_planning]  Time 0.04000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.04000000 loop_counter 2.00000000
+[planning_control_command]  Time 0.04000000 vc 0.45052008 wc 0.16233604 Time 0.04000000
 [state_of_robot]  Time 0.05000000 x 0.02342689 y -0.00999086 yaw 0.00090198 v 0.46619163 w 0.03420013 t 0.05000000
 [state_of_robot]  Time 0.06000000 x 0.02807313 y -0.00998469 yaw 0.00132941 v 0.46462447 w 0.04274253 t 0.06000000
 [reference_point]  Time 0.06000000 x_ref 0.02682934 y_ref 0.00001945 yaw_ref 0.00536588 v_ref 0.44655000 w_ref 0.08931000 t 0.06000000
@@ -162,6 +165,7 @@
 [reference_trajectory_planning]  Time 0.06000000 x_ref 0.65041121 y_ref 0.04236939 yaw_ref 0.11251310 v_ref 0.31217675 w_ref 0.02219969 t_ref 1.96000000 loop_counter 3.00000000
 [reference_trajectory_planning]  Time 0.06000000 x_ref 0.68142364 y_ref 0.04594323 yaw_ref 0.11473306 v_ref 0.31217675 w_ref 0.02219968 t_ref 2.06000000 loop_counter 3.00000000
 [goal_state_planning]  Time 0.06000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.06000000 loop_counter 3.00000000
+[planning_control_command]  Time 0.06000000 vc 0.44071524 wc 0.17616004 Time 0.06000000
 [state_of_robot]  Time 0.07000000 x 0.03269546 y -0.00997616 yaw 0.00184578 v 0.46223355 w 0.05163703 t 0.07000000
 [state_of_robot]  Time 0.08000000 x 0.03729626 y -0.00996491 yaw 0.00244516 v 0.46008172 w 0.05993856 t 0.08000000
 [reference_point]  Time 0.08000000 x_ref 0.03546925 y_ref 0.00005834 yaw_ref 0.00709387 v_ref 0.43927500 w_ref 0.08785500 t 0.08000000
@@ -191,6 +195,7 @@
 [reference_trajectory_planning]  Time 0.08000000 x_ref 0.64727269 y_ref 0.04157691 yaw_ref 0.11141464 v_ref 0.30611593 w_ref 0.02065365 t_ref 1.98000000 loop_counter 4.00000000
 [reference_trajectory_planning]  Time 0.08000000 x_ref 0.67768739 y_ref 0.04504326 yaw_ref 0.11348000 v_ref 0.30611593 w_ref 0.02065365 t_ref 2.08000000 loop_counter 4.00000000
 [goal_state_planning]  Time 0.08000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.08000000 loop_counter 4.00000000
+[planning_control_command]  Time 0.08000000 vc 0.43043837 wc 0.17499604 Time 0.08000000
 [state_of_robot]  Time 0.09000000 x 0.04186741 y -0.00995064 yaw 0.00312125 v 0.45711739 w 0.06760906 t 0.09000000
 [state_of_robot]  Time 0.10000000 x 0.04641187 y -0.00993306 yaw 0.00386894 v 0.45444948 w 0.07476819 t 0.10000000
 [reference_point]  Time 0.10000000 x_ref 0.04410916 y_ref 0.00009724 yaw_ref 0.00882187 v_ref 0.43200000 w_ref 0.08640000 t 0.10000000
@@ -220,6 +225,7 @@
 [reference_trajectory_planning]  Time 0.10000000 x_ref 0.64413203 y_ref 0.04081593 yaw_ref 0.11042643 v_ref 0.30005417 w_ref 0.01923554 t_ref 2.00000000 loop_counter 5.00000000
 [reference_trajectory_planning]  Time 0.10000000 x_ref 0.67394827 y_ref 0.04417995 yaw_ref 0.11234998 v_ref 0.30005417 w_ref 0.01923554 t_ref 2.10000000 loop_counter 5.00000000
 [goal_state_planning]  Time 0.10000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.10000000 loop_counter 5.00000000
+[planning_control_command]  Time 0.10000000 vc 0.42045930 wc 0.17383204 Time 0.10000000
 [state_of_robot]  Time 0.11000000 x 0.05092233 y -0.00991193 yaw 0.00468266 v 0.45105046 w 0.08137245 t 0.11000000
 [state_of_robot]  Time 0.12000000 x 0.05540217 y -0.00988703 yaw 0.00555803 v 0.44799135 w 0.08753642 t 0.12000000
 [reference_point]  Time 0.12000000 x_ref 0.05239259 y_ref 0.00017032 yaw_ref 0.01047862 v_ref 0.42487500 w_ref 0.08497500 t 0.12000000
@@ -249,6 +255,7 @@
 [reference_trajectory_planning]  Time 0.12000000 x_ref 0.64091905 y_ref 0.04008871 yaw_ref 0.10946987 v_ref 0.29414596 w_ref 0.01786643 t_ref 2.02000000 loop_counter 6.00000000
 [reference_trajectory_planning]  Time 0.12000000 x_ref 0.67015179 y_ref 0.04335453 yaw_ref 0.11125651 v_ref 0.29414596 w_ref 0.01786642 t_ref 2.12000000 loop_counter 6.00000000
 [goal_state_planning]  Time 0.12000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.12000000 loop_counter 6.00000000
+[planning_control_command]  Time 0.12000000 vc 0.40975163 wc 0.17269204 Time 0.12000000
 [state_of_robot]  Time 0.13000000 x 0.05984375 y -0.00985821 yaw 0.00649016 v 0.44416738 w 0.09321346 t 0.13000000
 [state_of_robot]  Time 0.14000000 x 0.06425089 y -0.00982526 yaw 0.00747528 v 0.44072580 w 0.09851204 t 0.14000000
 [reference_point]  Time 0.14000000 x_ref 0.06067602 y_ref 0.00024339 yaw_ref 0.01213537 v_ref 0.41775000 w_ref 0.08355000 t 0.14000000
@@ -278,6 +285,7 @@
 [reference_trajectory_planning]  Time 0.14000000 x_ref 0.63770457 y_ref 0.03938716 yaw_ref 0.10860362 v_ref 0.28823678 w_ref 0.01660967 t_ref 2.04000000 loop_counter 7.00000000
 [reference_trajectory_planning]  Time 0.14000000 x_ref 0.66635320 y_ref 0.04255895 yaw_ref 0.11026458 v_ref 0.28823678 w_ref 0.01660966 t_ref 2.14000000 loop_counter 7.00000000
 [goal_state_planning]  Time 0.14000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.14000000 loop_counter 7.00000000
+[planning_control_command]  Time 0.14000000 vc 0.39939339 wc 0.17155204 Time 0.14000000
 [state_of_robot]  Time 0.15000000 x 0.06861666 y -0.00978811 yaw 0.00850909 v 0.43659256 w 0.10338137 t 0.15000000
 [state_of_robot]  Time 0.16000000 x 0.07294518 y -0.00974661 yaw 0.00958836 v 0.43287264 w 0.10792608 t 0.16000000
 [reference_point]  Time 0.16000000 x_ref 0.06878490 y_ref 0.00033136 yaw_ref 0.01375725 v_ref 0.41070000 w_ref 0.08214000 t 0.16000000
@@ -307,6 +315,7 @@
 [reference_trajectory_planning]  Time 0.16000000 x_ref 0.63445666 y_ref 0.03870989 yaw_ref 0.10778934 v_ref 0.28240235 w_ref 0.01542984 t_ref 2.06000000 loop_counter 8.00000000
 [reference_trajectory_planning]  Time 0.16000000 x_ref 0.66252827 y_ref 0.04179131 yaw_ref 0.10933232 v_ref 0.28240235 w_ref 0.01542983 t_ref 2.16000000 loop_counter 8.00000000
 [goal_state_planning]  Time 0.16000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.16000000 loop_counter 8.00000000
+[planning_control_command]  Time 0.16000000 vc 0.38911952 wc 0.17042404 Time 0.16000000
 [state_of_robot]  Time 0.17000000 x 0.07722991 y -0.00970072 yaw 0.01070928 v 0.42849733 w 0.11209261 t 0.17000000
 [state_of_robot]  Time 0.18000000 x 0.08147521 y -0.00965033 yaw 0.01186909 v 0.42455955 w 0.11598137 t 0.18000000
 [reference_point]  Time 0.18000000 x_ref 0.07671923 y_ref 0.00043423 yaw_ref 0.01534425 v_ref 0.40372500 w_ref 0.08074500 t 0.18000000
@@ -336,6 +345,7 @@
 [reference_trajectory_planning]  Time 0.18000000 x_ref 0.63117566 y_ref 0.03805539 yaw_ref 0.10701862 v_ref 0.27664310 w_ref 0.01431885 t_ref 2.08000000 loop_counter 9.00000000
 [reference_trajectory_planning]  Time 0.18000000 x_ref 0.65867744 y_ref 0.04104972 yaw_ref 0.10845050 v_ref 0.27664310 w_ref 0.01431884 t_ref 2.18000000 loop_counter 9.00000000
 [goal_state_planning]  Time 0.18000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.18000000 loop_counter 9.00000000
+[planning_control_command]  Time 0.18000000 vc 0.37887928 wc 0.16930804 Time 0.18000000
 [state_of_robot]  Time 0.19000000 x 0.08567477 y -0.00959546 yaw 0.01306446 v 0.41999152 w 0.11953649 t 0.19000000
 [state_of_robot]  Time 0.20000000 x 0.08983314 y -0.00953602 yaw 0.01429301 v 0.41588030 w 0.12285459 t 0.20000000
 [reference_point]  Time 0.20000000 x_ref 0.08465356 y_ref 0.00053709 yaw_ref 0.01693125 v_ref 0.39675000 w_ref 0.07935000 t 0.20000000
@@ -365,6 +375,7 @@
 [reference_trajectory_planning]  Time 0.20000000 x_ref 0.62789288 y_ref 0.03741912 yaw_ref 0.10631701 v_ref 0.27088089 w_ref 0.01330526 t_ref 2.10000000 loop_counter 10.00000000
 [reference_trajectory_planning]  Time 0.20000000 x_ref 0.65482417 y_ref 0.04032946 yaw_ref 0.10764754 v_ref 0.27088089 w_ref 0.01330526 t_ref 2.20000000 loop_counter 10.00000000
 [goal_state_planning]  Time 0.20000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.20000000 loop_counter 10.00000000
+[planning_control_command]  Time 0.20000000 vc 0.36933908 wc 0.16819204 Time 0.20000000
 [state_of_robot]  Time 0.21000000 x 0.09394491 y -0.00947207 yaw 0.01555178 v 0.41122617 w 0.12587709 t 0.21000000
 [state_of_robot]  Time 0.22000000 x 0.09801471 y -0.00940353 yaw 0.01683876 v 0.40703747 w 0.12869808 t 0.22000000
 [reference_point]  Time 0.22000000 x_ref 0.09224622 y_ref 0.00066566 yaw_ref 0.01845000 v_ref 0.38992500 w_ref 0.07798500 t 0.22000000
@@ -394,6 +405,7 @@
 [reference_trajectory_planning]  Time 0.22000000 x_ref 0.62455296 y_ref 0.03680314 yaw_ref 0.10562106 v_ref 0.26527040 w_ref 0.01232752 t_ref 2.12000000 loop_counter 11.00000000
 [reference_trajectory_planning]  Time 0.22000000 x_ref 0.65092871 y_ref 0.03963226 yaw_ref 0.10685382 v_ref 0.26527040 w_ref 0.01232752 t_ref 2.22000000 loop_counter 11.00000000
 [goal_state_planning]  Time 0.22000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.22000000 loop_counter 11.00000000
+[planning_control_command]  Time 0.22000000 vc 0.35945077 wc 0.16710004 Time 0.22000000
 [state_of_robot]  Time 0.23000000 x 0.10203683 y -0.00933052 yaw 0.01815134 v 0.40227880 w 0.13125821 t 0.23000000
 [state_of_robot]  Time 0.24000000 x 0.10601603 y -0.00925296 yaw 0.01948782 v 0.39799599 w 0.13364767 t 0.24000000
 [reference_point]  Time 0.24000000 x_ref 0.09983888 y_ref 0.00079423 yaw_ref 0.01996875 v_ref 0.38310000 w_ref 0.07662000 t 0.24000000
@@ -423,6 +435,7 @@
 [reference_trajectory_planning]  Time 0.24000000 x_ref 0.62121171 y_ref 0.03620329 yaw_ref 0.10498194 v_ref 0.25965760 w_ref 0.01143625 t_ref 2.14000000 loop_counter 12.00000000
 [reference_trajectory_planning]  Time 0.24000000 x_ref 0.64703139 y_ref 0.03895375 yaw_ref 0.10612557 v_ref 0.25965760 w_ref 0.01143624 t_ref 2.24000000 loop_counter 12.00000000
 [goal_state_planning]  Time 0.24000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.24000000 loop_counter 12.00000000
+[planning_control_command]  Time 0.24000000 vc 0.35017300 wc 0.16600804 Time 0.24000000
 [state_of_robot]  Time 0.25000000 x 0.10994732 y -0.00917100 yaw 0.02084587 v 0.39321369 w 0.13580503 t 0.25000000
 [state_of_robot]  Time 0.26000000 x 0.11383545 y -0.00908458 yaw 0.02222405 v 0.38890962 w 0.13781856 t 0.26000000
 [reference_point]  Time 0.26000000 x_ref 0.10726443 y_ref 0.00093375 yaw_ref 0.02145413 v_ref 0.37635000 w_ref 0.07527000 t 0.26000000
@@ -452,6 +465,7 @@
 [reference_trajectory_planning]  Time 0.26000000 x_ref 0.61784466 y_ref 0.03561885 yaw_ref 0.10436935 v_ref 0.25411850 w_ref 0.01060441 t_ref 2.16000000 loop_counter 13.00000000
 [reference_trajectory_planning]  Time 0.26000000 x_ref 0.64311541 y_ref 0.03829305 yaw_ref 0.10542979 v_ref 0.25411850 w_ref 0.01060440 t_ref 2.26000000 loop_counter 13.00000000
 [goal_state_planning]  Time 0.26000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.26000000 loop_counter 13.00000000
+[planning_control_command]  Time 0.26000000 vc 0.34119353 wc 0.16492804 Time 0.26000000
 [state_of_robot]  Time 0.27000000 x 0.11767576 y -0.00899385 yaw 0.02362031 v 0.38413802 w 0.13962586 t 0.27000000
 [state_of_robot]  Time 0.28000000 x 0.12147301 y -0.00889877 yaw 0.02503344 v 0.37984357 w 0.14131267 t 0.28000000
 [reference_point]  Time 0.28000000 x_ref 0.11452287 y_ref 0.00108422 yaw_ref 0.02290613 v_ref 0.36967500 w_ref 0.07393500 t 0.28000000
@@ -481,6 +495,7 @@
 [reference_trajectory_planning]  Time 0.28000000 x_ref 0.61445212 y_ref 0.03504943 yaw_ref 0.10377741 v_ref 0.24865376 w_ref 0.00982525 t_ref 2.18000000 loop_counter 14.00000000
 [reference_trajectory_planning]  Time 0.28000000 x_ref 0.63918118 y_ref 0.03764956 yaw_ref 0.10475993 v_ref 0.24865376 w_ref 0.00982524 t_ref 2.28000000 loop_counter 14.00000000
 [goal_state_planning]  Time 0.28000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.28000000 loop_counter 14.00000000
+[planning_control_command]  Time 0.28000000 vc 0.33240796 wc 0.16386004 Time 0.28000000
 [state_of_robot]  Time 0.29000000 x 0.12522269 y -0.00879953 yaw 0.02646160 v 0.37510001 w 0.14281583 t 0.29000000
 [state_of_robot]  Time 0.30000000 x 0.12892956 y -0.00869606 yaw 0.02790378 v 0.37083080 w 0.14421878 t 0.30000000
 [reference_point]  Time 0.30000000 x_ref 0.12178131 y_ref 0.00123470 yaw_ref 0.02435813 v_ref 0.36300000 w_ref 0.07260000 t 0.30000000
@@ -510,6 +525,7 @@
 [reference_trajectory_planning]  Time 0.30000000 x_ref 0.61105789 y_ref 0.03449288 yaw_ref 0.10322807 v_ref 0.24318564 w_ref 0.00912060 t_ref 2.20000000 loop_counter 15.00000000
 [reference_trajectory_planning]  Time 0.30000000 x_ref 0.63524471 y_ref 0.03702085 yaw_ref 0.10414012 v_ref 0.24318564 w_ref 0.00912060 t_ref 2.30000000 loop_counter 15.00000000
 [goal_state_planning]  Time 0.30000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.30000000 loop_counter 15.00000000
+[planning_control_command]  Time 0.30000000 vc 0.32440134 wc 0.16279204 Time 0.30000000
 [state_of_robot]  Time 0.31000000 x 0.13258986 y -0.00858857 yaw 0.02935835 v 0.36618786 w 0.14545700 t 0.31000000
 [state_of_robot]  Time 0.32000000 x 0.13620823 y -0.00847700 yaw 0.03082448 v 0.36200920 w 0.14661266 t 0.32000000
 [reference_point]  Time 0.32000000 x_ref 0.12871301 y_ref 0.00140358 yaw_ref 0.02574488 v_ref 0.35647500 w_ref 0.07129500 t 0.32000000
@@ -539,6 +555,7 @@
 [reference_trajectory_planning]  Time 0.32000000 x_ref 0.60762163 y_ref 0.03394994 yaw_ref 0.10267019 v_ref 0.23786881 w_ref 0.00844392 t_ref 2.22000000 loop_counter 16.00000000
 [reference_trajectory_planning]  Time 0.32000000 x_ref 0.63128119 y_ref 0.03640783 yaw_ref 0.10351458 v_ref 0.23786881 w_ref 0.00844392 t_ref 2.32000000 loop_counter 16.00000000
 [goal_state_planning]  Time 0.32000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.32000000 loop_counter 16.00000000
+[planning_control_command]  Time 0.32000000 vc 0.31613524 wc 0.16174804 Time 0.32000000
 [state_of_robot]  Time 0.33000000 x 0.13978059 y -0.00836157 yaw 0.03230070 v 0.35742181 w 0.14762169 t 0.33000000
 [state_of_robot]  Time 0.34000000 x 0.14331150 y -0.00824223 yaw 0.03378633 v 0.35329315 w 0.14856345 t 0.34000000
 [reference_point]  Time 0.34000000 x_ref 0.13564470 y_ref 0.00157245 yaw_ref 0.02713163 v_ref 0.34995000 w_ref 0.06999000 t 0.34000000
@@ -568,6 +585,7 @@
 [reference_trajectory_planning]  Time 0.34000000 x_ref 0.60418411 y_ref 0.03341929 yaw_ref 0.10214580 v_ref 0.23254962 w_ref 0.00783212 t_ref 2.24000000 loop_counter 17.00000000
 [reference_trajectory_planning]  Time 0.34000000 x_ref 0.62731599 y_ref 0.03580868 yaw_ref 0.10292902 v_ref 0.23254962 w_ref 0.00783212 t_ref 2.34000000 loop_counter 17.00000000
 [goal_state_planning]  Time 0.34000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.34000000 loop_counter 17.00000000
+[planning_control_command]  Time 0.34000000 vc 0.30848257 wc 0.16070404 Time 0.34000000
 [state_of_robot]  Time 0.35000000 x 0.14679745 y -0.00811920 yaw 0.03528006 v 0.34881209 w 0.14937282 t 0.35000000
 [state_of_robot]  Time 0.36000000 x 0.15024291 y -0.00799241 yaw 0.03678134 v 0.34477914 w 0.15012823 t 0.36000000
 [reference_point]  Time 0.36000000 x_ref 0.14241677 y_ref 0.00174891 yaw_ref 0.02848650 v_ref 0.34350000 w_ref 0.06870000 t 0.36000000
@@ -597,6 +615,7 @@
 [reference_trajectory_planning]  Time 0.36000000 x_ref 0.60072838 y_ref 0.03290002 yaw_ref 0.10163085 v_ref 0.22730416 w_ref 0.00726537 t_ref 2.26000000 loop_counter 18.00000000
 [reference_trajectory_planning]  Time 0.36000000 x_ref 0.62333982 y_ref 0.03522259 yaw_ref 0.10235738 v_ref 0.22730416 w_ref 0.00726536 t_ref 2.36000000 loop_counter 18.00000000
 [goal_state_planning]  Time 0.36000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.36000000 loop_counter 18.00000000
+[planning_control_command]  Time 0.36000000 vc 0.30111763 wc 0.15967204 Time 0.36000000
 [state_of_robot]  Time 0.37000000 x 0.15364455 y -0.00786210 yaw 0.03828899 v 0.34041299 w 0.15076449 t 0.37000000
 [state_of_robot]  Time 0.38000000 x 0.15700671 y -0.00772821 yaw 0.03980257 v 0.33648345 w 0.15135833 t 0.38000000
 [reference_point]  Time 0.38000000 x_ref 0.14902920 y_ref 0.00193294 yaw_ref 0.02980950 v_ref 0.33712500 w_ref 0.06742500 t 0.38000000
@@ -626,6 +645,7 @@
 [reference_trajectory_planning]  Time 0.38000000 x_ref 0.59725476 y_ref 0.03239214 yaw_ref 0.10112068 v_ref 0.22213321 w_ref 0.00673759 t_ref 2.28000000 loop_counter 19.00000000
 [reference_trajectory_planning]  Time 0.38000000 x_ref 0.61935309 y_ref 0.03464943 yaw_ref 0.10179444 v_ref 0.22213321 w_ref 0.00673759 t_ref 2.38000000 loop_counter 19.00000000
 [goal_state_planning]  Time 0.38000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.38000000 loop_counter 19.00000000
+[planning_control_command]  Time 0.38000000 vc 0.29391502 wc 0.15865204 Time 0.38000000
 [state_of_robot]  Time 0.39000000 x 0.16032615 y -0.00759097 yaw 0.04132102 v 0.33222661 w 0.15184457 t 0.39000000
 [state_of_robot]  Time 0.40000000 x 0.16360709 y -0.00745031 yaw 0.04284400 v 0.32839545 w 0.15229840 t 0.40000000
 [reference_point]  Time 0.40000000 x_ref 0.15564164 y_ref 0.00211698 yaw_ref 0.03113250 v_ref 0.33075000 w_ref 0.06615000 t 0.40000000
@@ -655,6 +675,7 @@
 [reference_trajectory_planning]  Time 0.40000000 x_ref 0.59377953 y_ref 0.03189506 yaw_ref 0.10063280 v_ref 0.21695924 w_ref 0.00626379 t_ref 2.30000000 loop_counter 20.00000000
 [reference_trajectory_planning]  Time 0.40000000 x_ref 0.61536432 y_ref 0.03408822 yaw_ref 0.10125918 v_ref 0.21695924 w_ref 0.00626379 t_ref 2.40000000 loop_counter 20.00000000
 [goal_state_planning]  Time 0.40000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.40000000 loop_counter 20.00000000
+[planning_control_command]  Time 0.40000000 vc 0.28740949 wc 0.15763204 Time 0.40000000
 [state_of_robot]  Time 0.41000000 x 0.16684686 y -0.00730647 yaw 0.04437054 v 0.32429686 w 0.15265398 t 0.41000000
 [state_of_robot]  Time 0.42000000 x 0.17004957 y -0.00715936 yaw 0.04590040 v 0.32060812 w 0.15298585 t 0.42000000
 [reference_point]  Time 0.42000000 x_ref 0.16194234 y_ref 0.00231320 yaw_ref 0.03239325 v_ref 0.32452500 w_ref 0.06490500 t 0.42000000
@@ -684,6 +705,7 @@
 [reference_trajectory_planning]  Time 0.42000000 x_ref 0.59027742 y_ref 0.03140791 yaw_ref 0.10012702 v_ref 0.21193679 w_ref 0.00581145 t_ref 2.32000000 loop_counter 21.00000000
 [reference_trajectory_planning]  Time 0.42000000 x_ref 0.61136371 y_ref 0.03353868 yaw_ref 0.10070816 v_ref 0.21193679 w_ref 0.00581145 t_ref 2.42000000 loop_counter 21.00000000
 [goal_state_planning]  Time 0.42000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.42000000 loop_counter 21.00000000
+[planning_control_command]  Time 0.42000000 vc 0.28060137 wc 0.15663604 Time 0.42000000
 [state_of_robot]  Time 0.43000000 x 0.17321208 y -0.00700924 yaw 0.04743269 v 0.31660744 w 0.15322920 t 0.43000000
 [state_of_robot]  Time 0.44000000 x 0.17633840 y -0.00685603 yaw 0.04896725 v 0.31300684 w 0.15345632 t 0.44000000
 [reference_point]  Time 0.44000000 x_ref 0.16824303 y_ref 0.00250942 yaw_ref 0.03365400 v_ref 0.31830000 w_ref 0.06366000 t 0.44000000
@@ -713,6 +735,7 @@
 [reference_trajectory_planning]  Time 0.44000000 x_ref 0.58677410 y_ref 0.03093146 yaw_ref 0.09963597 v_ref 0.20691244 w_ref 0.00540431 t_ref 2.34000000 loop_counter 22.00000000
 [reference_trajectory_planning]  Time 0.44000000 x_ref 0.60736161 y_ref 0.03300077 yaw_ref 0.10017640 v_ref 0.20691244 w_ref 0.00540430 t_ref 2.44000000 loop_counter 22.00000000
 [goal_state_planning]  Time 0.44000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.44000000 loop_counter 22.00000000
+[planning_control_command]  Time 0.44000000 vc 0.27430452 wc 0.15564004 Time 0.44000000
 [state_of_robot]  Time 0.45000000 x 0.17942582 y -0.00669997 yaw 0.05050327 v 0.30913661 w 0.15360190 t 0.45000000
 [state_of_robot]  Time 0.46000000 x 0.18247822 y -0.00654098 yaw 0.05204065 v 0.30565340 w 0.15373778 t 0.46000000
 [reference_point]  Time 0.46000000 x_ref 0.17439162 y_ref 0.00271036 yaw_ref 0.03488438 v_ref 0.31215000 w_ref 0.06243000 t 0.46000000
@@ -742,6 +765,7 @@
 [reference_trajectory_planning]  Time 0.46000000 x_ref 0.58326020 y_ref 0.03046439 yaw_ref 0.09914090 v_ref 0.20196227 w_ref 0.00502918 t_ref 2.36000000 loop_counter 23.00000000
 [reference_trajectory_planning]  Time 0.46000000 x_ref 0.60335625 y_ref 0.03247349 yaw_ref 0.09964382 v_ref 0.20196227 w_ref 0.00502918 t_ref 2.46000000 loop_counter 23.00000000
 [goal_state_planning]  Time 0.46000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.46000000 loop_counter 23.00000000
+[planning_control_command]  Time 0.46000000 vc 0.26820407 wc 0.15465604 Time 0.46000000
 [state_of_robot]  Time 0.47000000 x 0.18549297 y -0.00637930 yaw 0.05357864 v 0.30190846 w 0.15379900 t 0.47000000
 [state_of_robot]  Time 0.48000000 x 0.18847382 y -0.00621484 yaw 0.05511720 v 0.29853802 w 0.15385613 t 0.48000000
 [reference_point]  Time 0.48000000 x_ref 0.18038809 y_ref 0.00291603 yaw_ref 0.03608438 v_ref 0.30607500 w_ref 0.06121500 t 0.48000000
@@ -771,6 +795,7 @@
 [reference_trajectory_planning]  Time 0.48000000 x_ref 0.57973604 y_ref 0.03000674 yaw_ref 0.09863786 v_ref 0.19708704 w_ref 0.00468057 t_ref 2.38000000 loop_counter 24.00000000
 [reference_trajectory_planning]  Time 0.48000000 x_ref 0.59934803 y_ref 0.03195679 yaw_ref 0.09910592 v_ref 0.19708704 w_ref 0.00468057 t_ref 2.48000000 loop_counter 24.00000000
 [goal_state_planning]  Time 0.48000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.48000000 loop_counter 24.00000000
+[planning_control_command]  Time 0.48000000 vc 0.26217538 wc 0.15368404 Time 0.48000000
 [state_of_robot]  Time 0.49000000 x 0.19141810 y -0.00604785 yaw 0.05665565 v 0.29490176 w 0.15384466 t 0.49000000
 [state_of_robot]  Time 0.50000000 x 0.19432946 y -0.00587823 yaw 0.05819399 v 0.29162912 w 0.15383395 t 0.50000000
 [reference_point]  Time 0.50000000 x_ref 0.18638457 y_ref 0.00312170 yaw_ref 0.03728438 v_ref 0.30000000 w_ref 0.06000000 t 0.50000000
@@ -800,6 +825,7 @@
 [reference_trajectory_planning]  Time 0.50000000 x_ref 0.57621032 y_ref 0.02955909 yaw_ref 0.09813965 v_ref 0.19220938 w_ref 0.00436685 t_ref 2.40000000 loop_counter 25.00000000
 [reference_trajectory_planning]  Time 0.50000000 x_ref 0.59533794 y_ref 0.03145075 yaw_ref 0.09857633 v_ref 0.19220938 w_ref 0.00436685 t_ref 2.50000000 loop_counter 25.00000000
 [goal_state_planning]  Time 0.50000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.50000000 loop_counter 25.00000000
+[planning_control_command]  Time 0.50000000 vc 0.25672194 wc 0.15271204 Time 0.50000000
 [state_of_robot]  Time 0.51000000 x 0.19720570 y -0.00570623 yaw 0.05973158 v 0.28813840 w 0.15375916 t 0.51000000
 [state_of_robot]  Time 0.52000000 x 0.20005032 y -0.00553172 yaw 0.06126847 v 0.28499676 w 0.15368935 t 0.52000000
 [reference_point]  Time 0.52000000 x_ref 0.19208435 y_ref 0.00333431 yaw_ref 0.03842513 v_ref 0.29407500 w_ref 0.05881500 t 0.52000000
@@ -829,6 +855,7 @@
 [reference_trajectory_planning]  Time 0.52000000 x_ref 0.57267287 y_ref 0.02911908 yaw_ref 0.09761611 v_ref 0.18748358 w_ref 0.00406873 t_ref 2.42000000 loop_counter 26.00000000
 [reference_trajectory_planning]  Time 0.52000000 x_ref 0.59133123 y_ref 0.03095391 yaw_ref 0.09802299 v_ref 0.18748358 w_ref 0.00406873 t_ref 2.52000000 loop_counter 26.00000000
 [goal_state_planning]  Time 0.52000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.52000000 loop_counter 26.00000000
+[planning_control_command]  Time 0.52000000 vc 0.25089949 wc 0.15176404 Time 0.52000000
 [state_of_robot]  Time 0.53000000 x 0.20286064 y -0.00535499 yaw 0.06280408 v 0.28158703 w 0.15356100 t 0.53000000
 [state_of_robot]  Time 0.54000000 x 0.20564006 y -0.00517592 yaw 0.06433849 v 0.27851828 w 0.15344120 t 0.54000000
 [reference_point]  Time 0.54000000 x_ref 0.19778414 y_ref 0.00354692 yaw_ref 0.03956588 v_ref 0.28815000 w_ref 0.05763000 t 0.54000000
@@ -858,6 +885,7 @@
 [reference_trajectory_planning]  Time 0.54000000 x_ref 0.56913424 y_ref 0.02868889 yaw_ref 0.09710586 v_ref 0.18275638 w_ref 0.00379428 t_ref 2.44000000 loop_counter 27.00000000
 [reference_trajectory_planning]  Time 0.54000000 x_ref 0.58732310 y_ref 0.03046768 yaw_ref 0.09748529 v_ref 0.18275638 w_ref 0.00379428 t_ref 2.54000000 loop_counter 27.00000000
 [goal_state_planning]  Time 0.54000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.54000000 loop_counter 27.00000000
+[planning_control_command]  Time 0.54000000 vc 0.24547704 wc 0.14974716 Time 0.54000000
 [state_of_robot]  Time 0.55000000 x 0.20838623 y -0.00499476 yaw 0.06587044 v 0.27521415 w 0.15319493 t 0.55000000
 [state_of_robot]  Time 0.56000000 x 0.21110246 y -0.00481141 yaw 0.06740009 v 0.27224044 w 0.15296508 t 0.56000000
 [reference_point]  Time 0.56000000 x_ref 0.20333935 y_ref 0.00376187 yaw_ref 0.04067775 v_ref 0.28230000 w_ref 0.05646000 t 0.56000000
@@ -887,6 +915,7 @@
 [reference_trajectory_planning]  Time 0.56000000 x_ref 0.56559244 y_ref 0.02826671 yaw_ref 0.09672416 v_ref 0.17810382 w_ref 0.00352446 t_ref 2.46000000 loop_counter 28.00000000
 [reference_trajectory_planning]  Time 0.56000000 x_ref 0.58331897 y_ref 0.02999297 yaw_ref 0.09707661 v_ref 0.17810382 w_ref 0.00352446 t_ref 2.56000000 loop_counter 28.00000000
 [goal_state_planning]  Time 0.56000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.56000000 loop_counter 28.00000000
+[planning_control_command]  Time 0.56000000 vc 0.24016242 wc 0.13865086 Time 0.56000000
 [state_of_robot]  Time 0.57000000 x 0.21378640 y -0.00462614 yaw 0.06892020 v 0.26903264 w 0.15201080 t 0.57000000
 [state_of_robot]  Time 0.58000000 x 0.21644125 y -0.00443885 yaw 0.07043140 v 0.26614562 w 0.15112013 t 0.58000000
 [reference_point]  Time 0.58000000 x_ref 0.20874999 y_ref 0.00397915 yaw_ref 0.04176075 v_ref 0.27652500 w_ref 0.05530500 t 0.58000000
@@ -916,6 +945,7 @@
 [reference_trajectory_planning]  Time 0.58000000 x_ref 0.56204715 y_ref 0.02786302 yaw_ref 0.09639408 v_ref 0.17352658 w_ref 0.00326401 t_ref 2.48000000 loop_counter 29.00000000
 [reference_trajectory_planning]  Time 0.58000000 x_ref 0.57931870 y_ref 0.02953876 yaw_ref 0.09672048 v_ref 0.17352658 w_ref 0.00326401 t_ref 2.58000000 loop_counter 29.00000000
 [goal_state_planning]  Time 0.58000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.58000000 loop_counter 29.00000000
+[planning_control_command]  Time 0.58000000 vc 0.23484149 wc 0.12603684 Time 0.58000000
 [state_of_robot]  Time 0.59000000 x 0.21906461 y -0.00424983 yaw 0.07192588 v 0.26301520 w 0.14944791 t 0.59000000
 [state_of_robot]  Time 0.60000000 x 0.22165958 y -0.00405901 yaw 0.07340475 v 0.26019783 w 0.14788718 t 0.60000000
 [reference_point]  Time 0.60000000 x_ref 0.21416063 y_ref 0.00419643 yaw_ref 0.04284375 v_ref 0.27075000 w_ref 0.05415000 t 0.60000000
@@ -945,6 +975,7 @@
 [reference_trajectory_planning]  Time 0.60000000 x_ref 0.55849957 y_ref 0.02747897 yaw_ref 0.09610458 v_ref 0.16894737 w_ref 0.00301378 t_ref 2.50000000 loop_counter 30.00000000
 [reference_trajectory_planning]  Time 0.60000000 x_ref 0.57531586 y_ref 0.02910520 yaw_ref 0.09640596 v_ref 0.16894737 w_ref 0.00301378 t_ref 2.60000000 loop_counter 30.00000000
 [goal_state_planning]  Time 0.60000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.60000000 loop_counter 30.00000000
+[planning_control_command]  Time 0.60000000 vc 0.22999422 wc 0.11346817 Time 0.60000000
 [state_of_robot]  Time 0.61000000 x 0.22422415 y -0.00386666 yaw 0.07486068 v 0.25717747 w 0.14559258 t 0.61000000
 [state_of_robot]  Time 0.62000000 x 0.22676134 y -0.00367271 yaw 0.07629519 v 0.25445915 w 0.14345095 t 0.62000000
 [reference_point]  Time 0.62000000 x_ref 0.21928967 y_ref 0.00441631 yaw_ref 0.04387050 v_ref 0.26512500 w_ref 0.05302500 t 0.62000000
@@ -974,6 +1005,7 @@
 [reference_trajectory_planning]  Time 0.62000000 x_ref 0.55495479 y_ref 0.02710974 yaw_ref 0.09582603 v_ref 0.16452027 w_ref 0.00276391 t_ref 2.52000000 loop_counter 31.00000000
 [reference_trajectory_planning]  Time 0.62000000 x_ref 0.57133091 y_ref 0.02868838 yaw_ref 0.09610242 v_ref 0.16452027 w_ref 0.00276391 t_ref 2.62000000 loop_counter 31.00000000
 [goal_state_planning]  Time 0.62000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.62000000 loop_counter 31.00000000
+[planning_control_command]  Time 0.62000000 vc 0.22473772 wc 0.10139385 Time 0.62000000
 [state_of_robot]  Time 0.63000000 x 0.22926862 y -0.00347750 yaw 0.07770166 v 0.25148700 w 0.14064714 t 0.63000000
 [state_of_robot]  Time 0.64000000 x 0.23174897 y -0.00328094 yaw 0.07908196 v 0.24881208 w 0.13803026 t 0.64000000
 [reference_point]  Time 0.64000000 x_ref 0.22441871 y_ref 0.00463619 yaw_ref 0.04489725 v_ref 0.25950000 w_ref 0.05190000 t 0.64000000
@@ -1003,6 +1035,7 @@
 [reference_trajectory_planning]  Time 0.64000000 x_ref 0.55140846 y_ref 0.02675611 yaw_ref 0.09557021 v_ref 0.16009213 w_ref 0.00251345 t_ref 2.54000000 loop_counter 32.00000000
 [reference_trajectory_planning]  Time 0.64000000 x_ref 0.56734423 y_ref 0.02828779 yaw_ref 0.09582155 v_ref 0.16009213 w_ref 0.00251346 t_ref 2.64000000 loop_counter 32.00000000
 [goal_state_planning]  Time 0.64000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.64000000 loop_counter 32.00000000
+[planning_control_command]  Time 0.64000000 vc 0.21980036 wc 0.08988634 Time 0.64000000
 [state_of_robot]  Time 0.65000000 x 0.23420012 y -0.00308336 yaw 0.08043017 v 0.24591090 w 0.13482066 t 0.65000000
 [state_of_robot]  Time 0.66000000 x 0.23662500 y -0.00288469 yaw 0.08174842 v 0.24329985 w 0.13182504 t 0.66000000
 [reference_point]  Time 0.66000000 x_ref 0.22941072 y_ref 0.00485644 yaw_ref 0.04589663 v_ref 0.25395000 w_ref 0.05079000 t 0.66000000
@@ -1032,6 +1065,7 @@
 [reference_trajectory_planning]  Time 0.66000000 x_ref 0.54786646 y_ref 0.02641449 yaw_ref 0.09532433 v_ref 0.15573891 w_ref 0.00226009 t_ref 2.56000000 loop_counter 33.00000000
 [reference_trajectory_planning]  Time 0.66000000 x_ref 0.56336931 y_ref 0.02790032 yaw_ref 0.09555033 v_ref 0.15573891 w_ref 0.00226009 t_ref 2.66000000 loop_counter 33.00000000
 [goal_state_planning]  Time 0.66000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.66000000 loop_counter 33.00000000
+[planning_control_command]  Time 0.66000000 vc 0.21491549 wc 0.07901902 Time 0.66000000
 [state_of_robot]  Time 0.67000000 x 0.23902133 y -0.00268526 yaw 0.08303147 v 0.24046141 w 0.12830464 t 0.67000000
 [state_of_robot]  Time 0.68000000 x 0.24139195 y -0.00248499 yaw 0.08428166 v 0.23790682 w 0.12501893 t 0.68000000
 [reference_point]  Time 0.68000000 x_ref 0.23426571 y_ref 0.00507706 yaw_ref 0.04686863 v_ref 0.24847500 w_ref 0.04969500 t 0.68000000
@@ -1061,6 +1095,7 @@
 [reference_trajectory_planning]  Time 0.68000000 x_ref 0.54432921 y_ref 0.02608320 yaw_ref 0.09508304 v_ref 0.15146122 w_ref 0.00199912 t_ref 2.58000000 loop_counter 34.00000000
 [reference_trajectory_planning]  Time 0.68000000 x_ref 0.55940663 y_ref 0.02752419 yaw_ref 0.09528296 v_ref 0.15146122 w_ref 0.00199912 t_ref 2.68000000 loop_counter 34.00000000
 [goal_state_planning]  Time 0.68000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.68000000 loop_counter 34.00000000
+[planning_control_command]  Time 0.68000000 vc 0.20998106 wc 0.06883441 Time 0.68000000
 [state_of_robot]  Time 0.69000000 x 0.24373451 y -0.00228422 yaw 0.08549439 v 0.23511425 w 0.12127330 t 0.69000000
 [state_of_robot]  Time 0.70000000 x 0.24605178 y -0.00208288 yaw 0.08667216 v 0.23260093 w 0.11777737 t 0.70000000
 [reference_point]  Time 0.70000000 x_ref 0.23912070 y_ref 0.00529768 yaw_ref 0.04784063 v_ref 0.24300000 w_ref 0.04860000 t 0.70000000
@@ -1090,6 +1125,7 @@
 [reference_trajectory_planning]  Time 0.70000000 x_ref 0.54079050 y_ref 0.02576183 yaw_ref 0.09485048 v_ref 0.14718188 w_ref 0.00172900 t_ref 2.60000000 loop_counter 35.00000000
 [reference_trajectory_planning]  Time 0.70000000 x_ref 0.55544229 y_ref 0.02715830 yaw_ref 0.09502338 v_ref 0.14718188 w_ref 0.00172900 t_ref 2.70000000 loop_counter 35.00000000
 [goal_state_planning]  Time 0.70000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.70000000 loop_counter 35.00000000
+[planning_control_command]  Time 0.70000000 vc 0.20545408 wc 0.05933268 Time 0.70000000
 [state_of_robot]  Time 0.71000000 x 0.24834179 y -0.00188127 yaw 0.08781097 v 0.22988624 w 0.11388106 t 0.71000000
 [state_of_robot]  Time 0.72000000 x 0.25060724 y -0.00167931 yaw 0.08891342 v 0.22744303 w 0.11024450 t 0.72000000
 [reference_point]  Time 0.72000000 x_ref 0.24370920 y_ref 0.00551736 yaw_ref 0.04875938 v_ref 0.23767500 w_ref 0.04753500 t 0.72000000
@@ -1119,6 +1155,7 @@
 [reference_trajectory_planning]  Time 0.72000000 x_ref 0.53727037 y_ref 0.02544652 yaw_ref 0.09461108 v_ref 0.14305470 w_ref 0.00145213 t_ref 2.62000000 loop_counter 36.00000000
 [reference_trajectory_planning]  Time 0.72000000 x_ref 0.55151166 y_ref 0.02680003 yaw_ref 0.09475629 v_ref 0.14305470 w_ref 0.00145213 t_ref 2.72000000 loop_counter 36.00000000
 [goal_state_planning]  Time 0.72000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.72000000 loop_counter 36.00000000
+[planning_control_command]  Time 0.72000000 vc 0.20051284 wc 0.05054436 Time 0.72000000
 [state_of_robot]  Time 0.73000000 x 0.25284564 y -0.00147736 yaw 0.08997606 v 0.22475001 w 0.10626449 t 0.73000000
 [state_of_robot]  Time 0.74000000 x 0.25505971 y -0.00127532 yaw 0.09100156 v 0.22232629 w 0.10254981 t 0.74000000
 [reference_point]  Time 0.74000000 x_ref 0.24829769 y_ref 0.00573705 yaw_ref 0.04967813 v_ref 0.23235000 w_ref 0.04647000 t 0.74000000
@@ -1148,6 +1185,7 @@
 [reference_trajectory_planning]  Time 0.74000000 x_ref 0.53374932 y_ref 0.02513847 yaw_ref 0.09437396 v_ref 0.13892669 w_ref 0.00116181 t_ref 2.64000000 loop_counter 37.00000000
 [reference_trajectory_planning]  Time 0.74000000 x_ref 0.54758002 y_ref 0.02644924 yaw_ref 0.09449014 v_ref 0.13892669 w_ref 0.00116181 t_ref 2.74000000 loop_counter 37.00000000
 [goal_state_planning]  Time 0.74000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.74000000 loop_counter 37.00000000
+[planning_control_command]  Time 0.74000000 vc 0.19584410 wc 0.04245200 Time 0.74000000
 [state_of_robot]  Time 0.75000000 x 0.25724720 y -0.00107353 yaw 0.09198699 v 0.21967807 w 0.09854329 t 0.75000000
 [state_of_robot]  Time 0.76000000 x 0.25941077 y -0.00087188 yaw 0.09293503 v 0.21729467 w 0.09480387 t 0.76000000
 [reference_point]  Time 0.76000000 x_ref 0.25275672 y_ref 0.00595552 yaw_ref 0.05057100 v_ref 0.22710000 w_ref 0.04542000 t 0.76000000
@@ -1177,6 +1215,7 @@
 [reference_trajectory_planning]  Time 0.76000000 x_ref 0.53024070 y_ref 0.02483543 yaw_ref 0.09413270 v_ref 0.13487371 w_ref 0.00086230 t_ref 2.66000000 loop_counter 38.00000000
 [reference_trajectory_planning]  Time 0.76000000 x_ref 0.54366825 y_ref 0.02610432 yaw_ref 0.09421893 v_ref 0.13487371 w_ref 0.00086230 t_ref 2.76000000 loop_counter 38.00000000
 [goal_state_planning]  Time 0.76000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.76000000 loop_counter 38.00000000
+[planning_control_command]  Time 0.76000000 vc 0.19120529 wc 0.03504881 Time 0.76000000
 [state_of_robot]  Time 0.77000000 x 0.26154818 y -0.00067070 yaw 0.09384324 v 0.21468574 w 0.09082020 t 0.77000000
 [state_of_robot]  Time 0.78000000 x 0.26366204 y -0.00046989 yaw 0.09471426 v 0.21233769 w 0.08710211 t 0.78000000
 [reference_point]  Time 0.78000000 x_ref 0.25708627 y_ref 0.00617277 yaw_ref 0.05143800 v_ref 0.22192500 w_ref 0.04438500 t 0.78000000
@@ -1206,6 +1245,7 @@
 [reference_trajectory_planning]  Time 0.78000000 x_ref 0.52674482 y_ref 0.02453657 yaw_ref 0.09388505 v_ref 0.13089634 w_ref 0.00055143 t_ref 2.68000000 loop_counter 39.00000000
 [reference_trajectory_planning]  Time 0.78000000 x_ref 0.53977674 y_ref 0.02576441 yaw_ref 0.09394019 v_ref 0.13089634 w_ref 0.00055143 t_ref 2.78000000 loop_counter 39.00000000
 [goal_state_planning]  Time 0.78000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.78000000 loop_counter 39.00000000
+[planning_control_command]  Time 0.78000000 vc 0.18650460 wc 0.02832424 Time 0.78000000
 [state_of_robot]  Time 0.79000000 x 0.26575002 y -0.00026978 yaw 0.09554609 v 0.20975438 w 0.08318359 t 0.79000000
 [state_of_robot]  Time 0.80000000 x 0.26781469 y -0.00007025 yaw 0.09634136 v 0.20742941 w 0.07952630 t 0.80000000
 [reference_point]  Time 0.80000000 x_ref 0.26141582 y_ref 0.00639003 yaw_ref 0.05230500 v_ref 0.21675000 w_ref 0.04335000 t 0.80000000
@@ -1235,6 +1275,7 @@
 [reference_trajectory_planning]  Time 0.80000000 x_ref 0.52324791 y_ref 0.02424195 yaw_ref 0.09363447 v_ref 0.12691748 w_ref 0.00022548 t_ref 2.70000000 loop_counter 40.00000000
 [reference_trajectory_planning]  Time 0.80000000 x_ref 0.53588403 y_ref 0.02542889 yaw_ref 0.09365702 v_ref 0.12691748 w_ref 0.00022548 t_ref 2.80000000 loop_counter 40.00000000
 [goal_state_planning]  Time 0.80000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.80000000 loop_counter 40.00000000
+[planning_control_command]  Time 0.80000000 vc 0.18217391 wc 0.02225659 Time 0.80000000
 [state_of_robot]  Time 0.81000000 x 0.26985408 y 0.00012839 yaw 0.09709844 v 0.20490386 w 0.07570831 t 0.81000000
 [state_of_robot]  Time 0.82000000 x 0.27187070 y 0.00032629 yaw 0.09781989 v 0.20263086 w 0.07214487 t 0.82000000
 [reference_point]  Time 0.82000000 x_ref 0.26549398 y_ref 0.00660353 yaw_ref 0.05312175 v_ref 0.21172500 w_ref 0.04234500 t 0.82000000
@@ -1264,6 +1305,7 @@
 [reference_trajectory_planning]  Time 0.82000000 x_ref 0.51978491 y_ref 0.02394945 yaw_ref 0.09337352 v_ref 0.12309071 w_ref -0.00010393 t_ref 2.72000000 loop_counter 41.00000000
 [reference_trajectory_planning]  Time 0.82000000 x_ref 0.53204037 y_ref 0.02509700 yaw_ref 0.09336313 v_ref 0.12309071 w_ref -0.00010393 t_ref 2.82000000 loop_counter 41.00000000
 [goal_state_planning]  Time 0.82000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.82000000 loop_counter 41.00000000
+[planning_control_command]  Time 0.82000000 vc 0.17745025 wc 0.01681189 Time 0.82000000
 [state_of_robot]  Time 0.83000000 x 0.27386213 y 0.00052309 yaw 0.09850445 v 0.20011280 w 0.06845600 t 0.83000000
 [state_of_robot]  Time 0.84000000 x 0.27583088 y 0.00071895 yaw 0.09915458 v 0.19784655 w 0.06501306 t 0.84000000
 [reference_point]  Time 0.84000000 x_ref 0.26957215 y_ref 0.00681704 yaw_ref 0.05393850 v_ref 0.20670000 w_ref 0.04134000 t 0.84000000
@@ -1293,6 +1335,7 @@
 [reference_trajectory_planning]  Time 0.84000000 x_ref 0.51632128 y_ref 0.02365993 yaw_ref 0.09310785 v_ref 0.11926319 w_ref -0.00044930 t_ref 2.74000000 loop_counter 42.00000000
 [reference_trajectory_planning]  Time 0.84000000 x_ref 0.52819600 y_ref 0.02476823 yaw_ref 0.09306292 v_ref 0.11926319 w_ref -0.00044930 t_ref 2.84000000 loop_counter 42.00000000
 [goal_state_planning]  Time 0.84000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.84000000 loop_counter 42.00000000
+[planning_control_command]  Time 0.84000000 vc 0.17297631 wc 0.01197241 Time 0.84000000
 [state_of_robot]  Time 0.85000000 x 0.27777476 y 0.00091353 yaw 0.09976935 v 0.19535952 w 0.06147702 t 0.85000000
 [state_of_robot]  Time 0.86000000 x 0.27969625 y 0.00110701 yaw 0.10035112 v 0.19312120 w 0.05817671 t 0.86000000
 [reference_point]  Time 0.86000000 x_ref 0.27352840 y_ref 0.00702808 yaw_ref 0.05473088 v_ref 0.20175000 w_ref 0.04035000 t 0.86000000
@@ -1322,6 +1365,7 @@
 [reference_trajectory_planning]  Time 0.86000000 x_ref 0.51287783 y_ref 0.02337241 yaw_ref 0.09283524 v_ref 0.11551073 w_ref -0.00080193 t_ref 2.76000000 loop_counter 43.00000000
 [reference_trajectory_planning]  Time 0.86000000 x_ref 0.52437925 y_ref 0.02444229 yaw_ref 0.09275504 v_ref 0.11551073 w_ref -0.00080193 t_ref 2.86000000 loop_counter 43.00000000
 [goal_state_planning]  Time 0.86000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.86000000 loop_counter 43.00000000
+[planning_control_command]  Time 0.86000000 vc 0.16853106 wc 0.00769977 Time 0.86000000
 [state_of_robot]  Time 0.87000000 x 0.28159318 y 0.00129906 yaw 0.10089923 v 0.19066219 w 0.05481158 t 0.87000000
 [state_of_robot]  Time 0.88000000 x 0.28346799 y 0.00148985 yaw 0.10141594 v 0.18844907 w 0.05167079 t 0.88000000
 [reference_point]  Time 0.88000000 x_ref 0.27736273 y_ref 0.00723667 yaw_ref 0.05549888 v_ref 0.19687500 w_ref 0.03937500 t 0.88000000
@@ -1351,6 +1395,7 @@
 [reference_trajectory_planning]  Time 0.88000000 x_ref 0.50945481 y_ref 0.02308660 yaw_ref 0.09255519 v_ref 0.11183384 w_ref -0.00116273 t_ref 2.78000000 loop_counter 44.00000000
 [reference_trajectory_planning]  Time 0.88000000 x_ref 0.52059045 y_ref 0.02411891 yaw_ref 0.09243892 v_ref 0.11183384 w_ref -0.00116273 t_ref 2.88000000 loop_counter 44.00000000
 [goal_state_planning]  Time 0.88000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.88000000 loop_counter 44.00000000
+[planning_control_command]  Time 0.88000000 vc 0.16403036 wc 0.00396310 Time 0.88000000
 [state_of_robot]  Time 0.89000000 x 0.28531841 y 0.00167906 yaw 0.10190084 v 0.18600720 w 0.04849028 t 0.89000000
 [state_of_robot]  Time 0.90000000 x 0.28714688 y 0.00186687 yaw 0.10235606 v 0.18380952 w 0.04552180 t 0.90000000
 [reference_point]  Time 0.90000000 x_ref 0.28119706 y_ref 0.00744526 yaw_ref 0.05626688 v_ref 0.19200000 w_ref 0.03840000 t 0.90000000
@@ -1380,6 +1425,7 @@
 [reference_trajectory_planning]  Time 0.90000000 x_ref 0.50603093 y_ref 0.02280244 yaw_ref 0.09227001 v_ref 0.10815555 w_ref -0.00153801 t_ref 2.80000000 loop_counter 45.00000000
 [reference_trajectory_planning]  Time 0.90000000 x_ref 0.51680063 y_ref 0.02379732 yaw_ref 0.09211621 v_ref 0.10815555 w_ref -0.00153800 t_ref 2.90000000 loop_counter 45.00000000
 [goal_state_planning]  Time 0.90000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.90000000 loop_counter 45.00000000
+[planning_control_command]  Time 0.90000000 vc 0.15987846 wc 0.00074166 Time 0.90000000
 [state_of_robot]  Time 0.91000000 x 0.28895147 y 0.00205301 yaw 0.10278142 v 0.18141641 w 0.04253646 t 0.91000000
 [state_of_robot]  Time 0.92000000 x 0.29073457 y 0.00223764 yaw 0.10317893 v 0.17926262 w 0.03975014 t 0.92000000
 [reference_point]  Time 0.92000000 x_ref 0.28479511 y_ref 0.00764792 yaw_ref 0.05698763 v_ref 0.18727500 w_ref 0.03745500 t 0.92000000
@@ -1409,6 +1455,7 @@
 [reference_trajectory_planning]  Time 0.92000000 x_ref 0.50265605 y_ref 0.02251965 yaw_ref 0.09197786 v_ref 0.10462922 w_ref -0.00190947 t_ref 2.82000000 loop_counter 46.00000000
 [reference_trajectory_planning]  Time 0.92000000 x_ref 0.51307493 y_ref 0.02347867 yaw_ref 0.09178691 v_ref 0.10462922 w_ref -0.00190946 t_ref 2.92000000 loop_counter 46.00000000
 [goal_state_planning]  Time 0.92000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.92000000 loop_counter 46.00000000
+[planning_control_command]  Time 0.92000000 vc 0.15536874 wc -0.00203125 Time 0.92000000
 [state_of_robot]  Time 0.93000000 x 0.29249383 y 0.00242046 yaw 0.10354857 v 0.17687323 w 0.03696471 t 0.93000000
 [state_of_robot]  Time 0.94000000 x 0.29423163 y 0.00260166 yaw 0.10389222 v 0.17472278 w 0.03436498 t 0.94000000
 [reference_point]  Time 0.94000000 x_ref 0.28839316 y_ref 0.00785059 yaw_ref 0.05770838 v_ref 0.18255000 w_ref 0.03651000 t 0.94000000
@@ -1438,6 +1485,7 @@
 [reference_trajectory_planning]  Time 0.94000000 x_ref 0.49928066 y_ref 0.02223807 yaw_ref 0.09168116 v_ref 0.10110217 w_ref -0.00229486 t_ref 2.84000000 loop_counter 47.00000000
 [reference_trajectory_planning]  Time 0.94000000 x_ref 0.50934863 y_ref 0.02316138 yaw_ref 0.09145167 v_ref 0.10110217 w_ref -0.00229485 t_ref 2.94000000 loop_counter 47.00000000
 [goal_state_planning]  Time 0.94000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.94000000 loop_counter 47.00000000
+[planning_control_command]  Time 0.94000000 vc 0.15109751 wc -0.00435949 Time 0.94000000
 [state_of_robot]  Time 0.95000000 x 0.29594588 y 0.00278095 yaw 0.10421006 v 0.17236025 w 0.03178335 t 0.95000000
 [state_of_robot]  Time 0.96000000 x 0.29763894 y 0.00295853 yaw 0.10450379 v 0.17023398 w 0.02937383 t 0.96000000
 [reference_point]  Time 0.96000000 x_ref 0.29187683 y_ref 0.00804986 yaw_ref 0.05840625 v_ref 0.17790000 w_ref 0.03558000 t 0.96000000
@@ -1467,6 +1515,7 @@
 [reference_trajectory_planning]  Time 0.96000000 x_ref 0.49593300 y_ref 0.02195784 yaw_ref 0.09138026 v_ref 0.09765014 w_ref -0.00268264 t_ref 2.86000000 loop_counter 48.00000000
 [reference_trajectory_planning]  Time 0.96000000 x_ref 0.50565751 y_ref 0.02284632 yaw_ref 0.09111199 v_ref 0.09765014 w_ref -0.00268264 t_ref 2.96000000 loop_counter 48.00000000
 [goal_state_planning]  Time 0.96000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.96000000 loop_counter 48.00000000
+[planning_control_command]  Time 0.96000000 vc 0.14686315 wc -0.00629150 Time 0.96000000
 [state_of_robot]  Time 0.97000000 x 0.29930870 y 0.00313412 yaw 0.10477376 v 0.16789690 w 0.02699614 t 0.97000000
 [state_of_robot]  Time 0.98000000 x 0.30095750 y 0.00330792 yaw 0.10502153 v 0.16579352 w 0.02477697 t 0.98000000
 [reference_point]  Time 0.98000000 x_ref 0.29524614 y_ref 0.00824573 yaw_ref 0.05908125 v_ref 0.17332500 w_ref 0.03466500 t 0.98000000
@@ -1496,6 +1545,7 @@
 [reference_trajectory_planning]  Time 0.98000000 x_ref 0.49261331 y_ref 0.02167892 yaw_ref 0.09107550 v_ref 0.09427362 w_ref -0.00307325 t_ref 2.88000000 loop_counter 49.00000000
 [reference_trajectory_planning]  Time 0.98000000 x_ref 0.50200187 y_ref 0.02253345 yaw_ref 0.09076817 v_ref 0.09427362 w_ref -0.00307325 t_ref 2.98000000 loop_counter 49.00000000
 [goal_state_planning]  Time 0.98000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 0.98000000 loop_counter 49.00000000
+[planning_control_command]  Time 0.98000000 vc 0.14258722 wc -0.00786154 Time 0.98000000
 [state_of_robot]  Time 0.99000000 x 0.30258318 y 0.00347965 yaw 0.10524754 v 0.16347289 w 0.02260106 t 0.99000000
 [state_of_robot]  Time 1.00000000 x 0.30418806 y 0.00364952 yaw 0.10545324 v 0.16138433 w 0.02057022 t 1.00000000
 [reference_point]  Time 1.00000000 x_ref 0.29861545 y_ref 0.00844160 yaw_ref 0.05975625 v_ref 0.16875000 w_ref 0.03375000 t 1.00000000
@@ -1525,6 +1575,7 @@
 [reference_trajectory_planning]  Time 1.00000000 x_ref 0.48929285 y_ref 0.02140076 yaw_ref 0.09076782 v_ref 0.09089576 w_ref -0.00347547 t_ref 2.90000000 loop_counter 50.00000000
 [reference_trajectory_planning]  Time 1.00000000 x_ref 0.49834529 y_ref 0.02222152 yaw_ref 0.09042028 v_ref 0.09089576 w_ref -0.00347547 t_ref 3.00000000 loop_counter 50.00000000
 [goal_state_planning]  Time 1.00000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.00000000 loop_counter 50.00000000
+[planning_control_command]  Time 1.00000000 vc 0.13864459 wc -0.00907887 Time 1.00000000
 [state_of_robot]  Time 1.01000000 x 0.30577029 y 0.00381729 yaw 0.10563917 v 0.15911035 w 0.01859362 t 1.01000000
 [state_of_robot]  Time 1.02000000 x 0.30733215 y 0.00398317 yaw 0.10580666 v 0.15706378 w 0.01674878 t 1.02000000
 [reference_point]  Time 1.02000000 x_ref 0.30176357 y_ref 0.00862994 yaw_ref 0.06038700 v_ref 0.16432500 w_ref 0.03286500 t 1.02000000
@@ -1554,6 +1605,7 @@
 [reference_trajectory_planning]  Time 1.02000000 x_ref 0.48603636 y_ref 0.02112490 yaw_ref 0.09045891 v_ref 0.08766970 w_ref -0.00386636 t_ref 2.92000000 loop_counter 51.00000000
 [reference_trajectory_planning]  Time 1.02000000 x_ref 0.49476779 y_ref 0.02191349 yaw_ref 0.09007227 v_ref 0.08766970 w_ref -0.00386636 t_ref 3.02000000 loop_counter 51.00000000
 [goal_state_planning]  Time 1.02000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.02000000 loop_counter 51.00000000
+[planning_control_command]  Time 1.02000000 vc 0.13438339 wc -0.01002441 Time 1.02000000
 [state_of_robot]  Time 1.03000000 x 0.30887142 y 0.00414688 yaw 0.10595630 v 0.15479574 w 0.01496390 t 1.03000000
 [state_of_robot]  Time 1.04000000 x 0.31039038 y 0.00430863 yaw 0.10608928 v 0.15275450 w 0.01329802 t 1.04000000
 [reference_point]  Time 1.04000000 x_ref 0.30491170 y_ref 0.00881829 yaw_ref 0.06101775 v_ref 0.15990000 w_ref 0.03198000 t 1.04000000
@@ -1583,6 +1635,7 @@
 [reference_trajectory_planning]  Time 1.04000000 x_ref 0.48277940 y_ref 0.02084970 yaw_ref 0.09014858 v_ref 0.08444293 w_ref -0.00426797 t_ref 2.94000000 loop_counter 52.00000000
 [reference_trajectory_planning]  Time 1.04000000 x_ref 0.49118973 y_ref 0.02160632 yaw_ref 0.08972178 v_ref 0.08444293 w_ref -0.00426797 t_ref 3.04000000 loop_counter 52.00000000
 [goal_state_planning]  Time 1.04000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.04000000 loop_counter 52.00000000
+[planning_control_command]  Time 1.04000000 vc 0.13035219 wc -0.01068343 Time 1.04000000
 [state_of_robot]  Time 1.05000000 x 0.31188704 y 0.00446818 yaw 0.10620627 v 0.15051427 w 0.01169925 t 1.05000000
 [state_of_robot]  Time 1.06000000 x 0.31336364 y 0.00462575 yaw 0.10630835 v 0.14849806 w 0.01020708 t 1.06000000
 [reference_point]  Time 1.06000000 x_ref 0.30795300 y_ref 0.00900256 yaw_ref 0.06162713 v_ref 0.15555000 w_ref 0.03111000 t 1.06000000
@@ -1612,6 +1665,7 @@
 [reference_trajectory_planning]  Time 1.06000000 x_ref 0.47955769 y_ref 0.02057630 yaw_ref 0.08983847 v_ref 0.08129115 w_ref -0.00466708 t_ref 2.96000000 loop_counter 53.00000000
 [reference_trajectory_planning]  Time 1.06000000 x_ref 0.48765436 y_ref 0.02130185 yaw_ref 0.08937176 v_ref 0.08129115 w_ref -0.00466708 t_ref 3.06000000 loop_counter 53.00000000
 [goal_state_planning]  Time 1.06000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.06000000 loop_counter 53.00000000
+[planning_control_command]  Time 1.06000000 vc 0.12636750 wc -0.01110357 Time 1.06000000
 [state_of_robot]  Time 1.07000000 x 0.31481822 y 0.00478110 yaw 0.10639621 v 0.14628501 w 0.00878637 t 1.07000000
 [state_of_robot]  Time 1.08000000 x 0.31625298 y 0.00493444 yaw 0.10647081 v 0.14429326 w 0.00746037 t 1.08000000
 [reference_point]  Time 1.08000000 x_ref 0.31088747 y_ref 0.00918277 yaw_ref 0.06221513 v_ref 0.15127500 w_ref 0.03025500 t 1.08000000
@@ -1641,6 +1695,7 @@
 [reference_trajectory_planning]  Time 1.08000000 x_ref 0.47637144 y_ref 0.02030478 yaw_ref 0.08952917 v_ref 0.07821482 w_ref -0.00506395 t_ref 2.98000000 loop_counter 54.00000000
 [reference_trajectory_planning]  Time 1.08000000 x_ref 0.48416195 y_ref 0.02100016 yaw_ref 0.08902277 v_ref 0.07821482 w_ref -0.00506395 t_ref 3.08000000 loop_counter 54.00000000
 [goal_state_planning]  Time 1.08000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.08000000 loop_counter 54.00000000
+[planning_control_command]  Time 1.08000000 vc 0.12235557 wc -0.01131486 Time 1.08000000
 [state_of_robot]  Time 1.09000000 x 0.31766592 y 0.00508554 yaw 0.10653290 v 0.14209949 w 0.00620869 t 1.09000000
 [state_of_robot]  Time 1.10000000 x 0.31905922 y 0.00523460 yaw 0.10658330 v 0.14012510 w 0.00504045 t 1.10000000
 [reference_point]  Time 1.10000000 x_ref 0.31382194 y_ref 0.00936298 yaw_ref 0.06280313 v_ref 0.14700000 w_ref 0.02940000 t 1.10000000
@@ -1670,6 +1725,7 @@
 [reference_trajectory_planning]  Time 1.10000000 x_ref 0.47318448 y_ref 0.02003381 yaw_ref 0.08922039 v_ref 0.07513720 w_ref -0.00546954 t_ref 3.00000000 loop_counter 55.00000000
 [reference_trajectory_planning]  Time 1.10000000 x_ref 0.48066868 y_ref 0.02069921 yaw_ref 0.08867344 v_ref 0.07513720 w_ref -0.00546954 t_ref 3.10000000 loop_counter 55.00000000
 [goal_state_planning]  Time 1.10000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.10000000 loop_counter 55.00000000
+[planning_control_command]  Time 1.10000000 vc 0.11866100 wc -0.01131200 Time 1.10000000
 [state_of_robot]  Time 1.11000000 x 0.32043117 y 0.00538144 yaw 0.10662281 v 0.13797869 w 0.00395029 t 1.11000000
 [state_of_robot]  Time 1.12000000 x 0.32178391 y 0.00552626 yaw 0.10665213 v 0.13604692 w 0.00293280 t 1.12000000
 [reference_point]  Time 1.12000000 x_ref 0.31655030 y_ref 0.00953456 yaw_ref 0.06334988 v_ref 0.14287500 w_ref 0.02857500 t 1.12000000
@@ -1699,6 +1755,7 @@
 [reference_trajectory_planning]  Time 1.12000000 x_ref 0.47007641 y_ref 0.01976675 yaw_ref 0.08891569 v_ref 0.07221123 w_ref -0.00585780 t_ref 3.02000000 loop_counter 56.00000000
 [reference_trajectory_planning]  Time 1.12000000 x_ref 0.47726938 y_ref 0.02040377 yaw_ref 0.08832991 v_ref 0.07221123 w_ref -0.00585779 t_ref 3.12000000 loop_counter 56.00000000
 [goal_state_planning]  Time 1.12000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.12000000 loop_counter 56.00000000
+[planning_control_command]  Time 1.12000000 vc 0.11468585 wc -0.01118053 Time 1.12000000
 [state_of_robot]  Time 1.13000000 x 0.32311541 y 0.00566884 yaw 0.10667205 v 0.13391081 w 0.00199191 t 1.13000000
 [state_of_robot]  Time 1.14000000 x 0.32442779 y 0.00580938 yaw 0.10668319 v 0.13198831 w 0.00111375 t 1.14000000
 [reference_point]  Time 1.14000000 x_ref 0.31927866 y_ref 0.00970613 yaw_ref 0.06389663 v_ref 0.13875000 w_ref 0.02775000 t 1.14000000
@@ -1728,6 +1785,7 @@
 [reference_trajectory_planning]  Time 1.14000000 x_ref 0.46696792 y_ref 0.01950025 yaw_ref 0.08861305 v_ref 0.06928457 w_ref -0.00625393 t_ref 3.04000000 loop_counter 57.00000000
 [reference_trajectory_planning]  Time 1.14000000 x_ref 0.47386958 y_ref 0.02010909 yaw_ref 0.08798766 v_ref 0.06928457 w_ref -0.00625393 t_ref 3.14000000 loop_counter 57.00000000
 [goal_state_planning]  Time 1.14000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.14000000 loop_counter 57.00000000
+[planning_control_command]  Time 1.14000000 vc 0.11093044 wc -0.01088805 Time 1.14000000
 [state_of_robot]  Time 1.15000000 x 0.32571923 y 0.00594769 yaw 0.10668633 v 0.12988253 w 0.00031363 t 1.15000000
 [state_of_robot]  Time 1.16000000 x 0.32699182 y 0.00608397 yaw 0.10668200 v 0.12798732 w -0.00043315 t 1.16000000
 [reference_point]  Time 1.16000000 x_ref 0.32190773 y_ref 0.00987320 yaw_ref 0.06442350 v_ref 0.13470000 w_ref 0.02694000 t 1.16000000
@@ -1757,6 +1815,7 @@
 [reference_trajectory_planning]  Time 1.16000000 x_ref 0.46390219 y_ref 0.01923640 yaw_ref 0.08831453 v_ref 0.06643288 w_ref -0.00664382 t_ref 3.06000000 loop_counter 58.00000000
 [reference_trajectory_planning]  Time 1.16000000 x_ref 0.47051997 y_ref 0.01981794 yaw_ref 0.08765015 v_ref 0.06643288 w_ref -0.00664382 t_ref 3.16000000 loop_counter 58.00000000
 [goal_state_planning]  Time 1.16000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.16000000 loop_counter 58.00000000
+[planning_control_command]  Time 1.16000000 vc 0.10722900 wc -0.01047725 Time 1.16000000
 [state_of_robot]  Time 1.17000000 x 0.32824378 y 0.00621802 yaw 0.10667097 v 0.12591149 w -0.00110276 t 1.17000000
 [state_of_robot]  Time 1.18000000 x 0.32947716 y 0.00635007 yaw 0.10665369 v 0.12404324 w -0.00172772 t 1.18000000
 [reference_point]  Time 1.18000000 x_ref 0.32443751 y_ref 0.01003575 yaw_ref 0.06493050 v_ref 0.13072500 w_ref 0.02614500 t 1.18000000
@@ -1786,6 +1845,7 @@
 [reference_trajectory_planning]  Time 1.18000000 x_ref 0.46087940 y_ref 0.01897525 yaw_ref 0.08802064 v_ref 0.06365658 w_ref -0.00702767 t_ref 3.08000000 loop_counter 59.00000000
 [reference_trajectory_planning]  Time 1.18000000 x_ref 0.46722080 y_ref 0.01953038 yaw_ref 0.08731788 v_ref 0.06365658 w_ref -0.00702767 t_ref 3.18000000 loop_counter 59.00000000
 [goal_state_planning]  Time 1.18000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.18000000 loop_counter 59.00000000
+[planning_control_command]  Time 1.18000000 vc 0.10351209 wc -0.00997187 Time 1.18000000
 [state_of_robot]  Time 1.19000000 x 0.33069014 y 0.00647990 yaw 0.10663092 v 0.12199012 w -0.00227733 t 1.19000000
 [state_of_robot]  Time 1.20000000 x 0.33188474 y 0.00660773 yaw 0.10660302 v 0.12014232 w -0.00279030 t 1.20000000
 [reference_point]  Time 1.20000000 x_ref 0.32696729 y_ref 0.01019831 yaw_ref 0.06543750 v_ref 0.12675000 w_ref 0.02535000 t 1.20000000
@@ -1815,6 +1875,7 @@
 [reference_trajectory_planning]  Time 1.20000000 x_ref 0.45785597 y_ref 0.01871459 yaw_ref 0.08773014 v_ref 0.06087906 w_ref -0.00741806 t_ref 3.10000000 loop_counter 60.00000000
 [reference_trajectory_planning]  Time 1.20000000 x_ref 0.46392086 y_ref 0.01924350 yaw_ref 0.08698833 v_ref 0.06087906 w_ref -0.00741805 t_ref 3.20000000 loop_counter 60.00000000
 [goal_state_planning]  Time 1.20000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.20000000 loop_counter 60.00000000
+[planning_control_command]  Time 1.20000000 vc 0.10009388 wc -0.00935336 Time 1.20000000
 [state_of_robot]  Time 1.21000000 x 0.33305941 y 0.00673340 yaw 0.10657074 v 0.11813748 w -0.00322784 t 1.21000000
 [state_of_robot]  Time 1.22000000 x 0.33421615 y 0.00685710 yaw 0.10653437 v 0.11633312 w -0.00363621 t 1.22000000
 [reference_point]  Time 1.22000000 x_ref 0.32930603 y_ref 0.01035157 yaw_ref 0.06590625 v_ref 0.12292500 w_ref 0.02458500 t 1.22000000
@@ -1844,6 +1905,7 @@
 [reference_trajectory_planning]  Time 1.22000000 x_ref 0.45492637 y_ref 0.01845965 yaw_ref 0.08744729 v_ref 0.05825305 w_ref -0.00778697 t_ref 3.12000000 loop_counter 61.00000000
 [reference_trajectory_planning]  Time 1.22000000 x_ref 0.46072981 y_ref 0.01896388 yaw_ref 0.08666860 v_ref 0.05825305 w_ref -0.00778697 t_ref 3.22000000 loop_counter 61.00000000
 [goal_state_planning]  Time 1.22000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.22000000 loop_counter 61.00000000
+[planning_control_command]  Time 1.22000000 vc 0.09643026 wc -0.00870747 Time 1.22000000
 [state_of_robot]  Time 1.23000000 x 0.33535310 y 0.00697864 yaw 0.10649463 v 0.11434283 w -0.00397429 t 1.23000000
 [state_of_robot]  Time 1.24000000 x 0.33647224 y 0.00709822 yaw 0.10645173 v 0.11255157 w -0.00428984 t 1.24000000
 [reference_point]  Time 1.24000000 x_ref 0.33164476 y_ref 0.01050483 yaw_ref 0.06637500 v_ref 0.11910000 w_ref 0.02382000 t 1.24000000
@@ -1873,6 +1935,7 @@
 [reference_trajectory_planning]  Time 1.24000000 x_ref 0.45199640 y_ref 0.01820519 yaw_ref 0.08716895 v_ref 0.05562639 w_ref -0.00816169 t_ref 3.14000000 loop_counter 62.00000000
 [reference_trajectory_planning]  Time 1.24000000 x_ref 0.45753832 y_ref 0.01868494 yaw_ref 0.08635278 v_ref 0.05562639 w_ref -0.00816169 t_ref 3.24000000 loop_counter 62.00000000
 [goal_state_planning]  Time 1.24000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.24000000 loop_counter 62.00000000
+[planning_control_command]  Time 1.24000000 vc 0.09297323 wc -0.00798811 Time 1.24000000
 [state_of_robot]  Time 1.25000000 x 0.33757193 y 0.00721568 yaw 0.10640637 v 0.11059374 w -0.00453639 t 1.25000000
 [state_of_robot]  Time 1.26000000 x 0.33865409 y 0.00733121 yaw 0.10635870 v 0.10883169 w -0.00476650 t 1.26000000
 [reference_point]  Time 1.26000000 x_ref 0.33389173 y_ref 0.01065335 yaw_ref 0.06682538 v_ref 0.11535000 w_ref 0.02307000 t 1.26000000
@@ -1902,6 +1965,7 @@
 [reference_trajectory_planning]  Time 1.26000000 x_ref 0.44911669 y_ref 0.01795423 yaw_ref 0.08689706 v_ref 0.05307469 w_ref -0.00852765 t_ref 3.16000000 loop_counter 63.00000000
 [reference_trajectory_planning]  Time 1.26000000 x_ref 0.45440453 y_ref 0.01841034 yaw_ref 0.08604429 v_ref 0.05307469 w_ref -0.00852765 t_ref 3.26000000 loop_counter 63.00000000
 [goal_state_planning]  Time 1.26000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.26000000 loop_counter 63.00000000
+[planning_control_command]  Time 1.26000000 vc 0.08957471 wc -0.00723244 Time 1.26000000
 [state_of_robot]  Time 1.27000000 x 0.33971712 y 0.00744465 yaw 0.10630940 v 0.10690599 w -0.00493090 t 1.27000000
 [state_of_robot]  Time 1.28000000 x 0.34076291 y 0.00755619 yaw 0.10625855 v 0.10517286 w -0.00508433 t 1.28000000
 [reference_point]  Time 1.28000000 x_ref 0.33604694 y_ref 0.01079712 yaw_ref 0.06725738 v_ref 0.11167500 w_ref 0.02233500 t 1.28000000
@@ -1931,6 +1995,7 @@
 [reference_trajectory_planning]  Time 1.28000000 x_ref 0.44628743 y_ref 0.01770680 yaw_ref 0.08663189 v_ref 0.05059834 w_ref -0.00888494 t_ref 3.18000000 loop_counter 64.00000000
 [reference_trajectory_planning]  Time 1.28000000 x_ref 0.45132868 y_ref 0.01814012 yaw_ref 0.08574340 v_ref 0.05059834 w_ref -0.00888494 t_ref 3.28000000 loop_counter 64.00000000
 [goal_state_planning]  Time 1.28000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.28000000 loop_counter 64.00000000
+[planning_control_command]  Time 1.28000000 vc 0.08616970 wc -0.00645875 Time 1.28000000
 [state_of_robot]  Time 1.29000000 x 0.34178982 y 0.00766567 yaw 0.10620679 v 0.10327255 w -0.00517596 t 1.29000000
 [state_of_robot]  Time 1.30000000 x 0.34279973 y 0.00777328 yaw 0.10615418 v 0.10156226 w -0.00526148 t 1.30000000
 [reference_point]  Time 1.30000000 x_ref 0.33820215 y_ref 0.01094089 yaw_ref 0.06768938 v_ref 0.10800000 w_ref 0.02160000 t 1.30000000
@@ -1960,6 +2025,7 @@
 [reference_trajectory_planning]  Time 1.30000000 x_ref 0.44345762 y_ref 0.01745975 yaw_ref 0.08637146 v_ref 0.04812085 w_ref -0.00924710 t_ref 3.20000000 loop_counter 65.00000000
 [reference_trajectory_planning]  Time 1.30000000 x_ref 0.44825215 y_ref 0.01787043 yaw_ref 0.08544675 v_ref 0.04812085 w_ref -0.00924710 t_ref 3.30000000 loop_counter 65.00000000
 [goal_state_planning]  Time 1.30000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.30000000 loop_counter 65.00000000
+[planning_control_command]  Time 1.30000000 vc 0.08304205 wc -0.00563908 Time 1.30000000
 [state_of_robot]  Time 1.31000000 x 0.34379122 y 0.00787888 yaw 0.10610131 v 0.09971024 w -0.00528665 t 1.31000000
 [state_of_robot]  Time 1.32000000 x 0.34476615 y 0.00798266 yaw 0.10604821 v 0.09804342 w -0.00531015 t 1.32000000
 [reference_point]  Time 1.32000000 x_ref 0.34018136 y_ref 0.01107507 yaw_ref 0.06808613 v_ref 0.10447500 w_ref 0.02089500 t 1.32000000
@@ -1989,6 +2055,7 @@
 [reference_trajectory_planning]  Time 1.32000000 x_ref 0.44073655 y_ref 0.01722016 yaw_ref 0.08612020 v_ref 0.04579475 w_ref -0.00958495 t_ref 3.22000000 loop_counter 66.00000000
 [reference_trajectory_planning]  Time 1.32000000 x_ref 0.44529943 y_ref 0.01760968 yaw_ref 0.08516171 v_ref 0.04579475 w_ref -0.00958495 t_ref 3.32000000 loop_counter 66.00000000
 [goal_state_planning]  Time 1.32000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.32000000 loop_counter 66.00000000
+[planning_control_command]  Time 1.32000000 vc 0.07970157 wc -0.00485797 Time 1.32000000
 [state_of_robot]  Time 1.33000000 x 0.34572284 y 0.00808444 yaw 0.10599541 v 0.09620924 w -0.00528000 t 1.33000000
 [state_of_robot]  Time 1.34000000 x 0.34666312 y 0.00818443 yaw 0.10594289 v 0.09455847 w -0.00525187 t 1.34000000
 [reference_point]  Time 1.34000000 x_ref 0.34216057 y_ref 0.01120924 yaw_ref 0.06848288 v_ref 0.10095000 w_ref 0.02019000 t 1.34000000
@@ -2018,6 +2085,7 @@
 [reference_trajectory_planning]  Time 1.34000000 x_ref 0.43801519 y_ref 0.01698088 yaw_ref 0.08587413 v_ref 0.04346805 w_ref -0.00992678 t_ref 3.24000000 loop_counter 67.00000000
 [reference_trajectory_planning]  Time 1.34000000 x_ref 0.44234635 y_ref 0.01734940 yaw_ref 0.08488145 v_ref 0.04346805 w_ref -0.00992678 t_ref 3.34000000 loop_counter 67.00000000
 [goal_state_planning]  Time 1.34000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.34000000 loop_counter 67.00000000
+[planning_control_command]  Time 1.34000000 vc 0.07655219 wc -0.00406094 Time 1.34000000
 [state_of_robot]  Time 1.35000000 x 0.34758551 y 0.00828247 yaw 0.10589117 v 0.09275784 w -0.00517247 t 1.35000000
 [state_of_robot]  Time 1.36000000 x 0.34849178 y 0.00837875 yaw 0.10584018 v 0.09113728 w -0.00509837 t 1.36000000
 [reference_point]  Time 1.36000000 x_ref 0.34405553 y_ref 0.01133861 yaw_ref 0.06886275 v_ref 0.09750000 w_ref 0.01950000 t 1.36000000
@@ -2047,6 +2115,7 @@
 [reference_trajectory_planning]  Time 1.36000000 x_ref 0.43535160 y_ref 0.01674588 yaw_ref 0.08563492 v_ref 0.04121629 w_ref -0.01025780 t_ref 3.26000000 loop_counter 68.00000000
 [reference_trajectory_planning]  Time 1.36000000 x_ref 0.43945849 y_ref 0.01709419 yaw_ref 0.08460914 v_ref 0.04121629 w_ref -0.01025780 t_ref 3.36000000 loop_counter 68.00000000
 [goal_state_planning]  Time 1.36000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.36000000 loop_counter 68.00000000
+[planning_control_command]  Time 1.36000000 vc 0.07346373 wc -0.00328074 Time 1.36000000
 [state_of_robot]  Time 1.37000000 x 0.34938048 y 0.00847312 yaw 0.10579041 v 0.08936992 w -0.00497720 t 1.37000000
 [state_of_robot]  Time 1.38000000 x 0.35025337 y 0.00856577 yaw 0.10574177 v 0.08777930 w -0.00486410 t 1.38000000
 [reference_point]  Time 1.38000000 x_ref 0.34586625 y_ref 0.01146316 yaw_ref 0.06922575 v_ref 0.09412500 w_ref 0.01882500 t 1.38000000
@@ -2076,6 +2145,7 @@
 [reference_trajectory_planning]  Time 1.38000000 x_ref 0.43274596 y_ref 0.01651516 yaw_ref 0.08540256 v_ref 0.03903987 w_ref -0.01057783 t_ref 3.28000000 loop_counter 69.00000000
 [reference_trajectory_planning]  Time 1.38000000 x_ref 0.43663607 y_ref 0.01684405 yaw_ref 0.08434478 v_ref 0.03903987 w_ref -0.01057783 t_ref 3.38000000 loop_counter 69.00000000
 [goal_state_planning]  Time 1.38000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.38000000 loop_counter 69.00000000
+[planning_control_command]  Time 1.38000000 vc 0.07037582 wc -0.00253235 Time 1.38000000
 [state_of_robot]  Time 1.39000000 x 0.35110896 y 0.00865654 yaw 0.10569468 v 0.08603895 w -0.00470865 t 1.39000000
 [state_of_robot]  Time 1.40000000 x 0.35194898 y 0.00874561 yaw 0.10564905 v 0.08447264 w -0.00456356 t 1.40000000
 [reference_point]  Time 1.40000000 x_ref 0.34767697 y_ref 0.01158772 yaw_ref 0.06958875 v_ref 0.09075000 w_ref 0.01815000 t 1.40000000
@@ -2105,6 +2175,7 @@
 [reference_trajectory_planning]  Time 1.40000000 x_ref 0.43013986 y_ref 0.01628459 yaw_ref 0.08517426 v_ref 0.03686240 w_ref -0.01090075 t_ref 3.30000000 loop_counter 70.00000000
 [reference_trajectory_planning]  Time 1.40000000 x_ref 0.43381307 y_ref 0.01659418 yaw_ref 0.08408418 v_ref 0.03686240 w_ref -0.01090074 t_ref 3.40000000 loop_counter 70.00000000
 [goal_state_planning]  Time 1.40000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.40000000 loop_counter 70.00000000
+[planning_control_command]  Time 1.40000000 vc 0.06754222 wc -0.00178327 Time 1.40000000
 [state_of_robot]  Time 1.41000000 x 0.35277216 y 0.00883287 yaw 0.10560527 v 0.08277960 w -0.00437821 t 1.41000000
 [state_of_robot]  Time 1.42000000 x 0.35358020 y 0.00891849 yaw 0.10556321 v 0.08125586 w -0.00420521 t 1.42000000
 [reference_point]  Time 1.42000000 x_ref 0.34932672 y_ref 0.01170271 yaw_ref 0.06991950 v_ref 0.08752500 w_ref 0.01750500 t 1.42000000
@@ -2134,6 +2205,7 @@
 [reference_trajectory_planning]  Time 1.42000000 x_ref 0.42765742 y_ref 0.01606318 yaw_ref 0.08495476 v_ref 0.03483619 w_ref -0.01119691 t_ref 3.32000000 loop_counter 71.00000000
 [reference_trajectory_planning]  Time 1.42000000 x_ref 0.43112881 y_ref 0.01635489 yaw_ref 0.08383507 v_ref 0.03483619 w_ref -0.01119691 t_ref 3.42000000 loop_counter 71.00000000
 [goal_state_planning]  Time 1.42000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.42000000 loop_counter 71.00000000
+[planning_control_command]  Time 1.42000000 vc 0.06452687 wc -0.00111466 Time 1.42000000
 [state_of_robot]  Time 1.43000000 x 0.35437160 y 0.00900231 yaw 0.10552322 v 0.07958296 w -0.00399918 t 1.43000000
 [state_of_robot]  Time 1.44000000 x 0.35514803 y 0.00908452 yaw 0.10548515 v 0.07807735 w -0.00380688 t 1.44000000
 [reference_point]  Time 1.44000000 x_ref 0.35097647 y_ref 0.01181770 yaw_ref 0.07025025 v_ref 0.08430000 w_ref 0.01686000 t 1.44000000
@@ -2163,6 +2235,7 @@
 [reference_trajectory_planning]  Time 1.44000000 x_ref 0.42517476 y_ref 0.01584184 yaw_ref 0.08473895 v_ref 0.03280944 w_ref -0.01149448 t_ref 3.34000000 loop_counter 72.00000000
 [reference_trajectory_planning]  Time 1.44000000 x_ref 0.42844425 y_ref 0.01611578 yaw_ref 0.08358950 v_ref 0.03280944 w_ref -0.01149448 t_ref 3.44000000 loop_counter 72.00000000
 [goal_state_planning]  Time 1.44000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.44000000 loop_counter 72.00000000
+[planning_control_command]  Time 1.44000000 vc 0.06168583 wc -0.00047070 Time 1.44000000
 [state_of_robot]  Time 1.45000000 x 0.35590817 y 0.00916497 yaw 0.10544931 v 0.07643820 w -0.00358446 t 1.45000000
 [state_of_robot]  Time 1.46000000 x 0.35665364 y 0.00924385 yaw 0.10541554 v 0.07496296 w -0.00337688 t 1.46000000
 [reference_point]  Time 1.46000000 x_ref 0.35254948 y_ref 0.01192797 yaw_ref 0.07056563 v_ref 0.08115000 w_ref 0.01623000 t 1.46000000
@@ -2192,6 +2265,7 @@
 [reference_trajectory_planning]  Time 1.46000000 x_ref 0.42275739 y_ref 0.01562551 yaw_ref 0.08452844 v_ref 0.03085764 w_ref -0.01177863 t_ref 3.36000000 loop_counter 73.00000000
 [reference_trajectory_planning]  Time 1.46000000 x_ref 0.42583244 y_ref 0.01588241 yaw_ref 0.08335057 v_ref 0.03085764 w_ref -0.01177863 t_ref 3.46000000 loop_counter 73.00000000
 [goal_state_planning]  Time 1.46000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.46000000 loop_counter 73.00000000
+[planning_control_command]  Time 1.46000000 vc 0.05890703 wc 0.00011921 Time 1.46000000
 [state_of_robot]  Time 1.47000000 x 0.35738314 y 0.00932101 yaw 0.10538410 v 0.07335737 w -0.00314381 t 1.47000000
 [state_of_robot]  Time 1.48000000 x 0.35809828 y 0.00939664 yaw 0.10535484 v 0.07191234 w -0.00292627 t 1.48000000
 [reference_point]  Time 1.48000000 x_ref 0.35404577 y_ref 0.01203350 yaw_ref 0.07086563 v_ref 0.07807500 w_ref 0.01561500 t 1.48000000
@@ -2221,6 +2295,7 @@
 [reference_trajectory_planning]  Time 1.48000000 x_ref 0.42040545 y_ref 0.01541418 yaw_ref 0.08432291 v_ref 0.02898114 w_ref -0.01204873 t_ref 3.38000000 loop_counter 74.00000000
 [reference_trajectory_planning]  Time 1.48000000 x_ref 0.42329356 y_ref 0.01565479 yaw_ref 0.08311803 v_ref 0.02898114 w_ref -0.01204873 t_ref 3.48000000 loop_counter 74.00000000
 [goal_state_planning]  Time 1.48000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.48000000 loop_counter 74.00000000
+[planning_control_command]  Time 1.48000000 vc 0.05613490 wc 0.00064139 Time 1.48000000
 [state_of_robot]  Time 1.49000000 x 0.35879773 y 0.00947058 yaw 0.10532795 v 0.07033459 w -0.00268843 t 1.49000000
 [state_of_robot]  Time 1.50000000 x 0.35948306 y 0.00954302 yaw 0.10530329 v 0.06891462 w -0.00246644 t 1.50000000
 [reference_point]  Time 1.50000000 x_ref 0.35554205 y_ref 0.01213904 yaw_ref 0.07116563 v_ref 0.07500000 w_ref 0.01500000 t 1.50000000
@@ -2250,6 +2325,7 @@
 [reference_trajectory_planning]  Time 1.50000000 x_ref 0.41805314 y_ref 0.01520277 yaw_ref 0.08411833 v_ref 0.02710369 w_ref -0.01231817 t_ref 3.40000000 loop_counter 75.00000000
 [reference_trajectory_planning]  Time 1.50000000 x_ref 0.42075420 y_ref 0.01542716 yaw_ref 0.08288651 v_ref 0.02710369 w_ref -0.01231817 t_ref 3.50000000 loop_counter 75.00000000
 [goal_state_planning]  Time 1.50000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.50000000 loop_counter 75.00000000
+[planning_control_command]  Time 1.50000000 vc 0.05359332 wc 0.00112692 Time 1.50000000
 [state_of_robot]  Time 1.51000000 x 0.36015315 y 0.00961383 yaw 0.10528102 v 0.06738249 w -0.00222688 t 1.51000000
 [state_of_robot]  Time 1.52000000 x 0.36080953 y 0.00968317 yaw 0.10526099 v 0.06600358 w -0.00200330 t 1.52000000
 [reference_point]  Time 1.52000000 x_ref 0.35689237 y_ref 0.01223530 yaw_ref 0.07143638 v_ref 0.07207500 w_ref 0.01441500 t 1.52000000
@@ -2279,6 +2355,7 @@
 [reference_trajectory_planning]  Time 1.52000000 x_ref 0.41583940 y_ref 0.01500225 yaw_ref 0.08392084 v_ref 0.02537740 w_ref -0.01255768 t_ref 3.42000000 loop_counter 76.00000000
 [reference_trajectory_planning]  Time 1.52000000 x_ref 0.41836847 y_ref 0.01521179 yaw_ref 0.08266508 v_ref 0.02537740 w_ref -0.01255768 t_ref 3.52000000 loop_counter 76.00000000
 [goal_state_planning]  Time 1.52000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.52000000 loop_counter 76.00000000
+[planning_control_command]  Time 1.52000000 vc 0.05090046 wc 0.00150194 Time 1.52000000
 [state_of_robot]  Time 1.53000000 x 0.36145090 y 0.00975092 yaw 0.10524329 v 0.06449326 w -0.00176961 t 1.53000000
 [state_of_robot]  Time 1.54000000 x 0.36207874 y 0.00981724 yaw 0.10522778 v 0.06313398 w -0.00155151 t 1.54000000
 [reference_point]  Time 1.54000000 x_ref 0.35824270 y_ref 0.01233156 yaw_ref 0.07170713 v_ref 0.06915000 w_ref 0.01383000 t 1.54000000
@@ -2308,6 +2385,7 @@
 [reference_trajectory_planning]  Time 1.54000000 x_ref 0.41362549 y_ref 0.01480160 yaw_ref 0.08372300 v_ref 0.02365061 w_ref -0.01279413 t_ref 3.44000000 loop_counter 77.00000000
 [reference_trajectory_planning]  Time 1.54000000 x_ref 0.41598252 y_ref 0.01499636 yaw_ref 0.08244359 v_ref 0.02365061 w_ref -0.01279413 t_ref 3.54000000 loop_counter 77.00000000
 [goal_state_planning]  Time 1.54000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.54000000 loop_counter 77.00000000
+[planning_control_command]  Time 1.54000000 vc 0.04836471 wc 0.00181573 Time 1.54000000
 [state_of_robot]  Time 1.55000000 x 0.36269190 y 0.00988199 yaw 0.10521451 v 0.06165706 w -0.00132703 t 1.55000000
 [state_of_robot]  Time 1.56000000 x 0.36329185 y 0.00994534 yaw 0.10520333 v 0.06032782 w -0.00111751 t 1.56000000
 [reference_point]  Time 1.56000000 x_ref 0.35952379 y_ref 0.01242330 yaw_ref 0.07196400 v_ref 0.06630000 w_ref 0.01326000 t 1.56000000
@@ -2337,6 +2415,7 @@
 [reference_trajectory_planning]  Time 1.56000000 x_ref 0.41148435 y_ref 0.01460675 yaw_ref 0.08352717 v_ref 0.02199878 w_ref -0.01301290 t_ref 3.46000000 loop_counter 78.00000000
 [reference_trajectory_planning]  Time 1.56000000 x_ref 0.41367680 y_ref 0.01478743 yaw_ref 0.08222588 v_ref 0.02199878 w_ref -0.01301290 t_ref 3.56000000 loop_counter 78.00000000
 [goal_state_planning]  Time 1.56000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.56000000 loop_counter 78.00000000
+[planning_control_command]  Time 1.56000000 vc 0.04589221 wc 0.00204293 Time 1.56000000
 [state_of_robot]  Time 1.57000000 x 0.36387744 y 0.01000717 yaw 0.10519426 v 0.05888426 w -0.00090681 t 1.57000000
 [state_of_robot]  Time 1.58000000 x 0.36445010 y 0.01006763 yaw 0.10518716 v 0.05758506 w -0.00071016 t 1.58000000
 [reference_point]  Time 1.58000000 x_ref 0.36073566 y_ref 0.01251051 yaw_ref 0.07220700 v_ref 0.06352500 w_ref 0.01270500 t 1.58000000
@@ -2366,6 +2445,7 @@
 [reference_trajectory_planning]  Time 1.58000000 x_ref 0.40941613 y_ref 0.01441774 yaw_ref 0.08333279 v_ref 0.02042222 w_ref -0.01321291 t_ref 3.48000000 loop_counter 79.00000000
 [reference_trajectory_planning]  Time 1.58000000 x_ref 0.41145149 y_ref 0.01458504 yaw_ref 0.08201150 v_ref 0.02042222 w_ref -0.01321291 t_ref 3.58000000 loop_counter 79.00000000
 [goal_state_planning]  Time 1.58000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.58000000 loop_counter 79.00000000
+[planning_control_command]  Time 1.58000000 vc 0.04343232 wc 0.00217071 Time 1.58000000
 [state_of_robot]  Time 1.59000000 x 0.36500870 y 0.01012660 yaw 0.10518198 v 0.05616978 w -0.00051811 t 1.59000000
 [state_of_robot]  Time 1.60000000 x 0.36555462 y 0.01018423 yaw 0.10517859 v 0.05489604 w -0.00033885 t 1.60000000
 [reference_point]  Time 1.60000000 x_ref 0.36194752 y_ref 0.01259772 yaw_ref 0.07245000 v_ref 0.06075000 w_ref 0.01215000 t 1.60000000
@@ -2395,6 +2475,7 @@
 [reference_trajectory_planning]  Time 1.60000000 x_ref 0.40734760 y_ref 0.01422853 yaw_ref 0.08313369 v_ref 0.01884482 w_ref -0.01340620 t_ref 3.50000000 loop_counter 80.00000000
 [reference_trajectory_planning]  Time 1.60000000 x_ref 0.40922578 y_ref 0.01438249 yaw_ref 0.08179307 v_ref 0.01884482 w_ref -0.01340620 t_ref 3.60000000 loop_counter 80.00000000
 [goal_state_planning]  Time 1.60000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.60000000 loop_counter 80.00000000
+[planning_control_command]  Time 1.60000000 vc 0.04117910 wc 0.00222203 Time 1.60000000
 [state_of_robot]  Time 1.61000000 x 0.36608691 y 0.01024042 yaw 0.10517691 v 0.05352434 w -0.00016813 t 1.61000000
 [state_of_robot]  Time 1.62000000 x 0.36660692 y 0.01029532 yaw 0.10517682 v 0.05228982 w -0.00000878 t 1.62000000
 [reference_point]  Time 1.62000000 x_ref 0.36302843 y_ref 0.01267617 yaw_ref 0.07266675 v_ref 0.05812500 w_ref 0.01162500 t 1.62000000
@@ -2424,6 +2505,7 @@
 [reference_trajectory_planning]  Time 1.62000000 x_ref 0.40543252 y_ref 0.01405209 yaw_ref 0.08293989 v_ref 0.01741845 w_ref -0.01356524 t_ref 3.52000000 loop_counter 81.00000000
 [reference_trajectory_planning]  Time 1.62000000 x_ref 0.40716857 y_ref 0.01419404 yaw_ref 0.08158337 v_ref 0.01741845 w_ref -0.01356524 t_ref 3.62000000 loop_counter 81.00000000
 [goal_state_planning]  Time 1.62000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.62000000 loop_counter 81.00000000
+[planning_control_command]  Time 1.62000000 vc 0.03880513 wc 0.00214028 Time 1.62000000
 [state_of_robot]  Time 1.63000000 x 0.36711352 y 0.01034880 yaw 0.10517817 v 0.05094135 w 0.00013449 t 1.63000000
 [state_of_robot]  Time 1.64000000 x 0.36760805 y 0.01040101 yaw 0.10518085 v 0.04972773 w 0.00026821 t 1.64000000
 [reference_point]  Time 1.64000000 x_ref 0.36410934 y_ref 0.01275462 yaw_ref 0.07288350 v_ref 0.05550000 w_ref 0.01110000 t 1.64000000
@@ -2453,6 +2535,7 @@
 [reference_trajectory_planning]  Time 1.64000000 x_ref 0.40351730 y_ref 0.01387550 yaw_ref 0.08273928 v_ref 0.01599165 w_ref -0.01371424 t_ref 3.54000000 loop_counter 82.00000000
 [reference_trajectory_planning]  Time 1.64000000 x_ref 0.40511118 y_ref 0.01400548 yaw_ref 0.08136786 v_ref 0.01599165 w_ref -0.01371424 t_ref 3.64000000 loop_counter 82.00000000
 [goal_state_planning]  Time 1.64000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.64000000 loop_counter 82.00000000
+[planning_control_command]  Time 1.64000000 vc 0.03657112 wc 0.00195840 Time 1.64000000
 [state_of_robot]  Time 1.65000000 x 0.36808949 y 0.01045184 yaw 0.10518466 v 0.04841207 w 0.00038089 t 1.65000000
 [state_of_robot]  Time 1.66000000 x 0.36855916 y 0.01050142 yaw 0.10518952 v 0.04722797 w 0.00048606 t 1.66000000
 [reference_point]  Time 1.66000000 x_ref 0.36512851 y_ref 0.01282885 yaw_ref 0.07308788 v_ref 0.05295000 w_ref 0.01059000 t 1.66000000
@@ -2482,6 +2565,7 @@
 [reference_trajectory_planning]  Time 1.66000000 x_ref 0.40168233 y_ref 0.01370570 yaw_ref 0.08253666 v_ref 0.01463980 w_ref -0.01383948 t_ref 3.56000000 loop_counter 83.00000000
 [reference_trajectory_planning]  Time 1.66000000 x_ref 0.40314149 y_ref 0.01382438 yaw_ref 0.08115271 v_ref 0.01463980 w_ref -0.01383948 t_ref 3.66000000 loop_counter 83.00000000
 [goal_state_planning]  Time 1.66000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.66000000 loop_counter 83.00000000
+[planning_control_command]  Time 1.66000000 vc 0.03440151 wc 0.00165931 Time 1.66000000
 [state_of_robot]  Time 1.67000000 x 0.36901607 y 0.01054967 yaw 0.10519516 v 0.04594532 w 0.00056427 t 1.67000000
 [state_of_robot]  Time 1.68000000 x 0.36946151 y 0.01059670 yaw 0.10520153 v 0.04479094 w 0.00063727 t 1.68000000
 [reference_point]  Time 1.68000000 x_ref 0.36608596 y_ref 0.01289886 yaw_ref 0.07327988 v_ref 0.05047500 w_ref 0.01009500 t 1.68000000
@@ -2511,6 +2595,7 @@
 [reference_trajectory_planning]  Time 1.68000000 x_ref 0.39992771 y_ref 0.01354277 yaw_ref 0.08233158 v_ref 0.01336320 w_ref -0.01393969 t_ref 3.58000000 loop_counter 84.00000000
 [reference_trajectory_planning]  Time 1.68000000 x_ref 0.40125966 y_ref 0.01365081 yaw_ref 0.08093761 v_ref 0.01336320 w_ref -0.01393969 t_ref 3.68000000 loop_counter 84.00000000
 [goal_state_planning]  Time 1.68000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.68000000 loop_counter 84.00000000
+[planning_control_command]  Time 1.68000000 vc 0.03225063 wc 0.00123346 Time 1.68000000
 [state_of_robot]  Time 1.69000000 x 0.36989447 y 0.01064242 yaw 0.10520831 v 0.04353691 w 0.00067702 t 1.69000000
 [state_of_robot]  Time 1.70000000 x 0.37031621 y 0.01068696 yaw 0.10521545 v 0.04240828 w 0.00071412 t 1.70000000
 [reference_point]  Time 1.70000000 x_ref 0.36704340 y_ref 0.01296887 yaw_ref 0.07347188 v_ref 0.04800000 w_ref 0.00960000 t 1.70000000
@@ -2540,6 +2625,7 @@
 [reference_trajectory_planning]  Time 1.70000000 x_ref 0.39817281 y_ref 0.01337979 yaw_ref 0.08211438 v_ref 0.01208586 w_ref -0.01402473 t_ref 3.60000000 loop_counter 85.00000000
 [reference_trajectory_planning]  Time 1.70000000 x_ref 0.39937746 y_ref 0.01347723 yaw_ref 0.08071191 v_ref 0.01208586 w_ref -0.01402473 t_ref 3.70000000 loop_counter 85.00000000
 [goal_state_planning]  Time 1.70000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.70000000 loop_counter 85.00000000
+[planning_control_command]  Time 1.70000000 vc 0.03028277 wc 0.00068932 Time 1.70000000
 [state_of_robot]  Time 1.71000000 x 0.37072588 y 0.01073022 yaw 0.10522257 v 0.04119573 w 0.00071246 t 1.71000000
 [state_of_robot]  Time 1.72000000 x 0.37112471 y 0.01077235 yaw 0.10522968 v 0.04010444 w 0.00071092 t 1.72000000
 [reference_point]  Time 1.72000000 x_ref 0.36788487 y_ref 0.01303081 yaw_ref 0.07364063 v_ref 0.04567500 w_ref 0.00913500 t 1.72000000
@@ -2569,6 +2655,7 @@
 [reference_trajectory_planning]  Time 1.72000000 x_ref 0.39658622 y_ref 0.01323160 yaw_ref 0.08190305 v_ref 0.01095943 w_ref -0.01407106 t_ref 3.62000000 loop_counter 86.00000000
 [reference_trajectory_planning]  Time 1.72000000 x_ref 0.39767862 y_ref 0.01331972 yaw_ref 0.08049595 v_ref 0.01095943 w_ref -0.01407106 t_ref 3.72000000 loop_counter 86.00000000
 [goal_state_planning]  Time 1.72000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.72000000 loop_counter 86.00000000
+[planning_control_command]  Time 1.72000000 vc 0.02822485 wc 0.00000457 Time 1.72000000
 [state_of_robot]  Time 1.73000000 x 0.37151172 y 0.01081323 yaw 0.10523632 v 0.03891648 w 0.00066383 t 1.73000000
 [state_of_robot]  Time 1.74000000 x 0.37188810 y 0.01085299 yaw 0.10524252 v 0.03784732 w 0.00061988 t 1.74000000
 [reference_point]  Time 1.74000000 x_ref 0.36872634 y_ref 0.01309274 yaw_ref 0.07380938 v_ref 0.04335000 w_ref 0.00867000 t 1.74000000
@@ -2598,6 +2685,7 @@
 [reference_trajectory_planning]  Time 1.74000000 x_ref 0.39499950 y_ref 0.01308349 yaw_ref 0.08167758 v_ref 0.00983262 w_ref -0.01409883 t_ref 3.64000000 loop_counter 87.00000000
 [reference_trajectory_planning]  Time 1.74000000 x_ref 0.39597959 y_ref 0.01316233 yaw_ref 0.08026770 v_ref 0.00983262 w_ref -0.01409883 t_ref 3.74000000 loop_counter 87.00000000
 [goal_state_planning]  Time 1.74000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.74000000 loop_counter 87.00000000
+[planning_control_command]  Time 1.74000000 vc 0.02629001 wc -0.00081436 Time 1.74000000
 [state_of_robot]  Time 1.75000000 x 0.37225299 y 0.01089153 yaw 0.10524776 v 0.03669158 w 0.00052426 t 1.75000000
 [state_of_robot]  Time 1.76000000 x 0.37260753 y 0.01092899 yaw 0.10525211 v 0.03565143 w 0.00043502 t 1.76000000
 [reference_point]  Time 1.76000000 x_ref 0.36951358 y_ref 0.01315084 yaw_ref 0.07396725 v_ref 0.04110000 w_ref 0.00822000 t 1.76000000
@@ -2627,6 +2715,7 @@
 [reference_trajectory_planning]  Time 1.76000000 x_ref 0.39350045 y_ref 0.01294335 yaw_ref 0.08144780 v_ref 0.00878077 w_ref -0.01409643 t_ref 3.66000000 loop_counter 88.00000000
 [reference_trajectory_planning]  Time 1.76000000 x_ref 0.39437572 y_ref 0.01301355 yaw_ref 0.08003816 v_ref 0.00878077 w_ref -0.01409643 t_ref 3.76000000 loop_counter 88.00000000
 [goal_state_planning]  Time 1.76000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.76000000 loop_counter 88.00000000
+[planning_control_command]  Time 1.76000000 vc 0.02442095 wc -0.00176778 Time 1.76000000
 [state_of_robot]  Time 1.77000000 x 0.37295090 y 0.01096526 yaw 0.10525499 v 0.03452838 w 0.00028817 t 1.77000000
 [state_of_robot]  Time 1.78000000 x 0.37328422 y 0.01100048 yaw 0.10525650 v 0.03351764 w 0.00015111 t 1.78000000
 [reference_point]  Time 1.78000000 x_ref 0.37024657 y_ref 0.01320510 yaw_ref 0.07411425 v_ref 0.03892500 w_ref 0.00778500 t 1.78000000
@@ -2656,6 +2745,7 @@
 [reference_trajectory_planning]  Time 1.78000000 x_ref 0.39208919 y_ref 0.01281124 yaw_ref 0.08121397 v_ref 0.00780415 w_ref -0.01406314 t_ref 3.68000000 loop_counter 89.00000000
 [reference_trajectory_planning]  Time 1.78000000 x_ref 0.39286712 y_ref 0.01287346 yaw_ref 0.07980766 v_ref 0.00780415 w_ref -0.01406314 t_ref 3.78000000 loop_counter 89.00000000
 [goal_state_planning]  Time 1.78000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.78000000 loop_counter 89.00000000
+[planning_control_command]  Time 1.78000000 vc 0.02257699 wc -0.00285613 Time 1.78000000
 [state_of_robot]  Time 1.79000000 x 0.37360666 y 0.01103454 yaw 0.10525601 v 0.03242357 w -0.00004938 t 1.79000000
 [state_of_robot]  Time 1.80000000 x 0.37391931 y 0.01106757 yaw 0.10525364 v 0.03143891 w -0.00023649 t 1.80000000
 [reference_point]  Time 1.80000000 x_ref 0.37097957 y_ref 0.01325936 yaw_ref 0.07426125 v_ref 0.03675000 w_ref 0.00735000 t 1.80000000
@@ -2685,6 +2775,7 @@
 [reference_trajectory_planning]  Time 1.80000000 x_ref 0.39067765 y_ref 0.01267946 yaw_ref 0.08096157 v_ref 0.00682687 w_ref -0.01400615 t_ref 3.70000000 loop_counter 90.00000000
 [reference_trajectory_planning]  Time 1.80000000 x_ref 0.39135818 y_ref 0.01273372 yaw_ref 0.07956096 v_ref 0.00682687 w_ref -0.01400615 t_ref 3.80000000 loop_counter 90.00000000
 [goal_state_planning]  Time 1.80000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.80000000 loop_counter 90.00000000
+[planning_control_command]  Time 1.80000000 vc 0.02089267 wc -0.00409014 Time 1.80000000
 [state_of_robot]  Time 1.81000000 x 0.37422147 y 0.01109949 yaw 0.10524871 v 0.03038429 w -0.00049340 t 1.81000000
 [state_of_robot]  Time 1.82000000 x 0.37451420 y 0.01113041 yaw 0.10524138 v 0.02943513 w -0.00073319 t 1.82000000
 [reference_point]  Time 1.82000000 x_ref 0.37161157 y_ref 0.01330638 yaw_ref 0.07438800 v_ref 0.03472500 w_ref 0.00694500 t 1.82000000
@@ -2714,6 +2805,7 @@
 [reference_trajectory_planning]  Time 1.82000000 x_ref 0.38944928 y_ref 0.01256441 yaw_ref 0.08072154 v_ref 0.00600039 w_ref -0.01390876 t_ref 3.72000000 loop_counter 91.00000000
 [reference_trajectory_planning]  Time 1.82000000 x_ref 0.39004743 y_ref 0.01261196 yaw_ref 0.07933066 v_ref 0.00600039 w_ref -0.01390876 t_ref 3.82000000 loop_counter 91.00000000
 [goal_state_planning]  Time 1.82000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.82000000 loop_counter 91.00000000
+[planning_control_command]  Time 1.82000000 vc 0.01914923 wc -0.00543602 Time 1.82000000
 [state_of_robot]  Time 1.83000000 x 0.37479669 y 0.01116025 yaw 0.10523091 v 0.02840654 w -0.00104671 t 1.83000000
 [state_of_robot]  Time 1.84000000 x 0.37506998 y 0.01118911 yaw 0.10521752 v 0.02748081 w -0.00133933 t 1.84000000
 [reference_point]  Time 1.84000000 x_ref 0.37224358 y_ref 0.01335340 yaw_ref 0.07451475 v_ref 0.03270000 w_ref 0.00654000 t 1.84000000
@@ -2743,6 +2835,7 @@
 [reference_trajectory_planning]  Time 1.84000000 x_ref 0.38822076 y_ref 0.01244983 yaw_ref 0.08046230 v_ref 0.00517358 w_ref -0.01378591 t_ref 3.74000000 loop_counter 92.00000000
 [reference_trajectory_planning]  Time 1.84000000 x_ref 0.38873650 y_ref 0.01249070 yaw_ref 0.07908371 v_ref 0.00517358 w_ref -0.01378591 t_ref 3.84000000 loop_counter 92.00000000
 [goal_state_planning]  Time 1.84000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.84000000 loop_counter 92.00000000
+[planning_control_command]  Time 1.84000000 vc 0.01751220 wc -0.00692334 Time 1.84000000
 [state_of_robot]  Time 1.85000000 x 0.37533335 y 0.01121692 yaw 0.10520040 v 0.02648395 w -0.00171160 t 1.85000000
 [state_of_robot]  Time 1.86000000 x 0.37558781 y 0.01124378 yaw 0.10517981 v 0.02558677 w -0.00205905 t 1.86000000
 [reference_point]  Time 1.86000000 x_ref 0.37282883 y_ref 0.01339703 yaw_ref 0.07463213 v_ref 0.03075000 w_ref 0.00615000 t 1.86000000
@@ -2772,6 +2865,7 @@
 [reference_trajectory_planning]  Time 1.86000000 x_ref 0.38708736 y_ref 0.01234431 yaw_ref 0.08020156 v_ref 0.00442173 w_ref -0.01362963 t_ref 3.76000000 loop_counter 93.00000000
 [reference_trajectory_planning]  Time 1.86000000 x_ref 0.38752816 y_ref 0.01237913 yaw_ref 0.07883860 v_ref 0.00442173 w_ref -0.01362963 t_ref 3.86000000 loop_counter 93.00000000
 [goal_state_planning]  Time 1.86000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.86000000 loop_counter 93.00000000
+[planning_control_command]  Time 1.86000000 vc 0.01594256 wc -0.00852562 Time 1.86000000
 [state_of_robot]  Time 1.87000000 x 0.37583267 y 0.01126963 yaw 0.10515491 v 0.02462235 w -0.00249015 t 1.87000000
 [state_of_robot]  Time 1.88000000 x 0.37606890 y 0.01129455 yaw 0.10512598 v 0.02375437 w -0.00289251 t 1.88000000
 [reference_point]  Time 1.88000000 x_ref 0.37336732 y_ref 0.01343726 yaw_ref 0.07474013 v_ref 0.02887500 w_ref 0.00577500 t 1.88000000
@@ -2801,6 +2895,7 @@
 [reference_trajectory_planning]  Time 1.88000000 x_ref 0.38604917 y_ref 0.01224784 yaw_ref 0.07994081 v_ref 0.00374508 w_ref -0.01344066 t_ref 3.78000000 loop_counter 94.00000000
 [reference_trajectory_planning]  Time 1.88000000 x_ref 0.38642252 y_ref 0.01227724 yaw_ref 0.07859674 v_ref 0.00374508 w_ref -0.01344066 t_ref 3.88000000 loop_counter 94.00000000
 [goal_state_planning]  Time 1.88000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.88000000 loop_counter 94.00000000
+[planning_control_command]  Time 1.88000000 vc 0.01440456 wc -0.01022826 Time 1.88000000
 [state_of_robot]  Time 1.89000000 x 0.37629584 y 0.01131849 yaw 0.10509217 v 0.02281939 w -0.00338156 t 1.89000000
 [state_of_robot]  Time 1.90000000 x 0.37651441 y 0.01134154 yaw 0.10505379 v 0.02197791 w -0.00383801 t 1.90000000
 [reference_point]  Time 1.90000000 x_ref 0.37390582 y_ref 0.01347750 yaw_ref 0.07484813 v_ref 0.02700000 w_ref 0.00540000 t 1.90000000
@@ -2830,6 +2925,7 @@
 [reference_trajectory_planning]  Time 1.90000000 x_ref 0.38501071 y_ref 0.01215204 yaw_ref 0.07965939 v_ref 0.00306787 w_ref -0.01322331 t_ref 3.80000000 loop_counter 95.00000000
 [reference_trajectory_planning]  Time 1.90000000 x_ref 0.38531656 y_ref 0.01217605 yaw_ref 0.07833706 v_ref 0.00306787 w_ref -0.01322331 t_ref 3.90000000 loop_counter 95.00000000
 [goal_state_planning]  Time 1.90000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.90000000 loop_counter 95.00000000
+[planning_control_command]  Time 1.90000000 vc 0.01300297 wc -0.01206479 Time 1.90000000
 [state_of_robot]  Time 1.91000000 x 0.37672405 y 0.01136363 yaw 0.10500992 v 0.02108041 w -0.00438646 t 1.91000000
 [state_of_robot]  Time 1.92000000 x 0.37692566 y 0.01138487 yaw 0.10496094 v 0.02027267 w -0.00489835 t 1.92000000
 [reference_point]  Time 1.92000000 x_ref 0.37435830 y_ref 0.01351143 yaw_ref 0.07493888 v_ref 0.02527500 w_ref 0.00505500 t 1.92000000
@@ -2859,6 +2955,7 @@
 [reference_trajectory_planning]  Time 1.92000000 x_ref 0.38417033 y_ref 0.01207444 yaw_ref 0.07940484 v_ref 0.00254134 w_ref -0.01296992 t_ref 3.82000000 loop_counter 96.00000000
 [reference_trajectory_planning]  Time 1.92000000 x_ref 0.38442369 y_ref 0.01209427 yaw_ref 0.07810784 v_ref 0.00254134 w_ref -0.01296992 t_ref 3.92000000 loop_counter 96.00000000
 [goal_state_planning]  Time 1.92000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.92000000 loop_counter 96.00000000
+[planning_control_command]  Time 1.92000000 vc 0.01157339 wc -0.01393020 Time 1.92000000
 [state_of_robot]  Time 1.93000000 x 0.37711862 y 0.01140519 yaw 0.10490594 v 0.01940274 w -0.00550048 t 1.93000000
 [state_of_robot]  Time 1.94000000 x 0.37730380 y 0.01142467 yaw 0.10484531 v 0.01861980 w -0.00606246 t 1.94000000
 [reference_point]  Time 1.94000000 x_ref 0.37481078 y_ref 0.01354536 yaw_ref 0.07502963 v_ref 0.02355000 w_ref 0.00471000 t 1.94000000
@@ -2888,6 +2985,7 @@
 [reference_trajectory_planning]  Time 1.94000000 x_ref 0.38332979 y_ref 0.01199750 yaw_ref 0.07913107 v_ref 0.00201454 w_ref -0.01268952 t_ref 3.84000000 loop_counter 97.00000000
 [reference_trajectory_planning]  Time 1.94000000 x_ref 0.38353063 y_ref 0.01201317 yaw_ref 0.07786212 v_ref 0.00201454 w_ref -0.01268952 t_ref 3.94000000 loop_counter 97.00000000
 [goal_state_planning]  Time 1.94000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.94000000 loop_counter 97.00000000
+[planning_control_command]  Time 1.94000000 vc 0.01023373 wc -0.01589783 Time 1.94000000
 [state_of_robot]  Time 1.95000000 x 0.37748063 y 0.01144327 yaw 0.10477813 v 0.01778120 w -0.00671815 t 1.95000000
 [state_of_robot]  Time 1.96000000 x 0.37764997 y 0.01146107 yaw 0.10470483 v 0.01702645 w -0.00733013 t 1.96000000
 [reference_point]  Time 1.96000000 x_ref 0.37522399 y_ref 0.01357639 yaw_ref 0.07511250 v_ref 0.02190000 w_ref 0.00438000 t 1.96000000
@@ -2917,6 +3015,7 @@
 [reference_trajectory_planning]  Time 1.96000000 x_ref 0.38315218 y_ref 0.01197963 yaw_ref 0.07897395 v_ref 0.00193770 w_ref -0.01230370 t_ref 3.86000000 loop_counter 98.00000000
 [reference_trajectory_planning]  Time 1.96000000 x_ref 0.38334536 y_ref 0.01199468 yaw_ref 0.07774358 v_ref 0.00193770 w_ref -0.01230370 t_ref 3.96000000 loop_counter 98.00000000
 [goal_state_planning]  Time 1.96000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.96000000 loop_counter 98.00000000
+[planning_control_command]  Time 1.96000000 vc 0.00896318 wc -0.01791061 Time 1.96000000
 [state_of_robot]  Time 1.97000000 x 0.37781128 y 0.01147801 yaw 0.10462447 v 0.01622012 w -0.00803549 t 1.97000000
 [state_of_robot]  Time 1.98000000 x 0.37796538 y 0.01149417 yaw 0.10453754 v 0.01549443 w -0.00869383 t 1.98000000
 [reference_point]  Time 1.98000000 x_ref 0.37559794 y_ref 0.01360452 yaw_ref 0.07518750 v_ref 0.02032500 w_ref 0.00406500 t 1.98000000
@@ -2946,6 +3045,7 @@
 [reference_trajectory_planning]  Time 1.98000000 x_ref 0.38333202 y_ref 0.01199316 yaw_ref 0.07887654 v_ref 0.00210648 w_ref -0.01185588 t_ref 3.88000000 loop_counter 99.00000000
 [reference_trajectory_planning]  Time 1.98000000 x_ref 0.38354203 y_ref 0.01200951 yaw_ref 0.07769095 v_ref 0.00210648 w_ref -0.01185588 t_ref 3.98000000 loop_counter 99.00000000
 [goal_state_planning]  Time 1.98000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 1.98000000 loop_counter 99.00000000
+[planning_control_command]  Time 1.98000000 vc 0.00773097 wc -0.01993924 Time 1.98000000
 [state_of_robot]  Time 1.99000000 x 0.37811176 y 0.01150952 yaw 0.10444310 v 0.01471808 w -0.00944353 t 1.99000000
 [state_of_robot]  Time 2.00000000 x 0.37825119 y 0.01152412 yaw 0.10434167 v 0.01401937 w -0.01014324 t 2.00000000
 [reference_point]  Time 2.00000000 x_ref 0.37597188 y_ref 0.01363264 yaw_ref 0.07526250 v_ref 0.01875000 w_ref 0.00375000 t 2.00000000
@@ -2975,6 +3075,7 @@
 [reference_trajectory_planning]  Time 2.00000000 x_ref 0.38337585 y_ref 0.01199464 yaw_ref 0.07873542 v_ref 0.00218389 w_ref -0.01139979 t_ref 3.90000000 loop_counter 100.00000000
 [reference_trajectory_planning]  Time 2.00000000 x_ref 0.38359358 y_ref 0.01201157 yaw_ref 0.07759544 v_ref 0.00218389 w_ref -0.01139979 t_ref 4.00000000 loop_counter 100.00000000
 [goal_state_planning]  Time 2.00000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.00000000 loop_counter 100.00000000
+[planning_control_command]  Time 2.00000000 vc 0.00661205 wc -0.02204391 Time 2.00000000
 [state_of_robot]  Time 2.01000000 x 0.37838325 y 0.01153793 yaw 0.10423230 v 0.01327864 w -0.01093662 t 2.01000000
 [state_of_robot]  Time 2.02000000 x 0.37850869 y 0.01155104 yaw 0.10411553 v 0.01261198 w -0.01167711 t 2.02000000
 [reference_point]  Time 2.02000000 x_ref 0.37627477 y_ref 0.01365548 yaw_ref 0.07532325 v_ref 0.01732500 w_ref 0.00346500 t 2.02000000
@@ -3004,6 +3105,7 @@
 [reference_trajectory_planning]  Time 2.02000000 x_ref 0.38335856 y_ref 0.01199073 yaw_ref 0.07858808 v_ref 0.00222836 w_ref -0.01095535 t_ref 3.92000000 loop_counter 101.00000000
 [reference_trajectory_planning]  Time 2.02000000 x_ref 0.38358073 y_ref 0.01200798 yaw_ref 0.07749254 v_ref 0.00222836 w_ref -0.01095535 t_ref 4.02000000 loop_counter 101.00000000
 [goal_state_planning]  Time 2.02000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.02000000 loop_counter 101.00000000
+[planning_control_command]  Time 2.02000000 vc 0.00549633 wc -0.02405041 Time 2.02000000
 [state_of_robot]  Time 2.03000000 x 0.37862705 y 0.01156339 yaw 0.10399051 v 0.01190041 w -0.01250199 t 2.03000000
 [state_of_robot]  Time 2.04000000 x 0.37873905 y 0.01157507 yaw 0.10385779 v 0.01126001 w -0.01327189 t 2.04000000
 [reference_point]  Time 2.04000000 x_ref 0.37657766 y_ref 0.01367832 yaw_ref 0.07538400 v_ref 0.01590000 w_ref 0.00318000 t 2.04000000
@@ -3033,6 +3135,7 @@
 [reference_trajectory_planning]  Time 2.04000000 x_ref 0.38331727 y_ref 0.01198472 yaw_ref 0.07842136 v_ref 0.00225659 w_ref -0.01049214 t_ref 3.94000000 loop_counter 102.00000000
 [reference_trajectory_planning]  Time 2.04000000 x_ref 0.38354225 y_ref 0.01200216 yaw_ref 0.07737215 v_ref 0.00225659 w_ref -0.01049214 t_ref 4.04000000 loop_counter 102.00000000
 [goal_state_planning]  Time 2.04000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.04000000 loop_counter 102.00000000
+[planning_control_command]  Time 2.04000000 vc 0.00445408 wc -0.02608116 Time 2.04000000
 [state_of_robot]  Time 2.05000000 x 0.37884427 y 0.01158602 yaw 0.10371653 v 0.01057941 w -0.01412584 t 2.05000000
 [state_of_robot]  Time 2.06000000 x 0.37894341 y 0.01159632 yaw 0.10356730 v 0.00996688 w -0.01492286 t 2.06000000
 [reference_point]  Time 2.06000000 x_ref 0.37684877 y_ref 0.01369878 yaw_ref 0.07543837 v_ref 0.01455000 w_ref 0.00291000 t 2.06000000
@@ -3062,6 +3165,7 @@
 [reference_trajectory_planning]  Time 2.06000000 x_ref 0.38329808 y_ref 0.01198101 yaw_ref 0.07825880 v_ref 0.00227589 w_ref -0.01002433 t_ref 3.96000000 loop_counter 103.00000000
 [reference_trajectory_planning]  Time 2.06000000 x_ref 0.38352499 y_ref 0.01199857 yaw_ref 0.07725636 v_ref 0.00227589 w_ref -0.01002433 t_ref 4.06000000 loop_counter 103.00000000
 [goal_state_planning]  Time 2.06000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.06000000 loop_counter 103.00000000
+[planning_control_command]  Time 2.06000000 vc 0.00348274 wc -0.02805549 Time 2.06000000
 [state_of_robot]  Time 2.07000000 x 0.37903609 y 0.01160594 yaw 0.10340932 v 0.00931847 w -0.01579837 t 2.07000000
 [state_of_robot]  Time 2.08000000 x 0.37912298 y 0.01161495 yaw 0.10324317 v 0.00873489 w -0.01661551 t 2.08000000
 [reference_point]  Time 2.08000000 x_ref 0.37708808 y_ref 0.01371687 yaw_ref 0.07548637 v_ref 0.01327500 w_ref 0.00265500 t 2.08000000
@@ -3091,6 +3195,7 @@
 [reference_trajectory_planning]  Time 2.08000000 x_ref 0.38328586 y_ref 0.01197804 yaw_ref 0.07809953 v_ref 0.00228987 w_ref -0.00955496 t_ref 3.98000000 loop_counter 104.00000000
 [reference_trajectory_planning]  Time 2.08000000 x_ref 0.38351416 y_ref 0.01199569 yaw_ref 0.07714403 v_ref 0.00228987 w_ref -0.00955496 t_ref 4.08000000 loop_counter 104.00000000
 [goal_state_planning]  Time 2.08000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.08000000 loop_counter 104.00000000
+[planning_control_command]  Time 2.08000000 vc 0.00255643 wc -0.02993752 Time 2.08000000
 [state_of_robot]  Time 2.09000000 x 0.37920372 y 0.01162330 yaw 0.10306813 v 0.00811705 w -0.01750365 t 2.09000000
 [state_of_robot]  Time 2.10000000 x 0.37927893 y 0.01163106 yaw 0.10288480 v 0.00756099 w -0.01833257 t 2.10000000
 [reference_point]  Time 2.10000000 x_ref 0.37732740 y_ref 0.01373495 yaw_ref 0.07553437 v_ref 0.01200000 w_ref 0.00240000 t 2.10000000
@@ -3120,6 +3225,7 @@
 [reference_trajectory_planning]  Time 2.10000000 x_ref 0.38325909 y_ref 0.01197371 yaw_ref 0.07792596 v_ref 0.00229990 w_ref -0.00906733 t_ref 4.00000000 loop_counter 105.00000000
 [reference_trajectory_planning]  Time 2.10000000 x_ref 0.38348840 y_ref 0.01199141 yaw_ref 0.07701923 v_ref 0.00229990 w_ref -0.00906733 t_ref 4.10000000 loop_counter 105.00000000
 [goal_state_planning]  Time 2.10000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.10000000 loop_counter 105.00000000
+[planning_control_command]  Time 2.10000000 vc 0.00172033 wc -0.03181741 Time 2.10000000
 [state_of_robot]  Time 2.11000000 x 0.37934833 y 0.01163821 yaw 0.10269249 v 0.00697692 w -0.01923156 t 2.11000000
 [state_of_robot]  Time 2.12000000 x 0.37941250 y 0.01164482 yaw 0.10249178 v 0.00645126 w -0.02007062 t 2.12000000
 [reference_point]  Time 2.12000000 x_ref 0.37751063 y_ref 0.01374881 yaw_ref 0.07557112 v_ref 0.01087500 w_ref 0.00217500 t 2.12000000
@@ -3149,6 +3255,7 @@
 [reference_trajectory_planning]  Time 2.12000000 x_ref 0.38321418 y_ref 0.01196785 yaw_ref 0.07777104 v_ref 0.00230789 w_ref -0.00859942 t_ref 4.02000000 loop_counter 106.00000000
 [reference_trajectory_planning]  Time 2.12000000 x_ref 0.38344429 y_ref 0.01198559 yaw_ref 0.07691110 v_ref 0.00230789 w_ref -0.00859942 t_ref 4.12000000 loop_counter 106.00000000
 [goal_state_planning]  Time 2.12000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.12000000 loop_counter 106.00000000
+[planning_control_command]  Time 2.12000000 vc 0.00091866 wc -0.03347057 Time 2.12000000
 [state_of_robot]  Time 2.13000000 x 0.37947117 y 0.01165084 yaw 0.10228214 v 0.00589800 w -0.02096395 t 2.13000000
 [state_of_robot]  Time 2.14000000 x 0.37952489 y 0.01165634 yaw 0.10206417 v 0.00540007 w -0.02179772 t 2.14000000
 [reference_point]  Time 2.14000000 x_ref 0.37769386 y_ref 0.01376268 yaw_ref 0.07560787 v_ref 0.00975000 w_ref 0.00195000 t 2.14000000
@@ -3178,6 +3285,7 @@
 [reference_trajectory_planning]  Time 2.14000000 x_ref 0.38316495 y_ref 0.01196159 yaw_ref 0.07760587 v_ref 0.00231391 w_ref -0.00811898 t_ref 4.04000000 loop_counter 107.00000000
 [reference_trajectory_planning]  Time 2.14000000 x_ref 0.38339566 y_ref 0.01197934 yaw_ref 0.07679397 v_ref 0.00231391 w_ref -0.00811898 t_ref 4.14000000 loop_counter 107.00000000
 [goal_state_planning]  Time 2.14000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.14000000 loop_counter 107.00000000
+[planning_control_command]  Time 2.14000000 vc 0.00017404 wc -0.03506751 Time 2.14000000
 [state_of_robot]  Time 2.15000000 x 0.37957342 y 0.01166130 yaw 0.10183734 v 0.00487746 w -0.02268237 t 2.15000000
 [state_of_robot]  Time 2.16000000 x 0.37961726 y 0.01166577 yaw 0.10160226 v 0.00440712 w -0.02350805 t 2.16000000
 [reference_point]  Time 2.16000000 x_ref 0.37785278 y_ref 0.01377471 yaw_ref 0.07563975 v_ref 0.00870000 w_ref 0.00174000 t 2.16000000
@@ -3207,6 +3315,7 @@
 [reference_trajectory_planning]  Time 2.16000000 x_ref 0.38314827 y_ref 0.01195847 yaw_ref 0.07745700 v_ref 0.00231858 w_ref -0.00764399 t_ref 4.06000000 loop_counter 108.00000000
 [reference_trajectory_planning]  Time 2.16000000 x_ref 0.38337944 y_ref 0.01197624 yaw_ref 0.07669260 v_ref 0.00231858 w_ref -0.00764398 t_ref 4.16000000 loop_counter 108.00000000
 [goal_state_planning]  Time 2.16000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.16000000 loop_counter 108.00000000
+[planning_control_command]  Time 2.16000000 vc -0.00049788 wc -0.03651652 Time 2.16000000
 [state_of_robot]  Time 2.17000000 x 0.37965622 y 0.01166973 yaw 0.10135851 v 0.00391662 w -0.02437528 t 2.17000000
 [state_of_robot]  Time 2.18000000 x 0.37969080 y 0.01167324 yaw 0.10110666 v 0.00347517 w -0.02518470 t 2.18000000
 [reference_point]  Time 2.18000000 x_ref 0.37798739 y_ref 0.01378491 yaw_ref 0.07566675 v_ref 0.00772500 w_ref 0.00154500 t 2.18000000
@@ -3236,6 +3345,7 @@
 [reference_trajectory_planning]  Time 2.18000000 x_ref 0.38314464 y_ref 0.01195660 yaw_ref 0.07732172 v_ref 0.00232233 w_ref -0.00717834 t_ref 4.08000000 loop_counter 109.00000000
 [reference_trajectory_planning]  Time 2.18000000 x_ref 0.38337619 y_ref 0.01197438 yaw_ref 0.07660388 v_ref 0.00232233 w_ref -0.00717834 t_ref 4.18000000 loop_counter 109.00000000
 [goal_state_planning]  Time 2.18000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.18000000 loop_counter 109.00000000
+[planning_control_command]  Time 2.18000000 vc -0.00111804 wc -0.03778458 Time 2.18000000
 [state_of_robot]  Time 2.19000000 x 0.37972080 y 0.01167627 yaw 0.10084641 v 0.00301585 w -0.02602469 t 2.19000000
 [state_of_robot]  Time 2.20000000 x 0.37974670 y 0.01167889 yaw 0.10057833 v 0.00260246 w -0.02680868 t 2.20000000
 [reference_point]  Time 2.20000000 x_ref 0.37812200 y_ref 0.01379511 yaw_ref 0.07569375 v_ref 0.00675000 w_ref 0.00135000 t 2.20000000
@@ -3265,6 +3375,7 @@
 [reference_trajectory_planning]  Time 2.20000000 x_ref 0.38313031 y_ref 0.01195367 yaw_ref 0.07717748 v_ref 0.00232501 w_ref -0.00670332 t_ref 4.10000000 loop_counter 110.00000000
 [reference_trajectory_planning]  Time 2.20000000 x_ref 0.38336213 y_ref 0.01197144 yaw_ref 0.07650715 v_ref 0.00232501 w_ref -0.00670332 t_ref 4.20000000 loop_counter 110.00000000
 [goal_state_planning]  Time 2.20000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.20000000 loop_counter 110.00000000
+[planning_control_command]  Time 2.20000000 vc -0.00167108 wc -0.03899040 Time 2.20000000
 [state_of_robot]  Time 2.21000000 x 0.37976834 y 0.01168107 yaw 0.10030212 v 0.00217511 w -0.02762080 t 2.21000000
 [state_of_robot]  Time 2.22000000 x 0.37978615 y 0.01168285 yaw 0.10001833 v 0.00179049 w -0.02837877 t 2.22000000
 [reference_point]  Time 2.22000000 x_ref 0.37821548 y_ref 0.01380220 yaw_ref 0.07571250 v_ref 0.00592500 w_ref 0.00118500 t 2.22000000
@@ -3294,6 +3405,7 @@
 [reference_trajectory_planning]  Time 2.22000000 x_ref 0.38310032 y_ref 0.01194949 yaw_ref 0.07706343 v_ref 0.00232737 w_ref -0.00626084 t_ref 4.12000000 loop_counter 111.00000000
 [reference_trajectory_planning]  Time 2.22000000 x_ref 0.38333238 y_ref 0.01196726 yaw_ref 0.07643735 v_ref 0.00232737 w_ref -0.00626084 t_ref 4.22000000 loop_counter 111.00000000
 [goal_state_planning]  Time 2.22000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.22000000 loop_counter 111.00000000
+[planning_control_command]  Time 2.22000000 vc -0.00215848 wc -0.03988127 Time 2.22000000
 [state_of_robot]  Time 2.23000000 x 0.37980004 y 0.01168424 yaw 0.09972688 v 0.00139559 w -0.02914560 t 2.23000000
 [state_of_robot]  Time 2.24000000 x 0.37981039 y 0.01168528 yaw 0.09942826 v 0.00104018 w -0.02986131 t 2.24000000
 [reference_point]  Time 2.24000000 x_ref 0.37830897 y_ref 0.01380929 yaw_ref 0.07573125 v_ref 0.00510000 w_ref 0.00102000 t 2.24000000
@@ -3323,6 +3435,7 @@
 [reference_trajectory_planning]  Time 2.24000000 x_ref 0.38306776 y_ref 0.01194502 yaw_ref 0.07694252 v_ref 0.00232910 w_ref -0.00581506 t_ref 4.14000000 loop_counter 112.00000000
 [reference_trajectory_planning]  Time 2.24000000 x_ref 0.38329999 y_ref 0.01196279 yaw_ref 0.07636101 v_ref 0.00232910 w_ref -0.00581505 t_ref 4.24000000 loop_counter 112.00000000
 [goal_state_planning]  Time 2.24000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.24000000 loop_counter 112.00000000
+[planning_control_command]  Time 2.24000000 vc -0.00260526 wc -0.04066700 Time 2.24000000
 [state_of_robot]  Time 2.25000000 x 0.37981711 y 0.01168594 yaw 0.09912245 v 0.00067564 w -0.03058169 t 2.25000000
 [state_of_robot]  Time 2.26000000 x 0.37982057 y 0.01168629 yaw 0.09880991 v 0.00034755 w -0.03125405 t 2.26000000
 [reference_point]  Time 2.26000000 x_ref 0.37838562 y_ref 0.01381511 yaw_ref 0.07574662 v_ref 0.00435000 w_ref 0.00087000 t 2.26000000
@@ -3352,6 +3465,7 @@
 [reference_trajectory_planning]  Time 2.26000000 x_ref 0.38306899 y_ref 0.01194377 yaw_ref 0.07684382 v_ref 0.00233038 w_ref -0.00538490 t_ref 4.16000000 loop_counter 113.00000000
 [reference_trajectory_planning]  Time 2.26000000 x_ref 0.38330135 y_ref 0.01196153 yaw_ref 0.07630533 v_ref 0.00233038 w_ref -0.00538490 t_ref 4.26000000 loop_counter 113.00000000
 [goal_state_planning]  Time 2.26000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.26000000 loop_counter 113.00000000
+[planning_control_command]  Time 2.26000000 vc -0.00297756 wc -0.04125434 Time 2.26000000
 [state_of_robot]  Time 2.27000000 x 0.37982072 y 0.01168630 yaw 0.09849070 v 0.00001504 w -0.03192073 t 2.27000000
 [state_of_robot]  Time 2.28000000 x 0.37981789 y 0.01168602 yaw 0.09816527 v -0.00028422 w -0.03254297 t 2.28000000
 [reference_point]  Time 2.28000000 x_ref 0.37844545 y_ref 0.01381965 yaw_ref 0.07575862 v_ref 0.00367500 w_ref 0.00073500 t 2.28000000
@@ -3381,6 +3495,7 @@
 [reference_trajectory_planning]  Time 2.28000000 x_ref 0.38308417 y_ref 0.01194384 yaw_ref 0.07676343 v_ref 0.00233139 w_ref -0.00497396 t_ref 4.18000000 loop_counter 114.00000000
 [reference_trajectory_planning]  Time 2.28000000 x_ref 0.38331663 y_ref 0.01196160 yaw_ref 0.07626604 v_ref 0.00233139 w_ref -0.00497396 t_ref 4.28000000 loop_counter 114.00000000
 [goal_state_planning]  Time 2.28000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.28000000 loop_counter 114.00000000
+[planning_control_command]  Time 2.28000000 vc -0.00329140 wc -0.04161747 Time 2.28000000
 [state_of_robot]  Time 2.29000000 x 0.37981207 y 0.01168545 yaw 0.09783379 v -0.00058494 w -0.03314794 t 2.29000000
 [state_of_robot]  Time 2.30000000 x 0.37980356 y 0.01168462 yaw 0.09749666 v -0.00085559 w -0.03371258 t 2.30000000
 [reference_point]  Time 2.30000000 x_ref 0.37850528 y_ref 0.01382419 yaw_ref 0.07577062 v_ref 0.00300000 w_ref 0.00060000 t 2.30000000
@@ -3410,6 +3525,7 @@
 [reference_trajectory_planning]  Time 2.30000000 x_ref 0.38308936 y_ref 0.01194289 yaw_ref 0.07667590 v_ref 0.00233192 w_ref -0.00456199 t_ref 4.20000000 loop_counter 115.00000000
 [reference_trajectory_planning]  Time 2.30000000 x_ref 0.38332188 y_ref 0.01196064 yaw_ref 0.07621970 v_ref 0.00233192 w_ref -0.00456199 t_ref 4.30000000 loop_counter 115.00000000
 [goal_state_planning]  Time 2.30000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.30000000 loop_counter 115.00000000
+[planning_control_command]  Time 2.30000000 vc -0.00356121 wc -0.04189684 Time 2.30000000
 [state_of_robot]  Time 2.31000000 x 0.37979235 y 0.01168353 yaw 0.09715408 v -0.00112615 w -0.03425819 t 2.31000000
 [state_of_robot]  Time 2.32000000 x 0.37977872 y 0.01168220 yaw 0.09680641 v -0.00136965 w -0.03476744 t 2.32000000
 [reference_point]  Time 2.32000000 x_ref 0.37853893 y_ref 0.01382674 yaw_ref 0.07577737 v_ref 0.00247500 w_ref 0.00049500 t 2.32000000
@@ -3439,6 +3555,7 @@
 [reference_trajectory_planning]  Time 2.32000000 x_ref 0.38307937 y_ref 0.01194078 yaw_ref 0.07662352 v_ref 0.00233241 w_ref -0.00419210 t_ref 4.22000000 loop_counter 116.00000000
 [reference_trajectory_planning]  Time 2.32000000 x_ref 0.38331193 y_ref 0.01195853 yaw_ref 0.07620431 v_ref 0.00233241 w_ref -0.00419210 t_ref 4.32000000 loop_counter 116.00000000
 [goal_state_planning]  Time 2.32000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.32000000 loop_counter 116.00000000
+[planning_control_command]  Time 2.32000000 vc -0.00373422 wc -0.04182723 Time 2.32000000
 [state_of_robot]  Time 2.33000000 x 0.37976273 y 0.01168066 yaw 0.09645403 v -0.00160611 w -0.03523809 t 2.33000000
 [state_of_robot]  Time 2.34000000 x 0.37974463 y 0.01167891 yaw 0.09609725 v -0.00181892 w -0.03567737 t 2.34000000
 [reference_point]  Time 2.34000000 x_ref 0.37857258 y_ref 0.01382929 yaw_ref 0.07578412 v_ref 0.00195000 w_ref 0.00039000 t 2.34000000
@@ -3468,6 +3585,7 @@
 [reference_trajectory_planning]  Time 2.34000000 x_ref 0.38306721 y_ref 0.01193839 yaw_ref 0.07656472 v_ref 0.00233261 w_ref -0.00382657 t_ref 4.24000000 loop_counter 117.00000000
 [reference_trajectory_planning]  Time 2.34000000 x_ref 0.38329980 y_ref 0.01195615 yaw_ref 0.07618207 v_ref 0.00233261 w_ref -0.00382657 t_ref 4.34000000 loop_counter 117.00000000
 [goal_state_planning]  Time 2.34000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.34000000 loop_counter 117.00000000
+[planning_control_command]  Time 2.34000000 vc -0.00388308 wc -0.04164457 Time 2.34000000
 [state_of_robot]  Time 2.35000000 x 0.37972446 y 0.01167698 yaw 0.09573650 v -0.00202534 w -0.03607518 t 2.35000000
 [state_of_robot]  Time 2.36000000 x 0.37970245 y 0.01167487 yaw 0.09537204 v -0.00221111 w -0.03644647 t 2.36000000
 [reference_point]  Time 2.34285714 x_ref 0.37857739 y_ref 0.01382966 yaw_ref 0.07578509 v_ref 0.00187500 w_ref 0.00037500 t 2.34285714
@@ -3497,6 +3615,7 @@
 [reference_trajectory_planning]  Time 2.36000000 x_ref 0.38306976 y_ref 0.01193823 yaw_ref 0.07663362 v_ref 0.00233295 w_ref -0.00359593 t_ref 4.26000000 loop_counter 118.00000000
 [reference_trajectory_planning]  Time 2.36000000 x_ref 0.38330237 y_ref 0.01195600 yaw_ref 0.07627403 v_ref 0.00233295 w_ref -0.00359593 t_ref 4.36000000 loop_counter 118.00000000
 [goal_state_planning]  Time 2.36000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.36000000 loop_counter 118.00000000
+[planning_control_command]  Time 2.36000000 vc -0.00366166 wc -0.04047489 Time 2.36000000
 [state_of_robot]  Time 2.37000000 x 0.37967900 y 0.01167263 yaw 0.09500489 v -0.00235617 w -0.03671503 t 2.37000000
 [state_of_robot]  Time 2.38000000 x 0.37965424 y 0.01167028 yaw 0.09463523 v -0.00248672 w -0.03696569 t 2.38000000
 [reference_point]  Time 2.33636364 x_ref 0.37856647 y_ref 0.01382883 yaw_ref 0.07578290 v_ref 0.00204545 w_ref 0.00040909 t 2.33636364
@@ -3526,6 +3645,7 @@
 [reference_trajectory_planning]  Time 2.38000000 x_ref 0.38308020 y_ref 0.01193922 yaw_ref 0.07676175 v_ref 0.00233343 w_ref -0.00346137 t_ref 4.28000000 loop_counter 119.00000000
 [reference_trajectory_planning]  Time 2.38000000 x_ref 0.38331286 y_ref 0.01195704 yaw_ref 0.07641561 v_ref 0.00233343 w_ref -0.00346137 t_ref 4.38000000 loop_counter 119.00000000
 [goal_state_planning]  Time 2.38000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.38000000 loop_counter 119.00000000
+[planning_control_command]  Time 2.38000000 vc -0.00325645 wc -0.03852183 Time 2.38000000
 [state_of_robot]  Time 2.39000000 x 0.37962872 y 0.01166787 yaw 0.09426453 v -0.00256369 w -0.03706943 t 2.39000000
 [state_of_robot]  Time 2.40000000 x 0.37960251 y 0.01166540 yaw 0.09389287 v -0.00263297 w -0.03716626 t 2.40000000
 [reference_point]  Time 2.33333333 x_ref 0.37856137 y_ref 0.01382844 yaw_ref 0.07578187 v_ref 0.00212500 w_ref 0.00042500 t 2.33333333
@@ -3555,6 +3675,7 @@
 [reference_trajectory_planning]  Time 2.40000000 x_ref 0.38308674 y_ref 0.01193963 yaw_ref 0.07684913 v_ref 0.00233372 w_ref -0.00332230 t_ref 4.30000000 loop_counter 120.00000000
 [reference_trajectory_planning]  Time 2.40000000 x_ref 0.38331943 y_ref 0.01195747 yaw_ref 0.07651690 v_ref 0.00233372 w_ref -0.00332230 t_ref 4.40000000 loop_counter 120.00000000
 [goal_state_planning]  Time 2.40000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.40000000 loop_counter 120.00000000
+[planning_control_command]  Time 2.40000000 vc -0.00291989 wc -0.03654289 Time 2.40000000
 [state_of_robot]  Time 2.41000000 x 0.37957601 y 0.01166292 yaw 0.09352162 v -0.00266166 w -0.03712470 t 2.41000000
 [state_of_robot]  Time 2.42000000 x 0.37954925 y 0.01166042 yaw 0.09315077 v -0.00268748 w -0.03708591 t 2.42000000
 [reference_point]  Time 2.33157895 x_ref 0.37855841 y_ref 0.01382822 yaw_ref 0.07578128 v_ref 0.00217105 w_ref 0.00043421 t 2.33157895
@@ -3584,6 +3705,7 @@
 [reference_trajectory_planning]  Time 2.42000000 x_ref 0.38309154 y_ref 0.01193978 yaw_ref 0.07691828 v_ref 0.00233379 w_ref -0.00318102 t_ref 4.32000000 loop_counter 121.00000000
 [reference_trajectory_planning]  Time 2.42000000 x_ref 0.38332424 y_ref 0.01195764 yaw_ref 0.07660018 v_ref 0.00233379 w_ref -0.00318102 t_ref 4.42000000 loop_counter 121.00000000
 [goal_state_planning]  Time 2.42000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.42000000 loop_counter 121.00000000
+[planning_control_command]  Time 2.42000000 vc -0.00259562 wc -0.03462689 Time 2.42000000
 [state_of_robot]  Time 2.43000000 x 0.37952258 y 0.01165794 yaw 0.09278155 v -0.00267829 w -0.03692198 t 2.43000000
 [state_of_robot]  Time 2.44000000 x 0.37949599 y 0.01165547 yaw 0.09241386 v -0.00267003 w -0.03676897 t 2.44000000
 [reference_point]  Time 2.33043478 x_ref 0.37855649 y_ref 0.01382807 yaw_ref 0.07578089 v_ref 0.00220109 w_ref 0.00044022 t 2.33043478
@@ -3613,6 +3735,7 @@
 [reference_trajectory_planning]  Time 2.44000000 x_ref 0.38309534 y_ref 0.01193977 yaw_ref 0.07697587 v_ref 0.00233369 w_ref -0.00304075 t_ref 4.34000000 loop_counter 122.00000000
 [reference_trajectory_planning]  Time 2.44000000 x_ref 0.38332803 y_ref 0.01195765 yaw_ref 0.07667179 v_ref 0.00233369 w_ref -0.00304075 t_ref 4.44000000 loop_counter 122.00000000
 [goal_state_planning]  Time 2.44000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.44000000 loop_counter 122.00000000
+[planning_control_command]  Time 2.44000000 vc -0.00227742 wc -0.03277402 Time 2.44000000
 [state_of_robot]  Time 2.45000000 x 0.37946980 y 0.01165305 yaw 0.09204883 v -0.00263077 w -0.03650264 t 2.45000000
 [state_of_robot]  Time 2.46000000 x 0.37944395 y 0.01165068 yaw 0.09168629 v -0.00259543 w -0.03625407 t 2.46000000
 [reference_point]  Time 2.32962963 x_ref 0.37855513 y_ref 0.01382797 yaw_ref 0.07578062 v_ref 0.00222222 w_ref 0.00044444 t 2.32962963
@@ -3642,6 +3765,7 @@
 [reference_trajectory_planning]  Time 2.46000000 x_ref 0.38309849 y_ref 0.01193968 yaw_ref 0.07702470 v_ref 0.00233349 w_ref -0.00290373 t_ref 4.36000000 loop_counter 123.00000000
 [reference_trajectory_planning]  Time 2.46000000 x_ref 0.38333115 y_ref 0.01195757 yaw_ref 0.07673433 v_ref 0.00233349 w_ref -0.00290373 t_ref 4.46000000 loop_counter 123.00000000
 [goal_state_planning]  Time 2.46000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.46000000 loop_counter 123.00000000
+[planning_control_command]  Time 2.46000000 vc -0.00196813 wc -0.03097683 Time 2.46000000
 [state_of_robot]  Time 2.47000000 x 0.37941873 y 0.01164837 yaw 0.09132727 v -0.00253270 w -0.03590225 t 2.47000000
 [state_of_robot]  Time 2.48000000 x 0.37939407 y 0.01164612 yaw 0.09097153 v -0.00247625 w -0.03557389 t 2.48000000
 [reference_point]  Time 2.32903226 x_ref 0.37855413 y_ref 0.01382789 yaw_ref 0.07578042 v_ref 0.00223790 w_ref 0.00044758 t 2.32903226
@@ -3671,6 +3795,7 @@
 [reference_trajectory_planning]  Time 2.48000000 x_ref 0.38310118 y_ref 0.01193952 yaw_ref 0.07706635 v_ref 0.00233323 w_ref -0.00277126 t_ref 4.38000000 loop_counter 124.00000000
 [reference_trajectory_planning]  Time 2.48000000 x_ref 0.38333382 y_ref 0.01195742 yaw_ref 0.07678922 v_ref 0.00233323 w_ref -0.00277126 t_ref 4.48000000 loop_counter 124.00000000
 [goal_state_planning]  Time 2.48000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.48000000 loop_counter 124.00000000
+[planning_control_command]  Time 2.48000000 vc -0.00167184 wc -0.02923165 Time 2.48000000
 [state_of_robot]  Time 2.49000000 x 0.37937021 y 0.01164395 yaw 0.09062002 v -0.00239580 w -0.03515107 t 2.49000000
 [state_of_robot]  Time 2.50000000 x 0.37934707 y 0.01164186 yaw 0.09027245 v -0.00232341 w -0.03475645 t 2.50000000
 [reference_point]  Time 2.32857143 x_ref 0.37855335 y_ref 0.01382784 yaw_ref 0.07578027 v_ref 0.00225000 w_ref 0.00045000 t 2.32857143
@@ -3700,4 +3825,5 @@
 [reference_trajectory_planning]  Time 2.50000000 x_ref 0.38310353 y_ref 0.01193932 yaw_ref 0.07710185 v_ref 0.00233296 w_ref -0.00264408 t_ref 4.40000000 loop_counter 125.00000000
 [reference_trajectory_planning]  Time 2.50000000 x_ref 0.38333614 y_ref 0.01195723 yaw_ref 0.07683744 v_ref 0.00233296 w_ref -0.00264408 t_ref 4.50000000 loop_counter 125.00000000
 [goal_state_planning]  Time 2.50000000 x_goal 1.00000000 y_goal -0.00000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 2.50000000 loop_counter 125.00000000
+[planning_control_command]  Time 2.50000000 vc -0.00139219 wc -0.02753808 Time 2.50000000
 [state_of_robot]  Time 2.51000000 x 0.37932486 y 0.01163985 yaw 0.08992970 v -0.00223029 w -0.03427522 t 2.51000000
