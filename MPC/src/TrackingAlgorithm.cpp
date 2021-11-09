@@ -28,7 +28,7 @@ TrackingAlgorithm::TrackingAlgorithm(RobotModel *p_RobotModel, SaveData *p_saved
     p_savedata_ = p_savedata;
 }
 
-void  TrackingAlgorithm::ReadInTrajPoints()
+void TrackingAlgorithm::ReadInTrajPoints()
 {
     string string_temp;
 
@@ -67,6 +67,11 @@ void  TrackingAlgorithm::ReadInTrajPoints()
 
     ReadFile.close();
     cout << "[INFO] read in reference trajectory points successfully !" << endl;
+}
+
+void TrackingAlgorithm::ReadInTrajPoints(vector<TrajPoint> local_traj_points)
+{
+    trajectory_points_.assign(local_traj_points.begin(), local_traj_points.end());
 }
 
 void TrackingAlgorithm::GetSensorInfo()

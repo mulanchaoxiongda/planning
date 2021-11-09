@@ -65,10 +65,12 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
     C_.resize(nx_, nx_ + nu_);
 }
 
-ControlCommand TrackingMPC::CalControlCommand()
+ControlCommand TrackingMPC::CalControlCommand(vector<TrajPoint> &local_traj_points)
 {
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
+
+    //ReadInTrajPoints(local_traj_points);
 
     GetSensorInfo();
 

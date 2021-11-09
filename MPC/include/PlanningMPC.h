@@ -21,7 +21,7 @@ class PlanningMPC: public PlanningAlgorithm
      PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state);
      ~PlanningMPC() {};
 
-     ControlCommand CalRefTrajectory();
+     ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points);
 
      double running_time_average_;
 
@@ -45,7 +45,7 @@ class PlanningMPC: public PlanningAlgorithm
 
      int loop_counter_;
 
-     vector<TrajPoint> ref_traj_point_;
+     vector<TrajPoint> ref_traj_points_;
 
      VectorXd u_optimal_;
 

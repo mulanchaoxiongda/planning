@@ -28,12 +28,12 @@ StaRob_Ide      = '%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f';
 %% Searching symbol: Planning Analysis
 RefTrajPlan_Index   = 1;
 GoalState_Index     = 1;
-GlobalRefTraj_Index = 1;
+GlobalRefPoint_Index = 1;
 PlanCmd_Index       = 1;
 
 RefTrajPlan_Ide   = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
 GoalState_Ide     = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
-GlobalRefTraj_Ide = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
+GlobalRefPoint_Ide = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
 PlanCmd_Ide       = "%s %s %f %s %f %s %f %s %f";
 
 
@@ -82,7 +82,9 @@ while ~feof(fid)
     id_MOTOR = strfind(t1, '[reference_trajectory_planning]');
     if ~isempty(id_MOTOR)
         data = textscan(t1 , RefTrajPlan_Ide);
-        RefTrajPlan(RefTrajPlan_Index, (1 : 14)) = data(1, (4 : 17));
+        if cell2mat(data(17)) < 2
+            RefTrajPlan(RefTrajPlan_Index, (1 : 14)) = data(1, (4 : 17));
+        end
         RefTrajPlan_Index = RefTrajPlan_Index + 1;
     end
     
@@ -95,9 +97,9 @@ while ~feof(fid)
     
     id_MOTOR = strfind(t1, '[plainning_global_reference_point]');
     if ~isempty(id_MOTOR)
-        data = textscan(t1 , GlobalRefTraj_Ide);
-        GlobalRefTraj(GlobalRefTraj_Index, (1 : 12)) = data(1, (4 : 15));
-        GlobalRefTraj_Index = GlobalRefTraj_Index + 1;
+        data = textscan(t1 , GlobalRefPoint_Ide);
+        GlobalRefPoint(GlobalRefPoint_Index, (1 : 12)) = data(1, (4 : 15));
+        GlobalRefPoint_Index = GlobalRefPoint_Index + 1;
     end
     
     id_MOTOR = strfind(t1, '[planning_control_command]');
@@ -232,30 +234,69 @@ fclose(fid);
 % title('时间-横摆角速度曲线'); legend('规划', '真实');
 
 
-%% Plot figure: Planning_trajectory
+%% Plot figure: MPC Planner Analysis
+% figure('name','trajectory planning');
+% subplot(3, 2, 1);
+% plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...          %% 近似全局轨迹             plot
+%        ...                                                                                                                   %% 真实全局轨迹散点图   plot
+%        ...                                                                                                                   %% 近似局部轨迹             plot
+%        cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                    %% 真实局部轨迹散点图   plot
+%        cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
+%        cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
+% xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
+% title('运动轨迹'); legend('近似全局轨迹', '真实局部轨迹散点图', '小车轨迹', '停车点');
+% 
+% subplot(3, 2, 2);
+% plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
+%        cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'g', ...
+%        cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
+% xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
+% title('速度-时间曲线'); legend('近似全局规划速度', '近似局部规划速度', '小车速度');
+% 
+% subplot(3, 2, 3);
+% plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 2)) * 1000); grid on;
+% xlabel('时间(秒)'); ylabel('轨迹系纵向误差(毫米)'); set(gca, 'FontSize', 16);
+% title('轨迹系纵向误差-时间曲线');
+% 
+% subplot(3, 2, 4);
+% plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 4)) * 1000); grid on;
+% xlabel('时间(秒)'); ylabel('轨迹系横向误差(毫米)'); set(gca, 'FontSize', 16);
+% title('轨迹系横向误差-时间曲线');
+% 
+% subplot(3, 2, 5);
+% plot(cell2mat(PlanCmd(:, 6)),  cell2mat(PlanCmd(:, 2)), 'r', ...
+%      cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'b', ...
+%      cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'g'); grid on;
+% xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
+% title('速度-时间曲线'); legend('速度指令','规划速度','真实速度');
+% 
+% subplot(3, 2, 6);
+% plot(cell2mat(PlanCmd(:, 6)),  cell2mat(PlanCmd(:, 4)) * 57.3,  'r',...
+%      cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 10)) * 57.3, 'b',...
+%      cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'g'); grid on;
+% xlabel('时间(秒)'); ylabel('横摆角速度(度/秒)'); set(gca, 'FontSize', 16);
+% title('横摆角速度-时间曲线'); legend('横摆角速度指令','规划横摆角速度','真实横摆角速度');
 
 
-
-% RefTrajPlan
-% GoalState
-% GlobalRefTraj
-% PlanCmd
-
-
-
+%% Plot figure: MPC Planner && Controller Analysis
 figure('name','trajectory planning');
 subplot(3, 2, 1);
-plot(cell2mat(GlobalRefTraj(:, 2)), cell2mat(GlobalRefTraj(:, 4)), 'r', ...
-     cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
-     cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
+plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...          %% 近似全局轨迹             plot
+       ...                                                                                                                   %% 真实全局轨迹散点图   plot
+       ...                                                                                                                   %% 近似局部轨迹             plot
+       cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                    %% 真实局部轨迹散点图   plot
+       cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
+       cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
-title('运动轨迹'); legend('局部轨迹', '真实轨迹', '停车点');
+title('运动轨迹'); legend('近似全局轨迹', '真实局部轨迹散点图', '小车轨迹', '停车点');
 
 subplot(3, 2, 2);
-plot(cell2mat(GlobalRefTraj(:, 12)), cell2mat(GlobalRefTraj(:, 8)), 'r', ...
-     cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
+plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
+       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'g', ...
+       cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'y', ...
+       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
 xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
-title('速度-时间曲线'); legend('规划速度', '真实速度');
+title('速度-时间曲线'); legend('近似全局速度', '近似局部速度', '速度指令', '小车速度');
 
 subplot(3, 2, 3);
 plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 2)) * 1000); grid on;
@@ -267,16 +308,9 @@ plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 4)) * 1000); grid on;
 xlabel('时间(秒)'); ylabel('轨迹系横向误差(毫米)'); set(gca, 'FontSize', 16);
 title('轨迹系横向误差-时间曲线');
 
-subplot(3, 2, 5);
-plot(cell2mat(PlanCmd(:, 6)),  cell2mat(PlanCmd(:, 2)), 'r', ...
-     cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'b', ...
-     cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'g'); grid on;
-xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
-title('速度-时间曲线'); legend('速度指令','规划速度','真实速度');
-
 subplot(3, 2, 6);
-plot(cell2mat(PlanCmd(:, 6)),  cell2mat(PlanCmd(:, 4)) * 57.3,  'r',...
-     cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 10)) * 57.3, 'b',...
-     cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'g'); grid on;
+plot(cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 4)) * 57.3,  'r',...
+       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 10)) * 57.3, 'b',...
+       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'g'); grid on;
 xlabel('时间(秒)'); ylabel('横摆角速度(度/秒)'); set(gca, 'FontSize', 16);
-title('横摆角速度-时间曲线'); legend('横摆角速度指令','规划横摆角速度','真实横摆角速度');
+title('横摆角速度-时间曲线'); legend('横摆角速度指令','近似局部横摆角速度','小车横摆角速度');

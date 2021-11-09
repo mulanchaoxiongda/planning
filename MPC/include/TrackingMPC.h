@@ -21,7 +21,7 @@ class TrackingMPC: public TrackingAlgorithm
      TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata);
      ~TrackingMPC() {};
 
-     ControlCommand CalControlCommand();
+     ControlCommand CalControlCommand(vector<TrajPoint> &local_traj_points);
 
      double running_time_average_;
 

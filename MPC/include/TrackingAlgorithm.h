@@ -17,11 +17,12 @@ class TrackingAlgorithm
     TrackingAlgorithm(RobotModel *p_RobotModel, SaveData *p_savedata);
     ~TrackingAlgorithm() {};
 
-    virtual ControlCommand CalControlCommand() = 0;
+    virtual ControlCommand CalControlCommand(vector<TrajPoint> &local_traj_points) = 0;
 
 
  protected:
     void ReadInTrajPoints();
+    void ReadInTrajPoints(vector<TrajPoint> local_traj_points);
 
     virtual void ReadInControlPara() = 0;
 

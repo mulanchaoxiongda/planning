@@ -19,7 +19,7 @@ class PlanningAlgorithm
                        GoalState goal_state);
      ~PlanningAlgorithm() {};
 
-     virtual ControlCommand CalRefTrajectory() = 0;
+     virtual ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points) = 0;
 
 
  protected:

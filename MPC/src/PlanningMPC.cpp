@@ -25,8 +25,10 @@
 
 using namespace std;
 
-PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state):
-        PlanningAlgorithm::PlanningAlgorithm(p_robot_model, p_savedata, goal_state)
+PlanningMPC::PlanningMPC(
+        RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state):
+        PlanningAlgorithm::PlanningAlgorithm(
+                p_robot_model, p_savedata, goal_state)
 {
     call_cycle_ = 0.02;
 
@@ -71,7 +73,8 @@ PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata, GoalSt
 
 //Todo
 /* void PlanningMPC::CalRefTrajectory() */
-ControlCommand PlanningMPC::CalRefTrajectory()
+ControlCommand PlanningMPC::CalRefTrajectory(
+        vector<TrajPoint> &local_traj_points)
 {
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
@@ -151,6 +154,9 @@ ControlCommand PlanningMPC::CalRefTrajectory()
 
     UpdateReferenceTrajectory();
 
+    local_traj_points.assign(loacl_trajectory_points_.begin(),
+                             loacl_trajectory_points_.end());
+
     gettimeofday(&t_end, NULL);
 
     loop_counter_++;
@@ -210,7 +216,8 @@ void PlanningMPC::ReadInGoalTraj()
     }
 
     ReadFile.close();
-    cout << "[INFO] read in reference global route points successfully !" << endl;
+    cout << "[INFO] read in reference global route points successfully !"
+         << endl;
 }
 
 void PlanningMPC::FindRefPoint()
@@ -323,13 +330,15 @@ void PlanningMPC::CalControlCoefficient()
     // Todo： 规划中的约束项应扣除各预测点的参考速度、角速度、加速度、角加速度
     // Todo： 约束项扣除的参开速度、角速度应随预测点调整，预测模型A应随预测点调整
     //  说明： 如果是非线性模型、非线性优化，则不需要以上处理
-    u_min_ << -1.5 - global_ref_traj_point_.v, -30.0 / 57.3 - global_ref_traj_point_.w;
+    u_min_ << -1.5 - global_ref_traj_point_.v,
+              -30.0 / 57.3 - global_ref_traj_point_.w;
 
-    u_max_ <<  1.5 - global_ref_traj_point_.v,  30.0 / 57.3 - global_ref_traj_point_.w;
+    u_max_ <<  1.5 - global_ref_traj_point_.v,
+               30.0 / 57.3 - global_ref_traj_point_.w;
 
     //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
-    du_min_ << -1.0 * predict_step_,    -200.0 / 57.3 * predict_step_;
-    du_max_ <<  1.0 * predict_step_,     200.0 / 57.3 * predict_step_;
+    du_min_ << -1.0 * predict_step_, -200.0 / 57.3 * predict_step_;
+    du_max_ <<  1.0 * predict_step_,  200.0 / 57.3 * predict_step_;
 }
 
 void PlanningMPC::UpdateErrorModel()
@@ -676,7 +685,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
             {sensor_info_.x, sensor_info_.y, sensor_info_.yaw,
              sensor_info_.v, sensor_info_.w, sensor_info_.t};
 
-    ref_traj_point_.resize(np_ + 1);
+    ref_traj_points_.resize(np_ + 1);
 
     // Todo: 最少预测np_个节点，当曲率较大时，增加预测节点的数量（以转弯半径、小车速度，动态调整预测步长），从而规避曲线拟合
     // Todo: 以上设计思路需与控制方案相适应，体现规划与控制的耦合性与交互性
@@ -719,33 +728,36 @@ void PlanningMPC::UpdateReferenceTrajectory()
             motion_state.t = motion_state.t + simulation_step;
         }
 
-        ref_traj_point_.at(i).t_ref   = motion_state.t;
-        ref_traj_point_.at(i).x_ref   = motion_state.x;
-        ref_traj_point_.at(i).y_ref   = motion_state.y;
-        ref_traj_point_.at(i).yaw_ref = motion_state.yaw;
-        ref_traj_point_.at(i).v_ref   = motion_state.v;
-        ref_traj_point_.at(i).w_ref   = motion_state.w;
+        ref_traj_points_.at(i).t_ref   = motion_state.t;
+        ref_traj_points_.at(i).x_ref   = motion_state.x;
+        ref_traj_points_.at(i).y_ref   = motion_state.y;
+        ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
+        ref_traj_points_.at(i).v_ref   = motion_state.v;
+        ref_traj_points_.at(i).w_ref   = motion_state.w;
 
         p_savedata_->file << "[reference_trajectory_planning] "
-                          << " Time "             << sensor_info_.t
-                          << " x_ref "            << ref_traj_point_.at(i).x_ref
-                          << " y_ref "            << ref_traj_point_.at(i).y_ref
-                          << " yaw_ref "          << ref_traj_point_.at(i).yaw_ref
-                          << " v_ref "            << ref_traj_point_.at(i).v_ref
-                          << " w_ref "            << ref_traj_point_.at(i).w_ref
-                          << " t_ref "            << ref_traj_point_.at(i).t_ref
-                          << " loop_counter "     << (double)loop_counter_ << endl;
+                          << " Time "           << sensor_info_.t
+                          << " x_ref "         << ref_traj_points_.at(i).x_ref
+                          << " y_ref "         << ref_traj_points_.at(i).y_ref
+                          << " yaw_ref "       << ref_traj_points_.at(i).yaw_ref
+                          << " v_ref "         << ref_traj_points_.at(i).v_ref
+                          << " w_ref "         << ref_traj_points_.at(i).w_ref
+                          << " t_ref "         << ref_traj_points_.at(i).t_ref
+                          << " loop_counter "  << (double)loop_counter_ << endl;
     }
 
+    loacl_trajectory_points_.assign(
+            ref_traj_points_.begin(), ref_traj_points_.end());
+
     p_savedata_->file << "[goal_state_planning] "
-                          << " Time "             << sensor_info_.t
-                          << " x_goal "            << goal_state_.x
-                          << " y_goal "            << goal_state_.y
-                          << " yaw_goal "          << goal_state_.yaw
-                          << " v_goal "            << goal_state_.v
-                          << " w_goal "            << goal_state_.w
-                          << " Time "             << sensor_info_.t
-                          << " loop_counter "     << (double)loop_counter_ << endl;
+                          << " Time "         << sensor_info_.t
+                          << " x_goal "       << goal_state_.x
+                          << " y_goal "       << goal_state_.y
+                          << " yaw_goal "     << goal_state_.yaw
+                          << " v_goal "       << goal_state_.v
+                          << " w_goal "       << goal_state_.w
+                          << " Time "         << sensor_info_.t
+                          << " loop_counter " << (double)loop_counter_<< endl;
 }
 
 //Todo
