@@ -70,7 +70,7 @@ ControlCommand TrackingMPC::CalControlCommand(vector<TrajPoint> &local_traj_poin
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
 
-    //ReadInTrajPoints(local_traj_points);
+    ReadInTrajPoints(local_traj_points);
 
     GetSensorInfo();
 
@@ -166,7 +166,7 @@ void TrackingMPC::ReadInControlPara()
 
 void TrackingMPC::CalControlCoefficient()
 {
-    np_ = 15;
+    np_ = 10;
     nc_ = 5;
 
     q_.resize(nx_, nx_);

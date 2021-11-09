@@ -53,12 +53,12 @@ int main(int argc, char **argv)
 
     while (time <= 2.5) {
         if (loop_counter % num_planning == 0) {
-            //planning_mpc.CalRefTrajectory(local_traj_points);
+            planning_mpc.CalRefTrajectory(local_traj_points);
         }
 
         if (loop_counter % num_control == 0) {
             control_command = tracking_mpc.CalControlCommand(local_traj_points);
-            control_command = planning_mpc.CalRefTrajectory(local_traj_points);
+            //control_command = planning_mpc.CalRefTrajectory(local_traj_points);
         }
 
         robot_model.UpdateMotionState(control_command);

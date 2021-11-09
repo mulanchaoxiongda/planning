@@ -307,7 +307,7 @@ void PlanningMPC::FindRefPoint()
 
 void PlanningMPC::CalControlCoefficient()
 {
-    np_ = 20;
+    np_ = 10;
     nc_ = 5;
 
     q_.resize(nx_, nx_);
@@ -331,10 +331,10 @@ void PlanningMPC::CalControlCoefficient()
     // Todo： 约束项扣除的参开速度、角速度应随预测点调整，预测模型A应随预测点调整
     //  说明： 如果是非线性模型、非线性优化，则不需要以上处理
     u_min_ << -1.5 - global_ref_traj_point_.v,
-              -30.0 / 57.3 - global_ref_traj_point_.w;
+              -40.0 / 57.3 - global_ref_traj_point_.w;
 
     u_max_ <<  1.5 - global_ref_traj_point_.v,
-               30.0 / 57.3 - global_ref_traj_point_.w;
+               40.0 / 57.3 - global_ref_traj_point_.w;
 
     //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
     du_min_ << -1.0 * predict_step_, -200.0 / 57.3 * predict_step_;
