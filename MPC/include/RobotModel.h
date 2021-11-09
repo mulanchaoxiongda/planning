@@ -19,9 +19,10 @@ class RobotModel
                 SaveData *p_savedata);
      RobotMotionStatePara UpdateMotionState(ControlCommand control_command);
 
+     RobotMotionStatePara motion_state_;
+
  private:
      SaveData *p_savedata_;
-     RobotMotionStatePara motion_state_;
 
      double simulation_step_;
 };

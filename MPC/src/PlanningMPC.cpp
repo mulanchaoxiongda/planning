@@ -30,6 +30,12 @@ PlanningMPC::PlanningMPC(
         PlanningAlgorithm::PlanningAlgorithm(
                 p_robot_model, p_savedata, goal_state)
 {
+    start_gate_ = false;
+
+    weak_planning_num_ = 3;
+
+    weak_planning_duration_ = 0.16;
+
     call_cycle_ = 0.02;
 
     nx_ = 4;
@@ -79,7 +85,11 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
 
-    GetSensorInfo();
+    if (start_gate_ == false) {
+        GetSensorInfo();
+    } else {
+        UpdateSensorInfo();
+    }
 
     FindRefPoint();
 
@@ -305,10 +315,63 @@ void PlanningMPC::FindRefPoint()
                       << " t "       << global_ref_traj_point_.t << endl;
 }
 
+void PlanningMPC::UpdateSensorInfo()
+{
+    int SizeOfRefTraj = ref_traj_points_.size();
+
+    if (SizeOfRefTraj <= 1 ) {
+        cout << "[error] global reference trajectory has only "
+             << SizeOfRefTraj << " points " << endl << endl;
+    }
+
+    vector<double> RelativeTime;
+    vector<double> fabs_RelativeTime;
+
+    for (int i = 0; i < SizeOfRefTraj; i++) {
+        double delta_t, fabs_delta_t;
+
+        delta_t = p_robot_model_->motion_state_.t - ref_traj_points_.at(i).t_ref;
+        fabs_delta_t = -1.0 * fabs(delta_t);
+
+        RelativeTime.push_back(delta_t);
+        fabs_RelativeTime.push_back(fabs_delta_t);
+    }
+
+    vector<double>::iterator biggest =
+            max_element(begin(fabs_RelativeTime), end(fabs_RelativeTime));
+
+    int _ID, ID_RefPoint;
+
+    _ID = distance(begin(fabs_RelativeTime), biggest);
+
+    if (RelativeTime.at(_ID) <= 0.0) {
+        ID_RefPoint = _ID - 1;
+
+        if(ID_RefPoint == -1) {
+            ID_RefPoint = 0;
+        }
+    } else {
+        ID_RefPoint = _ID;
+
+        if (ID_RefPoint == (SizeOfRefTraj - 1)) {
+            ID_RefPoint = SizeOfRefTraj - 2;
+        }
+    }
+
+    sensor_info_.t   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).t_ref;                                                                                    
+    sensor_info_.x   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).x_ref;
+    sensor_info_.y   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).y_ref;
+    sensor_info_.yaw = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).yaw_ref;
+    sensor_info_.v   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).v_ref;
+    sensor_info_.w   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).w_ref;
+
+    sensor_info_id_ = ID_RefPoint;
+}
+
 void PlanningMPC::CalControlCoefficient()
 {
-    np_ = 10;
-    nc_ = 5;
+    np_ = 20;
+    nc_ = 20;
 
     q_.resize(nx_, nx_);
     q_.setIdentity(nx_, nx_);
@@ -324,7 +387,7 @@ void PlanningMPC::CalControlCoefficient()
     r_(0, 0) = 8.0;
     r_(1, 1) = 0.2;
 
-    predict_step_ = 0.1;
+    predict_step_ = 0.08;
 
     // Todo： 无人车控制的约束项应扣除参考轨迹的速度、角速度、加速度、角加速度
     // Todo： 规划中的约束项应扣除各预测点的参考速度、角速度、加速度、角加速度
@@ -691,49 +754,122 @@ void PlanningMPC::UpdateReferenceTrajectory()
     // Todo: 以上设计思路需与控制方案相适应，体现规划与控制的耦合性与交互性
     // Todo: 控制算法求参考点的位置、速度、角速度算法需要优化，单一的时间线性插值，改为推算速度、位置的“线性”插值，且先推算速度、再求解位置
     for (int i = 0; i <= np_; i++) {
-        if (i >= 1) {
-            ControlCommand control_command;
+        if (start_gate_ == false) {
+            if (i >= 1) {
+                ControlCommand control_command;
 
-            if (i <= nc_) {
-                control_command.speed_command = u_optimal_(nu_ * i - nu_);
-                control_command.yaw_rate_command = u_optimal_(nu_ * i + 1 - nu_);
-            } else {
-                control_command.speed_command = u_optimal_(nu_ * nc_ - nu_);
-                control_command.yaw_rate_command = u_optimal_(nu_ * nc_ + 1 - nu_);
+                if (i <= nc_) {
+                    control_command.speed_command = u_optimal_(nu_ * i - nu_);
+                    control_command.yaw_rate_command =
+                            u_optimal_(nu_ * i + 1 - nu_);
+                } else {
+                    control_command.speed_command = u_optimal_(nu_ * nc_ - nu_);
+                    control_command.yaw_rate_command =
+                            u_optimal_(nu_ * nc_ + 1 - nu_);
+                }
+
+                double Tv = 0.1;
+                double acceleration =
+                        (control_command.speed_command - motion_state.v) / Tv;
+
+                double Tw = 0.15;
+                double yaw_acceleration =
+                        (control_command.yaw_rate_command - motion_state.w) / Tw;
+
+                double simulation_step = predict_step_;
+
+                /* motion_state.v = control_command.speed_command;
+                motion_state.w = control_command.yaw_rate_command; */
+                motion_state.v = motion_state.v + acceleration*simulation_step;
+
+                motion_state.w = 
+                        motion_state.w + yaw_acceleration*simulation_step;
+
+                motion_state.yaw =
+                        motion_state.yaw + motion_state.w * simulation_step;
+
+                motion_state.x =
+                        motion_state.x + motion_state.v *
+                        cos(motion_state.yaw) * simulation_step;
+                motion_state.y =
+                        motion_state.y + motion_state.v *
+                        sin(motion_state.yaw) * simulation_step;
+
+                motion_state.t = motion_state.t + simulation_step;
             }
 
-            double Tv = 0.1;
-            double acceleration = (control_command.speed_command - motion_state.v) / Tv;
+            ref_traj_points_.at(i).t_ref   = motion_state.t;
+            ref_traj_points_.at(i).x_ref   = motion_state.x;
+            ref_traj_points_.at(i).y_ref   = motion_state.y;
+            ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
+            ref_traj_points_.at(i).v_ref   = motion_state.v;
+            ref_traj_points_.at(i).w_ref   = motion_state.w;
+        } else {
+            if (i > weak_planning_num_) {
+                ControlCommand control_command;
 
-            double Tw = 0.15;
-            double yaw_acceleration =
-                    (control_command.yaw_rate_command - motion_state.w) / Tw;
+                if (i - weak_planning_num_ <= nc_) {
+                    control_command.speed_command =
+                            u_optimal_(nu_ * (i - weak_planning_num_) - nu_);
 
-            double simulation_step = predict_step_;
+                    control_command.yaw_rate_command =
+                            u_optimal_(nu_ * (i - weak_planning_num_) + 1 - nu_);
+                } else {
+                    control_command.speed_command = u_optimal_(nu_ * nc_ - nu_);
+                    control_command.yaw_rate_command =
+                            u_optimal_(nu_ * nc_ + 1 - nu_);
+                }
 
-            /* motion_state.v = control_command.speed_command;
-            motion_state.w = control_command.yaw_rate_command; */
-            motion_state.v = motion_state.v + acceleration*simulation_step;
-            motion_state.w = motion_state.w + yaw_acceleration*simulation_step;
+                double Tv = 0.1;
+                double acceleration =
+                        (control_command.speed_command - motion_state.v) / Tv;
 
-            motion_state.yaw = motion_state.yaw + motion_state.w * simulation_step;
+                double Tw = 0.15;
+                double yaw_acceleration =
+                        (control_command.yaw_rate_command - motion_state.w) / Tw;
 
-            motion_state.x =
-                    motion_state.x + motion_state.v *
-                    cos(motion_state.yaw) * simulation_step;
-            motion_state.y =
-                    motion_state.y + motion_state.v *
-                    sin(motion_state.yaw) * simulation_step;
+                double simulation_step = predict_step_;
 
-            motion_state.t = motion_state.t + simulation_step;
+                /* motion_state.v = control_command.speed_command;
+                motion_state.w = control_command.yaw_rate_command; */
+                motion_state.v = motion_state.v + acceleration*simulation_step;
+                
+                motion_state.w = 
+                        motion_state.w + yaw_acceleration*simulation_step;
+
+                motion_state.yaw =
+                        motion_state.yaw + motion_state.w * simulation_step;
+
+                motion_state.x =
+                        motion_state.x + motion_state.v *
+                        cos(motion_state.yaw) * simulation_step;
+                motion_state.y =
+                        motion_state.y + motion_state.v *
+                        sin(motion_state.yaw) * simulation_step;
+
+                motion_state.t = motion_state.t + simulation_step;
+
+                ref_traj_points_.at(i).t_ref   = motion_state.t;
+                ref_traj_points_.at(i).x_ref   = motion_state.x;
+                ref_traj_points_.at(i).y_ref   = motion_state.y;
+                ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
+                ref_traj_points_.at(i).v_ref   = motion_state.v;
+                ref_traj_points_.at(i).w_ref   = motion_state.w;
+            } else {
+                ref_traj_points_.at(i).t_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).t_ref;
+                ref_traj_points_.at(i).x_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).x_ref;
+                ref_traj_points_.at(i).y_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).y_ref;
+                ref_traj_points_.at(i).yaw_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).yaw_ref;
+                ref_traj_points_.at(i).v_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).v_ref;
+                ref_traj_points_.at(i).w_ref =
+                        ref_traj_points_.at(i + sensor_info_id_).w_ref;
+            }
         }
-
-        ref_traj_points_.at(i).t_ref   = motion_state.t;
-        ref_traj_points_.at(i).x_ref   = motion_state.x;
-        ref_traj_points_.at(i).y_ref   = motion_state.y;
-        ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
-        ref_traj_points_.at(i).v_ref   = motion_state.v;
-        ref_traj_points_.at(i).w_ref   = motion_state.w;
 
         p_savedata_->file << "[reference_trajectory_planning] "
                           << " Time "           << sensor_info_.t
@@ -748,6 +884,8 @@ void PlanningMPC::UpdateReferenceTrajectory()
 
     loacl_trajectory_points_.assign(
             ref_traj_points_.begin(), ref_traj_points_.end());
+
+    start_gate_ = true;
 
     p_savedata_->file << "[goal_state_planning] "
                           << " Time "         << sensor_info_.t

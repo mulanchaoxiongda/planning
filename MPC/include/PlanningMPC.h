@@ -27,6 +27,13 @@ class PlanningMPC: public PlanningAlgorithm
 
 
  private:
+     bool start_gate_;
+     
+     int weak_planning_num_;
+     int sensor_info_id_;
+
+     double  weak_planning_duration_;
+
      VectorXd u_pre_;
      int nx_, nu_;
 
@@ -59,6 +66,8 @@ class PlanningMPC: public PlanningAlgorithm
      void ReadInGoalTraj();
 
      void FindRefPoint();
+
+     void UpdateSensorInfo();
 
      void CalControlCoefficient();
 

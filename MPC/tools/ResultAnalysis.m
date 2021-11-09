@@ -280,7 +280,7 @@ fclose(fid);
 
 %% Plot figure: MPC Planner && Controller Analysis
 figure('name','trajectory planning');
-subplot(3, 2, 1);
+subplot(3, 1, 1);
 plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...          %% 近似全局轨迹             plot
        ...                                                                                                                   %% 真实全局轨迹散点图   plot
        ...                                                                                                                   %% 近似局部轨迹             plot
@@ -289,14 +289,6 @@ plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...   
        cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
 title('运动轨迹'); legend('近似全局轨迹', '真实局部轨迹散点图', '小车轨迹', '停车点');
-
-subplot(3, 2, 2);
-plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
-       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'g', ...
-       cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'y', ...
-       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
-xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
-title('速度-时间曲线'); legend('近似全局速度', '近似局部速度', '速度指令', '小车速度');
 
 subplot(3, 2, 3);
 plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 2)) * 1000); grid on;
@@ -307,6 +299,14 @@ subplot(3, 2, 4);
 plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 4)) * 1000); grid on;
 xlabel('时间(秒)'); ylabel('轨迹系横向误差(毫米)'); set(gca, 'FontSize', 16);
 title('轨迹系横向误差-时间曲线');
+
+subplot(3, 2, 5);
+plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
+       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'g', ...
+       cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'black', ...
+       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
+xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
+title('速度-时间曲线'); legend('近似全局速度', '近似局部速度', '速度指令', '小车速度');
 
 subplot(3, 2, 6);
 plot(cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 4)) * 57.3,  'r',...

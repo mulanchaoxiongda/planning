@@ -166,7 +166,7 @@ void TrackingMPC::ReadInControlPara()
 
 void TrackingMPC::CalControlCoefficient()
 {
-    np_ = 10;
+    np_ = 20;
     nc_ = 5;
 
     q_.resize(nx_, nx_);
