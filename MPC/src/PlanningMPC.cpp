@@ -55,6 +55,7 @@ PlanningMPC::PlanningMPC(
     GetSensorInfo();
 
     ReadInGoalTraj();
+    GenerateGoalTraj();
 
     FindRefPoint();
 
@@ -187,7 +188,6 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     return result;
 }
 
-//Todo
 void PlanningMPC::ReadInGoalTraj()
 {
     string string_temp;
@@ -227,6 +227,129 @@ void PlanningMPC::ReadInGoalTraj()
 
     ReadFile.close();
     cout << "[INFO] read in reference global route points successfully !"
+         << endl;
+}
+
+void PlanningMPC::GenerateGoalTraj()
+{
+    double distance_start2goal = pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
+                                     pow(goal_state_.y - sensor_info_.y, 2.0), 0.5);
+
+    double speed_average = 0.2;
+
+    double t0, t1;
+    t0 = sensor_info_.t;
+    t1 = t0 + distance_start2goal / speed_average + 1.0;
+
+    double distance_allowance = 0.2;
+
+    MatrixXd X(6, 1), Y(6, 1);
+    
+    X << sensor_info_.x,
+         sensor_info_.v * cos(sensor_info_.yaw),
+         0.0,
+         goal_state_.x - distance_allowance * cos(goal_state_.yaw),
+         speed_average * cos(goal_state_.yaw),
+         0.0;
+
+    Y << sensor_info_.y,
+         sensor_info_.v * sin(sensor_info_.yaw),
+         0.0,
+         goal_state_.y - distance_allowance * sin(goal_state_.yaw),
+         speed_average * sin(goal_state_.yaw),
+         0.0;
+
+    MatrixXd T(6, 6);
+    
+    T << pow(t0, 5.0),         pow(t0, 4.0),         pow(t0, 3.0),        pow(t0, 2.0),  t0,   1.0,
+         5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
+         20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
+         pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
+         5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
+         20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
+
+    MatrixXd A(6, 1), B(6, 1);
+
+    A = T.inverse() * X;
+
+    B = T.inverse() * Y;
+
+    double step = 0.05;
+    int cycle_num = (int)((t1 - t0) / step) + 1;
+
+    MatrixXd t(cycle_num, 1);
+    MatrixXd x(cycle_num, 1),  y(cycle_num, 1);
+    MatrixXd vx(cycle_num, 1), vy(cycle_num, 1);
+    MatrixXd ax(cycle_num, 1), ay(cycle_num, 1);
+    MatrixXd v(cycle_num, 1),  yaw(cycle_num, 1);
+    MatrixXd wz(cycle_num, 1), curvature(cycle_num, 1);
+    
+    TrajPoint temp;
+
+    for (int i = 0; i < cycle_num; i++) {
+        t(i) = i * step;
+
+        x(i) = 
+                A(5) +
+                A(4) * t(i) +
+                A(3) * pow(t(i), 2.0) +
+                A(2) * pow(t(i), 3.0) +
+                A(1) * pow(t(i), 4.0) +
+                A(0) * pow(t(i), 5.0);
+        
+        y(i) =
+                B(5) +
+                B(4) * t(i) +
+                B(3) * pow(t(i), 2.0) +
+                B(2) * pow(t(i), 3.0) +
+                B(1) * pow(t(i), 4.0) +
+                B(0) * pow(t(i), 5.0);
+
+        vx(i) = A(4) +
+                2.0 * A(3) * pow(t(i), 1.0) +
+                3.0 * A(2) * pow(t(i), 2.0) +
+                4.0 * A(1) * pow(t(i), 3.0) +
+                5.0 * A(0) * pow(t(i), 4.0);
+
+        vy(i) = B(4) +
+                2.0 * B(3) * pow(t(i), 1.0) +
+                3.0 * B(2) * pow(t(i), 2.0) +
+                4.0 * B(1) * pow(t(i), 3.0) +
+                5.0 * B(0) * pow(t(i), 4.0);
+
+        ax(i) = 2.0 +
+                6.0 * A(2) * pow(t(i), 1.0) +
+                12.0 * A(1) * pow(t(i), 2.0) +
+                20.0 * A(0) * pow(t(i), 3.0);
+
+        ay(i) = 2.0 +
+                6.0 * B(2) * pow(t(i), 1.0) +
+                12.0 * B(1) * pow(t(i), 2.0) +
+                20.0 * B(0) * pow(t(i), 3.0);
+
+        v(i) = pow(pow(vx(i), 2.0) + pow(vy(i), 2.0), 0.5);
+
+        yaw(i) = atan2(vy(i), vx(i));
+
+        curvature(i) =
+                vx(i) * ay(i) - vy(i) * ax(i) / 
+                pow(vx(i) * vx(i) + vy(i) * vy(i), 3.0 / 2.0);
+
+        wz(i) = v(i) * curvature(i);
+
+        temp.x_ref   = vx(i);
+        temp.y_ref   = vy(i);
+        temp.yaw_ref = yaw(i);
+        temp.v_ref   = v(i);
+        temp.w_ref   = wz(i);
+        temp.t_ref   = t(i);
+
+        //global_traj_points_.push_back(temp);
+
+        cout << endl;
+    }
+
+    cout << "[INFO] generate reference global route points successfully !"
          << endl;
 }
 
