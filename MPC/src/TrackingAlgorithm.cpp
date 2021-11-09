@@ -145,7 +145,7 @@ void TrackingAlgorithm::FindRefPoint(
     reference_point_.v =
             ( trajectory_points.at(ID_RefPoint).v_ref * dis2 +
               trajectory_points.at(ID_RefPoint + 1).v_ref * dis1 ) /
-            dis_total;
+              dis_total;
     reference_point_.w =
             ( trajectory_points.at(ID_RefPoint).w_ref * dis2 +
               trajectory_points.at(ID_RefPoint + 1).w_ref * dis1 ) /
@@ -161,6 +161,7 @@ void TrackingAlgorithm::FindRefPoint(
                       << " y_ref "   << reference_point_.y
                       << " yaw_ref " << reference_point_.yaw
                       << " v_ref "   << reference_point_.v
-                      << " w_ref "   << reference_point_.w
+                      << " v_ref "   << reference_point_.w
                       << " t "       << reference_point_.t << endl;
 }
+

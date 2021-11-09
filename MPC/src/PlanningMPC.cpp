@@ -371,7 +371,7 @@ void PlanningMPC::UpdateSensorInfo()
 void PlanningMPC::CalControlCoefficient()
 {
     np_ = 20;
-    nc_ = 20;
+    nc_ = 6;
 
     q_.resize(nx_, nx_);
     q_.setIdentity(nx_, nx_);
