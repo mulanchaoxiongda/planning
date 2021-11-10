@@ -155,7 +155,7 @@ void TrackingAlgorithm::FindRefPoint(
               trajectory_points.at(ID_RefPoint + 1).t_ref * dis1 ) /
               dis_total;
 
-    p_savedata_->file << "[reference_point] "
+    p_savedata_->file << "[reference_point_tracking] "
                       << " Time "    << reference_point_.t
                       << " x_ref "   << reference_point_.x
                       << " y_ref "   << reference_point_.y

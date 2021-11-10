@@ -51,7 +51,7 @@ while ~feof(fid)
         RefTra_Index = RefTra_Index + 1;
     end
 
-    id_MOTOR = strfind(t1, '[reference_point]');
+    id_MOTOR = strfind(t1, '[reference_point_tracking]');
     if ~isempty(id_MOTOR)
         data = textscan(t1, RefPoi_Ide);
         RefPoi(RefPoi_Index, (1 : 12)) = data(1, (4 : 15));
@@ -284,7 +284,7 @@ subplot(3, 1, 1);
 plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...          %% 近似全局轨迹             plot
        ...                                                                                                                %% 真实全局轨迹散点图   plot
        cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'black', ...                              %% 近似局部轨迹             plot
-       cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                   %% 真实局部轨迹散点图   plot
+       ... % cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                   %% 真实局部轨迹散点图   plot
        cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
        cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
@@ -304,7 +304,7 @@ title('横摆角-时间曲线'); legend('近似局部横摆角', '小车横摆�
 
 subplot(3, 2, 5);
 plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
-       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 8)), 'g', ...
+       cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 8)), 'g', ...
        cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'black', ...
        cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
 xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
@@ -312,7 +312,7 @@ title('速度-时间曲线'); legend('近似全局速度', '近似局部速度',
 
 subplot(3, 2, 6);
 plot(cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 4)) * 57.3,  'r',...
-       cell2mat(RefTra(:, 12)), cell2mat(RefTra(:, 10)) * 57.3, 'b',...
+       cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 10)) * 57.3, 'b',...
        cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'g'); grid on;
 xlabel('时间(秒)'); ylabel('横摆角速度(度/秒)'); set(gca, 'FontSize', 16);
 title('横摆角速度-时间曲线'); legend('横摆角速度指令','近似局部横摆角速度','小车横摆角速度');

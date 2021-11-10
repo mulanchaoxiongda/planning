@@ -244,7 +244,12 @@ void PlanningMPC::GenerateGoalTraj()
     double t0, t1;
     
     t0 = sensor_info_.t;
-    t1 = t0 + (distance_start2goal - safe_distance) / speed_except + tiem_margin;
+    t1 = 
+            t0 + (distance_start2goal - safe_distance) / speed_except + tiem_margin;
+
+    /* t1 = 
+            t0 + (distance_start2goal - safe_distance) /
+            ((speed_except + sensor_info_.v) / 2.0) + tiem_margin; */
 
     MatrixXd X(6, 1), Y(6, 1);
     
