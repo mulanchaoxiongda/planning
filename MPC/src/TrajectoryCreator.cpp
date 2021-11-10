@@ -13,7 +13,7 @@ TrajectoryCreator::TrajectoryCreator(
 
 void TrajectoryCreator::TrajCreator()
 {
-    TrajPoint trajectory_point = {0.0, 0.0, 0.0/57.3, 0.5*0.15*2.5*2.5, 0.0, 0.0}; // x, y, yaw, v, w, t
+    TrajPoint trajectory_point = {0.0, 0.0, 0.0/57.3, 0, 0.0, 0.0}; // x, y, yaw, v, w, t
 
     p_save_result_->file << "[reference_trajectory] "
                          << " Time " << trajectory_point.t_ref

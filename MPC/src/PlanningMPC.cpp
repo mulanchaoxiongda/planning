@@ -232,37 +232,79 @@ void PlanningMPC::ReadInGoalTraj()
 
 void PlanningMPC::GenerateGoalTraj()
 {
-    double distance_start2goal = pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
+    double distance_agv2goal = pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
                                      pow(goal_state_.y - sensor_info_.y, 2.0), 0.5);
 
+    double min_relative_dis = 1.0;
+
+    if (distance_agv2goal < min_relative_dis) {
+        cout << "[error] agv is too near to goal point!" << endl;
+    }
+
+    TrajPoint temp;
+
+    temp.x_ref   = sensor_info_.x;
+    temp.y_ref   = sensor_info_.y;
+    temp.yaw_ref = sensor_info_.yaw;
+    temp.v_ref   = sensor_info_.v;
+    temp.w_ref   = sensor_info_.w;
+    temp.t_ref   = sensor_info_.t;
+
+    global_traj_points_.push_back(temp);
+
+    double step = 0.05;
+
+    double distance_travel;
+
+    double min_speed = 0.01;
+
+    double acc = 0.0;
+
+    if (fabs(sensor_info_.v) < min_speed) {
+        acc = 0.1;
+
+        double delta_time = (min_speed - sensor_info_.v) / acc;
+
+        distance_travel = 
+                sensor_info_.v * delta_time + 0.5 * acc * pow(delta_time, 2.0);
+
+        temp.x_ref   = sensor_info_.x + distance_travel * cos(temp.yaw_ref);
+        temp.y_ref   = sensor_info_.y + distance_travel * sin(temp.yaw_ref);
+        temp.yaw_ref = sensor_info_.yaw + sensor_info_.w * delta_time;
+        temp.v_ref   = min_speed;
+        temp.w_ref   = sensor_info_.w;
+        temp.t_ref   = sensor_info_.t + delta_time;
+
+        global_traj_points_.push_back(temp);
+    }
+    
     double speed_except = 0.20;
 
     double safe_distance = 0.3;
 
-    double tiem_margin = -1.0;
+    double tiem_margin = 1.0;
 
     double t0, t1;
     
-    t0 = sensor_info_.t;
+    t0 = temp.t_ref;
     t1 = 
-            t0 + (distance_start2goal - safe_distance) / speed_except + tiem_margin;
+            t0 + (distance_agv2goal - safe_distance - distance_travel) /
+            speed_except + tiem_margin;
 
-    /* t1 = 
-            t0 + (distance_start2goal - safe_distance) /
-            ((speed_except + sensor_info_.v) / 2.0) + tiem_margin; */
+    cout << endl << endl << t0 << "   " << t1 << endl << endl;
 
     MatrixXd X(6, 1), Y(6, 1);
     
-    X << sensor_info_.x,
-         sensor_info_.v * cos(sensor_info_.yaw),
-         0.0,
+    X << temp.x_ref,
+         temp.v_ref * cos(temp.yaw_ref),
+         acc * cos(temp.yaw_ref),
          goal_state_.x - safe_distance * cos(goal_state_.yaw),
          speed_except * cos(goal_state_.yaw),
-         0.0;
+         0.0;    
 
-    Y << sensor_info_.y,
-         sensor_info_.v * sin(sensor_info_.yaw),
-         0.0,
+    Y << temp.y_ref,
+         temp.v_ref * sin(temp.yaw_ref),
+         acc * sin(temp.yaw_ref),
          goal_state_.y - safe_distance * sin(goal_state_.yaw),
          speed_except * sin(goal_state_.yaw),
          0.0;
@@ -282,13 +324,12 @@ void PlanningMPC::GenerateGoalTraj()
 
     B = T.inverse() * Y;
 
-    double step = 0.05;
     int cycle_num = (int)((t1 - t0) / step) + 1;
 
-    for (int i = 0; i < cycle_num; i++) {
-        double t;
-        
-        t= t0 + i * step;
+    double yaw = sensor_info_.yaw;
+
+    for (int i = 1; i < cycle_num; i++) {
+        double t = t0 + i * step;
 
         MatrixXd matrix_T(3, 6);
 
@@ -312,19 +353,23 @@ void PlanningMPC::GenerateGoalTraj()
         vy = result_y(1);
         ay = result_y(2);
 
-        double v, yaw, curvature, w;
+        double v, curvature, w;
 
         v = pow(vx * vx + vy * vy, 0.5);
 
         yaw = atan2(vy, vx);
 
-        curvature =
-                (vx * ay - vy * ax) /
-                pow(pow(vx, 2.0) + pow(vy, 2.0), 3.0 / 2.0);
+        if (v != 0) {
+            curvature =
+                    (vx * ay - vy * ax) /
+                    pow(pow(vx, 2.0) + pow(vy, 2.0), 3.0 / 2.0);
 
-        w = v * curvature;
+            w = v * curvature;
+        } else {
+            curvature = 9999999999.9999999;
 
-        TrajPoint temp;
+            w = 0.0;
+        }
 
         temp.x_ref   = x;
         temp.y_ref   = y;
@@ -335,12 +380,7 @@ void PlanningMPC::GenerateGoalTraj()
 
         global_traj_points_.push_back(temp);
         
-        cout << t   << "  "
-             << x   << "  "
-             << y   << "  "
-             << yaw << "  "
-             << v   << "  "
-             << w *57.3  << "  "
+        cout << t          << "  "
              << endl;
     }
 
@@ -422,7 +462,7 @@ void PlanningMPC::FindRefPoint()
             ( global_traj_points_.at(ID_RefPoint).t_ref * dis2 +
               global_traj_points_.at(ID_RefPoint + 1).t_ref * dis1 ) /
               dis_total;
-
+         
     p_savedata_->file << "[plainning_global_reference_point] "
                       << " Time "    << global_ref_traj_point_.t
                       << " x_ref "   << global_ref_traj_point_.x

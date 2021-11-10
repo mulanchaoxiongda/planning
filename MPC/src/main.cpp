@@ -27,8 +27,8 @@ int main(int argc, char **argv)
     TrajectoryCreator TrajCreator(&save_trajectory_reference, &save_result);
     TrajCreator.TrajCreator();
 
-    RobotMotionStatePara motion_state = {0.00, -0.01, -0.0/57.3, // x, y, yaw
-                                         0.47,   0.0,   0.0}; // v, w, time
+    RobotMotionStatePara motion_state = {0.00, -0.00, -0.0/57.3, // x, y, yaw
+                                         0.00,   0.0,   0.0}; // v, w, time
 
     double simulation_step = 0.01;
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
     vector<TrajPoint> local_traj_points;
 
-    while (time <= 2.5) {
+    while (time <= 4.5) {
         if (loop_counter % num_planning == 0) {
             planning_mpc.CalRefTrajectory(local_traj_points);
         }

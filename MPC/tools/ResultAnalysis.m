@@ -299,7 +299,7 @@ title('位置跟踪误差-时间曲线'); legend('纵向位置跟踪误差', '�
 subplot(3, 2, 4);
 plot(cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 6)) * 57.3, 'r', ...
        cell2mat(StaRob(:,12)), cell2mat(StaRob(:, 6)) * 57.3, 'b'); grid on;
-xlabel('时间(秒)'); ylabel('位置跟踪误差(毫米)'); set(gca, 'FontSize', 16);
+xlabel('时间(秒)'); ylabel('横摆角(度)'); set(gca, 'FontSize', 16);
 title('横摆角-时间曲线'); legend('近似局部横摆角', '小车横摆角');
 
 subplot(3, 2, 5);
