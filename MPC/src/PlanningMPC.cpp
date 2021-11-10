@@ -235,28 +235,29 @@ void PlanningMPC::GenerateGoalTraj()
     double distance_start2goal = pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
                                      pow(goal_state_.y - sensor_info_.y, 2.0), 0.5);
 
-    double speed_average = 0.2;
+    double speed_except = 0.2;
 
-    double t0, t1;
+    double t0, t1, tiem_margin;
+    tiem_margin = 1.0;
     t0 = sensor_info_.t;
-    t1 = t0 + distance_start2goal / speed_average + 1.0;
+    t1 = t0 + distance_start2goal / speed_except + tiem_margin;
 
-    double distance_allowance = 0.2;
+    double safe_distance = 0.3;
 
     MatrixXd X(6, 1), Y(6, 1);
     
     X << sensor_info_.x,
          sensor_info_.v * cos(sensor_info_.yaw),
          0.0,
-         goal_state_.x - distance_allowance * cos(goal_state_.yaw),
-         speed_average * cos(goal_state_.yaw),
+         goal_state_.x - safe_distance * cos(goal_state_.yaw),
+         speed_except * cos(goal_state_.yaw),
          0.0;
 
     Y << sensor_info_.y,
          sensor_info_.v * sin(sensor_info_.yaw),
          0.0,
-         goal_state_.y - distance_allowance * sin(goal_state_.yaw),
-         speed_average * sin(goal_state_.yaw),
+         goal_state_.y - safe_distance * sin(goal_state_.yaw),
+         speed_except * sin(goal_state_.yaw),
          0.0;
 
     MatrixXd T(6, 6);
@@ -287,7 +288,7 @@ void PlanningMPC::GenerateGoalTraj()
     TrajPoint temp;
 
     for (int i = 0; i < cycle_num; i++) {
-        t(i) = i * step;
+        t(i) = t0 + i * step;
 
         x(i) = 
                 A(5) +
@@ -305,24 +306,28 @@ void PlanningMPC::GenerateGoalTraj()
                 B(1) * pow(t(i), 4.0) +
                 B(0) * pow(t(i), 5.0);
 
-        vx(i) = A(4) +
+        vx(i) = 
+                A(4) +
                 2.0 * A(3) * pow(t(i), 1.0) +
                 3.0 * A(2) * pow(t(i), 2.0) +
                 4.0 * A(1) * pow(t(i), 3.0) +
                 5.0 * A(0) * pow(t(i), 4.0);
 
-        vy(i) = B(4) +
+        vy(i) = 
+                B(4) +
                 2.0 * B(3) * pow(t(i), 1.0) +
                 3.0 * B(2) * pow(t(i), 2.0) +
                 4.0 * B(1) * pow(t(i), 3.0) +
                 5.0 * B(0) * pow(t(i), 4.0);
 
-        ax(i) = 2.0 +
+        ax(i) = 
+                2.0 +
                 6.0 * A(2) * pow(t(i), 1.0) +
                 12.0 * A(1) * pow(t(i), 2.0) +
                 20.0 * A(0) * pow(t(i), 3.0);
 
-        ay(i) = 2.0 +
+        ay(i) = 
+                2.0 +
                 6.0 * B(2) * pow(t(i), 1.0) +
                 12.0 * B(1) * pow(t(i), 2.0) +
                 20.0 * B(0) * pow(t(i), 3.0);
@@ -332,8 +337,8 @@ void PlanningMPC::GenerateGoalTraj()
         yaw(i) = atan2(vy(i), vx(i));
 
         curvature(i) =
-                vx(i) * ay(i) - vy(i) * ax(i) / 
-                pow(vx(i) * vx(i) + vy(i) * vy(i), 3.0 / 2.0);
+                (vx(i) * ay(i) - vy(i) * ax(i)) /
+                pow(pow(vx(i), 2.0) + pow(vy(i), 2.0), 3.0 / 2.0);
 
         wz(i) = v(i) * curvature(i);
 
