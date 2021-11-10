@@ -237,12 +237,14 @@ void PlanningMPC::GenerateGoalTraj()
 
     double speed_except = 0.2;
 
-    double t0, t1, tiem_margin;
-    tiem_margin = 1.0;
-    t0 = sensor_info_.t;
-    t1 = t0 + distance_start2goal / speed_except + tiem_margin;
-
     double safe_distance = 0.3;
+
+    double tiem_margin = 1.0;
+
+    double t0, t1;
+    
+    t0 = sensor_info_.t;
+    t1 = t0 + (distance_start2goal - safe_distance) / speed_except + tiem_margin;
 
     MatrixXd X(6, 1), Y(6, 1);
     
@@ -278,80 +280,55 @@ void PlanningMPC::GenerateGoalTraj()
     double step = 0.05;
     int cycle_num = (int)((t1 - t0) / step) + 1;
 
-    MatrixXd t(cycle_num, 1);
-    MatrixXd x(cycle_num, 1),  y(cycle_num, 1);
-    MatrixXd vx(cycle_num, 1), vy(cycle_num, 1);
-    MatrixXd ax(cycle_num, 1), ay(cycle_num, 1);
-    MatrixXd v(cycle_num, 1),  yaw(cycle_num, 1);
-    MatrixXd wz(cycle_num, 1), curvature(cycle_num, 1);
-    
-    TrajPoint temp;
-
     for (int i = 0; i < cycle_num; i++) {
-        t(i) = t0 + i * step;
-
-        x(i) = 
-                A(5) +
-                A(4) * t(i) +
-                A(3) * pow(t(i), 2.0) +
-                A(2) * pow(t(i), 3.0) +
-                A(1) * pow(t(i), 4.0) +
-                A(0) * pow(t(i), 5.0);
+        double t;
         
-        y(i) =
-                B(5) +
-                B(4) * t(i) +
-                B(3) * pow(t(i), 2.0) +
-                B(2) * pow(t(i), 3.0) +
-                B(1) * pow(t(i), 4.0) +
-                B(0) * pow(t(i), 5.0);
+        t= t0 + i * step;
 
-        vx(i) = 
-                A(4) +
-                2.0 * A(3) * pow(t(i), 1.0) +
-                3.0 * A(2) * pow(t(i), 2.0) +
-                4.0 * A(1) * pow(t(i), 3.0) +
-                5.0 * A(0) * pow(t(i), 4.0);
+        MatrixXd matrix_T(3, 6);
 
-        vy(i) = 
-                B(4) +
-                2.0 * B(3) * pow(t(i), 1.0) +
-                3.0 * B(2) * pow(t(i), 2.0) +
-                4.0 * B(1) * pow(t(i), 3.0) +
-                5.0 * B(0) * pow(t(i), 4.0);
+        matrix_T << pow(t, 5.0),         pow(t, 4.0),         pow(t, 3.0),        pow(t, 2.0),  t,   1.0,
+                    5.0 * pow(t, 4.0),   4.0 * pow(t, 3.0),   3.0 * pow(t, 2.0),  2.0 * t,      1.0,  0.0,
+                    20.0 * pow(t, 3.0),  12.0 * pow(t, 2.0),  6.0 * t,            2.0,           0.0,  0.0;
 
-        ax(i) = 
-                2.0 +
-                6.0 * A(2) * pow(t(i), 1.0) +
-                12.0 * A(1) * pow(t(i), 2.0) +
-                20.0 * A(0) * pow(t(i), 3.0);
+        MatrixXd result_x(3, 1), result_y(3, 1);
 
-        ay(i) = 
-                2.0 +
-                6.0 * B(2) * pow(t(i), 1.0) +
-                12.0 * B(1) * pow(t(i), 2.0) +
-                20.0 * B(0) * pow(t(i), 3.0);
+        result_x = matrix_T * A;
 
-        v(i) = pow(pow(vx(i), 2.0) + pow(vy(i), 2.0), 0.5);
+        result_y = matrix_T * B;
 
-        yaw(i) = atan2(vy(i), vx(i));
+        double x, vx, ax, y, vy, ay;
 
-        curvature(i) =
-                (vx(i) * ay(i) - vy(i) * ax(i)) /
-                pow(pow(vx(i), 2.0) + pow(vy(i), 2.0), 3.0 / 2.0);
+        x = result_x(0);
+        vx = result_x(1);
+        ax = result_x(2);
 
-        wz(i) = v(i) * curvature(i);
+        y = result_y(0);
+        vy = result_y(1);
+        ay = result_y(2);
 
-        temp.x_ref   = vx(i);
-        temp.y_ref   = vy(i);
-        temp.yaw_ref = yaw(i);
-        temp.v_ref   = v(i);
-        temp.w_ref   = wz(i);
-        temp.t_ref   = t(i);
+        double v, yaw, curvature, w;
+
+        v = pow(vx * vx + vy * vy, 0.5);
+
+        yaw = atan2(vy, vx);
+
+        curvature =
+                (vx * ay - vy * ax) /
+                pow(pow(vx, 2.0) + pow(vy, 2.0), 3.0 / 2.0);
+
+        w = v * curvature;
+
+        TrajPoint temp;
+
+        temp.x_ref   = x;
+        temp.y_ref   = y;
+        temp.yaw_ref = yaw;
+        temp.v_ref   = v;
+        temp.w_ref   = w;
+        temp.t_ref   = t;
 
         //global_traj_points_.push_back(temp);
-
-        cout << endl;
     }
 
     cout << "[INFO] generate reference global route points successfully !"
