@@ -2108,19 +2108,19 @@
 [reference_trajectory_planning]  Time 4.32000000 x_ref 0.67156565 y_ref -0.09920296 yaw_ref -0.00413998 v_ref 0.20024290 w_ref 0.05931930 t_ref 4.48000000 loop_counter 41.00000000
 [reference_trajectory_planning]  Time 4.32000000 x_ref 0.68757443 y_ref -0.09921133 yaw_ref -0.00052313 v_ref 0.20010982 w_ref 0.04521064 t_ref 4.56000000 loop_counter 41.00000000
 [reference_trajectory_planning]  Time 4.32000000 x_ref 0.70357699 y_ref -0.09918108 yaw_ref 0.00189049 v_ref 0.20003232 w_ref 0.03017022 t_ref 4.64000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.71957939 y_ref -0.09912305 yaw_ref 0.00362628 v_ref 0.20003131 w_ref 0.02169743 t_ref 4.72000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.73558163 y_ref -0.09903964 yaw_ref 0.00521237 v_ref 0.20003076 w_ref 0.01982614 t_ref 4.80000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.75158372 y_ref -0.09893197 yaw_ref 0.00672860 v_ref 0.20003064 w_ref 0.01895287 t_ref 4.88000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.76758563 y_ref -0.09880055 yaw_ref 0.00821223 v_ref 0.20003062 w_ref 0.01854534 t_ref 4.96000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.78358733 y_ref -0.09864564 yaw_ref 0.00968064 v_ref 0.20003062 w_ref 0.01835516 t_ref 5.04000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.79958879 y_ref -0.09846735 yaw_ref 0.01114196 v_ref 0.20003062 w_ref 0.01826641 t_ref 5.12000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.81558996 y_ref -0.09826572 yaw_ref 0.01259996 v_ref 0.20003062 w_ref 0.01822500 t_ref 5.20000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.83159083 y_ref -0.09804079 yaw_ref 0.01405641 v_ref 0.20003062 w_ref 0.01820567 t_ref 5.28000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.84759136 y_ref -0.09779257 yaw_ref 0.01551214 v_ref 0.20003062 w_ref 0.01819665 t_ref 5.36000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.86359150 y_ref -0.09752106 yaw_ref 0.01696754 v_ref 0.20003062 w_ref 0.01819244 t_ref 5.44000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.87959124 y_ref -0.09722627 yaw_ref 0.01842278 v_ref 0.20003062 w_ref 0.01819047 t_ref 5.52000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.89559052 y_ref -0.09690819 yaw_ref 0.01987794 v_ref 0.20003062 w_ref 0.01818956 t_ref 5.60000000 loop_counter 41.00000000
-[reference_trajectory_planning]  Time 4.32000000 x_ref 0.91158933 y_ref -0.09656684 yaw_ref 0.02133307 v_ref 0.20003062 w_ref 0.01818913 t_ref 5.68000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.71957834 y_ref -0.09912638 yaw_ref 0.00341864 v_ref 0.20001813 w_ref 0.01910186 t_ref 4.72000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.73557899 y_ref -0.09905253 yaw_ref 0.00461508 v_ref 0.20001019 w_ref 0.01495550 t_ref 4.80000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.75157942 y_ref -0.09896202 yaw_ref 0.00565672 v_ref 0.20000860 w_ref 0.01302053 t_ref 4.88000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.76757973 y_ref -0.09885600 yaw_ref 0.00662612 v_ref 0.20000829 w_ref 0.01211755 t_ref 4.96000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.78357993 y_ref -0.09873501 yaw_ref 0.00756182 v_ref 0.20000822 w_ref 0.01169616 t_ref 5.04000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.79958001 y_ref -0.09859930 yaw_ref 0.00848178 v_ref 0.20000821 w_ref 0.01149951 t_ref 5.12000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.81557997 y_ref -0.09844898 yaw_ref 0.00939440 v_ref 0.20000821 w_ref 0.01140774 t_ref 5.20000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.83157977 y_ref -0.09828412 yaw_ref 0.01030359 v_ref 0.20000821 w_ref 0.01136491 t_ref 5.28000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.84757942 y_ref -0.09810474 yaw_ref 0.01121118 v_ref 0.20000821 w_ref 0.01134493 t_ref 5.36000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.86357891 y_ref -0.09791085 yaw_ref 0.01211803 v_ref 0.20000821 w_ref 0.01133560 t_ref 5.44000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.87957820 y_ref -0.09770245 yaw_ref 0.01302453 v_ref 0.20000821 w_ref 0.01133125 t_ref 5.52000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.89557731 y_ref -0.09747955 yaw_ref 0.01393087 v_ref 0.20000821 w_ref 0.01132922 t_ref 5.60000000 loop_counter 41.00000000
+[reference_trajectory_planning]  Time 4.32000000 x_ref 0.91157620 y_ref -0.09724216 yaw_ref 0.01483713 v_ref 0.20000821 w_ref 0.01132827 t_ref 5.68000000 loop_counter 41.00000000
 [goal_state_planning]  Time 4.32000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.32000000 loop_counter 41.00000000
 [planning_control_command]  Time 4.32000000 vc 0.20036517 wc 0.05963914 Time 4.32000000
 [reference_point_tracking]  Time 4.10000000 x_ref 0.59520306 y_ref -0.09803013 yaw_ref -0.03699377 v_ref 0.20235815 v_ref 0.11785869 t 4.10000000
@@ -2157,20 +2157,20 @@
 [reference_trajectory_planning]  Time 4.40000000 x_ref 0.67155705 y_ref -0.09920736 yaw_ref -0.00441704 v_ref 0.20013565 w_ref 0.05585604 t_ref 4.48000000 loop_counter 42.00000000
 [reference_trajectory_planning]  Time 4.40000000 x_ref 0.68755579 y_ref -0.09922817 yaw_ref -0.00130059 v_ref 0.19998448 w_ref 0.03895566 t_ref 4.56000000 loop_counter 42.00000000
 [reference_trajectory_planning]  Time 4.40000000 x_ref 0.70355113 y_ref -0.09921916 yaw_ref 0.00056311 v_ref 0.19994181 w_ref 0.02329625 t_ref 4.64000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.71955009 y_ref -0.09918991 yaw_ref 0.00182796 v_ref 0.19998730 w_ref 0.01581064 t_ref 4.72000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.73555232 y_ref -0.09914030 yaw_ref 0.00310033 v_ref 0.20002886 w_ref 0.01590463 t_ref 4.80000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.75155467 y_ref -0.09906829 yaw_ref 0.00450026 v_ref 0.20003130 w_ref 0.01749903 t_ref 4.88000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.76755693 y_ref -0.09897292 yaw_ref 0.00595970 v_ref 0.20003179 w_ref 0.01824309 t_ref 4.96000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.78355903 y_ref -0.09885375 yaw_ref 0.00744693 v_ref 0.20003189 w_ref 0.01859032 t_ref 5.04000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.79956094 y_ref -0.09871057 yaw_ref 0.00894712 v_ref 0.20003191 w_ref 0.01875236 t_ref 5.12000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.81556262 y_ref -0.09854330 yaw_ref 0.01045336 v_ref 0.20003191 w_ref 0.01882798 t_ref 5.20000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.83156403 y_ref -0.09835187 yaw_ref 0.01196242 v_ref 0.20003191 w_ref 0.01886326 t_ref 5.28000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.84756513 y_ref -0.09813628 yaw_ref 0.01347280 v_ref 0.20003191 w_ref 0.01887973 t_ref 5.36000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.86356589 y_ref -0.09789651 yaw_ref 0.01498379 v_ref 0.20003191 w_ref 0.01888742 t_ref 5.44000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.87956626 y_ref -0.09763256 yaw_ref 0.01649507 v_ref 0.20003191 w_ref 0.01889100 t_ref 5.52000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.89556622 y_ref -0.09734442 yaw_ref 0.01800648 v_ref 0.20003191 w_ref 0.01889268 t_ref 5.60000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.91156573 y_ref -0.09703211 yaw_ref 0.01951796 v_ref 0.20003191 w_ref 0.01889346 t_ref 5.68000000 loop_counter 42.00000000
-[reference_trajectory_planning]  Time 4.40000000 x_ref 0.92756474 y_ref -0.09669561 yaw_ref 0.02102947 v_ref 0.20003191 w_ref 0.01889382 t_ref 5.76000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.71954904 y_ref -0.09919324 yaw_ref 0.00162032 v_ref 0.19997413 w_ref 0.01321507 t_ref 4.72000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.73554966 y_ref -0.09915319 yaw_ref 0.00250304 v_ref 0.20000830 w_ref 0.01103399 t_ref 4.80000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.75155018 y_ref -0.09909891 yaw_ref 0.00339219 v_ref 0.20000771 w_ref 0.01111437 t_ref 4.88000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.76755064 y_ref -0.09903036 yaw_ref 0.00428434 v_ref 0.20000759 w_ref 0.01115189 t_ref 4.96000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.78355103 y_ref -0.09894751 yaw_ref 0.00517789 v_ref 0.20000757 w_ref 0.01116939 t_ref 5.04000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.79955134 y_ref -0.09885035 yaw_ref 0.00607209 v_ref 0.20000756 w_ref 0.01117756 t_ref 5.12000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.81555156 y_ref -0.09873888 yaw_ref 0.00696660 v_ref 0.20000756 w_ref 0.01118137 t_ref 5.20000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.83155167 y_ref -0.09861310 yaw_ref 0.00786126 v_ref 0.20000756 w_ref 0.01118315 t_ref 5.28000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.84755166 y_ref -0.09847300 yaw_ref 0.00875597 v_ref 0.20000756 w_ref 0.01118398 t_ref 5.36000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.86355152 y_ref -0.09831859 yaw_ref 0.00965072 v_ref 0.20000756 w_ref 0.01118437 t_ref 5.44000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.87955124 y_ref -0.09814986 yaw_ref 0.01054549 v_ref 0.20000756 w_ref 0.01118455 t_ref 5.52000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.89555080 y_ref -0.09796681 yaw_ref 0.01144026 v_ref 0.20000756 w_ref 0.01118464 t_ref 5.60000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.91155018 y_ref -0.09776945 yaw_ref 0.01233503 v_ref 0.20000756 w_ref 0.01118467 t_ref 5.68000000 loop_counter 42.00000000
+[reference_trajectory_planning]  Time 4.40000000 x_ref 0.92754939 y_ref -0.09755777 yaw_ref 0.01322981 v_ref 0.20000756 w_ref 0.01118469 t_ref 5.76000000 loop_counter 42.00000000
 [goal_state_planning]  Time 4.40000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.40000000 loop_counter 42.00000000
 [planning_control_command]  Time 4.40000000 vc 0.20004302 wc 0.03938432 Time 4.40000000
 [reference_point_tracking]  Time 4.20000000 x_ref 0.61536808 y_ref -0.09857617 yaw_ref -0.02625733 v_ref 0.20167370 v_ref 0.10633543 t 4.20000000
@@ -2206,21 +2206,21 @@
 [reference_trajectory_planning]  Time 4.48000000 x_ref 0.67155705 y_ref -0.09920736 yaw_ref -0.00441704 v_ref 0.20013565 w_ref 0.05585604 t_ref 4.48000000 loop_counter 43.00000000
 [reference_trajectory_planning]  Time 4.48000000 x_ref 0.68754900 y_ref -0.09923328 yaw_ref -0.00162076 v_ref 0.19989968 w_ref 0.03495357 t_ref 4.56000000 loop_counter 43.00000000
 [reference_trajectory_planning]  Time 4.48000000 x_ref 0.70353640 y_ref -0.09923869 yaw_ref -0.00033838 v_ref 0.19984250 w_ref 0.01602966 t_ref 4.64000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.71952964 y_ref -0.09923418 yaw_ref 0.00028188 v_ref 0.19991547 w_ref 0.00775334 t_ref 4.72000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.73552918 y_ref -0.09921826 yaw_ref 0.00099486 v_ref 0.19999441 w_ref 0.00891222 t_ref 4.80000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.75153172 y_ref -0.09918604 yaw_ref 0.00201372 v_ref 0.20003210 w_ref 0.01273572 t_ref 4.88000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.76753421 y_ref -0.09913304 yaw_ref 0.00331165 v_ref 0.20003222 w_ref 0.01622411 t_ref 4.96000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.78353661 y_ref -0.09905719 yaw_ref 0.00473981 v_ref 0.20003224 w_ref 0.01785202 t_ref 5.04000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.79953888 y_ref -0.09895752 yaw_ref 0.00622875 v_ref 0.20003224 w_ref 0.01861172 t_ref 5.12000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.81554098 y_ref -0.09883356 yaw_ref 0.00774605 v_ref 0.20003225 w_ref 0.01896624 t_ref 5.20000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.83154287 y_ref -0.09868512 yaw_ref 0.00927658 v_ref 0.20003225 w_ref 0.01913169 t_ref 5.28000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.84754451 y_ref -0.09851208 yaw_ref 0.01081329 v_ref 0.20003225 w_ref 0.01920889 t_ref 5.36000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.86354587 y_ref -0.09831441 yaw_ref 0.01235289 v_ref 0.20003225 w_ref 0.01924492 t_ref 5.44000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.87954690 y_ref -0.09809208 yaw_ref 0.01389383 v_ref 0.20003225 w_ref 0.01926174 t_ref 5.52000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.89554758 y_ref -0.09784508 yaw_ref 0.01543539 v_ref 0.20003225 w_ref 0.01926958 t_ref 5.60000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.91154785 y_ref -0.09757341 yaw_ref 0.01697725 v_ref 0.20003225 w_ref 0.01927325 t_ref 5.68000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.92754769 y_ref -0.09727707 yaw_ref 0.01851925 v_ref 0.20003225 w_ref 0.01927495 t_ref 5.76000000 loop_counter 43.00000000
-[reference_trajectory_planning]  Time 4.48000000 x_ref 0.94354705 y_ref -0.09695606 yaw_ref 0.02006131 v_ref 0.20003225 w_ref 0.01927575 t_ref 5.84000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.71952858 y_ref -0.09923750 yaw_ref 0.00007424 v_ref 0.19990229 w_ref 0.00515776 t_ref 4.72000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.73552649 y_ref -0.09923114 yaw_ref 0.00039757 v_ref 0.19997384 w_ref 0.00404158 t_ref 4.80000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.75152716 y_ref -0.09921665 yaw_ref 0.00090565 v_ref 0.20000851 w_ref 0.00635106 t_ref 4.88000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.76752772 y_ref -0.09919088 yaw_ref 0.00161052 v_ref 0.20000715 w_ref 0.00881089 t_ref 4.96000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.78352822 y_ref -0.09915236 yaw_ref 0.00240723 v_ref 0.20000688 w_ref 0.00995881 t_ref 5.04000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.79952868 y_ref -0.09910041 yaw_ref 0.00324679 v_ref 0.20000683 w_ref 0.01049450 t_ref 5.12000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.81552909 y_ref -0.09903471 yaw_ref 0.00410634 v_ref 0.20000682 w_ref 0.01074449 t_ref 5.20000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.83152944 y_ref -0.09895510 yaw_ref 0.00497524 v_ref 0.20000681 w_ref 0.01086116 t_ref 5.28000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.84752971 y_ref -0.09886153 yaw_ref 0.00584848 v_ref 0.20000681 w_ref 0.01091560 t_ref 5.36000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.86352989 y_ref -0.09875394 yaw_ref 0.00672377 v_ref 0.20000681 w_ref 0.01094100 t_ref 5.44000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.87952998 y_ref -0.09863234 yaw_ref 0.00759999 v_ref 0.20000681 w_ref 0.01095286 t_ref 5.52000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.89552995 y_ref -0.09849671 yaw_ref 0.00847667 v_ref 0.20000681 w_ref 0.01095839 t_ref 5.60000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.91152979 y_ref -0.09834705 yaw_ref 0.00935354 v_ref 0.20000681 w_ref 0.01096098 t_ref 5.68000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.92752950 y_ref -0.09818336 yaw_ref 0.01023052 v_ref 0.20000681 w_ref 0.01096218 t_ref 5.76000000 loop_counter 43.00000000
+[reference_trajectory_planning]  Time 4.48000000 x_ref 0.94352906 y_ref -0.09800564 yaw_ref 0.01110754 v_ref 0.20000681 w_ref 0.01096274 t_ref 5.84000000 loop_counter 43.00000000
 [goal_state_planning]  Time 4.48000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.48000000 loop_counter 43.00000000
 [planning_control_command]  Time 4.48000000 vc 0.19984068 wc 0.01666390 Time 4.48000000
 [reference_point_tracking]  Time 4.30000000 x_ref 0.63548553 y_ref -0.09893436 yaw_ref -0.01669742 v_ref 0.20115614 v_ref 0.09420121 t 4.30000000
@@ -2255,22 +2255,22 @@
 [reference_trajectory_planning]  Time 4.56000000 x_ref 0.67155705 y_ref -0.09920736 yaw_ref -0.00441704 v_ref 0.20013565 w_ref 0.05585604 t_ref 4.48000000 loop_counter 44.00000000
 [reference_trajectory_planning]  Time 4.56000000 x_ref 0.68754900 y_ref -0.09923328 yaw_ref -0.00162076 v_ref 0.19989968 w_ref 0.03495357 t_ref 4.56000000 loop_counter 44.00000000
 [reference_trajectory_planning]  Time 4.56000000 x_ref 0.70353226 y_ref -0.09924388 yaw_ref -0.00066355 v_ref 0.19979075 w_ref 0.01196503 t_ref 4.64000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.71952062 y_ref -0.09925415 yaw_ref -0.00064185 v_ref 0.19985454 w_ref 0.00027122 t_ref 4.72000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.73551663 y_ref -0.09926373 yaw_ref -0.00059906 v_ref 0.19995015 w_ref 0.00053490 t_ref 4.80000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.75151756 y_ref -0.09926646 yaw_ref -0.00017052 v_ref 0.20001164 w_ref 0.00535679 t_ref 4.88000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.76752046 y_ref -0.09925508 yaw_ref 0.00071070 v_ref 0.20003635 w_ref 0.01101531 t_ref 4.96000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.78352307 y_ref -0.09922380 yaw_ref 0.00195491 v_ref 0.20003298 w_ref 0.01555251 t_ref 5.04000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.79952556 y_ref -0.09916990 yaw_ref 0.00336849 v_ref 0.20003231 w_ref 0.01766987 t_ref 5.12000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.81552795 y_ref -0.09909211 yaw_ref 0.00486113 v_ref 0.20003217 w_ref 0.01865797 t_ref 5.20000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.83153019 y_ref -0.09898984 yaw_ref 0.00639066 v_ref 0.20003215 w_ref 0.01911908 t_ref 5.28000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.84753226 y_ref -0.09886282 yaw_ref 0.00793740 v_ref 0.20003214 w_ref 0.01933427 t_ref 5.36000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.86353411 y_ref -0.09871092 yaw_ref 0.00949218 v_ref 0.20003214 w_ref 0.01943469 t_ref 5.44000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.87953570 y_ref -0.09853409 yaw_ref 0.01105070 v_ref 0.20003214 w_ref 0.01948155 t_ref 5.52000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.89553700 y_ref -0.09833229 yaw_ref 0.01261097 v_ref 0.20003214 w_ref 0.01950342 t_ref 5.60000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.91153797 y_ref -0.09810550 yaw_ref 0.01417206 v_ref 0.20003214 w_ref 0.01951363 t_ref 5.68000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.92753856 y_ref -0.09785374 yaw_ref 0.01573353 v_ref 0.20003214 w_ref 0.01951839 t_ref 5.76000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.94353873 y_ref -0.09757698 yaw_ref 0.01729518 v_ref 0.20003214 w_ref 0.01952061 t_ref 5.84000000 loop_counter 44.00000000
-[reference_trajectory_planning]  Time 4.56000000 x_ref 0.95953846 y_ref -0.09727524 yaw_ref 0.01885692 v_ref 0.20003214 w_ref 0.01952165 t_ref 5.92000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 w_ref -0.00232436 t_ref 4.72000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.73551392 y_ref -0.09927660 yaw_ref -0.00119636 v_ref 0.19992959 w_ref -0.00433574 t_ref 4.80000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.75151295 y_ref -0.09929706 yaw_ref -0.00127859 v_ref 0.19998805 w_ref -0.00102787 t_ref 4.88000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.76751384 y_ref -0.09931290 yaw_ref -0.00099042 v_ref 0.20001128 w_ref 0.00360208 t_ref 4.96000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.78351440 y_ref -0.09931930 yaw_ref -0.00039952 v_ref 0.20000701 w_ref 0.00738635 t_ref 5.04000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.79951489 y_ref -0.09931397 yaw_ref 0.00033267 v_ref 0.20000616 w_ref 0.00915234 t_ref 5.12000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.81551536 y_ref -0.09929588 yaw_ref 0.00113079 v_ref 0.20000598 w_ref 0.00997647 t_ref 5.20000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.83151581 y_ref -0.09926452 yaw_ref 0.00195967 v_ref 0.20000595 w_ref 0.01036106 t_ref 5.28000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.84751622 y_ref -0.09921968 yaw_ref 0.00280292 v_ref 0.20000594 w_ref 0.01054054 t_ref 5.36000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.86351659 y_ref -0.09916123 yaw_ref 0.00365286 v_ref 0.20000594 w_ref 0.01062430 t_ref 5.44000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.87951690 y_ref -0.09908913 yaw_ref 0.00450593 v_ref 0.20000594 w_ref 0.01066338 t_ref 5.52000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.89551715 y_ref -0.09900336 yaw_ref 0.00536046 v_ref 0.20000594 w_ref 0.01068162 t_ref 5.60000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.91151731 y_ref -0.09890391 yaw_ref 0.00621567 v_ref 0.20000594 w_ref 0.01069013 t_ref 5.68000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.92751739 y_ref -0.09879077 yaw_ref 0.00707120 v_ref 0.20000594 w_ref 0.01069411 t_ref 5.76000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.94351736 y_ref -0.09866394 yaw_ref 0.00792688 v_ref 0.20000594 w_ref 0.01069596 t_ref 5.84000000 loop_counter 44.00000000
+[reference_trajectory_planning]  Time 4.56000000 x_ref 0.95951722 y_ref -0.09852341 yaw_ref 0.00878262 v_ref 0.20000594 w_ref 0.01069683 t_ref 5.92000000 loop_counter 44.00000000
 [goal_state_planning]  Time 4.56000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.56000000 loop_counter 44.00000000
 [planning_control_command]  Time 4.56000000 vc 0.19976351 wc -0.00814995 Time 4.56000000
 [reference_point_tracking]  Time 4.40000000 x_ref 0.65554635 y_ref -0.09913664 yaw_ref -0.00888552 v_ref 0.20050619 v_ref 0.07468087 t 4.40000000
@@ -2298,32 +2298,782 @@
 [control_command]  Time 4.48000000 speed_command 0.19959851 yawratio_command 0.02894918 t 4.48000000
 [state_of_robot]  Time 4.49000000 x 0.67360364 y -0.09955167 yaw 0.00334583 v 0.19990609 w 0.04696382 t 4.49000000
 [state_of_robot]  Time 4.50000000 x 0.67560225 y -0.09954409 yaw 0.00378973 v 0.19986215 w 0.04439030 t 4.50000000
-[plainning_global_reference_point]  Time 4.57931034 x_ref 0.69137389 y_ref -0.09999827 yaw_ref -0.00038821 v_ref 0.20002780 w_ref 0.01345693 t 4.57931034
- [plannin_tracking_error]  Time 4.72000000 err_x 0.02814673 err_y 0.00074412 err_yaw -0.00025364 t 4.72000000
+[plainning_global_reference_point]  Time 4.72000000 x_ref 0.71987140 y_ref -0.09999989 yaw_ref -0.00007437 v_ref 0.20000539 w_ref 0.00659561 t 4.72000000
+ [plannin_tracking_error]  Time 4.72000000 err_x -0.00035184 err_y 0.00074242 err_yaw -0.00077513 t 4.72000000
 [reference_trajectory_planning]  Time 4.72000000 x_ref 0.67155705 y_ref -0.09920736 yaw_ref -0.00441704 v_ref 0.20013565 w_ref 0.05585604 t_ref 4.48000000 loop_counter 45.00000000
 [reference_trajectory_planning]  Time 4.72000000 x_ref 0.68754900 y_ref -0.09923328 yaw_ref -0.00162076 v_ref 0.19989968 w_ref 0.03495357 t_ref 4.56000000 loop_counter 45.00000000
 [reference_trajectory_planning]  Time 4.72000000 x_ref 0.70353226 y_ref -0.09924388 yaw_ref -0.00066355 v_ref 0.19979075 w_ref 0.01196503 t_ref 4.64000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.71952062 y_ref -0.09925415 yaw_ref -0.00064185 v_ref 0.19985454 w_ref 0.00027122 t_ref 4.72000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.73422184 y_ref -0.09927019 yaw_ref -0.00109137 v_ref 0.18376534 w_ref -0.00561896 t_ref 4.80000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.74354573 y_ref -0.09928322 yaw_ref -0.00139776 v_ref 0.11654879 w_ref -0.00382990 t_ref 4.88000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.75075089 y_ref -0.09929226 yaw_ref -0.00125399 v_ref 0.09006460 w_ref 0.00179715 t_ref 4.96000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.75987103 y_ref -0.09929769 yaw_ref -0.00059536 v_ref 0.11400173 w_ref 0.00823285 t_ref 5.04000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.77215921 y_ref -0.09929163 yaw_ref 0.00049323 v_ref 0.15360230 w_ref 0.01360742 t_ref 5.12000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.78742585 y_ref -0.09926361 yaw_ref 0.00183497 v_ref 0.19083329 w_ref 0.01677180 t_ref 5.20000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.80328812 y_ref -0.09921135 yaw_ref 0.00329485 v_ref 0.19827949 w_ref 0.01824851 t_ref 5.28000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.81926944 y_ref -0.09913448 yaw_ref 0.00480987 v_ref 0.19976873 w_ref 0.01893764 t_ref 5.36000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.83527444 y_ref -0.09903284 yaw_ref 0.00635060 v_ref 0.20006658 w_ref 0.01925924 t_ref 5.44000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.85128403 y_ref -0.09890631 yaw_ref 0.00790335 v_ref 0.20012615 w_ref 0.01940932 t_ref 5.52000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.86729436 y_ref -0.09875482 yaw_ref 0.00946170 v_ref 0.20013806 w_ref 0.01947935 t_ref 5.60000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.88330462 y_ref -0.09857833 yaw_ref 0.01102266 v_ref 0.20014045 w_ref 0.01951204 t_ref 5.68000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.89931463 y_ref -0.09837684 yaw_ref 0.01258484 v_ref 0.20014092 w_ref 0.01952729 t_ref 5.76000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.91532431 y_ref -0.09815033 yaw_ref 0.01414760 v_ref 0.20014102 w_ref 0.01953441 t_ref 5.84000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.93133361 y_ref -0.09789879 yaw_ref 0.01571061 v_ref 0.20014104 w_ref 0.01953773 t_ref 5.92000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.94734251 y_ref -0.09762223 yaw_ref 0.01727376 v_ref 0.20014104 w_ref 0.01953928 t_ref 6.00000000 loop_counter 45.00000000
-[reference_trajectory_planning]  Time 4.72000000 x_ref 0.96335095 y_ref -0.09732064 yaw_ref 0.01883696 v_ref 0.20014104 w_ref 0.01954000 t_ref 6.08000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 w_ref -0.00232436 t_ref 4.72000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.73561160 y_ref -0.09928366 yaw_ref -0.00162807 v_ref 0.20115072 w_ref -0.00973209 t_ref 4.80000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.75172629 y_ref -0.09932159 yaw_ref -0.00235373 v_ref 0.20143422 w_ref -0.00907077 t_ref 4.88000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.76781142 y_ref -0.09936520 yaw_ref -0.00271078 v_ref 0.20106480 w_ref -0.00446316 t_ref 4.96000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.78385723 y_ref -0.09940743 yaw_ref -0.00263182 v_ref 0.20057339 w_ref 0.00098699 t_ref 5.04000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.79987422 y_ref -0.09944264 yaw_ref -0.00219867 v_ref 0.20021282 w_ref 0.00541443 t_ref 5.12000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.81587721 y_ref -0.09946801 yaw_ref -0.00158511 v_ref 0.20003760 w_ref 0.00766948 t_ref 5.20000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.83187740 y_ref -0.09948221 yaw_ref -0.00088736 v_ref 0.20000256 w_ref 0.00872184 t_ref 5.28000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.84787705 y_ref -0.09948461 yaw_ref -0.00015033 v_ref 0.19999555 w_ref 0.00921294 t_ref 5.36000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.86387658 y_ref -0.09947493 yaw_ref 0.00060504 v_ref 0.19999415 w_ref 0.00944212 t_ref 5.44000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.87987607 y_ref -0.09945303 yaw_ref 0.00136897 v_ref 0.19999387 w_ref 0.00954907 t_ref 5.52000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.89587554 y_ref -0.09941884 yaw_ref 0.00213689 v_ref 0.19999381 w_ref 0.00959898 t_ref 5.60000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.91187498 y_ref -0.09937234 yaw_ref 0.00290667 v_ref 0.19999380 w_ref 0.00962227 t_ref 5.68000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.92787437 y_ref -0.09931350 yaw_ref 0.00367732 v_ref 0.19999380 w_ref 0.00963314 t_ref 5.76000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.94387372 y_ref -0.09924233 yaw_ref 0.00444838 v_ref 0.19999380 w_ref 0.00963822 t_ref 5.84000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.95987301 y_ref -0.09915882 yaw_ref 0.00521962 v_ref 0.19999380 w_ref 0.00964058 t_ref 5.92000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.97587222 y_ref -0.09906297 yaw_ref 0.00599096 v_ref 0.19999380 w_ref 0.00964169 t_ref 6.00000000 loop_counter 45.00000000
+[reference_trajectory_planning]  Time 4.72000000 x_ref 0.99187136 y_ref -0.09895477 yaw_ref 0.00676233 v_ref 0.19999380 w_ref 0.00964220 t_ref 6.08000000 loop_counter 45.00000000
 [goal_state_planning]  Time 4.72000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.72000000 loop_counter 45.00000000
-[planning_control_command]  Time 4.72000000 vc 0.17974303 wc -0.01077286 Time 4.72000000
+[planning_control_command]  Time 4.72000000 vc 0.20147806 wc -0.01621386 Time 4.72000000
 [reference_point_tracking]  Time 4.50000000 x_ref 0.67555504 y_ref -0.09921384 yaw_ref -0.00371797 v_ref 0.20007666 v_ref 0.05063043 t 4.50000000
  [tracking_error]  Time 4.50000000 err_x 0.00004721 err_y -0.00033025 err_yaw 0.00750770 t 4.50000000
 [control_command]  Time 4.50000000 speed_command 0.19955371 yawratio_command 0.02217921 t 4.50000000
 [state_of_robot]  Time 4.51000000 x 0.67760041 y -0.09953570 yaw 0.00420190 v 0.19981808 w 0.04121729 t 4.51000000
+[state_of_robot]  Time 4.52000000 x 0.67959819 y -0.09952653 yaw 0.00458688 v 0.19978032 w 0.03849756 t 4.52000000
+[reference_point_tracking]  Time 4.52000000 x_ref 0.67955302 y_ref -0.09922032 yaw_ref -0.00301890 v_ref 0.20001766 v_ref 0.04540481 t 4.52000000
+ [tracking_error]  Time 4.52000000 err_x 0.00004517 err_y -0.00030621 err_yaw 0.00760578 t 4.52000000
+[control_command]  Time 4.52000000 speed_command 0.19951514 yawratio_command 0.01544730 t 4.52000000
+[state_of_robot]  Time 4.53000000 x 0.68159559 y -0.09951667 yaw 0.00493892 v 0.19974243 w 0.03520467 t 4.53000000
+[state_of_robot]  Time 4.54000000 x 0.68359267 y -0.09950616 yaw 0.00526275 v 0.19970996 w 0.03238219 t 4.54000000
+[reference_point_tracking]  Time 4.54000000 x_ref 0.68355101 y_ref -0.09922680 yaw_ref -0.00231983 v_ref 0.19995867 v_ref 0.04017919 t 4.54000000
+ [tracking_error]  Time 4.54000000 err_x 0.00004165 err_y -0.00027936 err_yaw 0.00758257 t 4.54000000
+[control_command]  Time 4.54000000 speed_command 0.19948811 yawratio_command 0.00916003 t 4.54000000
+[state_of_robot]  Time 4.55000000 x 0.68558942 y -0.09949507 yaw 0.00555339 v 0.19967827 w 0.02906474 t 4.55000000
+[state_of_robot]  Time 4.56000000 x 0.68758590 y -0.09948346 yaw 0.00581561 v 0.19965111 w 0.02622121 t 4.56000000
+[reference_point_tracking]  Time 4.56000000 x_ref 0.68754900 y_ref -0.09923328 yaw_ref -0.00162076 v_ref 0.19989968 v_ref 0.03495357 t 4.56000000
+ [tracking_error]  Time 4.56000000 err_x 0.00003689 err_y -0.00025018 err_yaw 0.00743636 t 4.56000000
+[control_command]  Time 4.56000000 speed_command 0.19947336 yawratio_command 0.00346840 t 4.56000000
+[state_of_robot]  Time 4.57000000 x 0.68958212 y -0.09947139 yaw 0.00604531 v 0.19962571 w 0.02297081 t 4.57000000
+[state_of_robot]  Time 4.58000000 x 0.69157812 y -0.09945892 yaw 0.00624716 v 0.19960395 w 0.02018475 t 4.58000000
+[reference_point_tracking]  Time 4.58000000 x_ref 0.69154482 y_ref -0.09923593 yaw_ref -0.00138145 v_ref 0.19987244 v_ref 0.02920643 t 4.58000000
+ [tracking_error]  Time 4.58000000 err_x 0.00003330 err_y -0.00022299 err_yaw 0.00762862 t 4.58000000
+[control_command]  Time 4.58000000 speed_command 0.19948735 yawratio_command -0.00383609 t 4.58000000
+[state_of_robot]  Time 4.59000000 x 0.69357395 y -0.09944612 yaw 0.00641469 v 0.19958729 w 0.01675320 t 4.59000000
+[state_of_robot]  Time 4.60000000 x 0.69556964 y -0.09943304 yaw 0.00655281 v 0.19957301 w 0.01381187 t 4.60000000
+[plainning_global_reference_point]  Time 4.80000000 x_ref 0.73611074 y_ref -0.09999989 yaw_ref -0.00007006 v_ref 0.20000508 w_ref 0.00621326 t 4.80000000
+ [plannin_tracking_error]  Time 4.80000000 err_x -0.00049914 err_y 0.00071623 err_yaw -0.00155801 t 4.80000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.68754900 y_ref -0.09923328 yaw_ref -0.00162076 v_ref 0.19989968 w_ref 0.03495357 t_ref 4.56000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.70353226 y_ref -0.09924388 yaw_ref -0.00066355 v_ref 0.19979075 w_ref 0.01196503 t_ref 4.64000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 w_ref -0.00232436 t_ref 4.72000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.73561160 y_ref -0.09928366 yaw_ref -0.00162807 v_ref 0.20115072 w_ref -0.00973209 t_ref 4.80000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.75180170 y_ref -0.09932280 yaw_ref -0.00241697 v_ref 0.20237692 w_ref -0.00986121 t_ref 4.88000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.76797413 y_ref -0.09936954 yaw_ref -0.00289031 v_ref 0.20215621 w_ref -0.00591680 t_ref 4.96000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.78408251 y_ref -0.09941684 yaw_ref -0.00293665 v_ref 0.20135554 w_ref -0.00057928 t_ref 5.04000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.80013183 y_ref -0.09945850 yaw_ref -0.00259534 v_ref 0.20061719 w_ref 0.00426639 t_ref 5.12000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.81614541 y_ref -0.09949049 yaw_ref -0.00199778 v_ref 0.20017022 w_ref 0.00746948 t_ref 5.20000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.83214731 y_ref -0.09951197 yaw_ref -0.00134214 v_ref 0.20002390 w_ref 0.00819547 t_ref 5.28000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.84814688 y_ref -0.09952252 yaw_ref -0.00065940 v_ref 0.19999464 w_ref 0.00853426 t_ref 5.36000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.86414598 y_ref -0.09952194 yaw_ref 0.00003599 v_ref 0.19998879 w_ref 0.00869236 t_ref 5.44000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.88014499 y_ref -0.09951014 yaw_ref 0.00073728 v_ref 0.19998762 w_ref 0.00876615 t_ref 5.52000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.89614396 y_ref -0.09948708 yaw_ref 0.00144132 v_ref 0.19998738 w_ref 0.00880058 t_ref 5.60000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.91214291 y_ref -0.09945274 yaw_ref 0.00214666 v_ref 0.19998734 w_ref 0.00881665 t_ref 5.68000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.92814183 y_ref -0.09940710 yaw_ref 0.00285259 v_ref 0.19998733 w_ref 0.00882414 t_ref 5.76000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.94414072 y_ref -0.09935016 yaw_ref 0.00355880 v_ref 0.19998733 w_ref 0.00882764 t_ref 5.84000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.96013956 y_ref -0.09928193 yaw_ref 0.00426514 v_ref 0.19998733 w_ref 0.00882928 t_ref 5.92000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.97613835 y_ref -0.09920239 yaw_ref 0.00497154 v_ref 0.19998733 w_ref 0.00883004 t_ref 6.00000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 0.99213707 y_ref -0.09911155 yaw_ref 0.00567798 v_ref 0.19998733 w_ref 0.00883039 t_ref 6.08000000 loop_counter 46.00000000
+[reference_trajectory_planning]  Time 4.80000000 x_ref 1.00813573 y_ref -0.09900940 yaw_ref 0.00638442 v_ref 0.19998733 w_ref 0.00883056 t_ref 6.16000000 loop_counter 46.00000000
+[goal_state_planning]  Time 4.80000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.80000000 loop_counter 46.00000000
+[planning_control_command]  Time 4.80000000 vc 0.20268346 wc -0.00997420 Time 4.80000000
+[reference_point_tracking]  Time 4.60000000 x_ref 0.69554063 y_ref -0.09923858 yaw_ref -0.00114215 v_ref 0.19984521 v_ref 0.02345930 t 4.60000000
+ [tracking_error]  Time 4.60000000 err_x 0.00002901 err_y -0.00019446 err_yaw 0.00769497 t 4.60000000
+[control_command]  Time 4.60000000 speed_command 0.19950435 yawratio_command -0.01111783 t 4.60000000
+[state_of_robot]  Time 4.61000000 x 0.69756522 y -0.09941976 yaw 0.00665532 v 0.19956321 w 0.01025049 t 4.61000000
+[state_of_robot]  Time 4.62000000 x 0.69956073 y -0.09940633 yaw 0.00672730 v 0.19955480 w 0.00719787 t 4.62000000
+[reference_point_tracking]  Time 4.62000000 x_ref 0.69953644 y_ref -0.09924123 yaw_ref -0.00090285 v_ref 0.19981798 v_ref 0.01771216 t 4.62000000
+ [tracking_error]  Time 4.62000000 err_x 0.00002428 err_y -0.00016510 err_yaw 0.00763015 t 4.62000000
+[control_command]  Time 4.62000000 speed_command 0.19952519 yawratio_command -0.01786695 t 4.62000000
+[state_of_robot]  Time 4.63000000 x 0.70155619 y -0.09939284 yaw 0.00676347 v 0.19955057 w 0.00361718 t 4.63000000
+[state_of_robot]  Time 4.64000000 x 0.70355161 y -0.09937933 yaw 0.00676895 v 0.19954694 w 0.00054802 t 4.64000000
+[reference_point_tracking]  Time 4.64000000 x_ref 0.70353226 y_ref -0.09924388 yaw_ref -0.00066355 v_ref 0.19979075 v_ref 0.01196503 t 4.64000000
+ [tracking_error]  Time 4.64000000 err_x 0.00001935 err_y -0.00013545 err_yaw 0.00743250 t 4.64000000
+[control_command]  Time 4.64000000 speed_command 0.19954881 yawratio_command -0.02389300 t 4.64000000
+[state_of_robot]  Time 4.65000000 x 0.70554704 y -0.09936588 yaw 0.00673951 v 0.19954721 w -0.00294355 t 4.65000000
+[state_of_robot]  Time 4.66000000 x 0.70754247 y -0.09935255 yaw 0.00668015 v 0.19954744 w -0.00593633 t 4.66000000
+[reference_point_tracking]  Time 4.66000000 x_ref 0.70752908 y_ref -0.09924728 yaw_ref -0.00071004 v_ref 0.19980340 v_ref 0.00839268 t 4.66000000
+ [tracking_error]  Time 4.66000000 err_x 0.00001338 err_y -0.00010527 err_yaw 0.00739019 t 4.66000000
+[control_command]  Time 4.66000000 speed_command 0.19961963 yawratio_command -0.02739668 t 4.66000000
+[state_of_robot]  Time 4.67000000 x 0.70953800 y -0.09933940 yaw 0.00659013 v 0.19955775 w -0.00900210 t 4.67000000
+[state_of_robot]  Time 4.68000000 x 0.71153363 y -0.09932648 yaw 0.00647383 v 0.19956659 w -0.01162989 t 4.68000000
+[reference_point_tracking]  Time 4.68000000 x_ref 0.71152591 y_ref -0.09925067 yaw_ref -0.00075653 v_ref 0.19981606 v_ref 0.00482034 t 4.68000000
+ [tracking_error]  Time 4.68000000 err_x 0.00000772 err_y -0.00007581 err_yaw 0.00723036 t 4.68000000
+[control_command]  Time 4.68000000 speed_command 0.19969164 yawratio_command -0.03053458 t 4.68000000
+[state_of_robot]  Time 4.69000000 x 0.71352943 y -0.09931385 yaw 0.00633052 v 0.19958445 w -0.01433056 t 4.69000000
+[state_of_robot]  Time 4.70000000 x 0.71552539 y -0.09930154 yaw 0.00616407 v 0.19959977 w -0.01664542 t 4.70000000
+[plainning_global_reference_point]  Time 4.88000000 x_ref 0.75235008 y_ref -0.09999990 yaw_ref -0.00006575 v_ref 0.20000476 w_ref 0.00583091 t 4.88000000
+ [plannin_tracking_error]  Time 4.88000000 err_x -0.00054838 err_y 0.00067711 err_yaw -0.00235122 t 4.88000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.70353226 y_ref -0.09924388 yaw_ref -0.00066355 v_ref 0.19979075 w_ref 0.01196503 t_ref 4.64000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 w_ref -0.00232436 t_ref 4.72000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.73561160 y_ref -0.09928366 yaw_ref -0.00162807 v_ref 0.20115072 w_ref -0.00973209 t_ref 4.80000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.75180170 y_ref -0.09932280 yaw_ref -0.00241697 v_ref 0.20237692 w_ref -0.00986121 t_ref 4.88000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.76804960 y_ref -0.09937110 yaw_ref -0.00297319 v_ref 0.20309961 w_ref -0.00695287 t_ref 4.96000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.78424564 y_ref -0.09942221 yaw_ref -0.00315552 v_ref 0.20245157 w_ref -0.00227902 t_ref 5.04000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.80035797 y_ref -0.09946975 yaw_ref -0.00295070 v_ref 0.20140488 w_ref 0.00256017 t_ref 5.12000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.81640338 y_ref -0.09950886 yaw_ref -0.00243719 v_ref 0.20056823 w_ref 0.00641897 t_ref 5.20000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.83241240 y_ref -0.09953694 yaw_ref -0.00175429 v_ref 0.20011316 w_ref 0.00853614 t_ref 5.28000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.84841320 y_ref -0.09955447 yaw_ref -0.00109530 v_ref 0.20001008 w_ref 0.00823749 t_ref 5.36000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.86441236 y_ref -0.09956163 yaw_ref -0.00044745 v_ref 0.19998946 w_ref 0.00809812 t_ref 5.44000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.88041118 y_ref -0.09955850 yaw_ref 0.00019520 v_ref 0.19998534 w_ref 0.00803308 t_ref 5.52000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.89640994 y_ref -0.09954514 yaw_ref 0.00083542 v_ref 0.19998451 w_ref 0.00800272 t_ref 5.60000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.91240867 y_ref -0.09952155 yaw_ref 0.00147450 v_ref 0.19998435 w_ref 0.00798856 t_ref 5.68000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.92840738 y_ref -0.09948774 yaw_ref 0.00211306 v_ref 0.19998432 w_ref 0.00798195 t_ref 5.76000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.94440606 y_ref -0.09944372 yaw_ref 0.00275137 v_ref 0.19998431 w_ref 0.00797887 t_ref 5.84000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.96040472 y_ref -0.09938950 yaw_ref 0.00338956 v_ref 0.19998431 w_ref 0.00797743 t_ref 5.92000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.97640333 y_ref -0.09932506 yaw_ref 0.00402770 v_ref 0.19998431 w_ref 0.00797675 t_ref 6.00000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 0.99240190 y_ref -0.09925041 yaw_ref 0.00466582 v_ref 0.19998431 w_ref 0.00797644 t_ref 6.08000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 1.00840042 y_ref -0.09916556 yaw_ref 0.00530392 v_ref 0.19998431 w_ref 0.00797629 t_ref 6.16000000 loop_counter 47.00000000
+[reference_trajectory_planning]  Time 4.88000000 x_ref 1.02439888 y_ref -0.09907049 yaw_ref 0.00594202 v_ref 0.19998431 w_ref 0.00797623 t_ref 6.24000000 loop_counter 47.00000000
+[goal_state_planning]  Time 4.88000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.88000000 loop_counter 47.00000000
+[planning_control_command]  Time 4.88000000 vc 0.20328028 wc -0.00440806 Time 4.88000000
+[reference_point_tracking]  Time 4.70000000 x_ref 0.71552273 y_ref -0.09925407 yaw_ref -0.00080301 v_ref 0.19982871 v_ref 0.00124799 t 4.70000000
+ [tracking_error]  Time 4.70000000 err_x 0.00000265 err_y -0.00004747 err_yaw 0.00696708 t 4.70000000
+[control_command]  Time 4.70000000 speed_command 0.19976040 yawratio_command -0.03330411 t 4.70000000
+[state_of_robot]  Time 4.71000000 x 0.71752158 y -0.09928962 yaw 0.00597382 v 0.19962271 w -0.01902524 t 4.71000000
+[state_of_robot]  Time 4.72000000 x 0.71951797 y -0.09927811 yaw 0.00576317 v 0.19964238 w -0.02106508 t 4.72000000
+[reference_point_tracking]  Time 4.72000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 v_ref -0.00232436 t 4.72000000
+ [tracking_error]  Time 4.72000000 err_x -0.00000159 err_y -0.00002065 err_yaw 0.00661267 t 4.72000000
+[control_command]  Time 4.72000000 speed_command 0.19982275 yawratio_command -0.03571380 t 4.72000000
+[state_of_robot]  Time 4.73000000 x 0.72151462 y -0.09926707 yaw 0.00553159 v 0.19966815 w -0.02315775 t 4.73000000
+[state_of_robot]  Time 4.74000000 x 0.72351150 y -0.09925652 yaw 0.00528207 v 0.19969023 w -0.02495147 t 4.74000000
+[reference_point_tracking]  Time 4.74000000 x_ref 0.72354257 y_ref -0.09926401 yaw_ref -0.00104414 v_ref 0.20016871 v_ref -0.00417629 t 4.74000000
+ [tracking_error]  Time 4.74000000 err_x -0.00003107 err_y 0.00000749 err_yaw 0.00632622 t 4.74000000
+[control_command]  Time 4.74000000 speed_command 0.20035347 yawratio_command -0.03618723 t 4.74000000
+[state_of_robot]  Time 4.75000000 x 0.72550932 y -0.09924650 yaw 0.00501651 v 0.19978498 w -0.02655658 t 4.75000000
+[state_of_robot]  Time 4.76000000 x 0.72750796 y -0.09923703 yaw 0.00473718 v 0.19986619 w -0.02793239 t 4.76000000
+[reference_point_tracking]  Time 4.76000000 x_ref 0.72756558 y_ref -0.09927056 yaw_ref -0.00123878 v_ref 0.20049604 v_ref -0.00602822 t 4.76000000
+ [tracking_error]  Time 4.76000000 err_x -0.00005762 err_y 0.00003353 err_yaw 0.00597597 t 4.76000000
+[control_command]  Time 4.76000000 speed_command 0.20092983 yawratio_command -0.03654224 t 4.76000000
+[state_of_robot]  Time 4.77000000 x 0.72950812 y -0.09922814 yaw 0.00444556 v 0.20001814 w -0.02916237 t 4.77000000
+[state_of_robot]  Time 4.78000000 x 0.73150959 y -0.09921985 yaw 0.00414339 v 0.20014838 w -0.03021663 t 4.78000000
+[reference_point_tracking]  Time 4.78000000 x_ref 0.73158859 y_ref -0.09927711 yaw_ref -0.00143343 v_ref 0.20082338 v_ref -0.00788016 t 4.78000000
+ [tracking_error]  Time 4.78000000 err_x -0.00007900 err_y 0.00005727 err_yaw 0.00557682 t 4.78000000
+[control_command]  Time 4.78000000 speed_command 0.20149320 yawratio_command -0.03680894 t 4.78000000
+[state_of_robot]  Time 4.79000000 x 0.73351298 y -0.09921217 yaw 0.00383181 v 0.20034050 w -0.03115839 t 4.79000000
+[state_of_robot]  Time 4.80000000 x 0.73551802 y -0.09920513 yaw 0.00351215 v 0.20050517 w -0.03196561 t 4.80000000
+[plainning_global_reference_point]  Time 4.96000000 x_ref 0.76858942 y_ref -0.09999991 yaw_ref -0.00006143 v_ref 0.20000445 w_ref 0.00544855 t 4.96000000
+ [plannin_tracking_error]  Time 4.96000000 err_x -0.00053982 err_y 0.00062880 err_yaw -0.00291176 t 4.96000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.71951956 y_ref -0.09925747 yaw_ref -0.00084950 v_ref 0.19984137 w_ref -0.00232436 t_ref 4.72000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.73561160 y_ref -0.09928366 yaw_ref -0.00162807 v_ref 0.20115072 w_ref -0.00973209 t_ref 4.80000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.75180170 y_ref -0.09932280 yaw_ref -0.00241697 v_ref 0.20237692 w_ref -0.00986121 t_ref 4.88000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.76804960 y_ref -0.09937110 yaw_ref -0.00297319 v_ref 0.20309961 w_ref -0.00695287 t_ref 4.96000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.78431859 y_ref -0.09942395 yaw_ref -0.00324819 v_ref 0.20336349 w_ref -0.00343742 t_ref 5.04000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 w_ref 0.00073060 t_ref 5.12000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.81662245 y_ref -0.09952102 yaw_ref -0.00281909 v_ref 0.20133305 w_ref 0.00463318 t_ref 5.20000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.83266189 y_ref -0.09955659 yaw_ref -0.00221760 v_ref 0.20049352 w_ref 0.00751854 t_ref 5.28000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.84866724 y_ref -0.09958080 yaw_ref -0.00151257 v_ref 0.20006710 w_ref 0.00881288 t_ref 5.36000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.86466726 y_ref -0.09959486 yaw_ref -0.00087901 v_ref 0.20000032 w_ref 0.00791946 t_ref 5.44000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.88066621 y_ref -0.09959932 yaw_ref -0.00027881 v_ref 0.19998696 w_ref 0.00750254 t_ref 5.52000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.89666496 y_ref -0.09959443 yaw_ref 0.00030583 v_ref 0.19998429 w_ref 0.00730797 t_ref 5.60000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.91266365 y_ref -0.09958030 yaw_ref 0.00088320 v_ref 0.19998376 w_ref 0.00721717 t_ref 5.68000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.92866232 y_ref -0.09955699 yaw_ref 0.00145718 v_ref 0.19998365 w_ref 0.00717480 t_ref 5.76000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.94466098 y_ref -0.09952452 yaw_ref 0.00202959 v_ref 0.19998363 w_ref 0.00715503 t_ref 5.84000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.96065962 y_ref -0.09948290 yaw_ref 0.00260125 v_ref 0.19998362 w_ref 0.00714580 t_ref 5.92000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.97665823 y_ref -0.09943214 yaw_ref 0.00317257 v_ref 0.19998362 w_ref 0.00714149 t_ref 6.00000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 0.99265680 y_ref -0.09937225 yaw_ref 0.00374373 v_ref 0.19998362 w_ref 0.00713948 t_ref 6.08000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 1.00865535 y_ref -0.09930322 yaw_ref 0.00431481 v_ref 0.19998362 w_ref 0.00713854 t_ref 6.16000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 1.02465384 y_ref -0.09922505 yaw_ref 0.00488586 v_ref 0.19998362 w_ref 0.00713811 t_ref 6.24000000 loop_counter 48.00000000
+[reference_trajectory_planning]  Time 4.96000000 x_ref 1.04065230 y_ref -0.09913775 yaw_ref 0.00545689 v_ref 0.19998362 w_ref 0.00713790 t_ref 6.32000000 loop_counter 48.00000000
+[goal_state_planning]  Time 4.96000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 4.96000000 loop_counter 48.00000000
+[planning_control_command]  Time 4.96000000 vc 0.20342946 wc -0.00036140 Time 4.96000000
+[reference_point_tracking]  Time 4.80000000 x_ref 0.73561160 y_ref -0.09928366 yaw_ref -0.00162807 v_ref 0.20115072 v_ref -0.00973209 t 4.80000000
+ [tracking_error]  Time 4.80000000 err_x -0.00009358 err_y 0.00007854 err_yaw 0.00514022 t 4.80000000
+[control_command]  Time 4.80000000 speed_command 0.20200908 yawratio_command -0.03698980 t 4.80000000
+[state_of_robot]  Time 4.81000000 x 0.73752521 y -0.09919873 yaw 0.00318532 v 0.20072001 w -0.03268335 t 4.81000000
+[state_of_robot]  Time 4.82000000 x 0.73953424 y -0.09919300 yaw 0.00285234 v 0.20090417 w -0.03329856 t 4.82000000
+[reference_point_tracking]  Time 4.82000000 x_ref 0.73965912 y_ref -0.09929345 yaw_ref -0.00182529 v_ref 0.20145727 v_ref -0.00976437 t 4.82000000
+ [tracking_error]  Time 4.82000000 err_x -0.00012488 err_y 0.00010044 err_yaw 0.00467763 t 4.82000000
+[control_command]  Time 4.82000000 speed_command 0.20258809 yawratio_command -0.03481213 t 4.82000000
+[state_of_robot]  Time 4.83000000 x 0.74154568 y -0.09918794 yaw 0.00251719 v 0.20114473 w -0.03351479 t 4.83000000
+[state_of_robot]  Time 4.84000000 x 0.74355919 y -0.09918355 yaw 0.00218019 v 0.20135092 w -0.03370012 t 4.84000000
+[reference_point_tracking]  Time 4.84000000 x_ref 0.74370665 y_ref -0.09930323 yaw_ref -0.00202252 v_ref 0.20176382 v_ref -0.00979665 t 4.84000000
+ [tracking_error]  Time 4.84000000 err_x -0.00014746 err_y 0.00011968 err_yaw 0.00420270 t 4.84000000
+[control_command]  Time 4.84000000 speed_command 0.20314794 yawratio_command -0.03254744 t 4.84000000
+[state_of_robot]  Time 4.85000000 x 0.74557526 y -0.09917983 yaw 0.00184483 v 0.20160764 w -0.03353545 t 4.85000000
+[state_of_robot]  Time 4.86000000 x 0.74759354 y -0.09917678 yaw 0.00151089 v 0.20182768 w -0.03339431 t 4.86000000
+[reference_point_tracking]  Time 4.86000000 x_ref 0.74775418 y_ref -0.09931301 yaw_ref -0.00221974 v_ref 0.20207037 v_ref -0.00982893 t 4.86000000
+ [tracking_error]  Time 4.86000000 err_x -0.00016064 err_y 0.00013623 err_yaw 0.00373063 t 4.86000000
+[control_command]  Time 4.86000000 speed_command 0.20364162 yawratio_command -0.03038888 t 4.86000000
+[state_of_robot]  Time 4.87000000 x 0.74961440 y -0.09917439 yaw 0.00118124 v 0.20208682 w -0.03296496 t 4.87000000
+[state_of_robot]  Time 4.88000000 x 0.75163749 y -0.09917266 yaw 0.00085527 v 0.20230893 w -0.03259695 t 4.88000000
+[reference_point_tracking]  Time 4.88000000 x_ref 0.75180170 y_ref -0.09932280 yaw_ref -0.00241697 v_ref 0.20237692 v_ref -0.00986121 t 4.88000000
+ [tracking_error]  Time 4.88000000 err_x -0.00016421 err_y 0.00015013 err_yaw 0.00327223 t 4.88000000
+[control_command]  Time 4.88000000 speed_command 0.20404832 yawratio_command -0.02840022 t 4.88000000
+[state_of_robot]  Time 4.89000000 x 0.75366306 y -0.09917158 yaw 0.00053530 v 0.20255741 w -0.03199742 t 4.89000000
+[state_of_robot]  Time 4.90000000 x 0.75569077 y -0.09917113 yaw 0.00022046 v 0.20277040 w -0.03148353 t 4.90000000
+[plainning_global_reference_point]  Time 5.12000000 x_ref 0.80106810 y_ref -0.09999992 yaw_ref -0.00005281 v_ref 0.20000383 w_ref 0.00468384 t 5.12000000
+ [plannin_tracking_error]  Time 5.12000000 err_x -0.00055223 err_y 0.00052431 err_yaw -0.00313693 t 5.12000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.75180170 y_ref -0.09932280 yaw_ref -0.00241697 v_ref 0.20237692 w_ref -0.00986121 t_ref 4.88000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.76804960 y_ref -0.09937110 yaw_ref -0.00297319 v_ref 0.20309961 w_ref -0.00695287 t_ref 4.96000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.78431859 y_ref -0.09942395 yaw_ref -0.00324819 v_ref 0.20336349 w_ref -0.00343742 t_ref 5.04000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 w_ref 0.00073060 t_ref 5.12000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.81678123 y_ref -0.09952570 yaw_ref -0.00307945 v_ref 0.20331805 w_ref 0.00137868 t_ref 5.20000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.83298097 y_ref -0.09957124 yaw_ref -0.00281121 v_ref 0.20249749 w_ref 0.00335300 t_ref 5.28000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.84908899 y_ref -0.09960934 yaw_ref -0.00236498 v_ref 0.20135086 w_ref 0.00557781 t_ref 5.36000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.86512859 y_ref -0.09963797 yaw_ref -0.00178498 v_ref 0.20049527 w_ref 0.00725004 t_ref 5.44000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.88113358 y_ref -0.09965656 yaw_ref -0.00116130 v_ref 0.20006257 w_ref 0.00779601 t_ref 5.52000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.89713346 y_ref -0.09966662 yaw_ref -0.00062884 v_ref 0.19999850 w_ref 0.00665569 t_ref 5.60000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.91313231 y_ref -0.09966884 yaw_ref -0.00013896 v_ref 0.19998568 w_ref 0.00612354 t_ref 5.68000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.92913096 y_ref -0.09966354 yaw_ref 0.00033106 v_ref 0.19998312 w_ref 0.00587521 t_ref 5.76000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.94512956 y_ref -0.09965088 yaw_ref 0.00079180 v_ref 0.19998260 w_ref 0.00575932 t_ref 5.84000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.96112815 y_ref -0.09963091 yaw_ref 0.00124822 v_ref 0.19998250 w_ref 0.00570523 t_ref 5.92000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.97712673 y_ref -0.09960367 yaw_ref 0.00170262 v_ref 0.19998248 w_ref 0.00568000 t_ref 6.00000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 0.99312529 y_ref -0.09956917 yaw_ref 0.00215608 v_ref 0.19998248 w_ref 0.00566822 t_ref 6.08000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 1.00912383 y_ref -0.09952743 yaw_ref 0.00260910 v_ref 0.19998248 w_ref 0.00566272 t_ref 6.16000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 1.02512235 y_ref -0.09947844 yaw_ref 0.00306191 v_ref 0.19998248 w_ref 0.00566016 t_ref 6.24000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 1.04112085 y_ref -0.09942221 yaw_ref 0.00351463 v_ref 0.19998248 w_ref 0.00565896 t_ref 6.32000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 1.05711933 y_ref -0.09935874 yaw_ref 0.00396730 v_ref 0.19998248 w_ref 0.00565840 t_ref 6.40000000 loop_counter 49.00000000
+[reference_trajectory_planning]  Time 5.12000000 x_ref 1.07311777 y_ref -0.09928803 yaw_ref 0.00441995 v_ref 0.19998248 w_ref 0.00565814 t_ref 6.48000000 loop_counter 49.00000000
+[goal_state_planning]  Time 5.12000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.12000000 loop_counter 49.00000000
+[planning_control_command]  Time 5.12000000 vc 0.20353083 wc 0.00194574 Time 5.12000000
+[reference_point_tracking]  Time 4.90000000 x_ref 0.75586368 y_ref -0.09933487 yaw_ref -0.00255602 v_ref 0.20255759 v_ref -0.00913413 t 4.90000000
+ [tracking_error]  Time 4.90000000 err_x -0.00017291 err_y 0.00016374 err_yaw 0.00277648 t 4.90000000
+[control_command]  Time 4.90000000 speed_command 0.20432477 yawratio_command -0.02544591 t 4.90000000
+[state_of_robot]  Time 4.91000000 x 0.75772069 y -0.09917131 yaw -0.00008575 v 0.20299245 w -0.03062101 t 4.91000000
+[state_of_robot]  Time 4.92000000 x 0.75975252 y -0.09917209 yaw -0.00038457 v 0.20318278 w -0.02988171 t 4.92000000
+[reference_point_tracking]  Time 4.92000000 x_ref 0.75992565 y_ref -0.09934695 yaw_ref -0.00269508 v_ref 0.20273826 v_ref -0.00840704 t 4.92000000
+ [tracking_error]  Time 4.92000000 err_x -0.00017313 err_y 0.00017486 err_yaw 0.00231051 t 4.92000000
+[control_command]  Time 4.92000000 speed_command 0.20454689 yawratio_command -0.02258339 t 4.92000000
+[state_of_robot]  Time 4.93000000 x 0.76178630 y -0.09917346 yaw -0.00067296 v 0.20337766 w -0.02883909 t 4.93000000
+[state_of_robot]  Time 4.94000000 x 0.76382174 y -0.09917540 yaw -0.00095241 v 0.20354469 w -0.02794542 t 4.94000000
+[reference_point_tracking]  Time 4.94000000 x_ref 0.76398763 y_ref -0.09935903 yaw_ref -0.00283414 v_ref 0.20291893 v_ref -0.00767995 t 4.94000000
+ [tracking_error]  Time 4.94000000 err_x -0.00016588 err_y 0.00018363 err_yaw 0.00188172 t 4.94000000
+[control_command]  Time 4.94000000 speed_command 0.20470019 yawratio_command -0.01993258 t 4.94000000
+[state_of_robot]  Time 4.95000000 x 0.76585884 y -0.09917788 yaw -0.00122042 v 0.20370976 w -0.02680073 t 4.95000000
+[state_of_robot]  Time 4.96000000 x 0.76789735 y -0.09918090 yaw -0.00147862 v 0.20385125 w -0.02581957 t 4.96000000
+[reference_point_tracking]  Time 4.96000000 x_ref 0.76804960 y_ref -0.09937110 yaw_ref -0.00297319 v_ref 0.20309961 v_ref -0.00695287 t 4.96000000
+ [tracking_error]  Time 4.96000000 err_x -0.00015225 err_y 0.00019021 err_yaw 0.00149458 t 4.96000000
+[control_command]  Time 4.96000000 speed_command 0.20478535 yawratio_command -0.01752530 t 4.96000000
+[state_of_robot]  Time 4.97000000 x 0.76993719 y -0.09918441 yaw -0.00172496 v 0.20398469 w -0.02463467 t 4.97000000
+[state_of_robot]  Time 4.98000000 x 0.77197818 y -0.09918842 yaw -0.00196115 v 0.20409907 w -0.02361904 t 4.98000000
+[reference_point_tracking]  Time 4.98000000 x_ref 0.77211685 y_ref -0.09938431 yaw_ref -0.00304194 v_ref 0.20316558 v_ref -0.00607400 t 4.98000000
+ [tracking_error]  Time 4.98000000 err_x -0.00013867 err_y 0.00019590 err_yaw 0.00108079 t 4.98000000
+[control_command]  Time 4.98000000 speed_command 0.20472774 yawratio_command -0.01492906 t 4.98000000
+[state_of_robot]  Time 4.99000000 x 0.77402006 y -0.09919288 yaw -0.00218493 v 0.20418888 w -0.02237762 t 4.99000000
+[state_of_robot]  Time 5.00000000 x 0.77606272 y -0.09919778 yaw -0.00239806 v 0.20426586 w -0.02131354 t 5.00000000
+[plainning_global_reference_point]  Time 5.20000000 x_ref 0.81730744 y_ref -0.09999993 yaw_ref -0.00004850 v_ref 0.20000351 w_ref 0.00430149 t 5.20000000
+ [plannin_tracking_error]  Time 5.20000000 err_x -0.00052620 err_y 0.00047423 err_yaw -0.00303094 t 5.20000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.76804960 y_ref -0.09937110 yaw_ref -0.00297319 v_ref 0.20309961 w_ref -0.00695287 t_ref 4.96000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.78431859 y_ref -0.09942395 yaw_ref -0.00324819 v_ref 0.20336349 w_ref -0.00343742 t_ref 5.04000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 w_ref 0.00073060 t_ref 5.12000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.81678123 y_ref -0.09952570 yaw_ref -0.00307945 v_ref 0.20331805 w_ref 0.00137868 t_ref 5.20000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.83305486 y_ref -0.09957280 yaw_ref -0.00289392 v_ref 0.20342119 w_ref 0.00231910 t_ref 5.28000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.84924905 y_ref -0.09961459 yaw_ref -0.00258056 v_ref 0.20242800 w_ref 0.00391694 t_ref 5.36000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.86535075 y_ref -0.09964890 yaw_ref -0.00213080 v_ref 0.20127179 w_ref 0.00562201 t_ref 5.44000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.88138639 y_ref -0.09967427 yaw_ref -0.00158211 v_ref 0.20044575 w_ref 0.00685858 t_ref 5.52000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.89738970 y_ref -0.09969044 yaw_ref -0.00101055 v_ref 0.20004149 w_ref 0.00714452 t_ref 5.60000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.91338927 y_ref -0.09969896 yaw_ref -0.00053267 v_ref 0.19999455 w_ref 0.00597359 t_ref 5.68000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.92938808 y_ref -0.09970054 yaw_ref -0.00009849 v_ref 0.19998517 w_ref 0.00542716 t_ref 5.76000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.94538674 y_ref -0.09969549 yaw_ref 0.00031528 v_ref 0.19998329 w_ref 0.00517216 t_ref 5.84000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.96138537 y_ref -0.09968398 yaw_ref 0.00071953 v_ref 0.19998291 w_ref 0.00505316 t_ref 5.92000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.97738399 y_ref -0.09966607 yaw_ref 0.00111934 v_ref 0.19998284 w_ref 0.00499762 t_ref 6.00000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 0.99338260 y_ref -0.09964180 yaw_ref 0.00151708 v_ref 0.19998282 w_ref 0.00497171 t_ref 6.08000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.00938119 y_ref -0.09961118 yaw_ref 0.00191385 v_ref 0.19998282 w_ref 0.00495961 t_ref 6.16000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.02537977 y_ref -0.09957422 yaw_ref 0.00231017 v_ref 0.19998282 w_ref 0.00495397 t_ref 6.24000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.04137834 y_ref -0.09953093 yaw_ref 0.00270627 v_ref 0.19998282 w_ref 0.00495134 t_ref 6.32000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.05737689 y_ref -0.09948130 yaw_ref 0.00310228 v_ref 0.19998282 w_ref 0.00495011 t_ref 6.40000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.07337542 y_ref -0.09942533 yaw_ref 0.00349824 v_ref 0.19998282 w_ref 0.00494953 t_ref 6.48000000 loop_counter 50.00000000
+[reference_trajectory_planning]  Time 5.20000000 x_ref 1.08937392 y_ref -0.09936303 yaw_ref 0.00389419 v_ref 0.19998282 w_ref 0.00494927 t_ref 6.56000000 loop_counter 50.00000000
+[goal_state_planning]  Time 5.20000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.20000000 loop_counter 50.00000000
+[planning_control_command]  Time 5.20000000 vc 0.20344698 wc 0.00314197 Time 5.20000000
+[reference_point_tracking]  Time 5.00000000 x_ref 0.77618410 y_ref -0.09939753 yaw_ref -0.00311069 v_ref 0.20323155 v_ref -0.00519514 t 5.00000000
+ [tracking_error]  Time 5.00000000 err_x -0.00012138 err_y 0.00019975 err_yaw 0.00071263 t 5.00000000
+[control_command]  Time 5.00000000 speed_command 0.20463551 yawratio_command -0.01246340 t 5.00000000
+[state_of_robot]  Time 5.01000000 x 0.77810590 y -0.09920309 yaw -0.00259856 v 0.20431867 w -0.02004923 t 5.01000000
+[state_of_robot]  Time 5.02000000 x 0.78014953 y -0.09920878 yaw -0.00278821 v 0.20436393 w -0.01896554 t 5.02000000
+[reference_point_tracking]  Time 5.02000000 x_ref 0.78025134 y_ref -0.09941074 yaw_ref -0.00317944 v_ref 0.20329752 v_ref -0.00431628 t 5.02000000
+ [tracking_error]  Time 5.02000000 err_x -0.00010182 err_y 0.00020195 err_yaw 0.00039123 t 5.02000000
+[control_command]  Time 5.02000000 speed_command 0.20451479 yawratio_command -0.01019493 t 5.02000000
+[state_of_robot]  Time 5.03000000 x 0.78219337 y -0.09921484 yaw -0.00296534 v 0.20438548 w -0.01771260 t 5.03000000
+[state_of_robot]  Time 5.04000000 x 0.78423740 y -0.09922125 yaw -0.00313172 v 0.20440395 w -0.01663864 t 5.04000000
+[reference_point_tracking]  Time 5.04000000 x_ref 0.78431859 y_ref -0.09942395 yaw_ref -0.00324819 v_ref 0.20336349 v_ref -0.00343742 t 5.04000000
+ [tracking_error]  Time 5.04000000 err_x -0.00008119 err_y 0.00020270 err_yaw 0.00011646 t 5.04000000
+[control_command]  Time 5.04000000 speed_command 0.20437562 yawratio_command -0.00813960 t 5.04000000
+[state_of_robot]  Time 5.05000000 x 0.78628139 y -0.09922796 yaw -0.00328597 v 0.20439991 w -0.01542450 t 5.05000000
+[state_of_robot]  Time 5.06000000 x 0.78832534 y -0.09923497 yaw -0.00342981 v 0.20439644 w -0.01438380 t 5.06000000
+[reference_point_tracking]  Time 5.06000000 x_ref 0.78836791 y_ref -0.09943686 yaw_ref -0.00323358 v_ref 0.20313935 v_ref -0.00239541 t 5.06000000
+ [tracking_error]  Time 5.06000000 err_x -0.00004257 err_y 0.00020189 err_yaw -0.00019623 t 5.06000000
+[control_command]  Time 5.06000000 speed_command 0.20382711 yawratio_command -0.00576601 t 5.06000000
+[state_of_robot]  Time 5.07000000 x 0.79036848 y -0.09924225 yaw -0.00356133 v 0.20431511 w -0.01315268 t 5.07000000
+[state_of_robot]  Time 5.08000000 x 0.79241092 y -0.09924977 yaw -0.00368231 v 0.20424539 w -0.01209744 t 5.08000000
+[reference_point_tracking]  Time 5.08000000 x_ref 0.79241723 y_ref -0.09944978 yaw_ref -0.00321896 v_ref 0.20291521 v_ref -0.00135341 t 5.08000000
+ [tracking_error]  Time 5.08000000 err_x -0.00000631 err_y 0.00020001 err_yaw -0.00046334 t 5.08000000
+[control_command]  Time 5.08000000 speed_command 0.20324372 yawratio_command -0.00346970 t 5.08000000
+[state_of_robot]  Time 5.09000000 x 0.79445193 y -0.09925751 yaw -0.00379096 v 0.20410229 w -0.01086491 t 5.09000000
+[state_of_robot]  Time 5.10000000 x 0.79649171 y -0.09926544 yaw -0.00388904 v 0.20397964 w -0.00980845 t 5.10000000
+[plainning_global_reference_point]  Time 5.28000000 x_ref 0.83354678 y_ref -0.09999993 yaw_ref -0.00004419 v_ref 0.20000320 w_ref 0.00391913 t 5.28000000
+ [plannin_tracking_error]  Time 5.28000000 err_x -0.00049192 err_y 0.00042714 err_yaw -0.00284973 t 5.28000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.78431859 y_ref -0.09942395 yaw_ref -0.00324819 v_ref 0.20336349 w_ref -0.00343742 t_ref 5.04000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 w_ref 0.00073060 t_ref 5.12000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.81678123 y_ref -0.09952570 yaw_ref -0.00307945 v_ref 0.20331805 w_ref 0.00137868 t_ref 5.20000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.83305486 y_ref -0.09957280 yaw_ref -0.00289392 v_ref 0.20342119 w_ref 0.00231910 t_ref 5.28000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.84931871 y_ref -0.09961604 yaw_ref -0.00265889 v_ref 0.20329881 w_ref 0.00293784 t_ref 5.36000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.86550169 y_ref -0.09965382 yaw_ref -0.00233438 v_ref 0.20228783 w_ref 0.00405641 t_ref 5.44000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.88159595 y_ref -0.09968453 yaw_ref -0.00190843 v_ref 0.20117859 w_ref 0.00532434 t_ref 5.52000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.89762807 y_ref -0.09970711 yaw_ref -0.00140852 v_ref 0.20040178 w_ref 0.00624887 t_ref 5.60000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.91363035 y_ref -0.09972148 yaw_ref -0.00089763 v_ref 0.20002859 w_ref 0.00638609 t_ref 5.68000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.92962976 y_ref -0.09972910 yaw_ref -0.00047628 v_ref 0.19999260 w_ref 0.00526690 t_ref 5.76000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.94562859 y_ref -0.09973065 yaw_ref -0.00009671 v_ref 0.19998540 w_ref 0.00474461 t_ref 5.84000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.96162731 y_ref -0.09972643 yaw_ref 0.00026336 v_ref 0.19998396 w_ref 0.00450087 t_ref 5.92000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.97762600 y_ref -0.09971660 yaw_ref 0.00061433 v_ref 0.19998367 w_ref 0.00438713 t_ref 6.00000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 0.99362468 y_ref -0.09970123 yaw_ref 0.00096105 v_ref 0.19998362 w_ref 0.00433405 t_ref 6.08000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.00962336 y_ref -0.09968034 yaw_ref 0.00130579 v_ref 0.19998361 w_ref 0.00430928 t_ref 6.16000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.02562202 y_ref -0.09965395 yaw_ref 0.00164961 v_ref 0.19998360 w_ref 0.00429772 t_ref 6.24000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.04162068 y_ref -0.09962206 yaw_ref 0.00199300 v_ref 0.19998360 w_ref 0.00429233 t_ref 6.32000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.05761932 y_ref -0.09958469 yaw_ref 0.00233618 v_ref 0.19998360 w_ref 0.00428981 t_ref 6.40000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.07361795 y_ref -0.09954182 yaw_ref 0.00267927 v_ref 0.19998360 w_ref 0.00428863 t_ref 6.48000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.08961657 y_ref -0.09949347 yaw_ref 0.00302232 v_ref 0.19998360 w_ref 0.00428809 t_ref 6.56000000 loop_counter 51.00000000
+[reference_trajectory_planning]  Time 5.28000000 x_ref 1.10561517 y_ref -0.09943963 yaw_ref 0.00336535 v_ref 0.19998360 w_ref 0.00428783 t_ref 6.64000000 loop_counter 51.00000000
+[goal_state_planning]  Time 5.28000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.28000000 loop_counter 51.00000000
+[planning_control_command]  Time 5.28000000 vc 0.20326821 wc 0.00347923 Time 5.28000000
+[reference_point_tracking]  Time 5.10000000 x_ref 0.79646655 y_ref -0.09946270 yaw_ref -0.00320435 v_ref 0.20269107 v_ref -0.00031140 t 5.10000000
+ [tracking_error]  Time 5.10000000 err_x 0.00002516 err_y 0.00019726 err_yaw -0.00068469 t 5.10000000
+[control_command]  Time 5.10000000 speed_command 0.20267549 yawratio_command -0.00135274 t 5.10000000
+[state_of_robot]  Time 5.11000000 x 0.79852963 y -0.09927354 yaw -0.00397505 v 0.20379333 w -0.00860049 t 5.11000000
+[state_of_robot]  Time 5.12000000 x 0.80056595 y -0.09928179 yaw -0.00405070 v 0.20363364 w -0.00756510 t 5.12000000
+[reference_point_tracking]  Time 5.12000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 v_ref 0.00073060 t 5.12000000
+ [tracking_error]  Time 5.12000000 err_x 0.00005008 err_y 0.00019382 err_yaw -0.00086096 t 5.12000000
+[control_command]  Time 5.12000000 speed_command 0.20215412 yawratio_command 0.00055078 t 5.12000000
+[state_of_robot]  Time 5.13000000 x 0.80260015 y -0.09929016 yaw -0.00411476 v 0.20342228 w -0.00640569 t 5.13000000
+[state_of_robot]  Time 5.14000000 x 0.80463255 y -0.09929863 yaw -0.00416887 v 0.20324111 w -0.00541191 t 5.14000000
+[reference_point_tracking]  Time 5.14000000 x_ref 0.80458221 y_ref -0.09948814 yaw_ref -0.00316217 v_ref 0.20267971 v_ref 0.00089262 t 5.14000000
+ [tracking_error]  Time 5.14000000 err_x 0.00005034 err_y 0.00018950 err_yaw -0.00100671 t 5.14000000
+[control_command]  Time 5.14000000 speed_command 0.20224182 yawratio_command 0.00115787 t 5.14000000
+[state_of_robot]  Time 5.15000000 x 0.80666351 y -0.09930719 yaw -0.00421361 v 0.20309836 w -0.00447337 t 5.15000000
+[state_of_robot]  Time 5.16000000 x 0.80869325 y -0.09931582 yaw -0.00425030 v 0.20297600 w -0.00366891 t 5.16000000
+[reference_point_tracking]  Time 5.16000000 x_ref 0.80864855 y_ref -0.09950066 yaw_ref -0.00313459 v_ref 0.20289249 v_ref 0.00105464 t 5.16000000
+ [tracking_error]  Time 5.16000000 err_x 0.00004471 err_y 0.00018484 err_yaw -0.00111570 t 5.16000000
+[control_command]  Time 5.16000000 speed_command 0.20243746 yawratio_command 0.00157530 t 5.16000000
+[state_of_robot]  Time 5.17000000 x 0.81072223 y -0.09932450 yaw -0.00427949 v 0.20289906 w -0.00291973 t 5.17000000
+[state_of_robot]  Time 5.18000000 x 0.81275054 y -0.09933323 yaw -0.00430227 v 0.20283312 w -0.00227758 t 5.18000000
+[reference_point_tracking]  Time 5.18000000 x_ref 0.81271489 y_ref -0.09951318 yaw_ref -0.00310702 v_ref 0.20310527 v_ref 0.00121666 t 5.18000000
+ [tracking_error]  Time 5.18000000 err_x 0.00003565 err_y 0.00017995 err_yaw -0.00119525 t 5.18000000
+[control_command]  Time 5.18000000 speed_command 0.20269909 yawratio_command 0.00191140 t 5.18000000
+[state_of_robot]  Time 5.19000000 x 0.81477866 y -0.09934199 yaw -0.00431906 v 0.20281397 w -0.00167916 t 5.19000000
+[state_of_robot]  Time 5.20000000 x 0.81680662 y -0.09935077 yaw -0.00433072 v 0.20279756 w -0.00116622 t 5.20000000
+[plainning_global_reference_point]  Time 5.36000000 x_ref 0.84978611 y_ref -0.09999994 yaw_ref -0.00003988 v_ref 0.20000289 w_ref 0.00353678 t 5.36000000
+ [plannin_tracking_error]  Time 5.36000000 err_x -0.00046741 err_y 0.00038390 err_yaw -0.00261901 t 5.36000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.80051587 y_ref -0.09947561 yaw_ref -0.00318974 v_ref 0.20246693 w_ref 0.00073060 t_ref 5.12000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.81678123 y_ref -0.09952570 yaw_ref -0.00307945 v_ref 0.20331805 w_ref 0.00137868 t_ref 5.20000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.83305486 y_ref -0.09957280 yaw_ref -0.00289392 v_ref 0.20342119 w_ref 0.00231910 t_ref 5.28000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.84931871 y_ref -0.09961604 yaw_ref -0.00265889 v_ref 0.20329881 w_ref 0.00293784 t_ref 5.36000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.86557004 y_ref -0.09965515 yaw_ref -0.00240630 v_ref 0.20314220 w_ref 0.00315733 t_ref 5.44000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 w_ref 0.00388205 t_ref 5.52000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.89783366 y_ref -0.09971654 yaw_ref -0.00170928 v_ref 0.20112067 w_ref 0.00483074 t_ref 5.60000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.91386423 y_ref -0.09973684 yaw_ref -0.00126575 v_ref 0.20038236 w_ref 0.00554411 t_ref 5.68000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.92986642 y_ref -0.09974992 yaw_ref -0.00081759 v_ref 0.20002744 w_ref 0.00560203 t_ref 5.76000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.94586585 y_ref -0.09975715 yaw_ref -0.00045206 v_ref 0.19999285 w_ref 0.00456911 t_ref 5.84000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.96186472 y_ref -0.09975915 yaw_ref -0.00012509 v_ref 0.19998593 w_ref 0.00408709 t_ref 5.92000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.97786349 y_ref -0.09975621 yaw_ref 0.00018388 v_ref 0.19998454 w_ref 0.00386214 t_ref 6.00000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 0.99386223 y_ref -0.09974846 yaw_ref 0.00048445 v_ref 0.19998427 w_ref 0.00375717 t_ref 6.08000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.00986096 y_ref -0.09973596 yaw_ref 0.00078110 v_ref 0.19998421 w_ref 0.00370818 t_ref 6.16000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.02585969 y_ref -0.09971875 yaw_ref 0.00107593 v_ref 0.19998420 w_ref 0.00368532 t_ref 6.24000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.04185841 y_ref -0.09969683 yaw_ref 0.00136990 v_ref 0.19998420 w_ref 0.00367465 t_ref 6.32000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.05785712 y_ref -0.09967022 yaw_ref 0.00166347 v_ref 0.19998420 w_ref 0.00366967 t_ref 6.40000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.07385582 y_ref -0.09963891 yaw_ref 0.00195686 v_ref 0.19998420 w_ref 0.00366735 t_ref 6.48000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.08985452 y_ref -0.09960291 yaw_ref 0.00225016 v_ref 0.19998420 w_ref 0.00366626 t_ref 6.56000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.10585320 y_ref -0.09956222 yaw_ref 0.00254342 v_ref 0.19998420 w_ref 0.00366576 t_ref 6.64000000 loop_counter 52.00000000
+[reference_trajectory_planning]  Time 5.36000000 x_ref 1.12185188 y_ref -0.09951684 yaw_ref 0.00283667 v_ref 0.19998420 w_ref 0.00366552 t_ref 6.72000000 loop_counter 52.00000000
+[goal_state_planning]  Time 5.36000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.36000000 loop_counter 52.00000000
+[planning_control_command]  Time 5.36000000 vc 0.20310305 wc 0.00334938 Time 5.36000000
+[reference_point_tracking]  Time 5.20000000 x_ref 0.81678123 y_ref -0.09952570 yaw_ref -0.00307945 v_ref 0.20331805 v_ref 0.00137868 t 5.20000000
+ [tracking_error]  Time 5.20000000 err_x 0.00002538 err_y 0.00017493 err_yaw -0.00125128 t 5.20000000
+[control_command]  Time 5.20000000 speed_command 0.20299559 yawratio_command 0.00221257 t 5.20000000
+[state_of_robot]  Time 5.21000000 x 0.81883486 y -0.09935957 yaw -0.00433756 v 0.20282585 w -0.00068354 t 5.21000000
+[state_of_robot]  Time 5.22000000 x 0.82086334 y -0.09936837 yaw -0.00434026 v 0.20285010 w -0.00026981 t 5.22000000
+[reference_point_tracking]  Time 5.22000000 x_ref 0.82084964 y_ref -0.09953748 yaw_ref -0.00303306 v_ref 0.20334383 v_ref 0.00161378 t 5.22000000
+ [tracking_error]  Time 5.22000000 err_x 0.00001370 err_y 0.00016910 err_yaw -0.00130719 t 5.22000000
+[control_command]  Time 5.22000000 speed_command 0.20312834 yawratio_command 0.00267843 t 5.22000000
+[state_of_robot]  Time 5.23000000 x 0.82289222 y -0.09937717 yaw -0.00433874 v 0.20288985 w 0.00015137 t 5.23000000
+[state_of_robot]  Time 5.24000000 x 0.82492144 y -0.09938597 yaw -0.00433362 v 0.20292392 w 0.00051238 t 5.24000000
+[reference_point_tracking]  Time 5.24000000 x_ref 0.82491805 y_ref -0.09954925 yaw_ref -0.00298668 v_ref 0.20336962 v_ref 0.00184889 t 5.24000000
+ [tracking_error]  Time 5.24000000 err_x 0.00000339 err_y 0.00016328 err_yaw -0.00134694 t 5.24000000
+[control_command]  Time 5.24000000 speed_command 0.20326220 yawratio_command 0.00316059 t 5.24000000
+[state_of_robot]  Time 5.25000000 x 0.82695114 y -0.09939475 yaw -0.00432471 v 0.20297224 w 0.00089069 t 5.25000000
+[state_of_robot]  Time 5.26000000 x 0.82898126 y -0.09940350 yaw -0.00431256 v 0.20301367 w 0.00121497 t 5.26000000
+[reference_point_tracking]  Time 5.26000000 x_ref 0.82898645 y_ref -0.09956102 yaw_ref -0.00294030 v_ref 0.20339541 v_ref 0.00208400 t 5.26000000
+ [tracking_error]  Time 5.26000000 err_x -0.00000519 err_y 0.00015752 err_yaw -0.00137226 t 5.26000000
+[control_command]  Time 5.26000000 speed_command 0.20338586 yawratio_command 0.00361939 t 5.26000000
+[state_of_robot]  Time 5.27000000 x 0.83101191 y -0.09941223 yaw -0.00429698 v 0.20306684 w 0.00155845 t 5.27000000
+[state_of_robot]  Time 5.28000000 x 0.83304301 y -0.09942092 yaw -0.00427845 v 0.20311241 w 0.00185287 t 5.28000000
+[reference_point_tracking]  Time 5.28000000 x_ref 0.83305486 y_ref -0.09957280 yaw_ref -0.00289392 v_ref 0.20342119 v_ref 0.00231910 t 5.28000000
+ [tracking_error]  Time 5.28000000 err_x -0.00001185 err_y 0.00015188 err_yaw -0.00138453 t 5.28000000
+[control_command]  Time 5.28000000 speed_command 0.20349332 yawratio_command 0.00403588 t 5.28000000
+[state_of_robot]  Time 5.29000000 x 0.83507466 y -0.09942957 yaw -0.00425680 v 0.20316683 w 0.00216473 t 5.29000000
+[state_of_robot]  Time 5.30000000 x 0.83710678 y -0.09943817 yaw -0.00423248 v 0.20321347 w 0.00243204 t 5.30000000
+[plainning_global_reference_point]  Time 5.52000000 x_ref 0.88226479 y_ref -0.09999995 yaw_ref -0.00003126 v_ref 0.20000226 w_ref 0.00277207 t 5.52000000
+ [plannin_tracking_error]  Time 5.52000000 err_x -0.00052076 err_y 0.00031091 err_yaw -0.00206448 t 5.52000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.83305486 y_ref -0.09957280 yaw_ref -0.00289392 v_ref 0.20342119 w_ref 0.00231910 t_ref 5.28000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.84931871 y_ref -0.09961604 yaw_ref -0.00265889 v_ref 0.20329881 w_ref 0.00293784 t_ref 5.36000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.86557004 y_ref -0.09965515 yaw_ref -0.00240630 v_ref 0.20314220 w_ref 0.00315733 t_ref 5.44000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 w_ref 0.00388205 t_ref 5.52000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.89798921 y_ref -0.09971928 yaw_ref -0.00186145 v_ref 0.20306506 w_ref 0.00292865 t_ref 5.60000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.91417662 y_ref -0.09974574 yaw_ref -0.00163438 v_ref 0.20234299 w_ref 0.00283841 t_ref 5.68000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.93027921 y_ref -0.09976781 yaw_ref -0.00137092 v_ref 0.20128257 w_ref 0.00329324 t_ref 5.76000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.94631752 y_ref -0.09978495 yaw_ref -0.00106831 v_ref 0.20047894 w_ref 0.00378259 t_ref 5.84000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.96232284 y_ref -0.09979709 yaw_ref -0.00075867 v_ref 0.20006653 w_ref 0.00387051 t_ref 5.92000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.97832276 y_ref -0.09980519 yaw_ref -0.00050594 v_ref 0.19999905 w_ref 0.00315915 t_ref 6.00000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 0.99432160 y_ref -0.09980966 yaw_ref -0.00027976 v_ref 0.19998555 w_ref 0.00282719 t_ref 6.08000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.01032023 y_ref -0.09981072 yaw_ref -0.00006598 v_ref 0.19998285 w_ref 0.00267227 t_ref 6.16000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.02631882 y_ref -0.09980845 yaw_ref 0.00014202 v_ref 0.19998231 w_ref 0.00259998 t_ref 6.24000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.04231739 y_ref -0.09980289 yaw_ref 0.00034732 v_ref 0.19998221 w_ref 0.00256624 t_ref 6.32000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.05831596 y_ref -0.09979407 yaw_ref 0.00055136 v_ref 0.19998218 w_ref 0.00255050 t_ref 6.40000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.07431453 y_ref -0.09978199 yaw_ref 0.00075481 v_ref 0.19998218 w_ref 0.00254315 t_ref 6.48000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.09031310 y_ref -0.09976667 yaw_ref 0.00095799 v_ref 0.19998218 w_ref 0.00253972 t_ref 6.56000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.10631166 y_ref -0.09974809 yaw_ref 0.00116104 v_ref 0.19998218 w_ref 0.00253812 t_ref 6.64000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.12231022 y_ref -0.09972627 yaw_ref 0.00136403 v_ref 0.19998218 w_ref 0.00253737 t_ref 6.72000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.13830878 y_ref -0.09970120 yaw_ref 0.00156699 v_ref 0.19998218 w_ref 0.00253702 t_ref 6.80000000 loop_counter 53.00000000
+[reference_trajectory_planning]  Time 5.52000000 x_ref 1.15430733 y_ref -0.09967288 yaw_ref 0.00176994 v_ref 0.19998218 w_ref 0.00253686 t_ref 6.88000000 loop_counter 53.00000000
+[goal_state_planning]  Time 5.52000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.52000000 loop_counter 53.00000000
+[planning_control_command]  Time 5.52000000 vc 0.20328749 wc 0.00209443 Time 5.52000000
+[reference_point_tracking]  Time 5.30000000 x_ref 0.83712082 y_ref -0.09958361 yaw_ref -0.00283516 v_ref 0.20339060 v_ref 0.00247379 t 5.30000000
+ [tracking_error]  Time 5.30000000 err_x -0.00001404 err_y 0.00014544 err_yaw -0.00139732 t 5.30000000
+[control_command]  Time 5.30000000 speed_command 0.20351005 yawratio_command 0.00436935 t 5.30000000
+[state_of_robot]  Time 5.31000000 x 0.83913932 y -0.09944671 yaw -0.00420539 v 0.20325584 w 0.00270880 t 5.31000000
+[state_of_robot]  Time 5.32000000 x 0.84117222 y -0.09945520 yaw -0.00417593 v 0.20329215 w 0.00294602 t 5.32000000
+[reference_point_tracking]  Time 5.32000000 x_ref 0.84118678 y_ref -0.09959442 yaw_ref -0.00277640 v_ref 0.20336000 v_ref 0.00262847 t 5.32000000
+ [tracking_error]  Time 5.32000000 err_x -0.00001456 err_y 0.00013922 err_yaw -0.00139953 t 5.32000000
+[control_command]  Time 5.32000000 speed_command 0.20350214 yawratio_command 0.00467650 t 5.32000000
+[state_of_robot]  Time 5.33000000 x 0.84320543 y -0.09946363 yaw -0.00414400 v 0.20332215 w 0.00319323 t 5.33000000
+[state_of_robot]  Time 5.34000000 x 0.84523889 y -0.09947199 yaw -0.00410995 v 0.20334787 w 0.00340513 t 5.34000000
+[reference_point_tracking]  Time 5.34000000 x_ref 0.84525274 y_ref -0.09960523 yaw_ref -0.00271765 v_ref 0.20332940 v_ref 0.00278315 t 5.34000000
+ [tracking_error]  Time 5.34000000 err_x -0.00001386 err_y 0.00013324 err_yaw -0.00139230 t 5.34000000
+[control_command]  Time 5.34000000 speed_command 0.20347645 yawratio_command 0.00494661 t 5.34000000
+[state_of_robot]  Time 5.35000000 x 0.84727253 y -0.09948027 yaw -0.00407370 v 0.20336624 w 0.00362534 t 5.35000000
+[state_of_robot]  Time 5.36000000 x 0.84930634 y -0.09948848 yaw -0.00403556 v 0.20338198 w 0.00381409 t 5.36000000
+[reference_point_tracking]  Time 5.36000000 x_ref 0.84931871 y_ref -0.09961604 yaw_ref -0.00265889 v_ref 0.20329881 v_ref 0.00293784 t 5.36000000
+ [tracking_error]  Time 5.36000000 err_x -0.00001237 err_y 0.00012756 err_yaw -0.00137667 t 5.36000000
+[control_command]  Time 5.36000000 speed_command 0.20343854 yawratio_command 0.00517616 t 5.36000000
+[state_of_robot]  Time 5.37000000 x 0.85134022 y -0.09949660 yaw -0.00399547 v 0.20339006 w 0.00400867 t 5.37000000
+[state_of_robot]  Time 5.38000000 x 0.85337418 y -0.09950465 yaw -0.00395371 v 0.20339699 w 0.00417546 t 5.38000000
+[reference_point_tracking]  Time 5.38000000 x_ref 0.85338154 y_ref -0.09962582 yaw_ref -0.00259574 v_ref 0.20325966 v_ref 0.00299271 t 5.38000000
+ [tracking_error]  Time 5.38000000 err_x -0.00000736 err_y 0.00012117 err_yaw -0.00135797 t 5.38000000
+[control_command]  Time 5.38000000 speed_command 0.20336520 yawratio_command 0.00527999 t 5.38000000
+[state_of_robot]  Time 5.39000000 x 0.85540809 y -0.09951260 yaw -0.00391038 v 0.20339245 w 0.00433325 t 5.39000000
+[state_of_robot]  Time 5.40000000 x 0.85744196 y -0.09952046 yaw -0.00386570 v 0.20338855 w 0.00446849 t 5.40000000
+[plainning_global_reference_point]  Time 5.60000000 x_ref 0.89850413 y_ref -0.09999996 yaw_ref -0.00002695 v_ref 0.20000195 w_ref 0.00238972 t 5.60000000
+ [plannin_tracking_error]  Time 5.60000000 err_x -0.00051493 err_y 0.00028068 err_yaw -0.00183450 t 5.60000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.84931871 y_ref -0.09961604 yaw_ref -0.00265889 v_ref 0.20329881 w_ref 0.00293784 t_ref 5.36000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.86557004 y_ref -0.09965515 yaw_ref -0.00240630 v_ref 0.20314220 w_ref 0.00315733 t_ref 5.44000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 w_ref 0.00388205 t_ref 5.52000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.89798921 y_ref -0.09971928 yaw_ref -0.00186145 v_ref 0.20306506 w_ref 0.00292865 t_ref 5.60000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.91425066 y_ref -0.09974665 yaw_ref -0.00168283 v_ref 0.20326851 w_ref 0.00223270 t_ref 5.68000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.93043953 y_ref -0.09977092 yaw_ref -0.00149942 v_ref 0.20236108 w_ref 0.00229266 t_ref 5.76000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.94654000 y_ref -0.09979148 yaw_ref -0.00127702 v_ref 0.20125604 w_ref 0.00278000 t_ref 5.84000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.96257613 y_ref -0.09980780 yaw_ref -0.00101770 v_ref 0.20045176 w_ref 0.00324149 t_ref 5.92000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.97858017 y_ref -0.09981987 yaw_ref -0.00075376 v_ref 0.20005054 w_ref 0.00329921 t_ref 6.00000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 0.99457982 y_ref -0.09982859 yaw_ref -0.00054539 v_ref 0.19999558 w_ref 0.00260461 t_ref 6.08000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.01057858 y_ref -0.09983440 yaw_ref -0.00036296 v_ref 0.19998459 w_ref 0.00228047 t_ref 6.16000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.02657717 y_ref -0.09983748 yaw_ref -0.00019262 v_ref 0.19998239 w_ref 0.00212920 t_ref 6.24000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.04257573 y_ref -0.09983793 yaw_ref -0.00002793 v_ref 0.19998195 w_ref 0.00205861 t_ref 6.32000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.05857428 y_ref -0.09983578 yaw_ref 0.00013412 v_ref 0.19998187 w_ref 0.00202567 t_ref 6.40000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.07457283 y_ref -0.09983106 yaw_ref 0.00029494 v_ref 0.19998185 w_ref 0.00201029 t_ref 6.48000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.09057137 y_ref -0.09982378 yaw_ref 0.00045519 v_ref 0.19998184 w_ref 0.00200312 t_ref 6.56000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.10656992 y_ref -0.09981394 yaw_ref 0.00061518 v_ref 0.19998184 w_ref 0.00199977 t_ref 6.64000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.12256846 y_ref -0.09980154 yaw_ref 0.00077503 v_ref 0.19998184 w_ref 0.00199821 t_ref 6.72000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.13856700 y_ref -0.09978658 yaw_ref 0.00093483 v_ref 0.19998184 w_ref 0.00199748 t_ref 6.80000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.15456554 y_ref -0.09976907 yaw_ref 0.00109460 v_ref 0.19998184 w_ref 0.00199714 t_ref 6.88000000 loop_counter 54.00000000
+[reference_trajectory_planning]  Time 5.60000000 x_ref 1.17056407 y_ref -0.09974900 yaw_ref 0.00125436 v_ref 0.19998184 w_ref 0.00199698 t_ref 6.96000000 loop_counter 54.00000000
+[goal_state_planning]  Time 5.60000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.60000000 loop_counter 54.00000000
+[planning_control_command]  Time 5.60000000 vc 0.20331937 wc 0.00162374 Time 5.60000000
+[reference_point_tracking]  Time 5.40000000 x_ref 0.85744437 y_ref -0.09963559 yaw_ref -0.00253260 v_ref 0.20322051 v_ref 0.00304758 t 5.40000000
+ [tracking_error]  Time 5.40000000 err_x -0.00000242 err_y 0.00011513 err_yaw -0.00133310 t 5.40000000
+[control_command]  Time 5.40000000 speed_command 0.20328108 yawratio_command 0.00536030 t 5.40000000
+[state_of_robot]  Time 5.41000000 x 0.85947567 y -0.09952823 yaw -0.00381974 v 0.20337320 w 0.00459590 t 5.41000000
+[state_of_robot]  Time 5.42000000 x 0.86150926 y -0.09953590 yaw -0.00377269 v 0.20336004 w 0.00470510 t 5.42000000
+[reference_point_tracking]  Time 5.42000000 x_ref 0.86150720 y_ref -0.09964537 yaw_ref -0.00246945 v_ref 0.20318136 v_ref 0.00310246 t 5.42000000
+ [tracking_error]  Time 5.42000000 err_x 0.00000206 err_y 0.00010947 err_yaw -0.00130324 t 5.42000000
+[control_command]  Time 5.42000000 speed_command 0.20319544 yawratio_command 0.00541838 t 5.42000000
+[state_of_robot]  Time 5.43000000 x 0.86354261 y -0.09954348 yaw -0.00372462 v 0.20333653 w 0.00480699 t 5.43000000
+[state_of_robot]  Time 5.44000000 x 0.86557576 y -0.09955095 yaw -0.00367567 v 0.20331637 w 0.00489433 t 5.44000000
+[reference_point_tracking]  Time 5.44000000 x_ref 0.86557004 y_ref -0.09965515 yaw_ref -0.00240630 v_ref 0.20314220 v_ref 0.00315733 t 5.44000000
+ [tracking_error]  Time 5.44000000 err_x 0.00000572 err_y 0.00010420 err_yaw -0.00126937 t 5.44000000
+[control_command]  Time 5.44000000 speed_command 0.20311415 yawratio_command 0.00545519 t 5.44000000
+[state_of_robot]  Time 5.45000000 x 0.86760862 y -0.09955832 yaw -0.00362593 v 0.20328748 w 0.00497446 t 5.45000000
+[state_of_robot]  Time 5.46000000 x 0.86964124 y -0.09956559 yaw -0.00357550 v 0.20326272 w 0.00504313 t 5.46000000
+[reference_point_tracking]  Time 5.46000000 x_ref 0.86961353 y_ref -0.09966362 yaw_ref -0.00232866 v_ref 0.20290049 v_ref 0.00333851 t 5.46000000
+ [tracking_error]  Time 5.46000000 err_x 0.00002770 err_y 0.00009803 err_yaw -0.00124684 t 5.46000000
+[control_command]  Time 5.46000000 speed_command 0.20271870 yawratio_command 0.00572190 t 5.46000000
+[state_of_robot]  Time 5.47000000 x 0.87167307 y -0.09957275 yaw -0.00352410 v 0.20318500 w 0.00514010 t 5.47000000
+[state_of_robot]  Time 5.48000000 x 0.87370424 y -0.09957980 yaw -0.00347187 v 0.20311839 w 0.00522322 t 5.48000000
+[reference_point_tracking]  Time 5.48000000 x_ref 0.87365703 y_ref -0.09967209 yaw_ref -0.00225102 v_ref 0.20265878 v_ref 0.00351969 t 5.48000000
+ [tracking_error]  Time 5.48000000 err_x 0.00004721 err_y 0.00009229 err_yaw -0.00122084 t 5.48000000
+[control_command]  Time 5.48000000 speed_command 0.20229221 yawratio_command 0.00600200 t 5.48000000
+[state_of_robot]  Time 5.49000000 x 0.87573424 y -0.09958674 yaw -0.00341852 v 0.20300036 w 0.00533447 t 5.49000000
+[state_of_robot]  Time 5.50000000 x 0.87776322 y -0.09959357 yaw -0.00336422 v 0.20289920 w 0.00542983 t 5.50000000
+[plainning_global_reference_point]  Time 5.68000000 x_ref 0.91474347 y_ref -0.09999997 yaw_ref -0.00002263 v_ref 0.20000164 w_ref 0.00200736 t 5.68000000
+ [plannin_tracking_error]  Time 5.68000000 err_x -0.00049281 err_y 0.00025332 err_yaw -0.00166020 t 5.68000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.86557004 y_ref -0.09965515 yaw_ref -0.00240630 v_ref 0.20314220 w_ref 0.00315733 t_ref 5.44000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 w_ref 0.00388205 t_ref 5.52000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.89798921 y_ref -0.09971928 yaw_ref -0.00186145 v_ref 0.20306506 w_ref 0.00292865 t_ref 5.60000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.91425066 y_ref -0.09974665 yaw_ref -0.00168283 v_ref 0.20326851 w_ref 0.00223270 t_ref 5.68000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.93050972 y_ref -0.09977172 yaw_ref -0.00154197 v_ref 0.20323848 w_ref 0.00176081 t_ref 5.76000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.94669204 y_ref -0.09979421 yaw_ref -0.00138970 v_ref 0.20227920 w_ref 0.00190341 t_ref 5.84000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.96278718 y_ref -0.09981353 yaw_ref -0.00120036 v_ref 0.20118940 w_ref 0.00236674 t_ref 5.92000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.97882033 y_ref -0.09982923 yaw_ref -0.00097937 v_ref 0.20041450 w_ref 0.00276231 t_ref 6.00000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 0.99482323 y_ref -0.09984136 yaw_ref -0.00075810 v_ref 0.20003619 w_ref 0.00276589 t_ref 6.08000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.01082266 y_ref -0.09985084 yaw_ref -0.00059236 v_ref 0.19999295 w_ref 0.00207169 t_ref 6.16000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.02682140 y_ref -0.09985808 yaw_ref -0.00045255 v_ref 0.19998431 w_ref 0.00174773 t_ref 6.24000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.04282001 y_ref -0.09986328 yaw_ref -0.00032482 v_ref 0.19998258 w_ref 0.00159654 t_ref 6.32000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.05881859 y_ref -0.09986652 yaw_ref -0.00020274 v_ref 0.19998223 w_ref 0.00152599 t_ref 6.40000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.07481716 y_ref -0.09986785 yaw_ref -0.00008330 v_ref 0.19998216 w_ref 0.00149307 t_ref 6.48000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.09081573 y_ref -0.09986729 yaw_ref 0.00003492 v_ref 0.19998215 w_ref 0.00147770 t_ref 6.56000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.10681430 y_ref -0.09986485 yaw_ref 0.00015256 v_ref 0.19998215 w_ref 0.00147053 t_ref 6.64000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.12281287 y_ref -0.09986053 yaw_ref 0.00026994 v_ref 0.19998215 w_ref 0.00146719 t_ref 6.72000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.13881144 y_ref -0.09985434 yaw_ref 0.00038719 v_ref 0.19998215 w_ref 0.00146563 t_ref 6.80000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.15481001 y_ref -0.09984627 yaw_ref 0.00050438 v_ref 0.19998215 w_ref 0.00146490 t_ref 6.88000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.17080858 y_ref -0.09983633 yaw_ref 0.00062154 v_ref 0.19998215 w_ref 0.00146456 t_ref 6.96000000 loop_counter 55.00000000
+[reference_trajectory_planning]  Time 5.68000000 x_ref 1.18680715 y_ref -0.09982451 yaw_ref 0.00073869 v_ref 0.19998215 w_ref 0.00146440 t_ref 7.04000000 loop_counter 55.00000000
+[goal_state_planning]  Time 5.68000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.68000000 loop_counter 55.00000000
+[planning_control_command]  Time 5.68000000 vc 0.20323097 wc 0.00134790 Time 5.68000000
+[reference_point_tracking]  Time 5.50000000 x_ref 0.87770053 y_ref -0.09968057 yaw_ref -0.00217338 v_ref 0.20241706 v_ref 0.00370087 t 5.50000000
+ [tracking_error]  Time 5.50000000 err_x 0.00006269 err_y 0.00008700 err_yaw -0.00119084 t 5.50000000
+[control_command]  Time 5.50000000 speed_command 0.20187785 yawratio_command 0.00625365 t 5.50000000
+[state_of_robot]  Time 5.51000000 x 0.87979074 y -0.09960027 yaw -0.00330875 v 0.20275329 w 0.00554752 t 5.51000000
+[state_of_robot]  Time 5.52000000 x 0.88181701 y -0.09960686 yaw -0.00325226 v 0.20262823 w 0.00564839 t 5.52000000
+[reference_point_tracking]  Time 5.52000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 v_ref 0.00388205 t 5.52000000
+ [tracking_error]  Time 5.52000000 err_x 0.00007298 err_y 0.00008218 err_yaw -0.00115652 t 5.52000000
+[control_command]  Time 5.52000000 speed_command 0.20150062 yawratio_command 0.00646073 t 5.52000000
+[state_of_robot]  Time 5.53000000 x 0.88384167 y -0.09961333 yaw -0.00319462 v 0.20246714 w 0.00576444 t 5.53000000
+[state_of_robot]  Time 5.54000000 x 0.88586495 y -0.09961968 yaw -0.00313598 v 0.20232907 w 0.00586391 t 5.54000000
+[reference_point_tracking]  Time 5.54000000 x_ref 0.88580532 y_ref -0.09969660 yaw_ref -0.00203717 v_ref 0.20239778 v_ref 0.00364370 t 5.54000000
+ [tracking_error]  Time 5.54000000 err_x 0.00005963 err_y 0.00007692 err_yaw -0.00109881 t 5.54000000
+[control_command]  Time 5.54000000 speed_command 0.20174940 yawratio_command 0.00603495 t 5.54000000
+[state_of_robot]  Time 5.55000000 x 0.88788740 y -0.09962590 yaw -0.00307710 v 0.20224626 w 0.00588835 t 5.55000000
+[state_of_robot]  Time 5.56000000 x 0.88990915 y -0.09963200 yaw -0.00301800 v 0.20217528 w 0.00590929 t 5.56000000
+[reference_point_tracking]  Time 5.56000000 x_ref 0.88986662 y_ref -0.09970416 yaw_ref -0.00197859 v_ref 0.20262021 v_ref 0.00340535 t 5.56000000
+ [tracking_error]  Time 5.56000000 err_x 0.00004253 err_y 0.00007216 err_yaw -0.00103941 t 5.56000000
+[control_command]  Time 5.56000000 speed_command 0.20208857 yawratio_command 0.00554377 t 5.56000000
+[state_of_robot]  Time 5.57000000 x 0.89193077 y -0.09963799 yaw -0.00295943 v 0.20216289 w 0.00585707 t 5.57000000
+[state_of_robot]  Time 5.58000000 x 0.89395228 y -0.09964385 yaw -0.00290131 v 0.20215227 w 0.00581231 t 5.58000000
+[reference_point_tracking]  Time 5.58000000 x_ref 0.89392791 y_ref -0.09971172 yaw_ref -0.00192002 v_ref 0.20284263 v_ref 0.00316700 t 5.58000000
+ [tracking_error]  Time 5.58000000 err_x 0.00002437 err_y 0.00006787 err_yaw -0.00098129 t 5.58000000
+[control_command]  Time 5.58000000 speed_command 0.20247184 yawratio_command 0.00505687 t 5.58000000
+[state_of_robot]  Time 5.59000000 x 0.89597425 y -0.09964960 yaw -0.00284427 v 0.20219792 w 0.00570439 t 5.59000000
+[state_of_robot]  Time 5.60000000 x 0.89799662 y -0.09965524 yaw -0.00278815 v 0.20223706 w 0.00561189 t 5.60000000
+[plainning_global_reference_point]  Time 5.76000000 x_ref 0.93098281 y_ref -0.09999997 yaw_ref -0.00001832 v_ref 0.20000133 w_ref 0.00162501 t 5.76000000
+ [plannin_tracking_error]  Time 5.76000000 err_x -0.00047309 err_y 0.00022825 err_yaw -0.00152364 t 5.76000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.88174403 y_ref -0.09968904 yaw_ref -0.00209574 v_ref 0.20217535 w_ref 0.00388205 t_ref 5.52000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.89798921 y_ref -0.09971928 yaw_ref -0.00186145 v_ref 0.20306506 w_ref 0.00292865 t_ref 5.60000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.91425066 y_ref -0.09974665 yaw_ref -0.00168283 v_ref 0.20326851 w_ref 0.00223270 t_ref 5.68000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.93050972 y_ref -0.09977172 yaw_ref -0.00154197 v_ref 0.20323848 w_ref 0.00176081 t_ref 5.76000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.94676091 y_ref -0.09979490 yaw_ref -0.00142665 v_ref 0.20314006 w_ref 0.00144142 t_ref 5.84000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 w_ref 0.00160756 t_ref 5.92000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.97902743 y_ref -0.09983420 yaw_ref -0.00113731 v_ref 0.20113845 w_ref 0.00200923 t_ref 6.00000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 0.99505888 y_ref -0.09984946 yaw_ref -0.00095189 v_ref 0.20039312 w_ref 0.00231773 t_ref 6.08000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.01106138 y_ref -0.09986181 yaw_ref -0.00077145 v_ref 0.20003138 w_ref 0.00225558 t_ref 6.16000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.02706079 y_ref -0.09987178 yaw_ref -0.00062357 v_ref 0.19999264 w_ref 0.00184840 t_ref 6.24000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.04305958 y_ref -0.09987964 yaw_ref -0.00049090 v_ref 0.19998489 w_ref 0.00165838 t_ref 6.32000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.05905825 y_ref -0.09988548 yaw_ref -0.00036533 v_ref 0.19998334 w_ref 0.00156970 t_ref 6.40000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.07505689 y_ref -0.09988937 yaw_ref -0.00024306 v_ref 0.19998303 w_ref 0.00152832 t_ref 6.48000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.09105553 y_ref -0.09989133 yaw_ref -0.00012234 v_ref 0.19998297 w_ref 0.00150901 t_ref 6.56000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.10705416 y_ref -0.09989136 yaw_ref -0.00000234 v_ref 0.19998296 w_ref 0.00149999 t_ref 6.64000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.12305280 y_ref -0.09988949 yaw_ref 0.00011732 v_ref 0.19998296 w_ref 0.00149579 t_ref 6.72000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.13905144 y_ref -0.09988570 yaw_ref 0.00023683 v_ref 0.19998296 w_ref 0.00149383 t_ref 6.80000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.15505007 y_ref -0.09988000 yaw_ref 0.00035626 v_ref 0.19998296 w_ref 0.00149291 t_ref 6.88000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.17104871 y_ref -0.09987239 yaw_ref 0.00047566 v_ref 0.19998296 w_ref 0.00149248 t_ref 6.96000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.18704734 y_ref -0.09986287 yaw_ref 0.00059504 v_ref 0.19998296 w_ref 0.00149228 t_ref 7.04000000 loop_counter 56.00000000
+[reference_trajectory_planning]  Time 5.76000000 x_ref 1.20304597 y_ref -0.09985144 yaw_ref 0.00071442 v_ref 0.19998296 w_ref 0.00149219 t_ref 7.12000000 loop_counter 56.00000000
+[goal_state_planning]  Time 5.76000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.76000000 loop_counter 56.00000000
+[planning_control_command]  Time 5.76000000 vc 0.20311545 wc 0.00116196 Time 5.76000000
+[reference_point_tracking]  Time 5.60000000 x_ref 0.89798921 y_ref -0.09971928 yaw_ref -0.00186145 v_ref 0.20306506 v_ref 0.00292865 t 5.60000000
+ [tracking_error]  Time 5.60000000 err_x 0.00000741 err_y 0.00006404 err_yaw -0.00092670 t 5.60000000
+[control_command]  Time 5.60000000 speed_command 0.20286601 yawratio_command 0.00460285 t 5.60000000
+[state_of_robot]  Time 5.61000000 x 0.90001988 y -0.09966077 yaw -0.00273347 v 0.20232691 w 0.00546774 t 5.61000000
+[state_of_robot]  Time 5.62000000 x 0.90204391 y -0.09966620 yaw -0.00268003 v 0.20240392 w 0.00534419 t 5.62000000
+[reference_point_tracking]  Time 5.62000000 x_ref 0.90205457 y_ref -0.09972612 yaw_ref -0.00181679 v_ref 0.20311592 v_ref 0.00275466 t 5.62000000
+ [tracking_error]  Time 5.62000000 err_x -0.00001066 err_y 0.00005993 err_yaw -0.00086323 t 5.62000000
+[control_command]  Time 5.62000000 speed_command 0.20310000 yawratio_command 0.00424187 t 5.62000000
+[state_of_robot]  Time 5.63000000 x 0.90406894 y -0.09967152 yaw -0.00262816 v 0.20250336 w 0.00518671 t 5.63000000
+[state_of_robot]  Time 5.64000000 x 0.90609482 y -0.09967674 yaw -0.00257764 v 0.20258859 w 0.00505173 t 5.64000000
+[reference_point_tracking]  Time 5.64000000 x_ref 0.90611993 y_ref -0.09973297 yaw_ref -0.00177214 v_ref 0.20316679 v_ref 0.00258068 t 5.64000000
+ [tracking_error]  Time 5.64000000 err_x -0.00002512 err_y 0.00005623 err_yaw -0.00080550 t 5.64000000
+[control_command]  Time 5.64000000 speed_command 0.20331636 yawratio_command 0.00391065 t 5.64000000
+[state_of_robot]  Time 5.65000000 x 0.90812173 y -0.09968187 yaw -0.00252876 v 0.20269256 w 0.00488872 t 5.65000000
+[state_of_robot]  Time 5.66000000 x 0.91014955 y -0.09968690 yaw -0.00248127 v 0.20278167 w 0.00474900 t 5.66000000
+[reference_point_tracking]  Time 5.66000000 x_ref 0.91018530 y_ref -0.09973981 yaw_ref -0.00172749 v_ref 0.20321765 v_ref 0.00240669 t 5.66000000
+ [tracking_error]  Time 5.66000000 err_x -0.00003575 err_y 0.00005291 err_yaw -0.00075378 t 5.66000000
+[control_command]  Time 5.66000000 speed_command 0.20350172 yawratio_command 0.00360702 t 5.66000000
+[state_of_robot]  Time 5.67000000 x 0.91217838 y -0.09969184 yaw -0.00243541 v 0.20288454 w 0.00458586 t 5.67000000
+[state_of_robot]  Time 5.68000000 x 0.91420811 y -0.09969669 yaw -0.00239095 v 0.20297271 w 0.00444602 t 5.68000000
+[reference_point_tracking]  Time 5.68000000 x_ref 0.91425066 y_ref -0.09974665 yaw_ref -0.00168283 v_ref 0.20326851 v_ref 0.00223270 t 5.68000000
+ [tracking_error]  Time 5.68000000 err_x -0.00004256 err_y 0.00004996 err_yaw -0.00070811 t 5.68000000
+[control_command]  Time 5.68000000 speed_command 0.20365050 yawratio_command 0.00332787 t 5.68000000
+[state_of_robot]  Time 5.69000000 x 0.91623880 y -0.09970146 yaw -0.00234808 v 0.20306953 w 0.00428629 t 5.69000000
+[state_of_robot]  Time 5.70000000 x 0.91827032 y -0.09970614 yaw -0.00230659 v 0.20315253 w 0.00414937 t 5.70000000
+[plainning_global_reference_point]  Time 5.92000000 x_ref 0.96346149 y_ref -0.09999999 yaw_ref -0.00000970 v_ref 0.20000070 w_ref 0.00086030 t 5.92000000
+ [plannin_tracking_error]  Time 5.92000000 err_x -0.00052512 err_y 0.00018409 err_yaw -0.00128835 t 5.92000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.91425066 y_ref -0.09974665 yaw_ref -0.00168283 v_ref 0.20326851 w_ref 0.00223270 t_ref 5.68000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.93050972 y_ref -0.09977172 yaw_ref -0.00154197 v_ref 0.20323848 w_ref 0.00176081 t_ref 5.76000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.94676091 y_ref -0.09979490 yaw_ref -0.00142665 v_ref 0.20314006 w_ref 0.00144142 t_ref 5.84000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 w_ref 0.00160756 t_ref 5.92000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.97918327 y_ref -0.09983560 yaw_ref -0.00121260 v_ref 0.20308637 w_ref 0.00106805 t_ref 6.00000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 0.99537210 y_ref -0.09985391 yaw_ref -0.00113121 v_ref 0.20236059 w_ref 0.00101743 t_ref 6.08000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.01147552 y_ref -0.09987058 yaw_ref -0.00103506 v_ref 0.20129275 w_ref 0.00120188 t_ref 6.16000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.02751415 y_ref -0.09988510 yaw_ref -0.00090489 v_ref 0.20048298 w_ref 0.00162718 t_ref 6.24000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.04351952 y_ref -0.09989705 yaw_ref -0.00074717 v_ref 0.20006722 w_ref 0.00197146 t_ref 6.32000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.05951944 y_ref -0.09990661 yaw_ref -0.00059701 v_ref 0.19999904 w_ref 0.00187692 t_ref 6.40000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.07551827 y_ref -0.09991381 yaw_ref -0.00045039 v_ref 0.19998541 w_ref 0.00183279 t_ref 6.48000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.09151688 y_ref -0.09991870 yaw_ref -0.00030541 v_ref 0.19998268 w_ref 0.00181220 t_ref 6.56000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.10751545 y_ref -0.09992128 yaw_ref -0.00016121 v_ref 0.19998213 w_ref 0.00180260 t_ref 6.64000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.12351402 y_ref -0.09992155 yaw_ref -0.00001736 v_ref 0.19998202 w_ref 0.00179811 t_ref 6.72000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.13951258 y_ref -0.09991953 yaw_ref 0.00012632 v_ref 0.19998200 w_ref 0.00179602 t_ref 6.80000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.15551114 y_ref -0.09991522 yaw_ref 0.00026993 v_ref 0.19998200 w_ref 0.00179504 t_ref 6.88000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.17150969 y_ref -0.09990860 yaw_ref 0.00041349 v_ref 0.19998200 w_ref 0.00179459 t_ref 6.96000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.18750825 y_ref -0.09989969 yaw_ref 0.00055704 v_ref 0.19998200 w_ref 0.00179437 t_ref 7.04000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.20350681 y_ref -0.09988848 yaw_ref 0.00070059 v_ref 0.19998200 w_ref 0.00179427 t_ref 7.12000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.21950536 y_ref -0.09987498 yaw_ref 0.00084412 v_ref 0.19998200 w_ref 0.00179423 t_ref 7.20000000 loop_counter 57.00000000
+[reference_trajectory_planning]  Time 5.92000000 x_ref 1.23550391 y_ref -0.09985917 yaw_ref 0.00098766 v_ref 0.19998200 w_ref 0.00179421 t_ref 7.28000000 loop_counter 57.00000000
+[goal_state_planning]  Time 5.92000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 5.92000000 loop_counter 57.00000000
+[planning_control_command]  Time 5.92000000 vc 0.20330961 wc 0.00059599 Time 5.92000000
+[reference_point_tracking]  Time 5.70000000 x_ref 0.91831543 y_ref -0.09975292 yaw_ref -0.00164762 v_ref 0.20326100 v_ref 0.00211473 t 5.70000000
+ [tracking_error]  Time 5.70000000 err_x -0.00004511 err_y 0.00004677 err_yaw -0.00065897 t 5.70000000
+[control_command]  Time 5.70000000 speed_command 0.20369941 yawratio_command 0.00312398 t 5.70000000
+[state_of_robot]  Time 5.71000000 x 0.92030262 y -0.09971075 yaw -0.00226656 v 0.20323065 w 0.00400289 t 5.71000000
+[state_of_robot]  Time 5.72000000 x 0.92233559 y -0.09971528 yaw -0.00222779 v 0.20329762 w 0.00387733 t 5.72000000
+[reference_point_tracking]  Time 5.72000000 x_ref 0.92238019 y_ref -0.09975918 yaw_ref -0.00161240 v_ref 0.20325349 v_ref 0.00199675 t 5.72000000
+ [tracking_error]  Time 5.72000000 err_x -0.00004460 err_y 0.00004390 err_yaw -0.00061539 t 5.72000000
+[control_command]  Time 5.72000000 speed_command 0.20371214 yawratio_command 0.00293282 t 5.72000000
+[state_of_robot]  Time 5.73000000 x 0.92436915 y -0.09971973 yaw -0.00219036 v 0.20335684 w 0.00374240 t 5.73000000
+[state_of_robot]  Time 5.74000000 x 0.92640322 y -0.09972412 yaw -0.00215410 v 0.20340759 w 0.00362675 t 5.74000000
+[reference_point_tracking]  Time 5.74000000 x_ref 0.92644496 y_ref -0.09976545 yaw_ref -0.00157718 v_ref 0.20324598 v_ref 0.00187878 t 5.74000000
+ [tracking_error]  Time 5.74000000 err_x -0.00004173 err_y 0.00004133 err_yaw -0.00057691 t 5.74000000
+[control_command]  Time 5.74000000 speed_command 0.20369522 yawratio_command 0.00275133 t 5.74000000
+[state_of_robot]  Time 5.75000000 x 0.92843771 y -0.09972843 yaw -0.00211908 v 0.20344868 w 0.00350169 t 5.75000000
+[state_of_robot]  Time 5.76000000 x 0.93047254 y -0.09973267 yaw -0.00208513 v 0.20348390 w 0.00339449 t 5.76000000
+[reference_point_tracking]  Time 5.76000000 x_ref 0.93050972 y_ref -0.09977172 yaw_ref -0.00154197 v_ref 0.20323848 v_ref 0.00176081 t 5.76000000
+ [tracking_error]  Time 5.76000000 err_x -0.00003718 err_y 0.00003905 err_yaw -0.00054317 t 5.76000000
+[control_command]  Time 5.76000000 speed_command 0.20365558 yawratio_command 0.00257819 t 5.76000000
+[state_of_robot]  Time 5.77000000 x 0.93250762 y -0.09973685 yaw -0.00205236 v 0.20350843 w 0.00327788 t 5.77000000
+[state_of_robot]  Time 5.78000000 x 0.93454291 y -0.09974096 yaw -0.00202058 v 0.20352945 w 0.00317792 t 5.78000000
+[reference_point_tracking]  Time 5.78000000 x_ref 0.93457252 y_ref -0.09977751 yaw_ref -0.00151314 v_ref 0.20321387 v_ref 0.00168096 t 5.78000000
+ [tracking_error]  Time 5.78000000 err_x -0.00002961 err_y 0.00003656 err_yaw -0.00050744 t 5.78000000
+[control_command]  Time 5.78000000 speed_command 0.20357071 yawratio_command 0.00245196 t 5.78000000
+[state_of_robot]  Time 5.79000000 x 0.93657826 y -0.09974501 yaw -0.00198983 v 0.20353534 w 0.00307421 t 5.79000000
+[state_of_robot]  Time 5.80000000 x 0.93861366 y -0.09974900 yaw -0.00195998 v 0.20354040 w 0.00298532 t 5.80000000
+[plainning_global_reference_point]  Time 6.00000000 x_ref 0.97970083 y_ref -0.09999999 yaw_ref -0.00000539 v_ref 0.20000039 w_ref 0.00047794 t 6.00000000
+ [plannin_tracking_error]  Time 6.00000000 err_x -0.00051756 err_y 0.00016439 err_yaw -0.00120722 t 6.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 0.93050972 y_ref -0.09977172 yaw_ref -0.00154197 v_ref 0.20323848 w_ref 0.00176081 t_ref 5.76000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 0.94676091 y_ref -0.09979490 yaw_ref -0.00142665 v_ref 0.20314006 w_ref 0.00144142 t_ref 5.84000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 w_ref 0.00160756 t_ref 5.92000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 0.97918327 y_ref -0.09983560 yaw_ref -0.00121260 v_ref 0.20308637 w_ref 0.00106805 t_ref 6.00000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 0.99544620 y_ref -0.09985431 yaw_ref -0.00115049 v_ref 0.20328679 w_ref 0.00077644 t_ref 6.08000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.01163596 y_ref -0.09987190 yaw_ref -0.00108649 v_ref 0.20237210 w_ref 0.00079996 t_ref 6.16000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.02773681 y_ref -0.09988780 yaw_ref -0.00098739 v_ref 0.20126069 w_ref 0.00123878 t_ref 6.24000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.04377301 y_ref -0.09990134 yaw_ref -0.00084461 v_ref 0.20045266 w_ref 0.00178476 t_ref 6.32000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.05977702 y_ref -0.09991215 yaw_ref -0.00067513 v_ref 0.20005015 w_ref 0.00211848 t_ref 6.40000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.07577668 y_ref -0.09992040 yaw_ref -0.00051554 v_ref 0.19999578 w_ref 0.00199488 t_ref 6.48000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.09177547 y_ref -0.09992617 yaw_ref -0.00036056 v_ref 0.19998491 w_ref 0.00193720 t_ref 6.56000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.10777409 y_ref -0.09992949 yaw_ref -0.00020774 v_ref 0.19998273 w_ref 0.00191028 t_ref 6.64000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.12377267 y_ref -0.09993038 yaw_ref -0.00005593 v_ref 0.19998230 w_ref 0.00189772 t_ref 6.72000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.13977125 y_ref -0.09992886 yaw_ref 0.00009542 v_ref 0.19998221 w_ref 0.00189185 t_ref 6.80000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.15576983 y_ref -0.09992491 yaw_ref 0.00024655 v_ref 0.19998219 w_ref 0.00188912 t_ref 6.88000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.17176840 y_ref -0.09991855 yaw_ref 0.00039758 v_ref 0.19998219 w_ref 0.00188784 t_ref 6.96000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.18776697 y_ref -0.09990978 yaw_ref 0.00054856 v_ref 0.19998219 w_ref 0.00188725 t_ref 7.04000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.20376554 y_ref -0.09989858 yaw_ref 0.00069952 v_ref 0.19998219 w_ref 0.00188697 t_ref 7.12000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.21976411 y_ref -0.09988498 yaw_ref 0.00085046 v_ref 0.19998219 w_ref 0.00188684 t_ref 7.20000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.23576268 y_ref -0.09986896 yaw_ref 0.00100141 v_ref 0.19998219 w_ref 0.00188678 t_ref 7.28000000 loop_counter 58.00000000
+[reference_trajectory_planning]  Time 6.00000000 x_ref 1.25176124 y_ref -0.09985052 yaw_ref 0.00115235 v_ref 0.19998219 w_ref 0.00188675 t_ref 7.36000000 loop_counter 58.00000000
+[goal_state_planning]  Time 6.00000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 6.00000000 loop_counter 58.00000000
+[planning_control_command]  Time 6.00000000 vc 0.20333690 wc 0.00052127 Time 6.00000000
+[reference_point_tracking]  Time 5.80000000 x_ref 0.93863532 y_ref -0.09978331 yaw_ref -0.00148431 v_ref 0.20318927 v_ref 0.00160112 t 5.80000000
+ [tracking_error]  Time 5.80000000 err_x -0.00002166 err_y 0.00003431 err_yaw -0.00047567 t 5.80000000
+[control_command]  Time 5.80000000 speed_command 0.20347181 yawratio_command 0.00233013 t 5.80000000
+[state_of_robot]  Time 5.81000000 x 0.94064896 y -0.09975293 yaw -0.00193106 v 0.20353060 w 0.00289172 t 5.81000000
+[state_of_robot]  Time 5.82000000 x 0.94268418 y -0.09975680 yaw -0.00190295 v 0.20352220 w 0.00281149 t 5.82000000
+[reference_point_tracking]  Time 5.82000000 x_ref 0.94269811 y_ref -0.09978911 yaw_ref -0.00145548 v_ref 0.20316466 v_ref 0.00152127 t 5.82000000
+ [tracking_error]  Time 5.82000000 err_x -0.00001393 err_y 0.00003231 err_yaw -0.00044747 t 5.82000000
+[control_command]  Time 5.82000000 speed_command 0.20336851 yawratio_command 0.00221122 t 5.82000000
+[state_of_robot]  Time 5.83000000 x 0.94471918 y -0.09976062 yaw -0.00187569 v 0.20350024 w 0.00272574 t 5.83000000
+[state_of_robot]  Time 5.84000000 x 0.94675399 y -0.09976438 yaw -0.00184917 v 0.20348142 w 0.00265224 t 5.84000000
+[reference_point_tracking]  Time 5.84000000 x_ref 0.94676091 y_ref -0.09979490 yaw_ref -0.00142665 v_ref 0.20314006 v_ref 0.00144142 t 5.84000000
+ [tracking_error]  Time 5.84000000 err_x -0.00000692 err_y 0.00003052 err_yaw -0.00042252 t 5.84000000
+[control_command]  Time 5.84000000 speed_command 0.20326779 yawratio_command 0.00209505 t 5.84000000
+[state_of_robot]  Time 5.85000000 x 0.94878850 y -0.09976809 yaw -0.00182344 v 0.20345090 w 0.00257264 t 5.85000000
+[state_of_robot]  Time 5.86000000 x 0.95082274 y -0.09977175 yaw -0.00179840 v 0.20342475 w 0.00250441 t 5.86000000
+[reference_point_tracking]  Time 5.86000000 x_ref 0.95080477 y_ref -0.09980015 yaw_ref -0.00139450 v_ref 0.20290340 v_ref 0.00148296 t 5.86000000
+ [tracking_error]  Time 5.86000000 err_x 0.00001796 err_y 0.00002840 err_yaw -0.00040390 t 5.86000000
+[control_command]  Time 5.86000000 speed_command 0.20284540 yawratio_command 0.00216559 t 5.86000000
+[state_of_robot]  Time 5.87000000 x 0.95285616 y -0.09977536 yaw -0.00177384 v 0.20334198 w 0.00245601 t 5.87000000
+[state_of_robot]  Time 5.88000000 x 0.95488886 y -0.09977891 yaw -0.00174969 v 0.20327104 w 0.00241452 t 5.88000000
+[reference_point_tracking]  Time 5.88000000 x_ref 0.95484864 y_ref -0.09980540 yaw_ref -0.00136235 v_ref 0.20266674 v_ref 0.00152449 t 5.88000000
+ [tracking_error]  Time 5.88000000 err_x 0.00004022 err_y 0.00002649 err_yaw -0.00038734 t 5.88000000
+[control_command]  Time 5.88000000 speed_command 0.20239377 yawratio_command 0.00225040 t 5.88000000
+[state_of_robot]  Time 5.89000000 x 0.95692032 y -0.09978242 yaw -0.00172578 v 0.20314572 w 0.00239107 t 5.89000000
+[state_of_robot]  Time 5.90000000 x 0.95895070 y -0.09978588 yaw -0.00170207 v 0.20303829 w 0.00237098 t 5.90000000
+[plainning_global_reference_point]  Time 6.08000000 x_ref 0.99594017 y_ref -0.10000000 yaw_ref -0.00000108 v_ref 0.20000008 w_ref 0.00009559 t 6.08000000
+ [plannin_tracking_error]  Time 6.08000000 err_x -0.00049397 err_y 0.00014569 err_yaw -0.00114941 t 6.08000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 0.94676091 y_ref -0.09979490 yaw_ref -0.00142665 v_ref 0.20314006 w_ref 0.00144142 t_ref 5.84000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 w_ref 0.00160756 t_ref 5.92000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 0.97918327 y_ref -0.09983560 yaw_ref -0.00121260 v_ref 0.20308637 w_ref 0.00106805 t_ref 6.00000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 0.99544620 y_ref -0.09985431 yaw_ref -0.00115049 v_ref 0.20328679 w_ref 0.00077644 t_ref 6.08000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.01170617 y_ref -0.09987221 yaw_ref -0.00110076 v_ref 0.20324977 w_ref 0.00062161 t_ref 6.16000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.02788890 y_ref -0.09988880 yaw_ref -0.00102526 v_ref 0.20228423 w_ref 0.00094374 t_ref 6.24000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.04398414 y_ref -0.09990336 yaw_ref -0.00090445 v_ref 0.20119060 w_ref 0.00151008 t_ref 6.32000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.06001727 y_ref -0.09991527 yaw_ref -0.00074265 v_ref 0.20041414 w_ref 0.00202255 t_ref 6.40000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.07602013 y_ref -0.09992423 yaw_ref -0.00056012 v_ref 0.20003581 w_ref 0.00228159 t_ref 6.48000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.09201962 y_ref -0.09993050 yaw_ref -0.00039164 v_ref 0.19999356 w_ref 0.00210604 t_ref 6.56000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.10801842 y_ref -0.09993417 yaw_ref -0.00022971 v_ref 0.19998511 w_ref 0.00202412 t_ref 6.64000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.12401710 y_ref -0.09993530 yaw_ref -0.00007084 v_ref 0.19998342 w_ref 0.00198589 t_ref 6.72000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.14001574 y_ref -0.09993392 yaw_ref 0.00008660 v_ref 0.19998308 w_ref 0.00196805 t_ref 6.80000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.15601439 y_ref -0.09993002 yaw_ref 0.00024338 v_ref 0.19998302 w_ref 0.00195973 t_ref 6.88000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.17201302 y_ref -0.09992363 yaw_ref 0.00039985 v_ref 0.19998300 w_ref 0.00195584 t_ref 6.96000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.18801166 y_ref -0.09991473 yaw_ref 0.00055617 v_ref 0.19998300 w_ref 0.00195403 t_ref 7.04000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.20401030 y_ref -0.09990333 yaw_ref 0.00071243 v_ref 0.19998300 w_ref 0.00195318 t_ref 7.12000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.22000893 y_ref -0.09988943 yaw_ref 0.00086865 v_ref 0.19998300 w_ref 0.00195279 t_ref 7.20000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.23600756 y_ref -0.09987304 yaw_ref 0.00102486 v_ref 0.19998300 w_ref 0.00195260 t_ref 7.28000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.25200619 y_ref -0.09985414 yaw_ref 0.00118106 v_ref 0.19998300 w_ref 0.00195252 t_ref 7.36000000 loop_counter 59.00000000
+[reference_trajectory_planning]  Time 6.08000000 x_ref 1.26800482 y_ref -0.09983275 yaw_ref 0.00133726 v_ref 0.19998300 w_ref 0.00195248 t_ref 7.44000000 loop_counter 59.00000000
+[goal_state_planning]  Time 6.08000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 6.08000000 loop_counter 59.00000000
+[planning_control_command]  Time 6.08000000 vc 0.20324052 wc 0.00048613 Time 6.08000000
+[reference_point_tracking]  Time 5.90000000 x_ref 0.95889250 y_ref -0.09981065 yaw_ref -0.00133020 v_ref 0.20243008 v_ref 0.00156602 t 5.90000000
+ [tracking_error]  Time 5.90000000 err_x 0.00005819 err_y 0.00002478 err_yaw -0.00037187 t 5.90000000
+[control_command]  Time 5.90000000 speed_command 0.20195658 yawratio_command 0.00232642 t 5.90000000
+[state_of_robot]  Time 5.91000000 x 0.96097953 y -0.09978928 yaw -0.00167843 v 0.20288376 w 0.00236461 t 5.91000000
+[state_of_robot]  Time 5.92000000 x 0.96300704 y -0.09979264 yaw -0.00165484 v 0.20275131 w 0.00235916 t 5.92000000
+[reference_point_tracking]  Time 5.92000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 v_ref 0.00160756 t 5.92000000
+ [tracking_error]  Time 5.92000000 err_x 0.00007067 err_y 0.00002326 err_yaw -0.00035679 t 5.92000000
+[control_command]  Time 5.92000000 speed_command 0.20155938 yawratio_command 0.00238511 t 5.92000000
+[state_of_robot]  Time 5.93000000 x 0.96503285 y -0.09979594 yaw -0.00163121 v 0.20258103 w 0.00236286 t 5.93000000
+[state_of_robot]  Time 5.94000000 x 0.96705720 y -0.09979919 yaw -0.00160755 v 0.20243508 w 0.00236604 t 5.94000000
+[reference_point_tracking]  Time 5.94000000 x_ref 0.96699809 y_ref -0.09982083 yaw_ref -0.00127669 v_ref 0.20241666 v_ref 0.00147268 t 5.94000000
+ [tracking_error]  Time 5.94000000 err_x 0.00005910 err_y 0.00002163 err_yaw -0.00033086 t 5.94000000
+[control_command]  Time 5.94000000 speed_command 0.20178762 yawratio_command 0.00216699 t 5.94000000
+[state_of_robot]  Time 5.95000000 x 0.96908062 y -0.09980240 yaw -0.00158417 v 0.20234259 w 0.00233761 t 5.95000000
+[state_of_robot]  Time 5.96000000 x 0.97110325 y -0.09980556 yaw -0.00156104 v 0.20226331 w 0.00231323 t 5.96000000
+[reference_point_tracking]  Time 5.96000000 x_ref 0.97105982 y_ref -0.09982575 yaw_ref -0.00125533 v_ref 0.20263989 v_ref 0.00133781 t 5.96000000
+ [tracking_error]  Time 5.96000000 err_x 0.00004343 err_y 0.00002019 err_yaw -0.00030571 t 5.96000000
+[control_command]  Time 5.96000000 speed_command 0.20210997 yawratio_command 0.00191872 t 5.96000000
+[state_of_robot]  Time 5.97000000 x 0.97312566 y -0.09980867 yaw -0.00153847 v 0.20224140 w 0.00225687 t 5.97000000
+[state_of_robot]  Time 5.98000000 x 0.97514789 y -0.09981174 yaw -0.00151638 v 0.20222263 w 0.00220857 t 5.98000000
+[reference_point_tracking]  Time 5.98000000 x_ref 0.97512154 y_ref -0.09983068 yaw_ref -0.00123397 v_ref 0.20286313 v_ref 0.00120293 t 5.98000000
+ [tracking_error]  Time 5.98000000 err_x 0.00002635 err_y 0.00001894 err_yaw -0.00028242 t 5.98000000
+[control_command]  Time 5.98000000 speed_command 0.20248017 yawratio_command 0.00167392 t 5.98000000
+[state_of_robot]  Time 5.99000000 x 0.97717048 y -0.09981476 yaw -0.00149506 v 0.20225942 w 0.00213219 t 5.99000000
+[state_of_robot]  Time 6.00000000 x 0.97919339 y -0.09981774 yaw -0.00147439 v 0.20229095 w 0.00206672 t 6.00000000
+[plainning_global_reference_point]  Time 6.04444444 x_ref 0.98872268 y_ref -0.10000000 yaw_ref -0.00000299 v_ref 0.20000022 w_ref 0.00026552 t 6.04444444
+ [plannin_tracking_error]  Time 6.16000000 err_x 0.02298349 err_y 0.00012779 err_yaw -0.00109777 t 6.16000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 0.96293637 y_ref -0.09981590 yaw_ref -0.00129805 v_ref 0.20219342 w_ref 0.00160756 t_ref 5.92000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 0.97918327 y_ref -0.09983560 yaw_ref -0.00121260 v_ref 0.20308637 w_ref 0.00106805 t_ref 6.00000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 0.99544620 y_ref -0.09985431 yaw_ref -0.00115049 v_ref 0.20328679 w_ref 0.00077644 t_ref 6.08000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.01170617 y_ref -0.09987221 yaw_ref -0.00110076 v_ref 0.20324977 w_ref 0.00062161 t_ref 6.16000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.02668619 y_ref -0.09988763 yaw_ref -0.00102963 v_ref 0.18725031 w_ref 0.00088915 t_ref 6.24000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.03634797 y_ref -0.09989648 yaw_ref -0.00091598 v_ref 0.12077228 w_ref 0.00142065 t_ref 6.32000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.04517265 y_ref -0.09990318 yaw_ref -0.00075880 v_ref 0.11030862 w_ref 0.00196474 t_ref 6.40000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.05583444 y_ref -0.09990925 yaw_ref -0.00056958 v_ref 0.13327232 w_ref 0.00236527 t_ref 6.48000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.06903087 y_ref -0.09991413 yaw_ref -0.00036951 v_ref 0.16495541 w_ref 0.00250081 t_ref 6.56000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.08450246 y_ref -0.09991708 yaw_ref -0.00019100 v_ref 0.19339490 w_ref 0.00223140 t_ref 6.64000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.10042909 y_ref -0.09991744 yaw_ref -0.00002255 v_ref 0.19908280 w_ref 0.00210567 t_ref 6.72000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.11644672 y_ref -0.09991518 yaw_ref 0.00014121 v_ref 0.20022038 w_ref 0.00204699 t_ref 6.80000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.13248255 y_ref -0.09991033 yaw_ref 0.00030278 v_ref 0.20044789 w_ref 0.00201961 t_ref 6.88000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.14852202 y_ref -0.09990289 yaw_ref 0.00046333 v_ref 0.20049340 w_ref 0.00200684 t_ref 6.96000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.16456221 y_ref -0.09989289 yaw_ref 0.00062340 v_ref 0.20050250 w_ref 0.00200087 t_ref 7.04000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.18060255 y_ref -0.09988033 yaw_ref 0.00078325 v_ref 0.20050432 w_ref 0.00199809 t_ref 7.12000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.19664292 y_ref -0.09986521 yaw_ref 0.00094299 v_ref 0.20050468 w_ref 0.00199679 t_ref 7.20000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.21268329 y_ref -0.09984752 yaw_ref 0.00110268 v_ref 0.20050476 w_ref 0.00199619 t_ref 7.28000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.22872366 y_ref -0.09982727 yaw_ref 0.00126236 v_ref 0.20050477 w_ref 0.00199590 t_ref 7.36000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.24476403 y_ref -0.09980446 yaw_ref 0.00142202 v_ref 0.20050477 w_ref 0.00199577 t_ref 7.44000000 loop_counter 60.00000000
+[reference_trajectory_planning]  Time 6.16000000 x_ref 1.26080439 y_ref -0.09977909 yaw_ref 0.00158167 v_ref 0.20050477 w_ref 0.00199571 t_ref 7.52000000 loop_counter 60.00000000
+[goal_state_planning]  Time 6.16000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal -0.00000000 v_goal 0.00000000 w_goal 0.00000000 Time 6.16000000 loop_counter 60.00000000
+[planning_control_command]  Time 6.16000000 vc 0.18325045 wc 0.00112324 Time 6.16000000
+[reference_point_tracking]  Time 6.00000000 x_ref 0.97918327 y_ref -0.09983560 yaw_ref -0.00121260 v_ref 0.20308637 v_ref 0.00106805 t 6.00000000
+ [tracking_error]  Time 6.00000000 err_x 0.00001012 err_y 0.00001786 err_yaw -0.00026179 t 6.00000000
+[control_command]  Time 6.00000000 speed_command 0.20286488 yawratio_command 0.00144668 t 6.00000000
+[state_of_robot]  Time 6.01000000 x 0.98121711 y -0.09982069 yaw -0.00145461 v 0.20237294 w 0.00197814 t 6.01000000

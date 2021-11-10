@@ -286,7 +286,7 @@ plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...   
        cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'black', ...                              %% 近似局部轨迹             plot
        ... % cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                   %% 真实局部轨迹散点图   plot
        cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
-       cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'black*'); grid on;
+       cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'ro'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
 title('运动轨迹'); legend('近似全局轨迹', '近似局部轨迹','真实局部轨迹散点图', '小车轨迹', '停车点');
 

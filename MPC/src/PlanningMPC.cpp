@@ -379,10 +379,18 @@ void PlanningMPC::GenerateGoalTraj()
         temp.t_ref   = t;
 
         global_traj_points_.push_back(temp);
-        
-        cout << t          << "  "
-             << endl;
     }
+
+    temp.x_ref   = goal_state_.x;
+    temp.y_ref   = goal_state_.y;
+    temp.yaw_ref = goal_state_.yaw;
+    temp.v_ref   = goal_state_.v + speed_except;
+    temp.w_ref   = goal_state_.w;
+    temp.t_ref   = temp.t_ref + safe_distance / speed_except;
+
+    global_traj_points_.push_back(temp);
+
+    cout << temp.t_ref << endl;
 
     cout << "[INFO] generate reference global route points successfully !"
          << endl;
