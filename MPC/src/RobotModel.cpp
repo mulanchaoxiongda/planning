@@ -13,8 +13,8 @@ RobotModel::RobotModel(RobotMotionStatePara motion_state,
 
 RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_command)
 {
-    double Tv = 0.1;
-    double Tw = 0.15;
+    double Tv = 0.07;
+    double Tw = 0.07;
 
     bool model_type = 1;
 

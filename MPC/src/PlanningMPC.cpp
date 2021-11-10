@@ -54,7 +54,7 @@ PlanningMPC::PlanningMPC(
 
     GetSensorInfo();
 
-    ReadInGoalTraj();
+    //ReadInGoalTraj();
     GenerateGoalTraj();
 
     FindRefPoint();
@@ -235,11 +235,11 @@ void PlanningMPC::GenerateGoalTraj()
     double distance_start2goal = pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
                                      pow(goal_state_.y - sensor_info_.y, 2.0), 0.5);
 
-    double speed_except = 0.2;
+    double speed_except = 0.20;
 
     double safe_distance = 0.3;
 
-    double tiem_margin = 1.0;
+    double tiem_margin = -1.0;
 
     double t0, t1;
     
@@ -328,7 +328,15 @@ void PlanningMPC::GenerateGoalTraj()
         temp.w_ref   = w;
         temp.t_ref   = t;
 
-        //global_traj_points_.push_back(temp);
+        global_traj_points_.push_back(temp);
+        
+        cout << t   << "  "
+             << x   << "  "
+             << y   << "  "
+             << yaw << "  "
+             << v   << "  "
+             << w *57.3  << "  "
+             << endl;
     }
 
     cout << "[INFO] generate reference global route points successfully !"
