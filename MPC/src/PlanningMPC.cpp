@@ -253,6 +253,8 @@ void PlanningMPC::GenerateGoalTraj()
     temp.w_ref   = sensor_info_.w;
     temp.t_ref   = sensor_info_.t;
 
+    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+
     global_traj_points_.push_back(temp);
 
     double step = 0.05;
@@ -281,11 +283,14 @@ void PlanningMPC::GenerateGoalTraj()
         global_traj_points_.push_back(temp);
     }
 
+    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+
     // Todo 代码风格
     // Todo 对时间time_margin、速度speed_except采样，形成备选轨迹集合
     // Todo 明确场景与边界条件，建模仿真
     // Todo 调参，分析仿真数据，确定代价函数和硬件约束
     // Todo 调试，定版
+    // Todo 五次多项式拼接出曲率不连续
     double speed_except = 0.15;
 
     double time_margin = 1.0;
@@ -298,8 +303,6 @@ void PlanningMPC::GenerateGoalTraj()
     t1 = 
             t0 + (distance_agv2goal - safe_distance - distance_travel) /
             speed_except + time_margin;
-
-    cout << t1 - t0 << endl;
 
     MatrixXd X(6, 1), Y(6, 1);
     
@@ -387,6 +390,8 @@ void PlanningMPC::GenerateGoalTraj()
         temp.t_ref   = t;
 
         global_traj_points_.push_back(temp);
+
+        cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
     }
 
     temp.x_ref   = goal_state_.x;
@@ -397,6 +402,8 @@ void PlanningMPC::GenerateGoalTraj()
     temp.t_ref   = temp.t_ref + safe_distance / speed_except;
 
     global_traj_points_.push_back(temp);
+
+    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
 
     cout << "[INFO] generate reference global route points successfully !"
          << endl;
