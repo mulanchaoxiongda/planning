@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
     vector<TrajPoint> local_traj_points;
 
-    while (time <= 6.0) {
+    while (time <= 7.8) {
         if (loop_counter % num_planning == 0) {
             planning_mpc.CalRefTrajectory(local_traj_points);
         }

@@ -280,12 +280,17 @@ void PlanningMPC::GenerateGoalTraj()
 
         global_traj_points_.push_back(temp);
     }
-    
-    double speed_except = 0.20;
 
-    double safe_distance = 0.3;
+    // Todo 代码风格
+    // Todo 对时间t1、速度speed_except采样，形成备选轨迹集合
+    // Todo 明确场景与边界条件，建模仿真
+    // Todo 调参，分析仿真数据，确定代价函数和硬件约束
+    // Todo 调试，定版
+    double speed_except = 0.15;
 
     double tiem_margin = 1.0;
+
+    double safe_distance = 0.3; // Todo 随速度自适应A
 
     double t0, t1;
     
@@ -293,6 +298,8 @@ void PlanningMPC::GenerateGoalTraj()
     t1 = 
             t0 + (distance_agv2goal - safe_distance - distance_travel) /
             speed_except + tiem_margin;
+
+    cout << t1 - t0 << endl;
 
     MatrixXd X(6, 1), Y(6, 1);
     
