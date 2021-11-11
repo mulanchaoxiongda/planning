@@ -127,6 +127,7 @@ ControlCommand PlanningMPC::CalRefTrajectory(
                        num_variables, max_iteration, eps_abs);
 
     u_optimal_.resize(nc_ * nu_, 1);
+    u_opt_storage_.resize(nc_ * nu_, 1);
 
     MatrixXd A_t = MatrixXd::Zero(nc_, nc_);
 
@@ -144,6 +145,8 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     Ut = CustomFunction::KroneckerProduct(MatrixXd::Ones(nc_, 1), u_pre_);
 
     u_optimal_ = Ut + A_I * u_opt;
+
+    u_opt_storage_ = u_optimal_;
 
     u_pre_(0) = u_optimal_(0);
     u_pre_(1) = u_optimal_(1);
@@ -520,14 +523,28 @@ void PlanningMPC::UpdateSensorInfo()
         }
     }
 
-    sensor_info_.t   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).t_ref;                                                                                    
-    sensor_info_.x   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).x_ref;
-    sensor_info_.y   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).y_ref;
-    sensor_info_.yaw = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).yaw_ref;
-    sensor_info_.v   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).v_ref;
-    sensor_info_.w   = ref_traj_points_.at(ID_RefPoint + weak_planning_num_).w_ref;
+    int index_transition_point = ID_RefPoint + weak_planning_num_;
+    
+    sensor_info_.t   = ref_traj_points_.at(index_transition_point).t_ref;
+    sensor_info_.x   = ref_traj_points_.at(index_transition_point).x_ref;
+    sensor_info_.y   = ref_traj_points_.at(index_transition_point).y_ref;
+    sensor_info_.yaw = ref_traj_points_.at(index_transition_point).yaw_ref;
+    sensor_info_.v   = ref_traj_points_.at(index_transition_point).v_ref;
+    sensor_info_.w   = ref_traj_points_.at(index_transition_point).w_ref;
 
     sensor_info_id_ = ID_RefPoint;
+
+    // 控制量初始值求解方案A
+    /* u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
+              sensor_info_.w - global_ref_traj_point_.w; */
+    
+    int index_init_point = index_transition_point - 1;
+
+    // 控制量初始值求解方案B
+    // 在规划轨迹的连续性上，方案B优于方案A，源于强、弱规划的衔接策略 + 运动学线性化误差模型
+    // 方案B规划的轨迹更顺化，易于跟踪，小车对全局路径的跟踪精度也会更高
+    u_pre_ << u_opt_storage_(index_init_point * nu_),
+              u_opt_storage_(index_init_point * nu_ + 1);
 }
 
 void PlanningMPC::CalControlCoefficient()
@@ -561,7 +578,7 @@ void PlanningMPC::CalControlCoefficient()
     u_max_ <<  1.0 - global_ref_traj_point_.v,
                35.0 / 57.3 - global_ref_traj_point_.w;
 
-    //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
+    // du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
     du_min_ << -1.0 * predict_step_, -100.0 / 57.3 * predict_step_;
     du_max_ <<  1.0 * predict_step_,  100.0 / 57.3 * predict_step_;
 }

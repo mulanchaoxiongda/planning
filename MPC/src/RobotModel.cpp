@@ -13,7 +13,7 @@ RobotModel::RobotModel(RobotMotionStatePara motion_state,
 
 RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_command)
 {
-    bool model_type = 0;
+    bool model_type = 1;
 
     if (model_type == 0) {
         motion_state_.x =

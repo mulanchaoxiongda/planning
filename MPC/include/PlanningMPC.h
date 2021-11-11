@@ -35,6 +35,7 @@ class PlanningMPC: public PlanningAlgorithm
      double  weak_planning_duration_;
 
      VectorXd u_pre_;
+
      int nx_, nu_;
 
      int np_, nc_;
@@ -55,6 +56,7 @@ class PlanningMPC: public PlanningAlgorithm
      vector<TrajPoint> ref_traj_points_;
 
      VectorXd u_optimal_;
+     VectorXd u_opt_storage_;
 
      bool gate_start_;
 
