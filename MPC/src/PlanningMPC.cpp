@@ -282,13 +282,13 @@ void PlanningMPC::GenerateGoalTraj()
     }
 
     // Todo 代码风格
-    // Todo 对时间t1、速度speed_except采样，形成备选轨迹集合
+    // Todo 对时间time_margin、速度speed_except采样，形成备选轨迹集合
     // Todo 明确场景与边界条件，建模仿真
     // Todo 调参，分析仿真数据，确定代价函数和硬件约束
     // Todo 调试，定版
     double speed_except = 0.15;
 
-    double tiem_margin = 1.0;
+    double time_margin = 1.0;
 
     double safe_distance = 0.3; // Todo 随速度自适应A
 
@@ -297,7 +297,7 @@ void PlanningMPC::GenerateGoalTraj()
     t0 = temp.t_ref;
     t1 = 
             t0 + (distance_agv2goal - safe_distance - distance_travel) /
-            speed_except + tiem_margin;
+            speed_except + time_margin;
 
     cout << t1 - t0 << endl;
 
