@@ -13,10 +13,7 @@ RobotModel::RobotModel(RobotMotionStatePara motion_state,
 
 RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_command)
 {
-    double Tv = 0.07;
-    double Tw = 0.07;
-
-    bool model_type = 1;
+    bool model_type = 0;
 
     if (model_type == 0) {
         motion_state_.x =
@@ -30,6 +27,9 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
         motion_state_.w = control_command.yaw_rate_command;
         motion_state_.t = motion_state_.t + simulation_step_;
     } else {
+        double Tv = 0.07;
+        double Tw = 0.07;
+
         double acceleration = (control_command.speed_command - motion_state_.v) / Tv;
 
         double yaw_acceleration =

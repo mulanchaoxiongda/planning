@@ -34,8 +34,7 @@ int main(int argc, char **argv)
 
     RobotModel robot_model(motion_state, simulation_step, &save_result);
 
-    //GoalState goal_state = {1.00, -0.00, -0.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
-    GoalState goal_state = {1.00, -0.10, -0.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
+    GoalState goal_state = {1.00, -0.10, 5.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
     PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);

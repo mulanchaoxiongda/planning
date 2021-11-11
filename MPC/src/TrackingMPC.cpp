@@ -52,8 +52,8 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
 
     FindRefPoint(trajectory_points_, sensor_info_);
 
-    u_ << sensor_info_.v-reference_point_.v,
-          sensor_info_.w-reference_point_.w;
+    u_ << sensor_info_.v - reference_point_.v,
+          sensor_info_.w - reference_point_.w;
 
     running_time_sum_ = 0.0;
     running_time_average_ = 0.0;
@@ -185,13 +185,13 @@ void TrackingMPC::CalControlCoefficient()
 
     predict_step_ = 0.04;
 
-    u_min_ << -2.0 - reference_point_.v, -40.0 / 57.3 - reference_point_.w;
+    u_min_ << -1.5 - reference_point_.v, -40.0 / 57.3 - reference_point_.w;
 
-    u_max_ <<  2.0 - reference_point_.v,  40.0 / 57.3 - reference_point_.w;
+    u_max_ <<  1.5 - reference_point_.v,  40.0 / 57.3 - reference_point_.w;
 
     //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
-    du_min_ << -1.0 * predict_step_,    -200.0 / 57.3 * predict_step_;
-    du_max_ <<  1.0 * predict_step_,     200.0 / 57.3 * predict_step_;
+    du_min_ << -2.0 * predict_step_,    -120.0 / 57.3 * predict_step_;
+    du_max_ <<  2.0 * predict_step_,     120.0 / 57.3 * predict_step_;
 }
 
 void TrackingMPC::CalControlCoefficient(double v_sensor)
@@ -370,9 +370,6 @@ void TrackingMPC::ConstraintCondition(MatrixXd &A, VectorXd &lb, VectorXd &ub)
             CustomFunction::KroneckerProduct(MatrixXd::Ones(nc_, 1), du_max_);
 
     for (int i = 0; i < nu_; i++) {
-        Umax(i, 0) = Umax(i, 0) * call_cycle_ / predict_step_;
-        Umin(i, 0) = Umin(i, 0) * call_cycle_ / predict_step_;
-
         delta_Umin(i, 0) = delta_Umin(i, 0) * call_cycle_ / predict_step_;
         delta_Umax(i, 0) = delta_Umax(i, 0) * call_cycle_ / predict_step_;
     }

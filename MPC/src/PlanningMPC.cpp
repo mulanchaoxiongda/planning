@@ -291,8 +291,6 @@ void PlanningMPC::GenerateGoalTraj()
             t0 + (distance_agv2goal - safe_distance - distance_travel) /
             speed_except + tiem_margin;
 
-    cout << endl << endl << t0 << "   " << t1 << endl << endl;
-
     MatrixXd X(6, 1), Y(6, 1);
     
     X << temp.x_ref,
@@ -389,8 +387,6 @@ void PlanningMPC::GenerateGoalTraj()
     temp.t_ref   = temp.t_ref + safe_distance / speed_except;
 
     global_traj_points_.push_back(temp);
-
-    cout << temp.t_ref << endl;
 
     cout << "[INFO] generate reference global route points successfully !"
          << endl;
@@ -536,7 +532,7 @@ void PlanningMPC::UpdateSensorInfo()
 
 void PlanningMPC::CalControlCoefficient()
 {
-    np_ = 20;
+    np_ = 15;
     nc_ = 6;
 
     q_.resize(nx_, nx_);
@@ -559,15 +555,15 @@ void PlanningMPC::CalControlCoefficient()
     // Todo： 规划中的约束项应扣除各预测点的参考速度、角速度、加速度、角加速度
     // Todo： 约束项扣除的参开速度、角速度应随预测点调整，预测模型A应随预测点调整
     //  说明： 如果是非线性模型、非线性优化，则不需要以上处理
-    u_min_ << -1.5 - global_ref_traj_point_.v,
-              -40.0 / 57.3 - global_ref_traj_point_.w;
+    u_min_ << -1.0 - global_ref_traj_point_.v,
+              -35.0 / 57.3 - global_ref_traj_point_.w;
 
-    u_max_ <<  1.5 - global_ref_traj_point_.v,
-               40.0 / 57.3 - global_ref_traj_point_.w;
+    u_max_ <<  1.0 - global_ref_traj_point_.v,
+               35.0 / 57.3 - global_ref_traj_point_.w;
 
     //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
-    du_min_ << -1.0 * predict_step_, -200.0 / 57.3 * predict_step_;
-    du_max_ <<  1.0 * predict_step_,  200.0 / 57.3 * predict_step_;
+    du_min_ << -1.0 * predict_step_, -100.0 / 57.3 * predict_step_;
+    du_max_ <<  1.0 * predict_step_,  100.0 / 57.3 * predict_step_;
 }
 
 void PlanningMPC::UpdateErrorModel()
@@ -701,9 +697,6 @@ void PlanningMPC::ConstraintCondition(MatrixXd &A, VectorXd &lb, VectorXd &ub)
             CustomFunction::KroneckerProduct(MatrixXd::Ones(nc_, 1), du_max_);
 
     for (int i = 0; i < nu_; i++) {
-        Umax(i, 0) = Umax(i, 0) * call_cycle_ / predict_step_;
-        Umin(i, 0) = Umin(i, 0) * call_cycle_ / predict_step_;
-
         delta_Umin(i, 0) = delta_Umin(i, 0) * call_cycle_ / predict_step_;
         delta_Umax(i, 0) = delta_Umax(i, 0) * call_cycle_ / predict_step_;
     }
