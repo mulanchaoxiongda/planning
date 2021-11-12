@@ -572,7 +572,7 @@ void PlanningMPC::CalControlCoefficient()
     q_(0, 0) = 500.0;
     q_(1, 1) = 500.0;
     q_(2, 2) = 1.5;
-    q_(3, 3) = 0.1;
+    q_(3, 3) = 2.0;
 
     r_.resize(nu_, nu_);
     r_.setIdentity(nu_, nu_);
