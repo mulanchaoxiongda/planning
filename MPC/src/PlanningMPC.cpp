@@ -253,11 +253,14 @@ void PlanningMPC::GenerateGoalTraj()
     temp.w_ref   = sensor_info_.w;
     temp.t_ref   = sensor_info_.t;
 
-    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+    cout << temp.t_ref << "   "
+         << temp.v_ref << "   "
+         << temp.w_ref << "   "
+         << temp.v_ref / temp.w_ref << endl;
 
     global_traj_points_.push_back(temp);
 
-    double step = 0.05;
+    double step = 0.01;
 
     double distance_travel;
 
@@ -283,7 +286,10 @@ void PlanningMPC::GenerateGoalTraj()
         global_traj_points_.push_back(temp);
     }
 
-    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+    cout << temp.t_ref << "   "
+         << temp.v_ref << "   "
+         << temp.w_ref << "   "
+         << temp.v_ref / temp.w_ref << endl;
 
     // Todo 代码风格
     // Todo 对时间time_margin、速度speed_except采样，形成备选轨迹集合
@@ -391,7 +397,10 @@ void PlanningMPC::GenerateGoalTraj()
 
         global_traj_points_.push_back(temp);
 
-        cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+        cout << temp.t_ref << "   "
+             << temp.v_ref << "   "
+             << temp.w_ref << "   "
+             << temp.v_ref / temp.w_ref << endl;
     }
 
     temp.x_ref   = goal_state_.x;
@@ -403,7 +412,10 @@ void PlanningMPC::GenerateGoalTraj()
 
     global_traj_points_.push_back(temp);
 
-    cout << temp.t_ref << "   " << temp.v_ref / temp.w_ref << endl;
+    cout << temp.t_ref << "   "
+         << temp.v_ref << "   "
+         << temp.w_ref << "   "
+         << temp.v_ref / temp.w_ref << endl;
 
     cout << "[INFO] generate reference global route points successfully !"
          << endl;
