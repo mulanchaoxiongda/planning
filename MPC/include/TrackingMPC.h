@@ -23,10 +23,12 @@ class TrackingMPC: public TrackingAlgorithm
 
      ControlCommand CalControlCommand(vector<TrajPoint> &local_traj_points);
 
-     double running_time_average_;
+     double GetRunningTimeAverage();
 
 
  private:
+     double running_time_average_;
+
      vector<double> q_delta_x_para_, q_delta_y_para_;
      vector<double> q_delta_yaw_para_, q_delta_wz_para_;
 
@@ -42,7 +44,7 @@ class TrackingMPC: public TrackingAlgorithm
 
      int np_, nc_;
 
-     MatrixXd q_, r_;
+     MatrixXd matrix_q_, matrix_r_;
 
      double predict_step_;
      double call_cycle_;
@@ -50,13 +52,13 @@ class TrackingMPC: public TrackingAlgorithm
      VectorXd u_min_, u_max_, du_min_, du_max_;
 
      VectorXd x_;
-     MatrixXd a_, b_;
+     MatrixXd matrix_a_, matrix_b_;
 
      double running_time_sum_;
 
      int loop_counter_;
 
-     MatrixXd A_, B_, C_;
+     MatrixXd matrix_A_, matrix_B_, matrix_C_;
 
      void ReadInControlPara();
 
@@ -68,18 +70,18 @@ class TrackingMPC: public TrackingAlgorithm
 
      void UpdateIncrementModel();
 
-     void PredictFunc(MatrixXd &phi, MatrixXd &theta);
+     void Predict(MatrixXd &phi, MatrixXd &theta);
 
-     void ObjectiveFunc(
+     void CalObjectiveFunc(
              MatrixXd &h_, MatrixXd &e_, VectorXd &g_, MatrixXd kesi_,
              MatrixXd phi_, MatrixXd theta_);
 
-     void ConstraintCondition(MatrixXd &A, VectorXd &lb, VectorXd &ub);
+     void CalConstraintConditions(MatrixXd &A, VectorXd &lb, VectorXd &ub);
 
      int  OptimizationSolver(
-             VectorXd &optimal_solution, MatrixXd p01, VectorXd q01, MatrixXd Ac,
-             VectorXd l01, VectorXd u01, int m01, int n01, c_int max_iteration,
-             c_float eps_abs);
+             VectorXd &optimal_solution, MatrixXd p01, VectorXd q01,
+             MatrixXd Ac, VectorXd l01, VectorXd u01, int m01, int n01,
+             c_int max_iteration, c_float eps_abs);
 
      void MatrixToCCS(
              MatrixXd matrix_, vector<c_float> *sm_x, c_int &sm_nnz,

@@ -23,7 +23,7 @@ class PlanningMPC: public PlanningAlgorithm
 
      ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points);
 
-     double running_time_average_;
+     double GetRunningTimeAverage();
 
 
  private:
@@ -40,16 +40,16 @@ class PlanningMPC: public PlanningAlgorithm
 
      int np_, nc_;
 
-     MatrixXd q_, r_;
+     MatrixXd matrix_q_, matrix_r_;
 
      VectorXd u_min_, u_max_, du_min_, du_max_;
 
      VectorXd x_;
-     MatrixXd a_, b_;
+     MatrixXd matrix_a_, matrix_b_;
 
      double running_time_sum_;
 
-     MatrixXd A_, B_, C_;
+     MatrixXd matrix_A_, matrix_B_, matrix_C_;
 
      int loop_counter_;
 
@@ -62,6 +62,8 @@ class PlanningMPC: public PlanningAlgorithm
 
      double predict_step_;
      double call_cycle_;
+
+     double running_time_average_;
 
      vector<double> ref_point_command_;
 
@@ -79,13 +81,13 @@ class PlanningMPC: public PlanningAlgorithm
 
      void UpdateIncrementModel();
 
-     void PredictFunc(MatrixXd &phi, MatrixXd &theta);
+     void Predict(MatrixXd &phi, MatrixXd &theta);
 
-     void ObjectiveFunc(
+     void CalObjectiveFunc(
              MatrixXd &h, MatrixXd &e, VectorXd &g, MatrixXd kesi,
              MatrixXd phi, MatrixXd theta);
 
-     void ConstraintCondition(
+     void CalConstraintConditions(
              MatrixXd &A, VectorXd &lb, VectorXd &ub);
 
      int  OptimizationSolver(

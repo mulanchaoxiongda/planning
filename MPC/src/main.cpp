@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     SaveData save_result(full_result_path);
 
     const char* full_trajectory_reference_path = "../data/TrajectoryPoints.txt";
+
     SaveData save_trajectory_reference(full_trajectory_reference_path);
 
     TrajectoryCreator TrajCreator(&save_trajectory_reference, &save_result);
@@ -35,6 +36,7 @@ int main(int argc, char **argv)
     RobotModel robot_model(motion_state, simulation_step, &save_result);
 
     GoalState goal_state = {1.00, -0.10, 5.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
+    
     PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
@@ -58,7 +60,7 @@ int main(int argc, char **argv)
 
         if (loop_counter % num_control == 0) {
             control_command = tracking_mpc.CalControlCommand(local_traj_points);
-            //control_command = planning_mpc.CalRefTrajectory(local_traj_points);
+            // control_command = planning_mpc.CalRefTrajectory(local_traj_points);
         }
 
         robot_model.UpdateMotionState(control_command);
@@ -69,14 +71,17 @@ int main(int argc, char **argv)
 
     gettimeofday(&t_end,NULL);
 
-    cout << "[planning] MPC run time(average): " << planning_mpc.running_time_average_ * 1000.0
+    cout << "[planning] MPC run time(average): "
+         << planning_mpc.GetRunningTimeAverage() * 1000.0
          << "ms." <<endl;
 
-    cout << "[tracking] MPC run time(average): " << tracking_mpc.running_time_average_ * 1000.0
+    cout << "[tracking] MPC run time(average): "
+         << tracking_mpc.GetRunningTimeAverage() * 1000.0
          << "ms." <<endl;
 
-    cout << "Program run time: " << (double)(t_end.tv_sec - t_start.tv_sec) * 1000.0 +
-                                    (double)(t_end.tv_usec - t_start.tv_usec) / 1000.0
+    cout << "Program run time: "
+         << (double)(t_end.tv_sec - t_start.tv_sec) * 1000.0 +
+            (double)(t_end.tv_usec - t_start.tv_usec) / 1000.0
          << "ms." << endl;
 
     return 0;

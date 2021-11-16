@@ -34,8 +34,8 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
     nu_ = 2;
 
     x_.resize(nx_ + nu_);
-    a_.resize(nx_, nx_);
-    b_.resize(nx_, nu_);
+    matrix_a_.resize(nx_, nx_);
+    matrix_b_.resize(nx_, nu_);
 
     u_.resize(nu_);
 
@@ -60,12 +60,13 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
 
     loop_counter_ = 0;
 
-    A_.resize(nx_ + nu_, nx_ + nu_);
-    B_.resize(nx_ + nu_, nu_);
-    C_.resize(nx_, nx_ + nu_);
+    matrix_A_.resize(nx_ + nu_, nx_ + nu_);
+    matrix_B_.resize(nx_ + nu_, nu_);
+    matrix_C_.resize(nx_, nx_ + nu_);
 }
 
-ControlCommand TrackingMPC::CalControlCommand(vector<TrajPoint> &local_traj_points)
+ControlCommand TrackingMPC::CalControlCommand(
+        vector<TrajPoint> &local_traj_points)
 {
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
@@ -76,7 +77,8 @@ ControlCommand TrackingMPC::CalControlCommand(vector<TrajPoint> &local_traj_poin
 
     FindRefPoint(trajectory_points_, sensor_info_);
 
-    CalControlCoefficient(); /* CalControlCoefficient(p_RobotModel_->motion_state_.v); */
+    // CalControlCoefficient(p_RobotModel_->motion_state_.v);
+    CalControlCoefficient(); 
 
     UpdateErrorModel();
 
@@ -84,17 +86,17 @@ ControlCommand TrackingMPC::CalControlCommand(vector<TrajPoint> &local_traj_poin
 
     MatrixXd phi(nx_ * np_, nx_ + nu_), theta(nx_ * np_, nu_ * nc_);
 
-    PredictFunc(phi, theta);
+    Predict(phi, theta);
 
     MatrixXd H(nc_ * nu_, nc_ * nu_), E(nx_ * np_, 1);
     VectorXd g(nc_ * nu_, 1);
 
-    ObjectiveFunc(H, E, g, x_, phi, theta);
+    CalObjectiveFunc(H, E, g, x_, phi, theta);
 
     MatrixXd _A(nc_ * nu_ * 2, nc_ * nu_);
     VectorXd lb(nc_ * nu_ * 2, 1), ub(nc_ * nu_ * 2, 1);
 
-    ConstraintCondition(_A, lb, ub);
+    CalConstraintConditions(_A, lb, ub);
 
     int num_constraints = nc_ * nu_ * 2, num_variables = nc_ * nu_;
     VectorXd u_optim(nc_ * nu_);
@@ -169,19 +171,19 @@ void TrackingMPC::CalControlCoefficient()
     np_ = 15;
     nc_ = 3;
 
-    q_.resize(nx_, nx_);
-    q_.setIdentity(nx_, nx_);
+    matrix_q_.resize(nx_, nx_);
+    matrix_q_.setIdentity(nx_, nx_);
 
-    q_(0, 0) = 500.0;
-    q_(1, 1) = 500.0;
-    q_(2, 2) = 1.5;
-    q_(3, 3) = 0.1;
+    matrix_q_(0, 0) = 500.0;
+    matrix_q_(1, 1) = 500.0;
+    matrix_q_(2, 2) = 1.5;
+    matrix_q_(3, 3) = 0.1;
 
-    r_.resize(nu_, nu_);
-    r_.setIdentity(nu_, nu_);
+    matrix_r_.resize(nu_, nu_);
+    matrix_r_.setIdentity(nu_, nu_);
 
-    r_(0, 0) = 8.0;
-    r_(1, 1) = 0.2;
+    matrix_r_(0, 0) = 8.0;
+    matrix_r_(1, 1) = 0.2;
 
     predict_step_ = 0.04;
 
@@ -196,17 +198,17 @@ void TrackingMPC::CalControlCoefficient()
 
 void TrackingMPC::CalControlCoefficient(double v_sensor)
 {
-    q_.setZero(nx_, nx_);
+    matrix_q_.setZero(nx_, nx_);
 
-    q_(0, 0) = CustomFunction::interp_linear(v_para_, q_delta_x_para_,   v_sensor);
-    q_(1, 1) = CustomFunction::interp_linear(v_para_, q_delta_y_para_,   v_sensor);
-    q_(2, 2) = CustomFunction::interp_linear(v_para_, q_delta_yaw_para_, v_sensor);
-    q_(3, 3) = CustomFunction::interp_linear(v_para_, q_delta_wz_para_,  v_sensor);
+    matrix_q_(0, 0) = CustomFunction::interp_linear(v_para_, q_delta_x_para_,   v_sensor);
+    matrix_q_(1, 1) = CustomFunction::interp_linear(v_para_, q_delta_y_para_,   v_sensor);
+    matrix_q_(2, 2) = CustomFunction::interp_linear(v_para_, q_delta_yaw_para_, v_sensor);
+    matrix_q_(3, 3) = CustomFunction::interp_linear(v_para_, q_delta_wz_para_,  v_sensor);
 
-    r_.setZero(nu_, nu_);
+    matrix_r_.setZero(nu_, nu_);
 
-    r_(0, 0) = CustomFunction::interp_linear(v_para_, r_delta_vc_para_, v_sensor);
-    r_(1, 1) = CustomFunction::interp_linear(v_para_, r_delta_wc_para_, v_sensor);
+    matrix_r_(0, 0) = CustomFunction::interp_linear(v_para_, r_delta_vc_para_, v_sensor);
+    matrix_r_(1, 1) = CustomFunction::interp_linear(v_para_, r_delta_wc_para_, v_sensor);
 
     np_ = (int)CustomFunction::interp_linear(v_para_, np_para_, v_sensor);
     nc_ = (int)CustomFunction::interp_linear(v_para_, nc_para_, v_sensor);
@@ -254,12 +256,12 @@ void TrackingMPC::UpdateErrorModel()
 
     double T1 = 0.07;
 
-    a_ << 1.0, 0.0, -reference_point_.v*predict_step_*sin(reference_point_.yaw),  0.0,
+    matrix_a_ << 1.0, 0.0, -reference_point_.v*predict_step_*sin(reference_point_.yaw),  0.0,
           0.0, 1.0,  reference_point_.v*predict_step_*cos(reference_point_.yaw),  0.0,
           0.0, 0.0,  1.0,                                                         predict_step_,
           0.0, 0.0,  0.0,                                                         1.0 - predict_step_ / T1;
 
-    b_ << predict_step_ * cos(reference_point_.yaw), 0.0,
+    matrix_b_ << predict_step_ * cos(reference_point_.yaw), 0.0,
           predict_step_ * sin(reference_point_.yaw), 0.0,
           0.0,                                       0.0,
           0.0,                                       predict_step_ / T1;
@@ -274,31 +276,31 @@ void TrackingMPC::UpdateErrorModel()
 
 void TrackingMPC::UpdateIncrementModel()
 {
-    A_.setZero(nx_ + nu_, nx_ + nu_);
-    A_.block(0, 0, nx_, nx_) = a_;
-    A_.block(0, nx_, nx_, nu_) = b_;
-    A_.block(nx_, nx_, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
+    matrix_A_.setZero(nx_ + nu_, nx_ + nu_);
+    matrix_A_.block(0, 0, nx_, nx_) = matrix_a_;
+    matrix_A_.block(0, nx_, nx_, nu_) = matrix_b_;
+    matrix_A_.block(nx_, nx_, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
 
-    B_.setZero(nx_ + nu_, nu_);
-    B_.block(0, 0, nx_, nu_) = b_;
-    B_.block(nx_, 0, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
+    matrix_B_.setZero(nx_ + nu_, nu_);
+    matrix_B_.block(0, 0, nx_, nu_) = matrix_b_;
+    matrix_B_.block(nx_, 0, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
 
-    C_.setZero(nx_, nx_ + nu_);
-    C_.block(0, 0, nx_, nx_) = MatrixXd::Identity(nx_, nx_);
+    matrix_C_.setZero(nx_, nx_ + nu_);
+    matrix_C_.block(0, 0, nx_, nx_) = MatrixXd::Identity(nx_, nx_);
 }
 
-void TrackingMPC::PredictFunc(MatrixXd &phi, MatrixXd &theta)
+void TrackingMPC::Predict(MatrixXd &phi, MatrixXd &theta)
 {
     phi.setZero(nx_ * np_, nx_ + nu_);
 
     for (int i = 0; i < np_; i++) {
-        MatrixXd A_i = MatrixXd::Identity(A_.rows(), A_.cols());
+        MatrixXd A_i = MatrixXd::Identity(matrix_A_.rows(), matrix_A_.cols());
 
         for (int j = 0; j <= i; j++) {
-            A_i = A_i * A_;
+            A_i = A_i * matrix_A_;
         }
 
-        phi.block(i * C_.rows(), 0, C_.rows(), A_i.cols()) = C_ * A_i;
+        phi.block(i * matrix_C_.rows(), 0, matrix_C_.rows(), A_i.cols()) = matrix_C_ * A_i;
     }
 
     theta.setZero(nx_ * np_, nu_ * nc_);
@@ -307,28 +309,28 @@ void TrackingMPC::PredictFunc(MatrixXd &phi, MatrixXd &theta)
         for (int j = 0; j < nc_; j++) {
             if (i >= j) {
                 MatrixXd A_i_substract_j =
-                        MatrixXd::Identity(A_.rows(), A_.cols());
+                        MatrixXd::Identity(matrix_A_.rows(), matrix_A_.cols());
 
                 for (int k = i - j; k > 0; k--) {
-                    A_i_substract_j = A_i_substract_j * A_;
+                    A_i_substract_j = A_i_substract_j * matrix_A_;
                 }
 
-                theta.block(i * C_.rows(), j * B_.cols(), C_.rows(), B_.cols()) =
-                        C_ * A_i_substract_j * B_;
+                theta.block(i * matrix_C_.rows(), j * matrix_B_.cols(), matrix_C_.rows(), matrix_B_.cols()) =
+                        matrix_C_ * A_i_substract_j * matrix_B_;
             }
         }
     }
 }
 
-void TrackingMPC::ObjectiveFunc(
+void TrackingMPC::CalObjectiveFunc(
         MatrixXd &h, MatrixXd &e, VectorXd &g,
         MatrixXd kesi, MatrixXd phi, MatrixXd theta)
 {
     MatrixXd Q(np_ * nx_, np_ * nx_), R(nc_ * nu_, nc_ * nu_);
 
-    Q = CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_), q_);
+    Q = CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_), matrix_q_);
 
-    R = CustomFunction::KroneckerProduct(MatrixXd::Identity(nc_, nc_), r_);
+    R = CustomFunction::KroneckerProduct(MatrixXd::Identity(nc_, nc_), matrix_r_);
 
     h = theta.transpose() * Q * theta + R;
     h = (h+h.transpose()) * 0.5;
@@ -337,7 +339,7 @@ void TrackingMPC::ObjectiveFunc(
     g = ((e.transpose()) * Q * theta).transpose();
 }
 
-void TrackingMPC::ConstraintCondition(MatrixXd &A, VectorXd &lb, VectorXd &ub)
+void TrackingMPC::CalConstraintConditions(MatrixXd &A, VectorXd &lb, VectorXd &ub)
 {
     MatrixXd A_t = MatrixXd::Zero(nc_, nc_);
 
@@ -571,4 +573,9 @@ void TrackingMPC::MatrixToCCS(
     }
 
     sm_nnz = nz;
+}
+
+double TrackingMPC::GetRunningTimeAverage()
+{
+    return running_time_average_;
 }

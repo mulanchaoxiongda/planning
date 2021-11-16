@@ -34,15 +34,11 @@ void TrajectoryCreator::TrajCreator()
     while (trajectory_point.t_ref <= 2.3) {
         double speed_command, yaw_ratio_command, radius, simulation_step = 0.05;
 
-        trajectory_point.t_ref = trajectory_point.t_ref+simulation_step;
+        trajectory_point.t_ref = trajectory_point.t_ref + simulation_step;
 
-        /* speed_command = 0.5*0.15*(trajectory_point.t_ref-2.5)*(trajectory_point.t_ref-2.5);
-
-        radius = 100000000.0;
-
-        yaw_ratio_command = speed_command / radius * 0.0; */
-
-        speed_command = 0.5*0.15*(trajectory_point.t_ref-2.5)*(trajectory_point.t_ref-2.5);
+        speed_command =
+                        0.5 * 0.15 * (trajectory_point.t_ref - 2.5) *
+                        (trajectory_point.t_ref - 2.5);                        
 
         radius = 5.0;
 

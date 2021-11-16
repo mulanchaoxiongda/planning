@@ -42,8 +42,8 @@ PlanningMPC::PlanningMPC(
     nu_ = 2;
 
     x_.resize(nx_ + nu_);
-    a_.resize(nx_, nx_);
-    b_.resize(nx_, nu_);
+    matrix_a_.resize(nx_, nx_);
+    matrix_b_.resize(nx_, nu_);
 
     u_max_.resize(nu_, 1);
     u_min_.resize(nu_, 1);
@@ -69,9 +69,9 @@ PlanningMPC::PlanningMPC(
 
     gate_start_ = true;
 
-    A_.resize(nx_ + nu_, nx_ + nu_);
-    B_.resize(nx_ + nu_, nu_);
-    C_.resize(nx_, nx_ + nu_);
+    matrix_A_.resize(nx_ + nu_, nx_ + nu_);
+    matrix_B_.resize(nx_ + nu_, nu_);
+    matrix_C_.resize(nx_, nx_ + nu_);
 
     CalControlCoefficient();
 
@@ -105,17 +105,17 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
     MatrixXd phi(nx_ * np_, nx_ + nu_), theta(nx_ * np_, nu_ * nc_);
 
-    PredictFunc(phi, theta);
+    Predict(phi, theta);
 
     MatrixXd H(nc_ * nu_, nc_ * nu_), E(nx_ * np_, 1);
     VectorXd g(nc_ * nu_, 1);
 
-    ObjectiveFunc(H, E, g, x_, phi, theta);
+    CalObjectiveFunc(H, E, g, x_, phi, theta);
 
     MatrixXd _A(nc_ * nu_ * 2, nc_ * nu_);
     VectorXd lb(nc_ * nu_ * 2, 1), ub(nc_ * nu_ * 2, 1);
 
-    ConstraintCondition(_A, lb, ub);
+    CalConstraintConditions(_A, lb, ub);
 
     int num_constraints = nc_ * nu_ * 2, num_variables = nc_ * nu_;
     VectorXd u_opt(nc_ * nu_);
@@ -578,19 +578,19 @@ void PlanningMPC::CalControlCoefficient()
     np_ = 15;
     nc_ = 6;
 
-    q_.resize(nx_, nx_);
-    q_.setIdentity(nx_, nx_);
+    matrix_q_.resize(nx_, nx_);
+    matrix_q_.setIdentity(nx_, nx_);
 
-    q_(0, 0) = 500.0;
-    q_(1, 1) = 500.0;
-    q_(2, 2) = 1.5;
-    q_(3, 3) = 2.0;
+    matrix_q_(0, 0) = 500.0;
+    matrix_q_(1, 1) = 500.0;
+    matrix_q_(2, 2) = 1.5;
+    matrix_q_(3, 3) = 2.0;
 
-    r_.resize(nu_, nu_);
-    r_.setIdentity(nu_, nu_);
+    matrix_r_.resize(nu_, nu_);
+    matrix_r_.setIdentity(nu_, nu_);
 
-    r_(0, 0) = 8.0;
-    r_(1, 1) = 0.2;
+    matrix_r_(0, 0) = 8.0;
+    matrix_r_(1, 1) = 0.2;
 
     predict_step_ = 0.08;
 
@@ -624,12 +624,12 @@ void PlanningMPC::UpdateErrorModel()
 
     double T1 = 0.07;
 
-    a_ << 1.0, 0.0, -global_ref_traj_point_.v*predict_step_*sin(global_ref_traj_point_.yaw),  0.0,
+    matrix_a_ << 1.0, 0.0, -global_ref_traj_point_.v*predict_step_*sin(global_ref_traj_point_.yaw),  0.0,
           0.0, 1.0,  global_ref_traj_point_.v*predict_step_*cos(global_ref_traj_point_.yaw),  0.0,
           0.0, 0.0,  1.0,                                                                     predict_step_,
           0.0, 0.0,  0.0,                                                                     1.0 - predict_step_ / T1;
 
-    b_ << predict_step_ * cos(global_ref_traj_point_.yaw), 0.0,
+    matrix_b_ << predict_step_ * cos(global_ref_traj_point_.yaw), 0.0,
           predict_step_ * sin(global_ref_traj_point_.yaw), 0.0,
           0.0,                                             0.0,
           0.0,                                             predict_step_ / T1;
@@ -644,31 +644,31 @@ void PlanningMPC::UpdateErrorModel()
 
 void PlanningMPC::UpdateIncrementModel()
 {
-    A_.setZero(nx_ + nu_, nx_ + nu_);
-    A_.block(0, 0, nx_, nx_) = a_;
-    A_.block(0, nx_, nx_, nu_) = b_;
-    A_.block(nx_, nx_, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
+    matrix_A_.setZero(nx_ + nu_, nx_ + nu_);
+    matrix_A_.block(0, 0, nx_, nx_) = matrix_a_;
+    matrix_A_.block(0, nx_, nx_, nu_) = matrix_b_;
+    matrix_A_.block(nx_, nx_, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
 
-    B_.setZero(nx_ + nu_, nu_);
-    B_.block(0, 0, nx_, nu_) = b_;
-    B_.block(nx_, 0, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
+    matrix_B_.setZero(nx_ + nu_, nu_);
+    matrix_B_.block(0, 0, nx_, nu_) = matrix_b_;
+    matrix_B_.block(nx_, 0, nu_, nu_) = MatrixXd::Identity(nu_, nu_);
 
-    C_.setZero(nx_, nx_ + nu_);
-    C_.block(0, 0, nx_, nx_) = MatrixXd::Identity(nx_, nx_);
+    matrix_C_.setZero(nx_, nx_ + nu_);
+    matrix_C_.block(0, 0, nx_, nx_) = MatrixXd::Identity(nx_, nx_);
 }
 
-void PlanningMPC::PredictFunc(MatrixXd &phi, MatrixXd &theta)
+void PlanningMPC::Predict(MatrixXd &phi, MatrixXd &theta)
 {
     phi.setZero(nx_ * np_, nx_ + nu_);
 
     for (int i = 0; i < np_; i++) {
-        MatrixXd A_i = MatrixXd::Identity(A_.rows(), A_.cols());
+        MatrixXd A_i = MatrixXd::Identity(matrix_A_.rows(), matrix_A_.cols());
 
         for (int j = 0; j <= i; j++) {
-            A_i = A_i * A_;
+            A_i = A_i * matrix_A_;
         }
 
-        phi.block(i * C_.rows(), 0, C_.rows(), A_i.cols()) = C_ * A_i;
+        phi.block(i * matrix_C_.rows(), 0, matrix_C_.rows(), A_i.cols()) = matrix_C_ * A_i;
     }
 
     theta.setZero(nx_ * np_, nu_ * nc_);
@@ -677,28 +677,28 @@ void PlanningMPC::PredictFunc(MatrixXd &phi, MatrixXd &theta)
         for (int j = 0; j < nc_; j++) {
             if (i >= j) {
                 MatrixXd A_i_substract_j =
-                        MatrixXd::Identity(A_.rows(), A_.cols());
+                        MatrixXd::Identity(matrix_A_.rows(), matrix_A_.cols());
 
                 for (int k = i - j; k > 0; k--) {
-                    A_i_substract_j = A_i_substract_j * A_;
+                    A_i_substract_j = A_i_substract_j * matrix_A_;
                 }
 
-                theta.block(i * C_.rows(), j * B_.cols(), C_.rows(), B_.cols()) =
-                        C_ * A_i_substract_j * B_;
+                theta.block(i * matrix_C_.rows(), j * matrix_B_.cols(), matrix_C_.rows(), matrix_B_.cols()) =
+                        matrix_C_ * A_i_substract_j * matrix_B_;
             }
         }
     }
 }
 
-void PlanningMPC::ObjectiveFunc(
+void PlanningMPC::CalObjectiveFunc(
         MatrixXd &h, MatrixXd &e, VectorXd &g,
         MatrixXd kesi, MatrixXd phi, MatrixXd theta)
 {
     MatrixXd Q(np_ * nx_, np_ * nx_), R(nc_ * nu_, nc_ * nu_);
 
-    Q = CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_), q_);
+    Q = CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_), matrix_q_);
 
-    R = CustomFunction::KroneckerProduct(MatrixXd::Identity(nc_, nc_), r_);
+    R = CustomFunction::KroneckerProduct(MatrixXd::Identity(nc_, nc_), matrix_r_);
 
     h = theta.transpose() * Q * theta + R;
     h = (h+h.transpose()) * 0.5;
@@ -707,7 +707,7 @@ void PlanningMPC::ObjectiveFunc(
     g = ((e.transpose()) * Q * theta).transpose();
 }
 
-void PlanningMPC::ConstraintCondition(MatrixXd &A, VectorXd &lb, VectorXd &ub)
+void PlanningMPC::CalConstraintConditions(MatrixXd &A, VectorXd &lb, VectorXd &ub)
 {
     MatrixXd A_t = MatrixXd::Zero(nc_, nc_);
 
@@ -1170,4 +1170,9 @@ void PlanningMPC::CalPredictForwardCommand()
         ref_point_command_.at(i * nu_) = vc_ref;
         ref_point_command_.at(i * nu_ + 1) = wc_ref;
     }
+}
+
+double PlanningMPC::GetRunningTimeAverage()
+{
+    return running_time_average_;
 }

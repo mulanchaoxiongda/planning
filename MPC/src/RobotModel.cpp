@@ -16,15 +16,18 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
     bool model_type = 1;
 
     if (model_type == 0) {
+        motion_state_.w = control_command.yaw_rate_command;
+        motion_state_.v = control_command.speed_command;
+
+        motion_state_.yaw = motion_state_.yaw + motion_state_.w * simulation_step_;
+        
         motion_state_.x =
                 motion_state_.x + motion_state_.v *
                 cos(motion_state_.yaw) * simulation_step_;
         motion_state_.y =
                 motion_state_.y + motion_state_.v *
                 sin(motion_state_.yaw) * simulation_step_;
-        motion_state_.yaw = motion_state_.yaw + motion_state_.w * simulation_step_;
-        motion_state_.v = control_command.speed_command;
-        motion_state_.w = control_command.yaw_rate_command;
+        
         motion_state_.t = motion_state_.t + simulation_step_;
     } else {
         double Tv = 0.07;
@@ -46,6 +49,7 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
         motion_state_.y =
                 motion_state_.y + motion_state_.v *
                 sin(motion_state_.yaw) * simulation_step_;
+        
         motion_state_.t = motion_state_.t + simulation_step_;
     }
 
@@ -58,5 +62,10 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
                       << " w "    << motion_state_.w
                       << " t "    << motion_state_.t   << endl;
 
+    return motion_state_;
+}
+
+RobotMotionStatePara RobotModel::GetRobotMotionState()
+{
     return motion_state_;
 }

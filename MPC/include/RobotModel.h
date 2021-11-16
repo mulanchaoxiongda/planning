@@ -19,6 +19,8 @@ class RobotModel
                 SaveData *p_savedata);
      RobotMotionStatePara UpdateMotionState(ControlCommand control_command);
 
+     RobotMotionStatePara GetRobotMotionState();
+
      RobotMotionStatePara motion_state_;
 
  private:
