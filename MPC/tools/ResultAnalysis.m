@@ -3,7 +3,7 @@ clear;
 clc;
 
 %% Read .txt
-[ReadFileName,ReadFilePathName,ReadFilterIndex] = ...
+[ReadFileName,ReadFilePathName,ReadFilter0.0.Index] = ...
         uigetfile('*.txt;*.log','获取txt或者log', '');
 
 str = [ReadFilePathName ReadFileName];

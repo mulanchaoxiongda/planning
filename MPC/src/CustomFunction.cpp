@@ -94,13 +94,13 @@ void txt_to_vectordouble(vector<vector<double>>& res, string pathname)
 {
     string string_;
 
-    ifstream ReadFile;
-    ReadFile.open(pathname, ios::in);
+    ifstream read_file;
+    read_file.open(pathname, ios::in);
 
-    if (ReadFile.fail()) {
+    if (read_file.fail()) {
         cout << "[error] failed to open : " << pathname << endl;
     } else {
-        while (getline(ReadFile, string_)) {
+        while (getline(read_file, string_)) {
             istringstream is(string_);
 
             double data_;
@@ -117,7 +117,7 @@ void txt_to_vectordouble(vector<vector<double>>& res, string pathname)
         }
     }
 
-    ReadFile.close();
+    read_file.close();
 }
 
 double interp_linear(vector<double> x, vector<double> y, double x0)

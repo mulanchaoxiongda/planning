@@ -18,7 +18,8 @@ class SaveData;
 class PlanningMPC: public PlanningAlgorithm
 {
  public:
-     PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state);
+     PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata,
+                 GoalState goal_state);
      ~PlanningMPC() {};
 
      ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points);
@@ -36,15 +37,15 @@ class PlanningMPC: public PlanningAlgorithm
 
      VectorXd u_pre_;
 
-     int nx_, nu_;
+     int nx_, nu_; // number of state variable and control variable
 
-     int np_, nc_;
+     int np_, nc_; // predict time domain, control time domain
 
      MatrixXd matrix_q_, matrix_r_;
 
      VectorXd u_min_, u_max_, du_min_, du_max_;
 
-     VectorXd x_;
+     VectorXd x_; // control variable
      MatrixXd matrix_a_, matrix_b_;
 
      double running_time_sum_;
@@ -55,7 +56,7 @@ class PlanningMPC: public PlanningAlgorithm
 
      vector<TrajPoint> ref_traj_points_;
 
-     VectorXd u_optimal_;
+     VectorXd u_optimal_; // optimal control variable
      VectorXd u_opt_storage_;
 
      bool gate_start_;
@@ -84,16 +85,16 @@ class PlanningMPC: public PlanningAlgorithm
      void Predict(MatrixXd &phi, MatrixXd &theta);
 
      void CalObjectiveFunc(
-             MatrixXd &h, MatrixXd &e, VectorXd &g, MatrixXd kesi,
-             MatrixXd phi, MatrixXd theta);
+             MatrixXd &matrix_h, MatrixXd &matrix_e, VectorXd &matrix_g,
+             MatrixXd matrix_kesi, MatrixXd matrix_phi, MatrixXd matrix_theta);
 
      void CalConstraintConditions(
-             MatrixXd &A, VectorXd &lb, VectorXd &ub);
+             MatrixXd &matrix_A, VectorXd &lb, VectorXd &ub);
 
      int  OptimizationSolver(
-             VectorXd &optimal_solution, MatrixXd p01, VectorXd q01, MatrixXd Ac,
-             VectorXd l01, VectorXd u01, int m01, int n01, c_int max_iteration,
-             c_float eps_abs);
+             VectorXd &optimal_solution, MatrixXd matrix_p, VectorXd vector_q,
+             MatrixXd matrix_Ac, VectorXd vector_l, VectorXd vector_u,
+             c_int max_iteration, c_float eps_abs);
 
      void MatrixToCCS(
              MatrixXd matrix_, vector<c_float> *sm_x, c_int &sm_nnz,

@@ -79,8 +79,8 @@ class TrackingMPC: public TrackingAlgorithm
      void CalConstraintConditions(MatrixXd &A, VectorXd &lb, VectorXd &ub);
 
      int  OptimizationSolver(
-             VectorXd &optimal_solution, MatrixXd p01, VectorXd q01,
-             MatrixXd Ac, VectorXd l01, VectorXd u01, int m01, int n01,
+             VectorXd &optimal_solution, MatrixXd matrix_p, VectorXd vector_q,
+             MatrixXd matrix_Ac, VectorXd vector_l, VectorXd vector_u,
              c_int max_iteration, c_float eps_abs);
 
      void MatrixToCCS(
