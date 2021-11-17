@@ -27,18 +27,12 @@ class PlanningAlgorithm
 
      virtual void ReadInGoalTraj() = 0;
 
-     virtual void SmoothTrajcecory() = 0;
-
      SaveData *p_savedata_;
      RobotModel *p_robot_model_;
 
-     GoalState goal_state_;
-     SensorInfo sensor_info_;
+     GoalState goal_state_; // excepted parking state
 
-     SensorInfo sensor_info_planner_;
+     SensorInfo sensor_info_; // AGV motion state
 
      vector<TrajPoint> loacl_trajectory_points_;
-
-     vector<TrajPoint> global_traj_points_;
-     RefPoint global_ref_traj_point_;
 };

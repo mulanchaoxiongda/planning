@@ -281,38 +281,34 @@ fclose(fid);
 %% Plot figure: MPC Planner && Controller Analysis
 figure('name','trajectory planning');
 subplot(3, 1, 1);
-plot(cell2mat(GlobalRefPoint(:, 2)), cell2mat(GlobalRefPoint(:, 4)), 'r', ...          %% 近似全局轨迹             plot
-       ...                                                                                                                %% 真实全局轨迹散点图   plot
-       cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'black', ...                              %% 近似局部轨迹             plot
-       ... % cell2mat(RefTrajPlan(:, 2)), cell2mat(RefTrajPlan(:, 4)), 'g.', ...                   %% 真实局部轨迹散点图   plot
-       cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
-       cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'ro'); grid on;
+plot(  cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'green', ...        %% 近似局部轨迹
+         cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
+         cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'blacko'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16);
-title('运动轨迹'); legend('近似全局轨迹', '近似局部轨迹', '小车轨迹', '停车点');
+title('运动轨迹'); legend('规划', '反馈', '托盘位置');
 
 subplot(3, 2, 3);
-plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 2)) * 1000, 'r', ...
-       cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 4)) * 1000, 'b'); grid on;
-xlabel('时间(秒)'); ylabel('位置跟踪误差(毫米)'); set(gca, 'FontSize', 16);
-title('位置跟踪误差-时间曲线'); legend('纵向位置跟踪误差', '横向位置跟踪误差');
+plot(cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 2)) * 1000, 'm', ...
+       cell2mat(TraErr(:, 8)), cell2mat(TraErr(:, 4)) * 1000, 'c'); grid on;
+ylabel('位置跟踪误差(毫米)'); set(gca, 'FontSize', 16);
+title('位置跟踪误差-时间曲线'); legend('纵向', '横向');
 
 subplot(3, 2, 4);
-plot(cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 6)) * 57.3, 'r', ...
+plot(cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 6)) * 57.3, 'green', ...
        cell2mat(StaRob(:,12)), cell2mat(StaRob(:, 6)) * 57.3, 'b'); grid on;
-xlabel('时间(秒)'); ylabel('横摆角(度)'); set(gca, 'FontSize', 16);
-title('横摆角-时间曲线'); legend('近似局部横摆角', '小车横摆角');
+ylabel('横摆角(度)'); set(gca, 'FontSize', 16);
+title('横摆角-时间曲线'); legend('规划', '反馈');
 
 subplot(3, 2, 5);
-plot(cell2mat(GlobalRefPoint(:, 12)), cell2mat(GlobalRefPoint(:, 8)), 'r', ...
-       cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 8)), 'g', ...
-       cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'black', ...
-       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
+plot(  cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 8)), 'green', ...
+         cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 2)), 'r', ...
+         cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 8)), 'b'); grid on;
 xlabel('时间(秒)'); ylabel('速度(米/秒)'); set(gca, 'FontSize', 16);
-title('速度-时间曲线'); legend('近似全局速度', '近似局部速度', '速度指令', '小车速度');
+title('速度-时间曲线'); legend('规划', '指令', '反馈');
 
 subplot(3, 2, 6);
-plot(cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 4)) * 57.3,  'r',...
-       cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 10)) * 57.3, 'b',...
-       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'g'); grid on;
+plot(  cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 10)) * 57.3, 'green',...
+       cell2mat(ConCom(:, 6)),  cell2mat(ConCom(:, 4)) * 57.3,  'r',...
+       cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'b'); grid on;
 xlabel('时间(秒)'); ylabel('横摆角速度(度/秒)'); set(gca, 'FontSize', 16);
-title('横摆角速度-时间曲线'); legend('角速度指令','近似局部角速度','小车角速度','近似全局角速度');
+title('横摆角速度-时间曲线'); legend('规划','指令','反馈');

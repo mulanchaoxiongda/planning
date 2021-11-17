@@ -52,11 +52,6 @@ PlanningMPC::PlanningMPC(
 
     u_pre_.resize(nu_);
 
-    GetSensorInfo();
-
-    //ReadInGoalTraj();
-    GenerateGlobalTraj();
-
     running_time_sum_ = 0.0;
 
     loop_counter_ = 0;
@@ -68,9 +63,23 @@ PlanningMPC::PlanningMPC(
     matrix_C_.resize(nx_, nx_ + nu_);
 
     ref_point_command_.resize(nc_ * nu_);
+
+    GetSensorInfo();
+
+    //ReadInGoalTraj();
+    GenerateGlobalTraj();
 }
 
 ControlCommand PlanningMPC::CalRefTrajectory(
+        vector<TrajPoint> &local_traj_points)
+{
+    ControlCommand result = {0.0, 0.0, 0.0};
+
+    return result;
+}
+
+ControlCommand PlanningMPC::CalRefTrajectory(
+        vector<TrajPoint> &optimal_traj_points,
         vector<TrajPoint> &local_traj_points)
 {
     struct timeval t_start, t_end;
@@ -78,10 +87,12 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
     if (start_gate_ == false) {
         GetSensorInfo();
-        
+
         /* 控制量初始值求解方案A */
         u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
                   sensor_info_.w - global_ref_traj_point_.w;
+
+        memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
     } else {
         UpdatePlannerSensorInfo();
     
@@ -993,7 +1004,6 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 double yaw_acceleration =
                         (control_command.yaw_rate_command - motion_state.w) / Tw;
 
-
                 double simulation_step = predict_step_;
 
                 motion_state.v = motion_state.v + acceleration*simulation_step;
@@ -1108,11 +1118,6 @@ void PlanningMPC::UpdateReferenceTrajectory()
                           << " w_goal "       << goal_state_.w
                           << " Time "         << sensor_info_planner_.t
                           << " loop_counter " << (double)loop_counter_<< endl;
-}
-
-void PlanningMPC::SmoothTrajcecory()
-{
-    ;
 }
 
 void PlanningMPC::CalPredictForwardCommand()

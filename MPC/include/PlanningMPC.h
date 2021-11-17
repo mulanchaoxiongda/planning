@@ -22,12 +22,23 @@ class PlanningMPC: public PlanningAlgorithm
                  GoalState goal_state);
      ~PlanningMPC() {};
 
-     ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points);
+     ControlCommand CalRefTrajectory(
+            vector<TrajPoint> &local_traj_points);
+
+     ControlCommand CalRefTrajectory(
+            vector<TrajPoint> &optimal_traj_points,
+            vector<TrajPoint> &local_traj_points);
 
      double GetRunningTimeAverage();
 
 
  private:
+     vector<TrajPoint> global_traj_points_;
+     RefPoint global_ref_traj_point_;
+
+     /* smoothed motion state for planner to get smooth trajcetory */
+     SensorInfo sensor_info_planner_;
+
      bool start_gate_;
      
      int weak_planning_num_;
@@ -111,8 +122,6 @@ class PlanningMPC: public PlanningAlgorithm
      }
 
      void UpdateReferenceTrajectory();
-
-     void SmoothTrajcecory();
 
      void CalPredictForwardCommand();
 };

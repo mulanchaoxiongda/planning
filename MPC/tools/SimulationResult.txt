@@ -48,8 +48,8 @@
 [reference_trajectory]  Time 2.35000000 x 0.37858941 y 0.01383057 yaw 0.07578750 v 0.00168750 w 0.00033750 t 2.35000000
 [reference_point_tracking]  Time 0.00000000 x_ref 0.00000000 y_ref -0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.00000000
 [plainning_global_reference_point]  Time 0.00000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 w_ref 0.00000000 t 0.00000000
- [plannin_tracking_error]  Time 0.00000000 err_x -0.00000000 err_y -0.00000000 err_yaw 0.00000000 t 0.00000000
-[reference_trajectory_planning]  Time 0.00000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 w_ref 0.00000000 t_ref 0.00000000 loop_counter 0.00000000
+ [plannin_tracking_error]  Time 0.00000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.00000000
+[reference_trajectory_planning]  Time 0.00000000 x_ref 0.00000000 y_ref -0.00000000 yaw_ref -0.00000000 v_ref 0.00000000 w_ref 0.00000000 t_ref 0.00000000 loop_counter 0.00000000
 [reference_trajectory_planning]  Time 0.00000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 w_ref 0.00000000 t_ref 0.08000000 loop_counter 0.00000000
 [reference_trajectory_planning]  Time 0.00000000 x_ref 0.00051200 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00640000 w_ref 0.00000000 t_ref 0.16000000 loop_counter 0.00000000
 [reference_trajectory_planning]  Time 0.00000000 x_ref 0.00163244 y_ref -0.00000967 yaw_ref -0.00863174 v_ref 0.01400606 w_ref -0.10789677 t_ref 0.24000000 loop_counter 0.00000000
@@ -68,27 +68,27 @@
 [goal_state_planning]  Time 0.00000000 x_goal 1.00000000 y_goal -0.10000000 yaw_goal 0.08726003 v_goal 0.00000000 w_goal 0.00000000 Time 0.00000000 loop_counter 0.00000000
 [planning_control_command]  Time 0.00000000 vc 0.00000000 wc 0.00000000 Time 0.00000000
 [reference_point_tracking]  Time 0.00000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.00000000
- [tracking_error]  Time 0.00000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.00000000
+ [tracking_error]  Time 0.00000000 err_x 0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.00000000
 [control_command]  Time 0.00000000 speed_command 0.00000000 yawratio_command 0.00000000 t 0.00000000
 [state_of_robot]  Time 0.01000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.01000000
 [state_of_robot]  Time 0.02000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.02000000
 [reference_point_tracking]  Time 0.02000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.02000000
- [tracking_error]  Time 0.02000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.02000000
+ [tracking_error]  Time 0.02000000 err_x -0.00000000 err_y 0.00000000 err_yaw -0.00000000 t 0.02000000
 [control_command]  Time 0.02000000 speed_command 0.00000000 yawratio_command 0.00000000 t 0.02000000
 [state_of_robot]  Time 0.03000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.03000000
 [state_of_robot]  Time 0.04000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.04000000
 [reference_point_tracking]  Time 0.04000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.04000000
- [tracking_error]  Time 0.04000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.04000000
+ [tracking_error]  Time 0.04000000 err_x -0.00000000 err_y 0.00000000 err_yaw -0.00000000 t 0.04000000
 [control_command]  Time 0.04000000 speed_command 0.00000000 yawratio_command 0.00000000 t 0.04000000
 [state_of_robot]  Time 0.05000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.05000000
 [state_of_robot]  Time 0.06000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.06000000
 [reference_point_tracking]  Time 0.06000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.06000000
- [tracking_error]  Time 0.06000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.06000000
+ [tracking_error]  Time 0.06000000 err_x -0.00000000 err_y 0.00000000 err_yaw -0.00000000 t 0.06000000
 [control_command]  Time 0.06000000 speed_command 0.00000000 yawratio_command 0.00000000 t 0.06000000
 [state_of_robot]  Time 0.07000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.07000000
 [state_of_robot]  Time 0.08000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.08000000
 [reference_point_tracking]  Time 0.08000000 x_ref 0.00000000 y_ref 0.00000000 yaw_ref 0.00000000 v_ref 0.00000000 v_ref 0.00000000 t 0.08000000
- [tracking_error]  Time 0.08000000 err_x -0.00000000 err_y -0.00000000 err_yaw -0.00000000 t 0.08000000
+ [tracking_error]  Time 0.08000000 err_x -0.00000000 err_y 0.00000000 err_yaw -0.00000000 t 0.08000000
 [control_command]  Time 0.08000000 speed_command 0.00000000 yawratio_command 0.00000000 t 0.08000000
 [state_of_robot]  Time 0.09000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.09000000
 [state_of_robot]  Time 0.10000000 x 0.00000000 y 0.00000000 yaw 0.00000000 v 0.00000000 w 0.00000000 t 0.10000000
