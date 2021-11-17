@@ -35,6 +35,8 @@ class PlanningAlgorithm
      GoalState goal_state_;
      SensorInfo sensor_info_;
 
+     SensorInfo sensor_info_planner_;
+
      vector<TrajPoint> loacl_trajectory_points_;
 
      vector<TrajPoint> global_traj_points_;

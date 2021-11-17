@@ -55,12 +55,7 @@ PlanningMPC::PlanningMPC(
     GetSensorInfo();
 
     //ReadInGoalTraj();
-    GenerateGoalTraj();
-
-    FindRefPoint();
-
-    u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
-              sensor_info_.w - global_ref_traj_point_.w;
+    GenerateGlobalTraj();
 
     running_time_sum_ = 0.0;
 
@@ -83,15 +78,25 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
     if (start_gate_ == false) {
         GetSensorInfo();
+        
+        /* 控制量初始值求解方案A */
+        u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
+                  sensor_info_.w - global_ref_traj_point_.w;
     } else {
-        UpdateSensorInfo();
+        UpdatePlannerSensorInfo();
+    
+        /* 控制量初始值求解方案B：在规划轨迹的连续性上，方案B优于方案A，源于强、弱规划的
+        衔接策略 + 运动学线性化误差模型，方案B规划的轨迹更顺化，易于跟踪，小车对全局路径的
+        跟踪精度也会更高 */
+        u_pre_ << u_opt_storage_(index_init_point_strong_planner_ * nu_),
+                u_opt_storage_(index_init_point_strong_planner_ * nu_ + 1);
     }
 
     FindRefPoint();
 
     VectorXd u_min(nu_, 1), u_max(nu_, 1), du_min(nu_, 1), du_max(nu_, 1);
 
-    /* CalControlCoefficient(sensor_info_.v); */
+    /* CalControlCoefficient(sensor_info_planner_.v); */
     CalControlCoefficient();
 
     UpdateErrorModel();
@@ -174,13 +179,14 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     running_time_sum_ = running_time_sum_ + (t_end.tv_sec - t_start.tv_sec) +
                         (double)(t_end.tv_usec - t_start.tv_usec) / 1000000.0;
 
+
     running_time_average_ = running_time_sum_ / (double)loop_counter_;
 
     p_savedata_->file << "[planning_control_command] "
                           << " Time "             << sensor_info_.t
                           << " vc "               << u_optimal_(0)
                           << " wc "               << u_optimal_(1)
-                          << " Time "             << sensor_info_.t << endl;
+                          << " Time "             << sensor_info_planner_.t << endl;
 
     ControlCommand result = {u_optimal_(0), u_optimal_(1), sensor_info_.t};
 
@@ -230,11 +236,11 @@ void PlanningMPC::ReadInGoalTraj()
          << endl;
 }
 
-void PlanningMPC::GenerateGoalTraj()
+void PlanningMPC::GenerateGlobalTraj()
 {
     double distance_agv2goal =
-            pow(pow(goal_state_.x - sensor_info_.x, 2.0) + 
-            pow(goal_state_.y - sensor_info_.y, 2.0), 0.5);
+            pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
+            pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
     double min_relative_dis = 1.0;
 
@@ -244,12 +250,12 @@ void PlanningMPC::GenerateGoalTraj()
 
     TrajPoint temp;
 
-    temp.x_ref   = sensor_info_.x;
-    temp.y_ref   = sensor_info_.y;
-    temp.yaw_ref = sensor_info_.yaw;
-    temp.v_ref   = sensor_info_.v;
-    temp.w_ref   = sensor_info_.w;
-    temp.t_ref   = sensor_info_.t;
+    temp.x_ref   = sensor_info_planner_.x;
+    temp.y_ref   = sensor_info_planner_.y;
+    temp.yaw_ref = sensor_info_planner_.yaw;
+    temp.v_ref   = sensor_info_planner_.v;
+    temp.w_ref   = sensor_info_planner_.w;
+    temp.t_ref   = sensor_info_planner_.t;
 
     global_traj_points_.push_back(temp);
 
@@ -265,7 +271,7 @@ void PlanningMPC::GenerateGoalTraj()
         temp.v_ref   = temp.v_ref + acceleration * step;
         temp.w_ref   = temp.w_ref;
 
-        temp.yaw_ref = temp.yaw_ref + sensor_info_.w * step;
+        temp.yaw_ref = temp.yaw_ref + temp.w_ref * step;
         
         temp.x_ref   = temp.x_ref + temp.v_ref * cos(temp.yaw_ref) * step;
         temp.y_ref   = temp.y_ref + temp.v_ref * sin(temp.yaw_ref) * step;
@@ -378,11 +384,6 @@ void PlanningMPC::GenerateGoalTraj()
         temp.t_ref   = t;
 
         global_traj_points_.push_back(temp);
-
-        cout << temp.t_ref << "   "
-             << temp.v_ref << "   "
-             << temp.w_ref << "   "
-             << temp.v_ref / temp.w_ref << endl;
     }
 
     temp.x_ref   = goal_state_.x;
@@ -414,7 +415,7 @@ void PlanningMPC::FindRefPoint()
     for (int i = 0; i < size_ref_traj; i++) {
         double delta_t, fabs_delta_t;
 
-        delta_t = sensor_info_.t - global_traj_points_.at(i).t_ref;
+        delta_t = sensor_info_planner_.t - global_traj_points_.at(i).t_ref;
         fabs_delta_t = -1.0 * fabs(delta_t);
 
         relative_time.push_back(delta_t);
@@ -500,7 +501,7 @@ void PlanningMPC::FindRefPoint()
             global_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
          
     p_savedata_->file << "[plainning_global_reference_point] "
-                      << " Time "    << global_ref_traj_point_.t
+                      << " Time "    << sensor_info_.t
                       << " x_ref "   << global_ref_traj_point_.x
                       << " y_ref "   << global_ref_traj_point_.y
                       << " yaw_ref " << global_ref_traj_point_.yaw
@@ -510,7 +511,7 @@ void PlanningMPC::FindRefPoint()
                       << endl;
 }
 
-void PlanningMPC::UpdateSensorInfo()
+void PlanningMPC::UpdatePlannerSensorInfo()
 {
     int size_ref_traj = ref_traj_points_.size();
 
@@ -555,26 +556,21 @@ void PlanningMPC::UpdateSensorInfo()
 
     int index_transition_point = ref_point_index + weak_planning_num_;
     
-    sensor_info_.t   = ref_traj_points_.at(index_transition_point).t_ref;
-    sensor_info_.x   = ref_traj_points_.at(index_transition_point).x_ref;
-    sensor_info_.y   = ref_traj_points_.at(index_transition_point).y_ref;
-    sensor_info_.yaw = ref_traj_points_.at(index_transition_point).yaw_ref;
-    sensor_info_.v   = ref_traj_points_.at(index_transition_point).v_ref;
-    sensor_info_.w   = ref_traj_points_.at(index_transition_point).w_ref;
+    sensor_info_planner_.t   =
+            ref_traj_points_.at(index_transition_point).t_ref;
+    sensor_info_planner_.x   =
+            ref_traj_points_.at(index_transition_point).x_ref;
+    sensor_info_planner_.y   =
+            ref_traj_points_.at(index_transition_point).y_ref;
+    sensor_info_planner_.yaw =
+            ref_traj_points_.at(index_transition_point).yaw_ref;
+    sensor_info_planner_.v   =
+            ref_traj_points_.at(index_transition_point).v_ref;
+    sensor_info_planner_.w   =
+            ref_traj_points_.at(index_transition_point).w_ref;
 
-    sensor_info_id_ = ref_point_index;
-
-    // 控制量初始值求解方案A
-    /* u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
-              sensor_info_.w - global_ref_traj_point_.w; */
-    
-    int index_init_point = index_transition_point - 1;
-
-    // 控制量初始值求解方案B
-    // 在规划轨迹的连续性上，方案B优于方案A，源于强、弱规划的衔接策略 + 运动学线性化误差模型
-    // 方案B规划的轨迹更顺化，易于跟踪，小车对全局路径的跟踪精度也会更高
-    u_pre_ << u_opt_storage_(index_init_point * nu_),
-              u_opt_storage_(index_init_point * nu_ + 1);
+    planner_sensor_info_id_ = ref_point_index;
+    index_init_point_strong_planner_ = index_transition_point - 1;
 }
 
 void PlanningMPC::CalControlCoefficient()
@@ -618,7 +614,7 @@ void PlanningMPC::UpdateErrorModel()
 {
     VectorXd x(nx_), xr(nx_), matrix_kesi(nx_ + nu_);
 
-    x << sensor_info_.x, sensor_info_.y, sensor_info_.yaw, sensor_info_.w;
+    x << sensor_info_planner_.x, sensor_info_planner_.y, sensor_info_planner_.yaw, sensor_info_planner_.w;
 
     xr << global_ref_traj_point_.x,   global_ref_traj_point_.y,
           global_ref_traj_point_.yaw, global_ref_traj_point_.w;
@@ -644,7 +640,7 @@ void PlanningMPC::UpdateErrorModel()
                       << " err_x "   << x_(0)
                       << " err_y "   << x_(1)
                       << " err_yaw " << x_(2)
-                      << " t "       << sensor_info_.t
+                      << " t "       << sensor_info_planner_.t
                       << endl;
 }
 
@@ -964,8 +960,8 @@ void PlanningMPC::MatrixToCCS(
 void PlanningMPC::UpdateReferenceTrajectory()
 {
     RobotMotionStatePara motion_state =
-            {sensor_info_.x, sensor_info_.y, sensor_info_.yaw,
-             sensor_info_.v, sensor_info_.w, sensor_info_.t};
+            {sensor_info_planner_.x, sensor_info_planner_.y, sensor_info_planner_.yaw,
+             sensor_info_planner_.v, sensor_info_planner_.w, sensor_info_planner_.t};
 
     ref_traj_points_.resize(np_ + 1);
 
@@ -1073,17 +1069,17 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 ref_traj_points_.at(i).w_ref   = motion_state.w;
             } else {
                 ref_traj_points_.at(i).t_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).t_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).t_ref;
                 ref_traj_points_.at(i).x_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).x_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).x_ref;
                 ref_traj_points_.at(i).y_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).y_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).y_ref;
                 ref_traj_points_.at(i).yaw_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).yaw_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).yaw_ref;
                 ref_traj_points_.at(i).v_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).v_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).v_ref;
                 ref_traj_points_.at(i).w_ref =
-                        ref_traj_points_.at(i + sensor_info_id_).w_ref;
+                        ref_traj_points_.at(i + planner_sensor_info_id_).w_ref;
             }
         }
 
@@ -1110,7 +1106,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                           << " yaw_goal "     << goal_state_.yaw
                           << " v_goal "       << goal_state_.v
                           << " w_goal "       << goal_state_.w
-                          << " Time "         << sensor_info_.t
+                          << " Time "         << sensor_info_planner_.t
                           << " loop_counter " << (double)loop_counter_<< endl;
 }
 
@@ -1123,7 +1119,7 @@ void PlanningMPC::CalPredictForwardCommand()
 {
     int size_ref_traj = global_traj_points_.size();
 
-    double time_predict = sensor_info_.t;
+    double time_predict = sensor_info_planner_.t;
 
     double vc_ref, wc_ref;
 

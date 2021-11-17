@@ -31,7 +31,9 @@ class PlanningMPC: public PlanningAlgorithm
      bool start_gate_;
      
      int weak_planning_num_;
-     int sensor_info_id_;
+     int planner_sensor_info_id_;
+
+     int index_init_point_strong_planner_;
 
      double  weak_planning_duration_;
 
@@ -70,11 +72,11 @@ class PlanningMPC: public PlanningAlgorithm
 
      void ReadInGoalTraj();
 
-     void GenerateGoalTraj();
+     void GenerateGlobalTraj();
 
      void FindRefPoint();
 
-     void UpdateSensorInfo();
+     void UpdatePlannerSensorInfo();
 
      void CalControlCoefficient();
 
