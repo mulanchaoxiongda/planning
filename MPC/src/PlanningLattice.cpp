@@ -87,11 +87,6 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     double opt_time = sample_time.at(opt_traj_index);
     double opt_distance = sample_distance.at(speed_index);
 
-    cout << opt_speed << "   "
-         << opt_time << "   "
-         << opt_distance << "   "
-         << endl;
-
     CalPolynomialCurve(opt_time, opt_speed, opt_distance);
 
     local_traj_points.assign(
@@ -257,8 +252,8 @@ void PlanningLattice::SprinkleFunc(
     sample_distance.at(1) = sample_speed.at(1) * time_to_goal;
     sample_distance.at(2) = sample_speed.at(2) * time_to_goal;
 
-    double time_interval = 5.0; // 5.0
-    double delta_time = 5.0 / 3.0; // 0.25
+    double time_interval = 3.0; // 3.0
+    double delta_time = 0.5; // 0.25
     
     num_time = int(time_interval / delta_time) + 1;
 
@@ -273,8 +268,7 @@ void PlanningLattice::SprinkleFunc(
 
         for (int j = 0; j < num_time; j++) {
             sample_time.at(i * num_time + j) =
-                    time_benchmark + ((double)j - 0.5 *
-                    time_interval / delta_time) * delta_time;
+                    time_benchmark + (double)j * delta_time;
         }
     }
 }
@@ -282,9 +276,9 @@ void PlanningLattice::SprinkleFunc(
 void PlanningLattice::CalPolynomialCurve(
         double time, double speed, double distance)
 {
-    if (time > 0.0) {
-        TrajPoint temp;
+    TrajPoint temp;
 
+    if (time > 0.0) {
         temp.x_ref   = sensor_info_planner_.x;
         temp.y_ref   = sensor_info_planner_.y;
         temp.yaw_ref = sensor_info_planner_.yaw;
@@ -303,13 +297,18 @@ void PlanningLattice::CalPolynomialCurve(
         while (fabs(temp.v_ref) < min_speed) {
             acceleration = 0.1;
 
-            temp.v_ref   = temp.v_ref + acceleration * polynomial_step;
-            temp.w_ref   = temp.w_ref;
+            temp.v_ref = temp.v_ref + acceleration * polynomial_step;
+            temp.w_ref = temp.w_ref;
 
             temp.yaw_ref = temp.yaw_ref + temp.w_ref * polynomial_step;
             
-            temp.x_ref   = temp.x_ref + temp.v_ref * cos(temp.yaw_ref) * polynomial_step;
-            temp.y_ref   = temp.y_ref + temp.v_ref * sin(temp.yaw_ref) * polynomial_step;
+            temp.x_ref = 
+                    temp.x_ref + temp.v_ref * cos(temp.yaw_ref) *
+                    polynomial_step;
+            
+            temp.y_ref =
+                    temp.y_ref + temp.v_ref * sin(temp.yaw_ref) *
+                    polynomial_step;
             
             temp.t_ref   = temp.t_ref + polynomial_step;
 
@@ -435,8 +434,6 @@ void PlanningLattice::CalPolynomialCurve(
 
         local_trajectory_points_.push_back(temp);
     } else {
-        TrajPoint temp;
-
         temp.x_ref   = sensor_info_planner_.x;
         temp.y_ref   = sensor_info_planner_.y;
         temp.yaw_ref = sensor_info_planner_.yaw;
@@ -448,6 +445,8 @@ void PlanningLattice::CalPolynomialCurve(
             local_trajectory_points_.push_back(temp);
         }
     }
+
+    time_simulation_ = temp.t_ref;
 }
 
 void PlanningLattice::ScoringFunc(
@@ -498,8 +497,6 @@ void PlanningLattice::ScoringFunc(
 
     double a_min = -1.0 * a_storage.at(amax_index);
 
-    cout << "a_min " << a_min << endl;
-
     double score;
 
     if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 || a_min < -0.01) {
@@ -516,8 +513,9 @@ void PlanningLattice::ScoringFunc(
 
         score_vmax = v_max / except_speed - 1.0;        
         
-        score_time = local_trajectory_points_.at(size_traj_points - 1).t_ref;
-        
+        score_time =
+                local_trajectory_points_.at(size_traj_points - 1).t_ref;
+
         score_jer = 0.0; // Todo
         score_acc = 0.0; // Todo
 
@@ -530,7 +528,7 @@ void PlanningLattice::ScoringFunc(
             delta_time =
                     local_trajectory_points_.at(i + 1).t_ref -
                     local_trajectory_points_.at(i).t_ref;
-                    
+
             score_w = score_w + w_storage.at(i) * delta_time;
         }
         score_w = score_w + w_storage.at(i) * delta_time;
@@ -567,4 +565,11 @@ void PlanningLattice::SelectTrajFunc(int num_time, int &opt_traj_index)
     int score_min_index = distance(begin(score_storage), biggest_score);
     
     opt_traj_index = score_data_.at(score_min_index).index;
+
+    score_data_.clear();
+}
+
+double PlanningLattice::GetTimeSimulation()
+{
+    return time_simulation_;
 }

@@ -40,9 +40,6 @@ int main(int argc, char **argv)
     
     PlanningLattice planning_lattice(&robot_model, &save_result, goal_state);
 
-    vector<TrajPoint> local_traj_pointss; // te
-    planning_lattice.CalRefTrajectory(local_traj_pointss);
-
     PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
@@ -62,7 +59,10 @@ int main(int argc, char **argv)
 
     planning_lattice.CalRefTrajectory(local_traj_points);
 
-    while (time <= 7.6) {
+    double time_simulation;
+    time_simulation = planning_lattice.GetTimeSimulation();
+
+    while (time <= time_simulation) {
         if (loop_counter % num_planning == 0) {
             //planning_lattice.CalRefTrajectory(local_traj_points);
             planning_mpc.CalRefTrajectory(

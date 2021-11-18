@@ -27,9 +27,13 @@ class PlanningLattice: public PlanningAlgorithm
 
      double GetRunningTimeAverage();
 
+     double GetTimeSimulation();
+
 
  private:
      vector<ScoreData> score_data_;
+
+     double time_simulation_;
 
      double distance_agv2goal_;
      
@@ -46,8 +50,6 @@ class PlanningLattice: public PlanningAlgorithm
      double running_time_sum_;
 
      int loop_counter_;
-
-     vector<TrajPoint> ref_traj_points_;
 
      bool gate_start_;
 
