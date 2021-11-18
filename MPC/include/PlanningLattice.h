@@ -32,8 +32,6 @@ class PlanningLattice: public PlanningAlgorithm
      vector<ScoreData> score_data_;
 
      double distance_agv2goal_;
-
-     vector<TrajPoint> local_traj_points_;
      
      /* smoothed motion state for planner to get smooth trajcetory */
      SensorInfo sensor_info_planner_;
@@ -44,8 +42,6 @@ class PlanningLattice: public PlanningAlgorithm
      int planner_sensor_info_id_;
 
      int index_init_point_strong_planner_;
-
-     double  weak_planning_duration_;
 
      double running_time_sum_;
 
@@ -62,8 +58,6 @@ class PlanningLattice: public PlanningAlgorithm
 
      void ReadInGoalTraj();
 
-     void GenerateGlobalTraj();
-
      void UpdatePlannerSensorInfo();
 
      void SprinkleFunc(
@@ -73,5 +67,8 @@ class PlanningLattice: public PlanningAlgorithm
 
      void CalPolynomialCurve(double time, double speed, double distance);
 
-     void ScoringFunc();
+     void ScoringFunc(
+            double except_speed, int speed_index, int time_index, int num_time);
+
+     void SelectTrajFunc(int num_time, int &opt_traj_index);
 };

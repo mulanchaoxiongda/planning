@@ -34,8 +34,6 @@ PlanningMPC::PlanningMPC(
 
     weak_planning_num_ = 3;
 
-    weak_planning_duration_ = 0.16;
-
     call_cycle_ = 0.02;
 
     nx_ = 4;

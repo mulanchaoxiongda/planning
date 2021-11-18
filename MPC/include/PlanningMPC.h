@@ -46,8 +46,6 @@ class PlanningMPC: public PlanningAlgorithm
 
      int index_init_point_strong_planner_;
 
-     double  weak_planning_duration_;
-
      VectorXd u_pre_;
 
      int nx_, nu_; // number of state variable and control variable
