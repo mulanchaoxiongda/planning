@@ -65,7 +65,7 @@ PlanningMPC::PlanningMPC(
     GetSensorInfo();
 
     //ReadInGoalTraj();
-    GenerateGlobalTraj();
+    //GenerateGlobalTraj();
 }
 
 ControlCommand PlanningMPC::CalRefTrajectory(
@@ -83,6 +83,9 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
 
+    global_traj_points_.assign(
+            local_traj_points.begin(), local_traj_points.end());
+
     if (start_gate_ == false) {
         GetSensorInfo();
 
@@ -98,7 +101,7 @@ ControlCommand PlanningMPC::CalRefTrajectory(
         衔接策略 + 运动学线性化误差模型，方案B规划的轨迹更顺化，易于跟踪，小车对全局路径的
         跟踪精度也会更高 */
         u_pre_ << u_opt_storage_(index_init_point_strong_planner_ * nu_),
-                u_opt_storage_(index_init_point_strong_planner_ * nu_ + 1);
+                  u_opt_storage_(index_init_point_strong_planner_ * nu_ + 1);
     }
 
     FindRefPoint();
@@ -178,8 +181,8 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
     UpdateReferenceTrajectory();
 
-    local_traj_points.assign(loacl_trajectory_points_.begin(),
-                             loacl_trajectory_points_.end());
+    optimal_traj_points.assign(local_trajectory_points_.begin(),
+                             local_trajectory_points_.end());
 
     gettimeofday(&t_end, NULL);
 
@@ -1113,7 +1116,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                           << " loop_counter "  << (double)loop_counter_ << endl;
     }
 
-    loacl_trajectory_points_.assign(
+    local_trajectory_points_.assign(
             ref_traj_points_.begin(), ref_traj_points_.end());
 
     start_gate_ = true;

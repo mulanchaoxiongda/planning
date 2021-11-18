@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     
     PlanningLattice planning_lattice(&robot_model, &save_result, goal_state);
 
-    vector<TrajPoint> local_traj_pointss; // test
+    vector<TrajPoint> local_traj_pointss; // te
     planning_lattice.CalRefTrajectory(local_traj_pointss);
 
     PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
@@ -60,6 +60,8 @@ int main(int argc, char **argv)
     vector<TrajPoint> local_traj_points;
     vector<TrajPoint> optimal_traj_points;
 
+    planning_lattice.CalRefTrajectory(local_traj_points);
+
     while (time <= 7.6) {
         if (loop_counter % num_planning == 0) {
             //planning_lattice.CalRefTrajectory(local_traj_points);
@@ -68,7 +70,7 @@ int main(int argc, char **argv)
         }
 
         if (loop_counter % num_control == 0) {
-            control_command = tracking_mpc.CalControlCommand(local_traj_points);
+            control_command = tracking_mpc.CalControlCommand(optimal_traj_points);
         }
 
         robot_model.UpdateMotionState(control_command);

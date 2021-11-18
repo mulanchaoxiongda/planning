@@ -34,5 +34,5 @@ class PlanningAlgorithm
 
      SensorInfo sensor_info_; // AGV motion state
 
-     vector<TrajPoint> loacl_trajectory_points_;
+     vector<TrajPoint> local_trajectory_points_;
 };
