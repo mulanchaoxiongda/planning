@@ -81,6 +81,10 @@ int main(int argc, char **argv)
 
     gettimeofday(&t_end,NULL);
 
+    cout << "[planning] Lattice run time(average): "
+         << planning_lattice.GetRunningTimeAverage() * 1000.0
+         << "ms." <<endl;
+
     cout << "[planning] MPC run time(average): "
          << planning_mpc.GetRunningTimeAverage() * 1000.0
          << "ms." <<endl;

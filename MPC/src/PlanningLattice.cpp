@@ -253,7 +253,7 @@ void PlanningLattice::SprinkleFunc(
     sample_distance.at(2) = sample_speed.at(2) * time_to_goal;
 
     double time_interval = 3.0; // 3.0
-    double delta_time = 0.5; // 0.25
+    double delta_time = 1.0; // 0.5
     
     num_time = int(time_interval / delta_time) + 1;
 
@@ -490,6 +490,14 @@ void PlanningLattice::ScoringFunc(
         a_storage.push_back(-1.0 * acc);
     }
     
+    for (int i = 0; i < size_traj_points - 2; i++) {
+        double jerk =
+                (a_storage.at(i + 1) - a_storage.at(i)) /
+                (t_storage.at(i + 1) - t_storage.at(i));
+
+        j_storage.push_back(fabs(jerk));
+    }
+    
     vector<double>::iterator biggest_a =
             max_element(begin(a_storage), end(a_storage));
 
@@ -505,11 +513,11 @@ void PlanningLattice::ScoringFunc(
         double score_vmax, score_time, score_jer, score_acc, score_w;
         double weight_vmax, weight_time, weight_jer, weight_acc, weight_w;
 
-        weight_vmax = 1.0;
-        weight_time = 0.0;
-        weight_jer = 0.0;
-        weight_acc = 0.0;
-        weight_w = 0.0;
+        weight_vmax = 1.00;
+        weight_time = 0.05;
+        weight_jer = 2.0;
+        weight_acc = 1.0;
+        weight_w = 0.4;
 
         score_vmax = v_max / except_speed - 1.0;        
         
@@ -517,21 +525,48 @@ void PlanningLattice::ScoringFunc(
                 local_trajectory_points_.at(size_traj_points - 1).t_ref;
 
         score_jer = 0.0; // Todo
-        score_acc = 0.0; // Todo
+        
+        int i;
 
+        for (i = 0; i < size_traj_points - 2; i++) {
+            double delta_time =
+                    local_trajectory_points_.at(i + 1).t_ref -
+                    local_trajectory_points_.at(i).t_ref;
+
+            score_jer = score_jer + j_storage.at(i) * delta_time;
+        }
+
+        score_jer =
+                score_jer + j_storage.at(i - 1) *
+                (t_storage.at(i + 1) -
+                 t_storage.at(i - 1));
+
+        score_acc = 0.0;
         score_w = 0.0;
 
         double delta_time;
-
-        int i = 0;
-        for (; i < size_traj_points-1; i++) {
+        
+        for (i = 0; i < size_traj_points-1; i++) {
             delta_time =
                     local_trajectory_points_.at(i + 1).t_ref -
                     local_trajectory_points_.at(i).t_ref;
 
             score_w = score_w + w_storage.at(i) * delta_time;
+
+            score_acc = score_acc + fabs(a_storage.at(i)) * delta_time;
         }
-        score_w = score_w + w_storage.at(i) * delta_time;
+        score_w =
+                score_w + w_storage.at(i) *
+                (t_storage.at(i) - t_storage.at(i - 1));
+
+        score_acc =
+                score_acc + fabs(a_storage.at(i - 1)) *
+                (t_storage.at(i) - t_storage.at(i - 1));
+
+        cout << score_acc << "   "
+             << score_w   << "   "
+             << score_jer << "   "
+             << endl;
 
         score = weight_vmax * score_vmax + weight_time * score_time +
                 weight_jer * score_jer + weight_acc * score_acc +
