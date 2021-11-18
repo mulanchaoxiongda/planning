@@ -71,6 +71,6 @@ class PlanningLattice: public PlanningAlgorithm
 
      void ScoringFunc(
             double except_speed, int speed_index, int time_index, int num_time);
-
+       
      void SelectTrajFunc(int num_time, int &opt_traj_index);
 };

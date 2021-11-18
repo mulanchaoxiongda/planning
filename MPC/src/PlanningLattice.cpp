@@ -162,9 +162,10 @@ void PlanningLattice::UpdatePlannerSensorInfo()
 
     for (int i = 0; i < size_ref_traj; i++) {
         double delta_t, fabs_delta_t;
-                                                                        
+                                          
         delta_t = 
-                p_robot_model_->motion_state_.t - local_trajectory_points_.at(i).t_ref;
+                p_robot_model_->motion_state_.t -
+                local_trajectory_points_.at(i).t_ref;
         
         fabs_delta_t = -1.0 * fabs(delta_t);
 
@@ -507,7 +508,8 @@ void PlanningLattice::ScoringFunc(
 
     double score;
 
-    if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 || a_min < -0.01) {
+    if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 ||
+        a_min < -0.01) {
         score = 100000000.0;
     } else {
         double score_vmax, score_time, score_jer, score_acc, score_w;
@@ -579,7 +581,8 @@ void PlanningLattice::ScoringFunc(
 
     score_data_.push_back(temp);
 
-    cout << " score.index " << temp.index << " score.score " << temp.score << endl;
+    cout << " score.index " << temp.index
+         << " score.score " << temp.score << endl;
 
     local_trajectory_points_.clear();
 }
