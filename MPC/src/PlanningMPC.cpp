@@ -270,7 +270,7 @@ void PlanningMPC::GenerateGlobalTraj()
 
     global_traj_points_.push_back(temp);
 
-    double step = 0.01;
+    double polynomial_step = 0.05;
 
     double min_speed = 0.01;
 
@@ -279,15 +279,15 @@ void PlanningMPC::GenerateGlobalTraj()
     while (fabs(temp.v_ref) < min_speed) {
         acceleration = 0.1;
 
-        temp.v_ref   = temp.v_ref + acceleration * step;
+        temp.v_ref   = temp.v_ref + acceleration * polynomial_step;
         temp.w_ref   = temp.w_ref;
 
-        temp.yaw_ref = temp.yaw_ref + temp.w_ref * step;
+        temp.yaw_ref = temp.yaw_ref + temp.w_ref * polynomial_step;
         
-        temp.x_ref   = temp.x_ref + temp.v_ref * cos(temp.yaw_ref) * step;
-        temp.y_ref   = temp.y_ref + temp.v_ref * sin(temp.yaw_ref) * step;
+        temp.x_ref   = temp.x_ref + temp.v_ref * cos(temp.yaw_ref) * polynomial_step;
+        temp.y_ref   = temp.y_ref + temp.v_ref * sin(temp.yaw_ref) * polynomial_step;
         
-        temp.t_ref   = temp.t_ref + step;
+        temp.t_ref   = temp.t_ref + polynomial_step;
 
         global_traj_points_.push_back(temp);
     }
@@ -342,10 +342,10 @@ void PlanningMPC::GenerateGlobalTraj()
 
     B = T.inverse() * Y;
 
-    int cycle_num = (int)((t1 - t0) / step) + 1;
+    int cycle_num = (int)((t1 - t0) / polynomial_step) + 1;
 
     for (int i = 1; i < cycle_num; i++) {
-        double t = t0 + i * step;
+        double t = t0 + i * polynomial_step;
 
         MatrixXd matrix_T(3, 6);
 
@@ -393,6 +393,17 @@ void PlanningMPC::GenerateGlobalTraj()
         temp.v_ref   = v;
         temp.w_ref   = w;
         temp.t_ref   = t;
+
+        global_traj_points_.push_back(temp);
+    }
+
+    if (temp.t_ref < t1) {
+        temp.x_ref   = goal_state_.x - safe_distance * cos(goal_state_.yaw);
+        temp.y_ref   = goal_state_.y - safe_distance * sin(goal_state_.yaw);
+        temp.yaw_ref = goal_state_.yaw;
+        temp.v_ref   = speed_except;
+        temp.w_ref   = 0.0;
+        temp.t_ref   = t1;
 
         global_traj_points_.push_back(temp);
     }

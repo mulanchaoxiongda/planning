@@ -63,3 +63,14 @@ struct GoalState
     double v;
     double w;
 };
+
+struct ScoreData
+{
+    int index;
+    double score;
+    double expect_speed;
+    double time_duration;
+    double safe_distance;
+    double v_max;
+    double w_max;
+};

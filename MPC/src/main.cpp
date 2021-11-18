@@ -9,6 +9,7 @@
 #include "RobotModel.h"
 #include "TrackingMPC.h"
 #include "PlanningMPC.h"
+#include "PlanningLattice.h"
 #include "TrajectoryCreator.h"
 
 using namespace std;
@@ -37,6 +38,11 @@ int main(int argc, char **argv)
 
     GoalState goal_state = {1.00, -0.10, 5.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
     
+    PlanningLattice planning_lattice(&robot_model, &save_result, goal_state);
+
+    vector<TrajPoint> local_traj_pointss; // test
+    planning_lattice.CalRefTrajectory(local_traj_pointss);
+
     PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
@@ -56,6 +62,7 @@ int main(int argc, char **argv)
 
     while (time <= 7.6) {
         if (loop_counter % num_planning == 0) {
+            //planning_lattice.CalRefTrajectory(local_traj_points);
             planning_mpc.CalRefTrajectory(
                     optimal_traj_points, local_traj_points);            
         }
