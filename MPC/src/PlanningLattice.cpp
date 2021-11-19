@@ -253,12 +253,8 @@ void PlanningLattice::SprinkleFunc(
     sample_distance.at(1) = sample_speed.at(1) * time_to_goal;
     sample_distance.at(2) = sample_speed.at(2) * time_to_goal;
 
-    double time_interval = 3.0; // 3.0
-    double delta_time = 1.0; // 0.5
-    
-    num_time = int(time_interval / delta_time) + 1;
-
-    sample_time.resize(num_time * num_speed);
+    double time_interval; // 3.0
+    double delta_time; // 1.0
 
     double time_benchmark;
 
@@ -267,9 +263,18 @@ void PlanningLattice::SprinkleFunc(
                 (distance_agv2goal - sample_distance.at(i)) /
                 sample_speed.at(i);
 
+        time_interval = time_benchmark * 0.5; // 采样区间
+
+        delta_time = time_benchmark * 0.1; // 采样间隔
+
+        num_time = int(time_interval / delta_time); // 采样点数
+
+        sample_time.resize(num_time * num_speed);
+
+        // 采样点（0.1, 0.2, 0.3, 0.4, 0.5） * time_benchmark + time_benchmark
         for (int j = 0; j < num_time; j++) {
             sample_time.at(i * num_time + j) =
-                    time_benchmark + (double)j * delta_time;
+                    time_benchmark + (double)(j + 1) * delta_time;
         }
     }
 }
@@ -509,7 +514,7 @@ void PlanningLattice::ScoringFunc(
     double score;
 
     if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 ||
-        a_min < -0.01) {
+        a_min <= -0.05) {
         score = 100000000.0;
     } else {
         double score_vmax, score_time, score_jer, score_acc, score_w;
