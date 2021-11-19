@@ -18,6 +18,9 @@ struct TrajPoint
     double v_ref;
     double w_ref;
     double t_ref;
+
+    double ax_ref; // Lattice Planner
+    double ay_ref;
 };
 
 struct RefPoint

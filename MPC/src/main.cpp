@@ -59,13 +59,16 @@ int main(int argc, char **argv)
 
     double time_simulation = 1.0;
 
-    planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
-            
-    time_simulation = planning_lattice.GetTimeSimulation();
+    //planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
 
-    while (time <= time_simulation) {
+    /* while (time <= time_simulation) { */
+    while (time <= 6.0) {
         if (loop_counter % num_planning == 0) {
-            // planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
+            planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
+
+            time_simulation = planning_lattice.GetTimeSimulation();
+
+            cout << time_simulation << endl;
 
             planning_mpc.CalRefTrajectory(
                     optimal_traj_points, local_traj_points);

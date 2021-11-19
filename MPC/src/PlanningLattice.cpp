@@ -30,9 +30,9 @@ PlanningLattice::PlanningLattice(
         PlanningAlgorithm::PlanningAlgorithm(
                 p_robot_model, p_savedata, goal_state)
 {
-    start_gate_ = false;
+    start_gate_ = true;
 
-    min_relative_dis_ = 0.3;
+    min_relative_dis_ = 0.5;
 
     weak_planning_num_ = 5;
 
@@ -61,63 +61,100 @@ ControlCommand PlanningLattice::CalRefTrajectory(
 
     ControlCommand result = {0.0, 0.0, 0.0};
     
-    distance_agv2goal_ =
-            pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
-            pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
+    if (start_gate_ == true) {
+        start_gate_ = false;
 
-    if (distance_agv2goal_ < min_relative_dis_) {
-        cout << "[INFO] agv is too near to goal point!" << endl;
-
-        return result;
-    }
-
-    if (start_gate_ == false) {
         GetSensorInfo();
 
         memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
-    } else {
-        UpdatePlannerSensorInfo();
-    }
 
-    vector<double> sample_time, sample_speed, sample_distance;
-    int num_time, num_speed, num_distance;
+        distance_agv2goal_ =
+                pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
+                pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
-    SprinkleFunc(
-            sample_time, num_time,
-            sample_speed, num_speed,
-            sample_distance, num_distance);
+        if (distance_agv2goal_ < min_relative_dis_) {
+            cout << "[INFO] agv is too near to goal point!" << endl;
 
-    step_polynomial_curve_ = 0.1;
-
-    for (int i = 0; i < num_speed; i++) {
-        for (int j = 0; j < num_time; j++) {
-            CalPolynomialCurve(
-                    sample_time.at(i * num_time + j), sample_speed.at(i),
-                    sample_distance.at(i), step_polynomial_curve_);
-
-            ScoringFunc(sample_speed.at(i), i, j, num_time);
+            return result;
         }
+
+        vector<double> sample_time, sample_speed, sample_distance;
+        int num_time, num_speed, num_distance;
+
+        SprinkleFunc(
+                sample_time, num_time,
+                sample_speed, num_speed,
+                sample_distance, num_distance);
+
+        step_polynomial_curve_ = 0.1;
+
+        for (int i = 0; i < num_speed; i++) {
+            for (int j = 0; j < num_time; j++) {
+                CalPolynomialCurve(
+                        sample_time.at(i * num_time + j), sample_speed.at(i),
+                        sample_distance.at(i), step_polynomial_curve_);
+
+                ScoringFunc(sample_speed.at(i), i, j, num_time);
+            }
+        }
+
+        int opt_traj_index;
+
+        SelectTrajFunc(num_time, opt_traj_index);
+
+        int speed_index = int(opt_traj_index / num_time);
+
+        opt_speed_ = sample_speed.at(speed_index);
+        opt_time_ = sample_time.at(opt_traj_index);
+        opt_distance_ = sample_distance.at(speed_index);
+
+        double dis_margin = 0.2;
+        min_relative_dis_ = opt_distance_ + dis_margin;
+
+        step_polynomial_curve_ = 0.05;
+
+        CalPolynomialCurve(
+                opt_time_, opt_speed_, opt_distance_, step_polynomial_curve_);
+    } else {
+        GetSensorInfo();
+
+        UpdatePlannerSensorInfo();
+
+        distance_agv2goal_ =
+                pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
+                pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
+
+        if (distance_agv2goal_ < min_relative_dis_) {
+            cout << "[INFO] agv is too near to goal point!" << endl;
+
+            return result;
+        }
+
+        vector<TrajPoint> temp;
+
+        for (int i = planner_sensor_info_id_; 
+             i < index_init_point_strong_planner_; i++) {
+            temp.push_back(local_traj_points_.at(i));
+        }
+
+        TrajPoint init_point_strong_planning;
+        memcpy(
+                &init_point_strong_planning,
+                &local_traj_points_.at(index_init_point_strong_planner_),
+                sizeof(TrajPoint));
+
+        local_traj_points_.clear();
+
+        local_traj_points_.assign(temp.begin(), temp.end());
+
+        CalPolynomialCurve(
+                start_time_polynomial_ + opt_time_ - sensor_info_planner_.t,
+                opt_speed_, opt_distance_, step_polynomial_curve_,
+                init_point_strong_planning);
     }
-
-    int opt_traj_index;
-
-    SelectTrajFunc(num_time, opt_traj_index);
-
-    int speed_index = int(opt_traj_index / num_time);
-
-    double opt_speed = sample_speed.at(speed_index);
-    double opt_time = sample_time.at(opt_traj_index);
-    double opt_distance = sample_distance.at(speed_index);
-
-    min_relative_dis_ = opt_distance;
-
-    step_polynomial_curve_ = 0.05;
-
-    CalPolynomialCurve(
-            opt_time, opt_speed, opt_distance, step_polynomial_curve_);
 
     local_traj_points.assign(
-            local_traj_points_.begin(), local_traj_points_.end());
+                local_traj_points_.begin(), local_traj_points_.end());
 
     gettimeofday(&t_end, NULL);
 
@@ -189,8 +226,7 @@ void PlanningLattice::UpdatePlannerSensorInfo()
         double delta_t, fabs_delta_t;
                                           
         delta_t = 
-                p_robot_model_->motion_state_.t -
-                local_traj_points_.at(i).t_ref;
+                sensor_info_.t - local_traj_points_.at(i).t_ref;
         
         fabs_delta_t = -1.0 * fabs(delta_t);
 
@@ -201,9 +237,7 @@ void PlanningLattice::UpdatePlannerSensorInfo()
     vector<double>::iterator biggest =
             max_element(begin(fabs_relative_time), end(fabs_relative_time));
 
-    int ref_point_index;
-
-    ref_point_index = distance(begin(fabs_relative_time), biggest);
+    int ref_point_index = distance(begin(fabs_relative_time), biggest);
 
     if (relative_time.at(ref_point_index) <= 0.0) {
         ref_point_index = ref_point_index - 1;
@@ -220,23 +254,22 @@ void PlanningLattice::UpdatePlannerSensorInfo()
     }
 
     /* weak planning time = weak_planning_num_ * step_polynomial_curve_ */
-    int index_transition_point = ref_point_index + weak_planning_num_;
-    
+    index_init_point_strong_planner_ = ref_point_index + weak_planning_num_;
+
     sensor_info_planner_.t   =
-            local_traj_points_.at(index_transition_point).t_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).t_ref;
     sensor_info_planner_.x   =
-            local_traj_points_.at(index_transition_point).x_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).x_ref;
     sensor_info_planner_.y   =
-            local_traj_points_.at(index_transition_point).y_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).y_ref;
     sensor_info_planner_.yaw =
-            local_traj_points_.at(index_transition_point).yaw_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).yaw_ref;
     sensor_info_planner_.v   =
-            local_traj_points_.at(index_transition_point).v_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).v_ref;
     sensor_info_planner_.w   =
-            local_traj_points_.at(index_transition_point).w_ref;
+            local_traj_points_.at(index_init_point_strong_planner_).w_ref;
 
     planner_sensor_info_id_ = ref_point_index;
-    index_init_point_strong_planner_ = index_transition_point - 1;
 }
 
 double PlanningLattice::GetRunningTimeAverage()
@@ -304,6 +337,9 @@ void PlanningLattice::CalPolynomialCurve(
         temp.w_ref   = sensor_info_planner_.w;
         temp.t_ref   = sensor_info_planner_.t;
 
+        temp.ax_ref = 0.0; // 应使用IMU量测信息
+        temp.ay_ref = 0.0;
+
         local_traj_points_.push_back(temp);
 
         double polynomial_step = step;
@@ -330,9 +366,12 @@ void PlanningLattice::CalPolynomialCurve(
             
             temp.t_ref   = temp.t_ref + polynomial_step;
 
+            temp.ax_ref = acceleration * cos(temp.yaw_ref);
+            temp.ay_ref = acceleration * sin(temp.yaw_ref);
+
             local_traj_points_.push_back(temp);
         }
-        
+
         double speed_except  = speed;
         double safe_distance = distance;
         double time_duration = time;
@@ -340,7 +379,9 @@ void PlanningLattice::CalPolynomialCurve(
         double t0, t1;
         t0 = temp.t_ref;
         t1 = t0 + time_duration;
-                
+
+        start_time_polynomial_ = t0;
+
         MatrixXd X(6, 1), Y(6, 1);
         
         X << temp.x_ref,
@@ -348,7 +389,7 @@ void PlanningLattice::CalPolynomialCurve(
              acceleration * cos(temp.yaw_ref),
              goal_state_.x - safe_distance * cos(goal_state_.yaw),
              speed_except * cos(goal_state_.yaw),
-             0.0;    
+             0.0;
 
         Y << temp.y_ref,
              temp.v_ref * sin(temp.yaw_ref),
@@ -424,6 +465,9 @@ void PlanningLattice::CalPolynomialCurve(
             temp.w_ref   = w;
             temp.t_ref   = t;
 
+            temp.ax_ref = ax;
+            temp.ay_ref = ay;
+
             local_traj_points_.push_back(temp);
         }
 
@@ -437,6 +481,9 @@ void PlanningLattice::CalPolynomialCurve(
             temp.w_ref   = 0.0;
             temp.t_ref   = t1;
 
+            temp.ax_ref = 0.0;
+            temp.ay_ref = 0.0;
+
             local_traj_points_.push_back(temp);
         }
 
@@ -447,6 +494,9 @@ void PlanningLattice::CalPolynomialCurve(
         temp.w_ref   = goal_state_.w;
         temp.t_ref   = temp.t_ref + safe_distance / speed_except;
 
+        temp.ax_ref = 0.0;
+        temp.ay_ref = 0.0;
+
         local_traj_points_.push_back(temp);
     } else {
         temp.x_ref   = sensor_info_planner_.x;
@@ -455,6 +505,173 @@ void PlanningLattice::CalPolynomialCurve(
         temp.v_ref   = sensor_info_planner_.v;
         temp.w_ref   = 50.0/57.3;
         temp.t_ref   = sensor_info_planner_.t;
+
+        temp.ax_ref = 0.0;
+        temp.ay_ref = 0.0;
+
+        for (int i = 0; i < 5; i++) {
+            local_traj_points_.push_back(temp);
+        }
+    }
+
+    time_simulation_ = temp.t_ref;
+}
+
+void PlanningLattice::CalPolynomialCurve(
+        double time, double speed, double distance,
+        double step, TrajPoint traj_point)
+{
+    TrajPoint temp;
+
+    if (time > 0.0) {
+        temp.x_ref   = traj_point.x_ref;
+        temp.y_ref   = traj_point.y_ref;
+        temp.yaw_ref = traj_point.yaw_ref;
+        temp.v_ref   = traj_point.v_ref;
+        temp.w_ref   = traj_point.w_ref;
+        temp.t_ref   = traj_point.t_ref;
+
+        temp.ax_ref = traj_point.ax_ref;
+        temp.ay_ref = traj_point.ay_ref;
+
+        local_traj_points_.push_back(temp);
+
+        double polynomial_step = step;
+
+        double speed_except  = speed;
+        double safe_distance = distance;
+        double time_duration = time;
+
+        double t0, t1;
+        t0 = temp.t_ref;
+        t1 = t0 + time_duration;
+
+        MatrixXd X(6, 1), Y(6, 1);
+        
+        X << temp.x_ref,
+             temp.v_ref * cos(temp.yaw_ref),
+             temp.ax_ref,
+             goal_state_.x - safe_distance * cos(goal_state_.yaw),
+             speed_except * cos(goal_state_.yaw),
+             0.0;
+
+        Y << temp.y_ref,
+             temp.v_ref * sin(temp.yaw_ref),
+             temp.ay_ref,
+             goal_state_.y - safe_distance * sin(goal_state_.yaw),
+             speed_except * sin(goal_state_.yaw),
+             0.0;
+
+        MatrixXd T(6, 6);
+        
+        T << pow(t0, 5.0),         pow(t0, 4.0),         pow(t0, 3.0),        pow(t0, 2.0),  t0,   1.0,
+            5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
+            20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
+            pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
+            5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
+            20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
+
+        MatrixXd A(6, 1), B(6, 1);
+
+        A = T.inverse() * X;
+
+        B = T.inverse() * Y;
+
+        int cycle_num = (int)((t1 - t0) / polynomial_step) + 1;
+
+        for (int i = 1; i < cycle_num; i++) {
+            double t = t0 + i * polynomial_step;
+
+            MatrixXd matrix_T(3, 6);
+
+            matrix_T << pow(t, 5.0),        pow(t, 4.0),        pow(t, 3.0),       pow(t, 2.0), t,   1.0,
+                        5.0 * pow(t, 4.0),  4.0 * pow(t, 3.0),  3.0 * pow(t, 2.0), 2.0 * t,     1.0, 0.0,
+                        20.0 * pow(t, 3.0), 12.0 * pow(t, 2.0), 6.0 * t,           2.0,         0.0, 0.0;
+
+            MatrixXd result_x(3, 1), result_y(3, 1);
+
+            result_x = matrix_T * A;
+
+            result_y = matrix_T * B;
+
+            double x, vx, ax, y, vy, ay;
+
+            x = result_x(0);
+            vx = result_x(1);
+            ax = result_x(2);
+
+            y = result_y(0);
+            vy = result_y(1);
+            ay = result_y(2);
+
+            double v, yaw, curvature, w;
+
+            v = pow(pow(vx, 2.0) + pow(vy, 2.0), 0.5);
+
+            yaw = atan2(vy, vx);
+
+            if (v != 0) {
+                curvature =
+                        (vx * ay - vy * ax) /
+                        pow(pow(vx, 2.0) + pow(vy, 2.0), 3.0 / 2.0);
+
+                w = v * curvature;
+            } else {
+                curvature = 9999999999.9999999;
+
+                w = 0.0;
+            }
+
+            temp.x_ref   = x;
+            temp.y_ref   = y;
+            temp.yaw_ref = yaw;
+            temp.v_ref   = v;
+            temp.w_ref   = w;
+            temp.t_ref   = t;
+
+            temp.ax_ref = ax;
+            temp.ay_ref = ay;
+
+            local_traj_points_.push_back(temp);
+        }
+
+        if (temp.t_ref < t1) {
+            temp.x_ref   =
+                    goal_state_.x - safe_distance * cos(goal_state_.yaw);
+            temp.y_ref   =
+                    goal_state_.y - safe_distance * sin(goal_state_.yaw);
+            temp.yaw_ref = goal_state_.yaw;
+            temp.v_ref   = speed_except;
+            temp.w_ref   = 0.0;
+            temp.t_ref   = t1;
+
+            temp.ax_ref = 0.0;
+            temp.ay_ref = 0.0;
+
+            local_traj_points_.push_back(temp);
+        }
+
+        temp.x_ref   = goal_state_.x;
+        temp.y_ref   = goal_state_.y;
+        temp.yaw_ref = goal_state_.yaw;
+        temp.v_ref   = goal_state_.v + speed_except;
+        temp.w_ref   = goal_state_.w;
+        temp.t_ref   = temp.t_ref + safe_distance / speed_except;
+
+        temp.ax_ref = 0.0;
+        temp.ay_ref = 0.0;
+
+        local_traj_points_.push_back(temp);
+    } else {
+        temp.x_ref   = sensor_info_planner_.x;
+        temp.y_ref   = sensor_info_planner_.y;
+        temp.yaw_ref = sensor_info_planner_.yaw;
+        temp.v_ref   = sensor_info_planner_.v;
+        temp.w_ref   = 50.0/57.3;
+        temp.t_ref   = sensor_info_planner_.t;
+
+        temp.ax_ref = 0.0;
+        temp.ay_ref = 0.0;
 
         for (int i = 0; i < 5; i++) {
             local_traj_points_.push_back(temp);

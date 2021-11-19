@@ -19,16 +19,16 @@ class PlanningLattice: public PlanningAlgorithm
 {
  public:
      PlanningLattice(
-            RobotModel *p_robot_model, SaveData *p_savedata,
-            GoalState goal_state);
+             RobotModel *p_robot_model, SaveData *p_savedata,
+             GoalState goal_state);
 
      ~PlanningLattice() {};
 
      ControlCommand CalRefTrajectory(
-            vector<TrajPoint> &local_traj_points);
+             vector<TrajPoint> &local_traj_points);
 
      ControlCommand CalRefTrajectory(
-            vector<TrajPoint> &local_traj_points, GoalState goal_state);
+             vector<TrajPoint> &local_traj_points, GoalState goal_state);
 
      double GetRunningTimeAverage();
 
@@ -36,6 +36,12 @@ class PlanningLattice: public PlanningAlgorithm
 
 
  private:
+     double start_time_polynomial_;
+
+     double opt_speed_;
+     double opt_time_;
+     double opt_distance_;
+
      double min_relative_dis_;
      
      double distance_agv2goal_;
@@ -72,15 +78,19 @@ class PlanningLattice: public PlanningAlgorithm
      void UpdatePlannerSensorInfo();
 
      void SprinkleFunc(
-            vector<double> &sample_time, int &num_time,
-            vector<double> &sample_speed, int &num_speed,
-            vector<double> &sample_distance, int &num_distance);
+             vector<double> &sample_time, int &num_time,
+             vector<double> &sample_speed, int &num_speed,
+             vector<double> &sample_distance, int &num_distance);
 
      void CalPolynomialCurve(
-            double time, double speed, double distance, double step);
+             double time, double speed, double distance, double step);
 
      void ScoringFunc(
-            double except_speed, int speed_index, int time_index, int num_time);
+             double except_speed, int speed_index, int time_index, int num_time);
        
      void SelectTrajFunc(int num_time, int &opt_traj_index);
+
+     void CalPolynomialCurve(
+             double time, double speed, double distance,
+             double step, TrajPoint traj_point);
 };
