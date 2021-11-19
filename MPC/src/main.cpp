@@ -57,16 +57,18 @@ int main(int argc, char **argv)
     vector<TrajPoint> local_traj_points;
     vector<TrajPoint> optimal_traj_points;
 
-    planning_lattice.CalRefTrajectory(local_traj_points);
+    double time_simulation = 1.0;
 
-    double time_simulation;
+    planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
+            
     time_simulation = planning_lattice.GetTimeSimulation();
 
     while (time <= time_simulation) {
         if (loop_counter % num_planning == 0) {
-            //planning_lattice.CalRefTrajectory(local_traj_points);
+            // planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
+
             planning_mpc.CalRefTrajectory(
-                    optimal_traj_points, local_traj_points);            
+                    optimal_traj_points, local_traj_points);
         }
 
         if (loop_counter % num_control == 0) {

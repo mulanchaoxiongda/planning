@@ -61,11 +61,6 @@ PlanningMPC::PlanningMPC(
     matrix_C_.resize(nx_, nx_ + nu_);
 
     ref_point_command_.resize(nc_ * nu_);
-
-    GetSensorInfo();
-
-    //ReadInGoalTraj();
-    //GenerateGlobalTraj();
 }
 
 ControlCommand PlanningMPC::CalRefTrajectory(
@@ -83,15 +78,15 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
 
-    global_traj_points_.assign(
+    local_traj_points_.assign(
             local_traj_points.begin(), local_traj_points.end());
 
     if (start_gate_ == false) {
         GetSensorInfo();
 
         /* 控制量初始值求解方案A */
-        u_pre_ << sensor_info_.v - global_ref_traj_point_.v,
-                  sensor_info_.w - global_ref_traj_point_.w;
+        u_pre_ << sensor_info_.v - local_ref_traj_point_.v,
+                  sensor_info_.w - local_ref_traj_point_.w;
 
         memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
     } else {
@@ -181,8 +176,8 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
     UpdateReferenceTrajectory();
 
-    optimal_traj_points.assign(local_trajectory_points_.begin(),
-                             local_trajectory_points_.end());
+    optimal_traj_points.assign(opt_traj_points_.begin(),
+                               opt_traj_points_.end());
 
     gettimeofday(&t_end, NULL);
 
@@ -195,10 +190,10 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     running_time_average_ = running_time_sum_ / (double)loop_counter_;
 
     p_savedata_->file << "[planning_control_command] "
-                          << " Time "             << sensor_info_.t
-                          << " vc "               << u_optimal_(0)
-                          << " wc "               << u_optimal_(1)
-                          << " Time "             << sensor_info_planner_.t << endl;
+                          << " Time " << sensor_info_.t
+                          << " vc "   << u_optimal_(0)
+                          << " wc "   << u_optimal_(1)
+                          << " Time " << sensor_info_planner_.t << endl;
 
     ControlCommand result = {u_optimal_(0), u_optimal_(1), sensor_info_.t};
 
@@ -207,224 +202,12 @@ ControlCommand PlanningMPC::CalRefTrajectory(
 
 void PlanningMPC::ReadInGoalTraj()
 {
-    string string_temp;
-
-    ifstream read_file;
-    read_file.open("../data/TrajectoryPoints.txt", ios::in);
-
-    if (read_file.fail()) {
-        cout << "[error] failed to open TrajectoryPoints.txt" << endl;
-    } else {
-        while (getline(read_file, string_temp)) {
-            istringstream is(string_temp);
-
-            double data;
-
-            vector<double> temp_container;
-            TrajPoint temp;
-
-            while (!is.eof()) {
-                is>>data;
-                temp_container.push_back(data);
-            }
-
-            temp.x_ref   = temp_container.at(0);
-            temp.y_ref   = temp_container.at(1);
-            temp.yaw_ref = temp_container.at(2);
-            temp.v_ref   = temp_container.at(3);
-            temp.w_ref   = temp_container.at(4);
-            temp.t_ref   = temp_container.at(5);
-
-            global_traj_points_.push_back(temp);
-
-            temp_container.clear();
-            string_temp.clear();
-        }
-    }
-
-
-    read_file.close();
-    cout << "[INFO] read in reference global route points successfully !"
-         << endl;
-}
-
-void PlanningMPC::GenerateGlobalTraj()
-{
-    double distance_agv2goal =
-            pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
-            pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
-
-    double min_relative_dis = 1.0;
-
-    if (distance_agv2goal < min_relative_dis) {
-        cout << "[error] agv is too near to goal point!" << endl;
-    }
-
-    TrajPoint temp;
-
-    temp.x_ref   = sensor_info_planner_.x;
-    temp.y_ref   = sensor_info_planner_.y;
-    temp.yaw_ref = sensor_info_planner_.yaw;
-    temp.v_ref   = sensor_info_planner_.v;
-    temp.w_ref   = sensor_info_planner_.w;
-    temp.t_ref   = sensor_info_planner_.t;
-
-    global_traj_points_.push_back(temp);
-
-    double polynomial_step = 0.05;
-
-    double min_speed = 0.01;
-
-    double acceleration = 0.0;
-
-    while (fabs(temp.v_ref) < min_speed) {
-        acceleration = 0.1;
-
-        temp.v_ref   = temp.v_ref + acceleration * polynomial_step;
-        temp.w_ref   = temp.w_ref;
-
-        temp.yaw_ref = temp.yaw_ref + temp.w_ref * polynomial_step;
-        
-        temp.x_ref   = temp.x_ref + temp.v_ref * cos(temp.yaw_ref) * polynomial_step;
-        temp.y_ref   = temp.y_ref + temp.v_ref * sin(temp.yaw_ref) * polynomial_step;
-        
-        temp.t_ref   = temp.t_ref + polynomial_step;
-
-        global_traj_points_.push_back(temp);
-    }
-    
-    /* Todo 对时间time_margin、速度speed_except采样，形成备选轨迹集合
-    Todo 明确场景与边界条件，建模仿真
-    Todo 调参，分析仿真数据，确定代价函数和硬件约束
-    Todo 调试，定版
-    Todo 五次多项式拼接出曲率不连续 */
-    double speed_except = 0.15; // Lattice
-
-    double time_margin = 1.0;
-
-    double time_to_goal = 2.5;
-    double safe_distance = speed_except * time_to_goal;
-
-    double t0, t1;
-    
-    t0 = temp.t_ref + 0.0;
-    t1 = 
-            t0 + (distance_agv2goal - safe_distance) / // Todo
-            speed_except + time_margin; // Lattice
-
-    MatrixXd X(6, 1), Y(6, 1);
-    
-    X << temp.x_ref,
-         temp.v_ref * cos(temp.yaw_ref),
-         acceleration * cos(temp.yaw_ref),
-         goal_state_.x - safe_distance * cos(goal_state_.yaw),
-         speed_except * cos(goal_state_.yaw),
-         0.0;    
-
-    Y << temp.y_ref,
-         temp.v_ref * sin(temp.yaw_ref),
-         acceleration * sin(temp.yaw_ref),
-         goal_state_.y - safe_distance * sin(goal_state_.yaw),
-         speed_except * sin(goal_state_.yaw),
-         0.0;
-
-    MatrixXd T(6, 6);
-    
-    T << pow(t0, 5.0),         pow(t0, 4.0),         pow(t0, 3.0),        pow(t0, 2.0),  t0,   1.0,
-         5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
-         20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
-         pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
-         5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
-         20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
-
-    MatrixXd A(6, 1), B(6, 1);
-
-    A = T.inverse() * X;
-
-    B = T.inverse() * Y;
-
-    int cycle_num = (int)((t1 - t0) / polynomial_step) + 1;
-
-    for (int i = 1; i < cycle_num; i++) {
-        double t = t0 + i * polynomial_step;
-
-        MatrixXd matrix_T(3, 6);
-
-        matrix_T << pow(t, 5.0),        pow(t, 4.0),        pow(t, 3.0),       pow(t, 2.0), t,   1.0,
-                    5.0 * pow(t, 4.0),  4.0 * pow(t, 3.0),  3.0 * pow(t, 2.0), 2.0 * t,     1.0, 0.0,
-                    20.0 * pow(t, 3.0), 12.0 * pow(t, 2.0), 6.0 * t,           2.0,         0.0, 0.0;
-
-        MatrixXd result_x(3, 1), result_y(3, 1);
-
-        result_x = matrix_T * A;
-
-        result_y = matrix_T * B;
-
-        double x, vx, ax, y, vy, ay;
-
-        x = result_x(0);
-        vx = result_x(1);
-        ax = result_x(2);
-
-        y = result_y(0);
-        vy = result_y(1);
-        ay = result_y(2);
-
-        double v, yaw, curvature, w;
-
-        v = pow(pow(vx, 2.0) + pow(vy, 2.0), 0.5);
-
-        yaw = atan2(vy, vx);
-
-        if (v != 0) {
-            curvature =
-                    (vx * ay - vy * ax) /
-                    pow(pow(vx, 2.0) + pow(vy, 2.0), 3.0 / 2.0);
-
-            w = v * curvature;
-        } else {
-            curvature = 9999999999.9999999;
-
-            w = 0.0;
-        }
-
-        temp.x_ref   = x;
-        temp.y_ref   = y;
-        temp.yaw_ref = yaw;
-        temp.v_ref   = v;
-        temp.w_ref   = w;
-        temp.t_ref   = t;
-
-        global_traj_points_.push_back(temp);
-    }
-
-    if (temp.t_ref < t1) {
-        temp.x_ref   = goal_state_.x - safe_distance * cos(goal_state_.yaw);
-        temp.y_ref   = goal_state_.y - safe_distance * sin(goal_state_.yaw);
-        temp.yaw_ref = goal_state_.yaw;
-        temp.v_ref   = speed_except;
-        temp.w_ref   = 0.0;
-        temp.t_ref   = t1;
-
-        global_traj_points_.push_back(temp);
-    }
-
-    temp.x_ref   = goal_state_.x;
-    temp.y_ref   = goal_state_.y;
-    temp.yaw_ref = goal_state_.yaw;
-    temp.v_ref   = goal_state_.v + speed_except;
-    temp.w_ref   = goal_state_.w;
-    temp.t_ref   = temp.t_ref + safe_distance / speed_except;
-
-    global_traj_points_.push_back(temp);
-
-    cout << "[INFO] generate reference global route points successfully !"
-         << endl;
+    ;
 }
 
 void PlanningMPC::FindRefPoint()
 {
-    int size_ref_traj = global_traj_points_.size();
+    int size_ref_traj = local_traj_points_.size();
 
     if (size_ref_traj <= 1 ) {
         cout << "[error] global reference trajectory has only "
@@ -438,7 +221,7 @@ void PlanningMPC::FindRefPoint()
     for (int i = 0; i < size_ref_traj; i++) {
         double delta_t, fabs_delta_t;
 
-        delta_t = sensor_info_planner_.t - global_traj_points_.at(i).t_ref;
+        delta_t = sensor_info_planner_.t - local_traj_points_.at(i).t_ref;
         fabs_delta_t = -1.0 * fabs(delta_t);
 
         relative_time.push_back(delta_t);
@@ -471,72 +254,72 @@ void PlanningMPC::FindRefPoint()
 
     dis_total = dis1 + dis2;
 
-    global_ref_traj_point_.t =
-            ( global_traj_points_.at(ref_point_index).t_ref * dis2 +
-              global_traj_points_.at(ref_point_index + 1).t_ref * dis1 ) /
+    local_ref_traj_point_.t =
+            ( local_traj_points_.at(ref_point_index).t_ref * dis2 +
+              local_traj_points_.at(ref_point_index + 1).t_ref * dis1 ) /
               dis_total;
     
-    global_ref_traj_point_.v =
-            ( global_traj_points_.at(ref_point_index).v_ref * dis2 +
-              global_traj_points_.at(ref_point_index + 1).v_ref * dis1 ) /
+    local_ref_traj_point_.v =
+            ( local_traj_points_.at(ref_point_index).v_ref * dis2 +
+              local_traj_points_.at(ref_point_index + 1).v_ref * dis1 ) /
             dis_total;
     
-    global_ref_traj_point_.w =
-            ( global_traj_points_.at(ref_point_index).w_ref * dis2 +
-              global_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
+    local_ref_traj_point_.w =
+            ( local_traj_points_.at(ref_point_index).w_ref * dis2 +
+              local_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
               dis_total;
     
     double delta_t1, delta_t2;
     
     delta_t1 = 
-            global_ref_traj_point_.t -
-            global_traj_points_.at(ref_point_index).t_ref;
+            local_ref_traj_point_.t -
+            local_traj_points_.at(ref_point_index).t_ref;
 
     delta_t2 = 
-            global_traj_points_.at(ref_point_index + 1).t_ref -
-            global_ref_traj_point_.t;
+            local_traj_points_.at(ref_point_index + 1).t_ref -
+            local_ref_traj_point_.t;
     
-    global_ref_traj_point_.yaw =
-            ((global_traj_points_.at(ref_point_index).yaw_ref +
-            global_traj_points_.at(ref_point_index).w_ref * delta_t1) *
-            dis2 + (global_traj_points_.at(ref_point_index + 1).yaw_ref -
-            global_traj_points_.at(ref_point_index + 1).w_ref * delta_t2) *
+    local_ref_traj_point_.yaw =
+            ((local_traj_points_.at(ref_point_index).yaw_ref +
+            local_traj_points_.at(ref_point_index).w_ref * delta_t1) *
+            dis2 + (local_traj_points_.at(ref_point_index + 1).yaw_ref -
+            local_traj_points_.at(ref_point_index + 1).w_ref * delta_t2) *
             dis1 ) / dis_total;
     
-    global_ref_traj_point_.x =
-            ((global_traj_points_.at(ref_point_index).x_ref +
-            global_traj_points_.at(ref_point_index).v_ref * delta_t1 *
-            cos(global_traj_points_.at(ref_point_index).yaw_ref * 0.5 +
-            global_ref_traj_point_.yaw * 0.5)) * dis2 +
-            (global_traj_points_.at(ref_point_index + 1).x_ref -
-            global_traj_points_.at(ref_point_index + 1).v_ref * delta_t2 *
-            cos(global_traj_points_.at(ref_point_index + 1).yaw_ref * 0.5 +
-            global_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
+    local_ref_traj_point_.x =
+            ((local_traj_points_.at(ref_point_index).x_ref +
+            local_traj_points_.at(ref_point_index).v_ref * delta_t1 *
+            cos(local_traj_points_.at(ref_point_index).yaw_ref * 0.5 +
+            local_ref_traj_point_.yaw * 0.5)) * dis2 +
+            (local_traj_points_.at(ref_point_index + 1).x_ref -
+            local_traj_points_.at(ref_point_index + 1).v_ref * delta_t2 *
+            cos(local_traj_points_.at(ref_point_index + 1).yaw_ref * 0.5 +
+            local_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
     
-    global_ref_traj_point_.y =
-            ((global_traj_points_.at(ref_point_index).y_ref +
-            global_traj_points_.at(ref_point_index).v_ref * delta_t1 *
-            sin(global_traj_points_.at(ref_point_index).yaw_ref * 0.5 +
-            global_ref_traj_point_.yaw * 0.5)) * dis2 +
-            (global_traj_points_.at(ref_point_index + 1).y_ref -
-            global_traj_points_.at(ref_point_index + 1).v_ref * delta_t2 *
-            sin(global_traj_points_.at(ref_point_index + 1).yaw_ref * 0.5 +
-            global_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
+    local_ref_traj_point_.y =
+            ((local_traj_points_.at(ref_point_index).y_ref +
+            local_traj_points_.at(ref_point_index).v_ref * delta_t1 *
+            sin(local_traj_points_.at(ref_point_index).yaw_ref * 0.5 +
+            local_ref_traj_point_.yaw * 0.5)) * dis2 +
+            (local_traj_points_.at(ref_point_index + 1).y_ref -
+            local_traj_points_.at(ref_point_index + 1).v_ref * delta_t2 *
+            sin(local_traj_points_.at(ref_point_index + 1).yaw_ref * 0.5 +
+            local_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
          
     p_savedata_->file << "[plainning_global_reference_point] "
                       << " Time "    << sensor_info_.t
-                      << " x_ref "   << global_ref_traj_point_.x
-                      << " y_ref "   << global_ref_traj_point_.y
-                      << " yaw_ref " << global_ref_traj_point_.yaw
-                      << " v_ref "   << global_ref_traj_point_.v
-                      << " w_ref "   << global_ref_traj_point_.w
-                      << " t "       << global_ref_traj_point_.t
+                      << " x_ref "   << local_ref_traj_point_.x
+                      << " y_ref "   << local_ref_traj_point_.y
+                      << " yaw_ref " << local_ref_traj_point_.yaw
+                      << " v_ref "   << local_ref_traj_point_.v
+                      << " w_ref "   << local_ref_traj_point_.w
+                      << " t "       << local_ref_traj_point_.t
                       << endl;
 }
 
 void PlanningMPC::UpdatePlannerSensorInfo()
 {
-    int size_ref_traj = ref_traj_points_.size();
+    int size_ref_traj = opt_traj_points_.size();
 
     if (size_ref_traj <= 1 ) {
         cout << "[error] global reference trajectory has only "
@@ -549,7 +332,7 @@ void PlanningMPC::UpdatePlannerSensorInfo()
     for (int i = 0; i < size_ref_traj; i++) {
         double delta_t, fabs_delta_t;
 
-        delta_t = p_robot_model_->motion_state_.t - ref_traj_points_.at(i).t_ref;
+        delta_t = p_robot_model_->motion_state_.t - opt_traj_points_.at(i).t_ref;
         fabs_delta_t = -1.0 * fabs(delta_t);
 
         relative_time.push_back(delta_t);
@@ -580,17 +363,17 @@ void PlanningMPC::UpdatePlannerSensorInfo()
     int index_transition_point = ref_point_index + weak_planning_num_;
     
     sensor_info_planner_.t   =
-            ref_traj_points_.at(index_transition_point).t_ref;
+            opt_traj_points_.at(index_transition_point).t_ref;
     sensor_info_planner_.x   =
-            ref_traj_points_.at(index_transition_point).x_ref;
+            opt_traj_points_.at(index_transition_point).x_ref;
     sensor_info_planner_.y   =
-            ref_traj_points_.at(index_transition_point).y_ref;
+            opt_traj_points_.at(index_transition_point).y_ref;
     sensor_info_planner_.yaw =
-            ref_traj_points_.at(index_transition_point).yaw_ref;
+            opt_traj_points_.at(index_transition_point).yaw_ref;
     sensor_info_planner_.v   =
-            ref_traj_points_.at(index_transition_point).v_ref;
+            opt_traj_points_.at(index_transition_point).v_ref;
     sensor_info_planner_.w   =
-            ref_traj_points_.at(index_transition_point).w_ref;
+            opt_traj_points_.at(index_transition_point).w_ref;
 
     planner_sensor_info_id_ = ref_point_index;
     index_init_point_strong_planner_ = index_transition_point - 1;
@@ -622,11 +405,11 @@ void PlanningMPC::CalControlCoefficient()
     Todo： 规划中的约束项应扣除各预测点的参考速度、角速度、加速度、角加速度
     Todo： 约束项扣除的参开速度、角速度应随预测点调整，预测模型A应随预测点调整
     说明： 如果是非线性模型、非线性优化，则不需要以上处理 */
-    u_min_ << -1.0 - global_ref_traj_point_.v,
-              -35.0 / 57.3 - global_ref_traj_point_.w;
+    u_min_ << -1.0 - local_ref_traj_point_.v,
+              -35.0 / 57.3 - local_ref_traj_point_.w;
 
-    u_max_ <<  1.0 - global_ref_traj_point_.v,
-               35.0 / 57.3 - global_ref_traj_point_.w;
+    u_max_ <<  1.0 - local_ref_traj_point_.v,
+               35.0 / 57.3 - local_ref_traj_point_.w;
 
     /* du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_ */
     du_min_ << -1.0 * predict_step_, -100.0 / 57.3 * predict_step_;
@@ -639,8 +422,8 @@ void PlanningMPC::UpdateErrorModel()
 
     x << sensor_info_planner_.x, sensor_info_planner_.y, sensor_info_planner_.yaw, sensor_info_planner_.w;
 
-    xr << global_ref_traj_point_.x,   global_ref_traj_point_.y,
-          global_ref_traj_point_.yaw, global_ref_traj_point_.w;
+    xr << local_ref_traj_point_.x,   local_ref_traj_point_.y,
+          local_ref_traj_point_.yaw, local_ref_traj_point_.w;
 
     matrix_kesi << x - xr, u_pre_;
 
@@ -648,13 +431,13 @@ void PlanningMPC::UpdateErrorModel()
 
     double T1 = 0.07;
 
-    matrix_a_ << 1.0, 0.0, -global_ref_traj_point_.v * predict_step_ * sin(global_ref_traj_point_.yaw),  0.0,
-                 0.0, 1.0,  global_ref_traj_point_.v * predict_step_ * cos(global_ref_traj_point_.yaw),  0.0,
+    matrix_a_ << 1.0, 0.0, -local_ref_traj_point_.v * predict_step_ * sin(local_ref_traj_point_.yaw),  0.0,
+                 0.0, 1.0,  local_ref_traj_point_.v * predict_step_ * cos(local_ref_traj_point_.yaw),  0.0,
                  0.0, 0.0,  1.0,                                                                         predict_step_,
                  0.0, 0.0,  0.0,                                                                         1.0 - predict_step_ / T1;
 
-    matrix_b_ << predict_step_ * cos(global_ref_traj_point_.yaw), 0.0,
-                 predict_step_ * sin(global_ref_traj_point_.yaw), 0.0,
+    matrix_b_ << predict_step_ * cos(local_ref_traj_point_.yaw), 0.0,
+                 predict_step_ * sin(local_ref_traj_point_.yaw), 0.0,
                  0.0,                                             0.0,
                  0.0,                                             predict_step_ / T1;
 
@@ -983,10 +766,11 @@ void PlanningMPC::MatrixToCCS(
 void PlanningMPC::UpdateReferenceTrajectory()
 {
     RobotMotionStatePara motion_state =
-            {sensor_info_planner_.x, sensor_info_planner_.y, sensor_info_planner_.yaw,
-             sensor_info_planner_.v, sensor_info_planner_.w, sensor_info_planner_.t};
+            {sensor_info_planner_.x, sensor_info_planner_.y,
+             sensor_info_planner_.yaw, sensor_info_planner_.v,
+             sensor_info_planner_.w, sensor_info_planner_.t};
 
-    ref_traj_points_.resize(np_ + 1);
+    opt_traj_points_.resize(np_ + 1);
 
     /* Todo: 最少预测np_个节点，当曲率较大时，增加预测节点的数量（以转弯半径、小车速度，
           动态调整预测步长），从而规避曲线拟合
@@ -1014,7 +798,8 @@ void PlanningMPC::UpdateReferenceTrajectory()
 
                 double Tw = 0.15;
                 double yaw_acceleration =
-                        (control_command.yaw_rate_command - motion_state.w) / Tw;
+                        (control_command.yaw_rate_command -
+                        motion_state.w) / Tw;
 
                 double simulation_step = predict_step_;
 
@@ -1035,12 +820,12 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 motion_state.t = motion_state.t + simulation_step;
             }
 
-            ref_traj_points_.at(i).t_ref   = motion_state.t;
-            ref_traj_points_.at(i).x_ref   = motion_state.x;
-            ref_traj_points_.at(i).y_ref   = motion_state.y;
-            ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
-            ref_traj_points_.at(i).v_ref   = motion_state.v;
-            ref_traj_points_.at(i).w_ref   = motion_state.w;
+            opt_traj_points_.at(i).t_ref   = motion_state.t;
+            opt_traj_points_.at(i).x_ref   = motion_state.x;
+            opt_traj_points_.at(i).y_ref   = motion_state.y;
+            opt_traj_points_.at(i).yaw_ref = motion_state.yaw;
+            opt_traj_points_.at(i).v_ref   = motion_state.v;
+            opt_traj_points_.at(i).w_ref   = motion_state.w;
         } else {
             if (i > weak_planning_num_) {
                 ControlCommand control_command;
@@ -1063,8 +848,9 @@ void PlanningMPC::UpdateReferenceTrajectory()
 
                 double Tw = 0.15;
                 double yaw_acceleration =
-                        (control_command.yaw_rate_command - motion_state.w) / Tw;
-
+                        (control_command.yaw_rate_command -
+                        motion_state.w) / Tw;
+                                                                
                 double simulation_step = predict_step_;
 
                 motion_state.v = motion_state.v + acceleration*simulation_step;
@@ -1083,58 +869,57 @@ void PlanningMPC::UpdateReferenceTrajectory()
 
                 motion_state.t = motion_state.t + simulation_step;
 
-                ref_traj_points_.at(i).t_ref   = motion_state.t;
-                ref_traj_points_.at(i).x_ref   = motion_state.x;
-                ref_traj_points_.at(i).y_ref   = motion_state.y;
-                ref_traj_points_.at(i).yaw_ref = motion_state.yaw;
-                ref_traj_points_.at(i).v_ref   = motion_state.v;
-                ref_traj_points_.at(i).w_ref   = motion_state.w;
+                opt_traj_points_.at(i).t_ref   = motion_state.t;
+                opt_traj_points_.at(i).x_ref   = motion_state.x;
+                opt_traj_points_.at(i).y_ref   = motion_state.y;
+                opt_traj_points_.at(i).yaw_ref = motion_state.yaw;
+                opt_traj_points_.at(i).v_ref   = motion_state.v;
+                opt_traj_points_.at(i).w_ref   = motion_state.w;
             } else {
-                ref_traj_points_.at(i).t_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).t_ref;
-                ref_traj_points_.at(i).x_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).x_ref;
-                ref_traj_points_.at(i).y_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).y_ref;
-                ref_traj_points_.at(i).yaw_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).yaw_ref;
-                ref_traj_points_.at(i).v_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).v_ref;
-                ref_traj_points_.at(i).w_ref =
-                        ref_traj_points_.at(i + planner_sensor_info_id_).w_ref;
+                double index = i + planner_sensor_info_id_;
+
+                opt_traj_points_.at(i).t_ref =
+                        opt_traj_points_.at(index).t_ref;
+                opt_traj_points_.at(i).x_ref =
+                        opt_traj_points_.at(index).x_ref;
+                opt_traj_points_.at(i).y_ref =
+                        opt_traj_points_.at(index).y_ref;
+                opt_traj_points_.at(i).yaw_ref =
+                        opt_traj_points_.at(index).yaw_ref;
+                opt_traj_points_.at(i).v_ref =
+                        opt_traj_points_.at(index).v_ref;
+                opt_traj_points_.at(i).w_ref =
+                        opt_traj_points_.at(index).w_ref;
             }
         }
 
         p_savedata_->file << "[reference_trajectory_planning] "
-                          << " Time "           << sensor_info_.t
-                          << " x_ref "         << ref_traj_points_.at(i).x_ref
-                          << " y_ref "         << ref_traj_points_.at(i).y_ref
-                          << " yaw_ref "       << ref_traj_points_.at(i).yaw_ref
-                          << " v_ref "         << ref_traj_points_.at(i).v_ref
-                          << " w_ref "         << ref_traj_points_.at(i).w_ref
-                          << " t_ref "         << ref_traj_points_.at(i).t_ref
-                          << " loop_counter "  << (double)loop_counter_ << endl;
+                          << "Time "         << sensor_info_.t
+                          << "x_ref "        << opt_traj_points_.at(i).x_ref
+                          << "y_ref "        << opt_traj_points_.at(i).y_ref
+                          << "yaw_ref "      << opt_traj_points_.at(i).yaw_ref
+                          << "v_ref "        << opt_traj_points_.at(i).v_ref
+                          << "w_ref "        << opt_traj_points_.at(i).w_ref
+                          << "t_ref "        << opt_traj_points_.at(i).t_ref
+                          << "loop_counter " << (double)loop_counter_ << endl;
     }
-
-    local_trajectory_points_.assign(
-            ref_traj_points_.begin(), ref_traj_points_.end());
 
     start_gate_ = true;
 
     p_savedata_->file << "[goal_state_planning] "
-                          << " Time "         << sensor_info_.t
-                          << " x_goal "       << goal_state_.x
-                          << " y_goal "       << goal_state_.y
-                          << " yaw_goal "     << goal_state_.yaw
-                          << " v_goal "       << goal_state_.v
-                          << " w_goal "       << goal_state_.w
-                          << " Time "         << sensor_info_planner_.t
-                          << " loop_counter " << (double)loop_counter_<< endl;
+                          << "Time "         << sensor_info_.t
+                          << "x_goal "       << goal_state_.x
+                          << "y_goal "       << goal_state_.y
+                          << "yaw_goal "     << goal_state_.yaw
+                          << "v_goal "       << goal_state_.v
+                          << "w_goal "       << goal_state_.w
+                          << "Time "         << sensor_info_planner_.t
+                          << "loop_counter " << (double)loop_counter_<< endl;
 }
 
 void PlanningMPC::CalPredictForwardCommand()
 {
-    int size_ref_traj = global_traj_points_.size();
+    int size_ref_traj = local_traj_points_.size();
 
     double time_predict = sensor_info_planner_.t;
 
@@ -1147,7 +932,7 @@ void PlanningMPC::CalPredictForwardCommand()
         for (int i = 0; i < size_ref_traj; i++) {
             double delta_t, fabs_delta_t;
 
-            delta_t = time_predict - global_traj_points_.at(i).t_ref;
+            delta_t = time_predict - local_traj_points_.at(i).t_ref;
             fabs_delta_t = -1.0 * fabs(delta_t);
 
             relative_time.push_back(delta_t);
@@ -1155,7 +940,8 @@ void PlanningMPC::CalPredictForwardCommand()
         }
 
         vector<double>::iterator biggest =
-                max_element(begin(fabs_relative_time), end(fabs_relative_time));
+                max_element(begin(fabs_relative_time),
+                            end(fabs_relative_time));
 
         int ref_point_index;
 
@@ -1183,14 +969,14 @@ void PlanningMPC::CalPredictForwardCommand()
         dis_total = dis1 + dis2;
 
         vc_ref =
-                ( global_traj_points_.at(ref_point_index).v_ref * dis2 +
-                global_traj_points_.at(ref_point_index + 1).v_ref * dis1 ) /
+                ( local_traj_points_.at(ref_point_index).v_ref * dis2 +
+                local_traj_points_.at(ref_point_index + 1).v_ref * dis1 ) /
                 dis_total;
         wc_ref =
-                ( global_traj_points_.at(ref_point_index).w_ref * dis2 +
-                global_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
+                ( local_traj_points_.at(ref_point_index).w_ref * dis2 +
+                local_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
                 dis_total;
-
+                                                                        
         time_predict += predict_step_;
 
         ref_point_command_.at(i * nu_) = vc_ref;

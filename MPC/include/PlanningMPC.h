@@ -33,8 +33,9 @@ class PlanningMPC: public PlanningAlgorithm
 
 
  private:
-     vector<TrajPoint> global_traj_points_;
-     RefPoint global_ref_traj_point_;
+     RefPoint local_ref_traj_point_;
+
+     vector<TrajPoint> opt_traj_points_;
 
      /* smoothed motion state for planner to get smooth trajcetory */
      SensorInfo sensor_info_planner_;
@@ -65,8 +66,6 @@ class PlanningMPC: public PlanningAlgorithm
 
      int loop_counter_;
 
-     vector<TrajPoint> ref_traj_points_;
-
      VectorXd u_optimal_; // optimal control variable
      VectorXd u_opt_storage_;
 
@@ -80,8 +79,6 @@ class PlanningMPC: public PlanningAlgorithm
      vector<double> ref_point_command_;
 
      void ReadInGoalTraj();
-
-     void GenerateGlobalTraj();
 
      void FindRefPoint();
 

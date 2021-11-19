@@ -18,12 +18,17 @@ class SaveData;
 class PlanningLattice: public PlanningAlgorithm
 {
  public:
-     PlanningLattice(RobotModel *p_robot_model, SaveData *p_savedata,
-                 GoalState goal_state);
+     PlanningLattice(
+            RobotModel *p_robot_model, SaveData *p_savedata,
+            GoalState goal_state);
+
      ~PlanningLattice() {};
 
      ControlCommand CalRefTrajectory(
             vector<TrajPoint> &local_traj_points);
+
+     ControlCommand CalRefTrajectory(
+            vector<TrajPoint> &local_traj_points, GoalState goal_state);
 
      double GetRunningTimeAverage();
 
@@ -31,11 +36,15 @@ class PlanningLattice: public PlanningAlgorithm
 
 
  private:
+     double min_relative_dis_;
+     
+     double distance_agv2goal_;
+
+     double step_polynomial_curve_;
+
      vector<ScoreData> score_data_;
 
      double time_simulation_;
-
-     double distance_agv2goal_;
      
      /* smoothed motion state for planner to get smooth trajcetory */
      SensorInfo sensor_info_planner_;

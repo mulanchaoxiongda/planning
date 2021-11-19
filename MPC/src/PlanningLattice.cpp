@@ -32,7 +32,9 @@ PlanningLattice::PlanningLattice(
 {
     start_gate_ = false;
 
-    weak_planning_num_ = 3;
+    min_relative_dis_ = 0.3;
+
+    weak_planning_num_ = 5;
 
     call_cycle_ = 0.02;
 
@@ -46,8 +48,28 @@ PlanningLattice::PlanningLattice(
 ControlCommand PlanningLattice::CalRefTrajectory(
         vector<TrajPoint> &local_traj_points)
 {
+    ControlCommand result = {0.0, 0.0, 0.0};
+
+    return result;
+}
+
+ControlCommand PlanningLattice::CalRefTrajectory(
+        vector<TrajPoint> &local_traj_points, GoalState goal_state)
+{
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
+
+    ControlCommand result = {0.0, 0.0, 0.0};
+    
+    distance_agv2goal_ =
+            pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
+            pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
+
+    if (distance_agv2goal_ < min_relative_dis_) {
+        cout << "[INFO] agv is too near to goal point!" << endl;
+
+        return result;
+    }
 
     if (start_gate_ == false) {
         GetSensorInfo();
@@ -65,13 +87,13 @@ ControlCommand PlanningLattice::CalRefTrajectory(
             sample_speed, num_speed,
             sample_distance, num_distance);
 
-    double step_polynomial_curve = 0.1;
+    step_polynomial_curve_ = 0.1;
 
     for (int i = 0; i < num_speed; i++) {
         for (int j = 0; j < num_time; j++) {
             CalPolynomialCurve(
                     sample_time.at(i * num_time + j), sample_speed.at(i),
-                    sample_distance.at(i), step_polynomial_curve);
+                    sample_distance.at(i), step_polynomial_curve_);
 
             ScoringFunc(sample_speed.at(i), i, j, num_time);
         }
@@ -81,20 +103,21 @@ ControlCommand PlanningLattice::CalRefTrajectory(
 
     SelectTrajFunc(num_time, opt_traj_index);
 
-    cout << opt_traj_index << endl;
-
     int speed_index = int(opt_traj_index / num_time);
 
     double opt_speed = sample_speed.at(speed_index);
     double opt_time = sample_time.at(opt_traj_index);
     double opt_distance = sample_distance.at(speed_index);
 
-    step_polynomial_curve = 0.05;
+    min_relative_dis_ = opt_distance;
 
-    CalPolynomialCurve(opt_time, opt_speed, opt_distance, step_polynomial_curve);
+    step_polynomial_curve_ = 0.05;
+
+    CalPolynomialCurve(
+            opt_time, opt_speed, opt_distance, step_polynomial_curve_);
 
     local_traj_points.assign(
-            local_trajectory_points_.begin(), local_trajectory_points_.end());
+            local_traj_points_.begin(), local_traj_points_.end());
 
     gettimeofday(&t_end, NULL);
 
@@ -104,8 +127,6 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                         (double)(t_end.tv_usec - t_start.tv_usec) / 1000000.0;
 
     running_time_average_ = running_time_sum_ / (double)loop_counter_;
-
-    ControlCommand result = {0.0, 0.0, 0.0};
 
     return result;
 }
@@ -140,7 +161,7 @@ void PlanningLattice::ReadInGoalTraj()
             temp.w_ref   = temp_container.at(4);
             temp.t_ref   = temp_container.at(5);
 
-            local_trajectory_points_.push_back(temp);
+            local_traj_points_.push_back(temp);
 
             temp_container.clear();
             string_temp.clear();
@@ -154,7 +175,7 @@ void PlanningLattice::ReadInGoalTraj()
 
 void PlanningLattice::UpdatePlannerSensorInfo()
 {
-    int size_ref_traj = local_trajectory_points_.size();
+    int size_ref_traj = local_traj_points_.size();
 
     if (size_ref_traj <= 1 ) {
         cout << "[error] global reference trajectory has only "
@@ -169,7 +190,7 @@ void PlanningLattice::UpdatePlannerSensorInfo()
                                           
         delta_t = 
                 p_robot_model_->motion_state_.t -
-                local_trajectory_points_.at(i).t_ref;
+                local_traj_points_.at(i).t_ref;
         
         fabs_delta_t = -1.0 * fabs(delta_t);
 
@@ -198,21 +219,21 @@ void PlanningLattice::UpdatePlannerSensorInfo()
         }
     }
 
-    /* weak planning time = weak_planning_num_ * predict_step_ */
+    /* weak planning time = weak_planning_num_ * step_polynomial_curve_ */
     int index_transition_point = ref_point_index + weak_planning_num_;
     
     sensor_info_planner_.t   =
-            local_trajectory_points_.at(index_transition_point).t_ref;
+            local_traj_points_.at(index_transition_point).t_ref;
     sensor_info_planner_.x   =
-            local_trajectory_points_.at(index_transition_point).x_ref;
+            local_traj_points_.at(index_transition_point).x_ref;
     sensor_info_planner_.y   =
-            local_trajectory_points_.at(index_transition_point).y_ref;
+            local_traj_points_.at(index_transition_point).y_ref;
     sensor_info_planner_.yaw =
-            local_trajectory_points_.at(index_transition_point).yaw_ref;
+            local_traj_points_.at(index_transition_point).yaw_ref;
     sensor_info_planner_.v   =
-            local_trajectory_points_.at(index_transition_point).v_ref;
+            local_traj_points_.at(index_transition_point).v_ref;
     sensor_info_planner_.w   =
-            local_trajectory_points_.at(index_transition_point).w_ref;
+            local_traj_points_.at(index_transition_point).w_ref;
 
     planner_sensor_info_id_ = ref_point_index;
     index_init_point_strong_planner_ = index_transition_point - 1;
@@ -228,19 +249,6 @@ void PlanningLattice::SprinkleFunc(
         vector<double> &sample_speed, int &num_speed,
         vector<double> &sample_distance, int &num_distance)
 {
-    /* Todo 移到上层函数 */
-    double distance_agv2goal =
-            pow(pow(goal_state_.x - sensor_info_planner_.x, 2.0) + 
-            pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
-
-    double min_relative_dis = 0.3;
-
-    if (distance_agv2goal < min_relative_dis) {
-        cout << "[INFO] agv is too near to goal point!" << endl;
-
-        return;
-    }
-
     num_speed = 3;
     sample_speed.resize(num_speed);
     
@@ -264,14 +272,14 @@ void PlanningLattice::SprinkleFunc(
 
     for (int i = 0; i < num_speed; i++) {
         time_benchmark =
-                (distance_agv2goal - sample_distance.at(i)) /
+                (distance_agv2goal_ - sample_distance.at(i)) /
                 sample_speed.at(i);
 
-        time_interval = time_benchmark * 0.5; // 采样区间
+        time_interval = time_benchmark * 0.3; // 采样区间
 
         delta_time = time_benchmark * 0.1; // 采样间隔
 
-        num_time = int(time_interval / delta_time); // 采样点数
+        num_time = round(time_interval / delta_time); // 采样点数
 
         sample_time.resize(num_time * num_speed);
 
@@ -296,7 +304,7 @@ void PlanningLattice::CalPolynomialCurve(
         temp.w_ref   = sensor_info_planner_.w;
         temp.t_ref   = sensor_info_planner_.t;
 
-        local_trajectory_points_.push_back(temp);
+        local_traj_points_.push_back(temp);
 
         double polynomial_step = step;
 
@@ -322,14 +330,9 @@ void PlanningLattice::CalPolynomialCurve(
             
             temp.t_ref   = temp.t_ref + polynomial_step;
 
-            local_trajectory_points_.push_back(temp);
+            local_traj_points_.push_back(temp);
         }
         
-        /* Todo 对时间time_margin、速度speed_except采样，形成备选轨迹集合
-        Todo 明确场景与边界条件，建模仿真
-        Todo 调参，分析仿真数据，确定代价函数和硬件约束
-        Todo 调试，定版
-        Todo 五次多项式拼接出曲率不连续 */
         double speed_except  = speed;
         double safe_distance = distance;
         double time_duration = time;
@@ -421,18 +424,20 @@ void PlanningLattice::CalPolynomialCurve(
             temp.w_ref   = w;
             temp.t_ref   = t;
 
-            local_trajectory_points_.push_back(temp);
+            local_traj_points_.push_back(temp);
         }
 
         if (temp.t_ref < t1) {
-            temp.x_ref   = goal_state_.x - safe_distance * cos(goal_state_.yaw);
-            temp.y_ref   = goal_state_.y - safe_distance * sin(goal_state_.yaw);
+            temp.x_ref   =
+                    goal_state_.x - safe_distance * cos(goal_state_.yaw);
+            temp.y_ref   =
+                    goal_state_.y - safe_distance * sin(goal_state_.yaw);
             temp.yaw_ref = goal_state_.yaw;
             temp.v_ref   = speed_except;
             temp.w_ref   = 0.0;
             temp.t_ref   = t1;
 
-            local_trajectory_points_.push_back(temp);
+            local_traj_points_.push_back(temp);
         }
 
         temp.x_ref   = goal_state_.x;
@@ -442,7 +447,7 @@ void PlanningLattice::CalPolynomialCurve(
         temp.w_ref   = goal_state_.w;
         temp.t_ref   = temp.t_ref + safe_distance / speed_except;
 
-        local_trajectory_points_.push_back(temp);
+        local_traj_points_.push_back(temp);
     } else {
         temp.x_ref   = sensor_info_planner_.x;
         temp.y_ref   = sensor_info_planner_.y;
@@ -452,7 +457,7 @@ void PlanningLattice::CalPolynomialCurve(
         temp.t_ref   = sensor_info_planner_.t;
 
         for (int i = 0; i < 5; i++) {
-            local_trajectory_points_.push_back(temp);
+            local_traj_points_.push_back(temp);
         }
     }
 
@@ -462,7 +467,7 @@ void PlanningLattice::CalPolynomialCurve(
 void PlanningLattice::ScoringFunc(
         double except_speed, int speed_index, int time_index, int num_time)
 {
-    int size_traj_points = local_trajectory_points_.size();
+    int size_traj_points = local_traj_points_.size();
 
     vector<double> t_storage; // time
     vector<double> v_storage; // speed
@@ -471,11 +476,11 @@ void PlanningLattice::ScoringFunc(
     vector<double> j_storage; // jerk
 
     for (int i = 0; i < size_traj_points; i++) {
-        t_storage.push_back(local_trajectory_points_.at(i).t_ref);
+        t_storage.push_back(local_traj_points_.at(i).t_ref);
         
-        v_storage.push_back(local_trajectory_points_.at(i).v_ref);
+        v_storage.push_back(local_traj_points_.at(i).v_ref);
 
-        w_storage.push_back(fabs(local_trajectory_points_.at(i).w_ref));
+        w_storage.push_back(fabs(local_traj_points_.at(i).w_ref));
     }
 
     vector<double>::iterator biggest_v =
@@ -533,16 +538,16 @@ void PlanningLattice::ScoringFunc(
         score_vmax = v_max / except_speed - 1.0;        
         
         score_time =
-                local_trajectory_points_.at(size_traj_points - 1).t_ref;
+                local_traj_points_.at(size_traj_points - 1).t_ref;
 
-        score_jer = 0.0; // Todo
+        score_jer = 0.0;
         
         int i;
 
         for (i = 0; i < size_traj_points - 2; i++) {
             double delta_time =
-                    local_trajectory_points_.at(i + 1).t_ref -
-                    local_trajectory_points_.at(i).t_ref;
+                    local_traj_points_.at(i + 1).t_ref -
+                    local_traj_points_.at(i).t_ref;
 
             score_jer = score_jer + fabs(j_storage.at(i)) * delta_time;
         }
@@ -559,8 +564,8 @@ void PlanningLattice::ScoringFunc(
         
         for (i = 0; i < size_traj_points-1; i++) {
             delta_time =
-                    local_trajectory_points_.at(i + 1).t_ref -
-                    local_trajectory_points_.at(i).t_ref;
+                    local_traj_points_.at(i + 1).t_ref -
+                    local_traj_points_.at(i).t_ref;
 
             score_w = score_w + w_storage.at(i) * delta_time;
 
@@ -585,10 +590,7 @@ void PlanningLattice::ScoringFunc(
 
     score_data_.push_back(temp);
 
-    cout << " score.index " << temp.index
-         << " score.score " << temp.score << endl;
-
-    local_trajectory_points_.clear();
+    local_traj_points_.clear();
 }
 
 void PlanningLattice::SelectTrajFunc(int num_time, int &opt_traj_index)
