@@ -67,7 +67,8 @@ class PlanningLattice: public PlanningAlgorithm
             vector<double> &sample_speed, int &num_speed,
             vector<double> &sample_distance, int &num_distance);
 
-     void CalPolynomialCurve(double time, double speed, double distance);
+     void CalPolynomialCurve(
+            double time, double speed, double distance, double step);
 
      void ScoringFunc(
             double except_speed, int speed_index, int time_index, int num_time);

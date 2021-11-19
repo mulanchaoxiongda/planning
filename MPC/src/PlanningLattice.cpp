@@ -65,11 +65,13 @@ ControlCommand PlanningLattice::CalRefTrajectory(
             sample_speed, num_speed,
             sample_distance, num_distance);
 
+    double step_polynomial_curve = 0.1;
+
     for (int i = 0; i < num_speed; i++) {
         for (int j = 0; j < num_time; j++) {
             CalPolynomialCurve(
-                    sample_time.at(i * num_time + j),
-                    sample_speed.at(i), sample_distance.at(i));
+                    sample_time.at(i * num_time + j), sample_speed.at(i),
+                    sample_distance.at(i), step_polynomial_curve);
 
             ScoringFunc(sample_speed.at(i), i, j, num_time);
         }
@@ -87,7 +89,9 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     double opt_time = sample_time.at(opt_traj_index);
     double opt_distance = sample_distance.at(speed_index);
 
-    CalPolynomialCurve(opt_time, opt_speed, opt_distance);
+    step_polynomial_curve = 0.05;
+
+    CalPolynomialCurve(opt_time, opt_speed, opt_distance, step_polynomial_curve);
 
     local_traj_points.assign(
             local_trajectory_points_.begin(), local_trajectory_points_.end());
@@ -280,7 +284,7 @@ void PlanningLattice::SprinkleFunc(
 }
 
 void PlanningLattice::CalPolynomialCurve(
-        double time, double speed, double distance)
+        double time, double speed, double distance, double step)
 {
     TrajPoint temp;
 
@@ -294,7 +298,7 @@ void PlanningLattice::CalPolynomialCurve(
 
         local_trajectory_points_.push_back(temp);
 
-        double polynomial_step = 0.05;
+        double polynomial_step = step;
 
         double min_speed = 0.01;
 
@@ -501,7 +505,7 @@ void PlanningLattice::ScoringFunc(
                 (a_storage.at(i + 1) - a_storage.at(i)) /
                 (t_storage.at(i + 1) - t_storage.at(i));
 
-        j_storage.push_back(fabs(jerk));
+        j_storage.push_back(jerk);
     }
     
     vector<double>::iterator biggest_a =
@@ -540,11 +544,11 @@ void PlanningLattice::ScoringFunc(
                     local_trajectory_points_.at(i + 1).t_ref -
                     local_trajectory_points_.at(i).t_ref;
 
-            score_jer = score_jer + j_storage.at(i) * delta_time;
+            score_jer = score_jer + fabs(j_storage.at(i)) * delta_time;
         }
 
         score_jer =
-                score_jer + j_storage.at(i - 1) *
+                score_jer + fabs(j_storage.at(i - 1)) *
                 (t_storage.at(i + 1) -
                  t_storage.at(i - 1));
 
@@ -569,11 +573,6 @@ void PlanningLattice::ScoringFunc(
         score_acc =
                 score_acc + fabs(a_storage.at(i - 1)) *
                 (t_storage.at(i) - t_storage.at(i - 1));
-
-        cout << score_acc << "   "
-             << score_w   << "   "
-             << score_jer << "   "
-             << endl;
 
         score = weight_vmax * score_vmax + weight_time * score_time +
                 weight_jer * score_jer + weight_acc * score_acc +
