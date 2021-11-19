@@ -236,7 +236,7 @@ void PlanningLattice::SprinkleFunc(
     double min_relative_dis = 0.3;
 
     if (distance_agv2goal < min_relative_dis) {
-        cout << "[INFO] agv is near to goal point!" << endl;
+        cout << "[INFO] agv is too near to goal point!" << endl;
 
         return;
     }
