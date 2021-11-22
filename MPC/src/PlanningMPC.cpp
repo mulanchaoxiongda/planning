@@ -173,7 +173,7 @@ ControlCommand PlanningMPC::CalRefTrajectory(
                     ref_point_command_.at(nu_ * i + j);    
         }
     }
-
+    
     UpdateReferenceTrajectory();
 
     optimal_traj_points.assign(opt_traj_points_.begin(),
@@ -388,8 +388,8 @@ void PlanningMPC::CalControlCoefficient()
     matrix_q_.resize(nx_, nx_);
     matrix_q_.setIdentity(nx_, nx_);
 
-    matrix_q_(0, 0) = 80.0;
-    matrix_q_(1, 1) = 80.0;
+    matrix_q_(0, 0) = 80.0; // k_lon = fabs( k_x * cos(psi) + k_y * sin(psi) )
+    matrix_q_(1, 1) = 80.0; // k_lat = fabs( k_x * sin(psi) + k_y * cos(psi) )
     matrix_q_(2, 2) = 1.5;
     matrix_q_(3, 3) = 2.0;
 
@@ -778,25 +778,28 @@ void PlanningMPC::UpdateReferenceTrajectory()
     Todo: 控制算法求参考点的位置、速度、角速度算法需要优化，单一的时间线性插值，
           改为推算速度、位置的“线性”插值，且先推算速度、再求解位置 */
     for (int i = 0; i <= np_; i++) {
+        /* motion_state.v = u_optimal_(0);
+        motion_state.w = u_optimal_(1); */
+
         if (start_gate_ == false) {
             if (i >= 1) {
                 ControlCommand control_command;
 
-                if (i <= nc_) {
-                    control_command.speed_command = u_optimal_(nu_ * i - nu_);
+                if (i < nc_) {
+                    control_command.speed_command = u_optimal_(nu_ * i);
                     control_command.yaw_rate_command =
-                            u_optimal_(nu_ * i + 1 - nu_);
+                            u_optimal_(nu_ * i + 1);
                 } else {
                     control_command.speed_command = u_optimal_(nu_ * nc_ - nu_);
                     control_command.yaw_rate_command =
                             u_optimal_(nu_ * nc_ + 1 - nu_);
                 }
 
-                double Tv = 0.1;
+                double Tv = 0.3;
                 double acceleration =
                         (control_command.speed_command - motion_state.v) / Tv;
 
-                double Tw = 0.15;
+                double Tw = 0.3;
                 double yaw_acceleration =
                         (control_command.yaw_rate_command -
                         motion_state.w) / Tw;
@@ -818,6 +821,9 @@ void PlanningMPC::UpdateReferenceTrajectory()
                         sin(motion_state.yaw) * simulation_step;
 
                 motion_state.t = motion_state.t + simulation_step;
+            } else {
+                motion_state.v = u_optimal_(0);
+                motion_state.w = u_optimal_(1);
             }
 
             opt_traj_points_.at(i).t_ref   = motion_state.t;
@@ -846,7 +852,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 double acceleration =
                         (control_command.speed_command - motion_state.v) / Tv;
 
-                double Tw = 0.15;
+                double Tw = 0.1;
                 double yaw_acceleration =
                         (control_command.yaw_rate_command -
                         motion_state.w) / Tw;

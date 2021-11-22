@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     TrajCreator.TrajCreator();
 
     RobotMotionStatePara motion_state = {0.00, -0.00, -0.0/57.3, // x, y, yaw
-                                         0.01,  0.0,   0.0,      // v, w, time
+                                         0.00,  0.0,   0.0,      // v, w, time
                                          0.00,  0.00};           // ax, ay 
 
     double simulation_step = 0.01;
@@ -62,12 +62,12 @@ int main(int argc, char **argv)
 
     int test_gate = 0;
 
-    /* while (time <= time_simulation) { */
-    while (time <= 0.02) {
+    while (time <= time_simulation) {
+    /* while (time <= 0.02) { */
         cout << "t:" << time << endl << endl << endl;
 
         if (loop_counter % num_planning == 0) {
-            if (test_gate <= 0) {
+            if (test_gate <= 1) {
                 planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
 
                 test_gate++;

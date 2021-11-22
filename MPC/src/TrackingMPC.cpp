@@ -120,13 +120,9 @@ ControlCommand TrackingMPC::CalControlCommand(
     u_(0) = u_(0) + u_optim(0);
     u_(1) = u_(1) + u_optim(1);
 
-    cout << u_(0) << " opt " << u_optim(0) << endl;
-
     ControlCommand control_command = { u_(0) + reference_point_.v,
                                        u_(1) + reference_point_.w,
                                        p_RobotModel_->motion_state_.t };
-
-    cout << control_command.t << "   " << control_command.speed_command << endl;
 
     p_savedata_->file << "[control_command] "
                       << " Time "             << control_command.t
@@ -269,15 +265,10 @@ void TrackingMPC::UpdateErrorModel()
 
     xr << reference_point_.x,   reference_point_.y,
           reference_point_.yaw, reference_point_.w;
-    
-    cout << " x: " << x << endl;
-    cout << " xr: " << xr << endl;
 
     matrix_kesi << x - xr, u_;
 
     x_ = matrix_kesi;
-
-    cout << x_ << "err" << endl;
 
     double T1 = 0.07;
 

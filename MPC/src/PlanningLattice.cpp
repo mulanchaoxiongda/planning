@@ -145,7 +145,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 &init_point_strong_planning,
                 &local_traj_points_.at(index_init_point_strong_planner_),
                 sizeof(TrajPoint));
-        /* init_point_strong_planning.x_ref   = sensor_info_.x;
+        init_point_strong_planning.x_ref   = sensor_info_.x;
         init_point_strong_planning.y_ref   = sensor_info_.y;
         init_point_strong_planning.yaw_ref = sensor_info_.yaw;
         init_point_strong_planning.v_ref   = sensor_info_.v;
@@ -153,11 +153,11 @@ ControlCommand PlanningLattice::CalRefTrajectory(
         init_point_strong_planning.t_ref   = sensor_info_.t;
 
         init_point_strong_planning.ax_ref = sensor_info_.ax;
-        init_point_strong_planning.ay_ref = sensor_info_.ay; */
+        init_point_strong_planning.ay_ref = sensor_info_.ay;
 
         local_traj_points_.clear();
 
-        local_traj_points_.assign(temp.begin(), temp.end());
+        /* local_traj_points_.assign(temp.begin(), temp.end()); */
 
         CalPolynomialCurve(
                 start_time_polynomial_ + opt_time_ - sensor_info_planner_.t,
