@@ -9,6 +9,8 @@ RobotModel::RobotModel(RobotMotionStatePara motion_state,
     motion_state_ = motion_state;
     simulation_step_ = step;
     p_savedata_ = p_savedata;
+
+    v_pre_ = motion_state_.v;
 }
 
 RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_command)
@@ -29,6 +31,17 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
                 sin(motion_state_.yaw) * simulation_step_;
         
         motion_state_.t = motion_state_.t + simulation_step_;
+
+        double acc_speed, acc_omega;
+
+        acc_speed = (motion_state_.v - v_pre_) / simulation_step_;
+        acc_omega = motion_state_.v * motion_state_.w;
+        
+        motion_state_.ax = acc_speed * cos(motion_state_.yaw) -
+                acc_omega * sin(motion_state_.yaw);
+                
+        motion_state_.ay = acc_speed * sin(motion_state_.yaw) +
+                acc_omega * cos(motion_state_.yaw);
     } else {
         double Tv = 0.07;
         double Tw = 0.07;
@@ -51,6 +64,17 @@ RobotMotionStatePara RobotModel::UpdateMotionState(ControlCommand control_comman
                 sin(motion_state_.yaw) * simulation_step_;
         
         motion_state_.t = motion_state_.t + simulation_step_;
+
+        double acc_speed, acc_omega;
+
+        acc_speed = acceleration;
+        acc_omega = motion_state_.v * motion_state_.w;
+        
+        motion_state_.ax = acc_speed * cos(motion_state_.yaw) -
+                acc_omega * sin(motion_state_.yaw);
+
+        motion_state_.ay = acc_speed * sin(motion_state_.yaw) +
+                acc_omega * cos(motion_state_.yaw);
     }
 
     p_savedata_->file << "[state_of_robot] "

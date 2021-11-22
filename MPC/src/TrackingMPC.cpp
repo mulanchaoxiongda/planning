@@ -28,6 +28,8 @@ using namespace std;
 TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
         TrackingAlgorithm::TrackingAlgorithm(p_RobotModel, p_savedata)
 {
+    control_start_ = false;
+
     call_cycle_ = 0.02;
 
     nx_ = 4;
@@ -52,9 +54,6 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
 
     FindRefPoint(trajectory_points_, sensor_info_);
 
-    u_ << sensor_info_.v - reference_point_.v,
-          sensor_info_.w - reference_point_.w;
-
     running_time_sum_ = 0.0;
     running_time_average_ = 0.0;
 
@@ -63,6 +62,11 @@ TrackingMPC::TrackingMPC(RobotModel *p_RobotModel, SaveData *p_savedata):
     matrix_A_.resize(nx_ + nu_, nx_ + nu_);
     matrix_B_.resize(nx_ + nu_, nu_);
     matrix_C_.resize(nx_, nx_ + nu_);
+}
+
+void TrackingMPC::Reset()
+{
+    control_start_ = false;
 }
 
 ControlCommand TrackingMPC::CalControlCommand(
@@ -76,6 +80,13 @@ ControlCommand TrackingMPC::CalControlCommand(
     GetSensorInfo();
 
     FindRefPoint(trajectory_points_, sensor_info_);
+
+    if (control_start_ == false) {
+        control_start_ = true;
+
+        u_ << sensor_info_.v - reference_point_.v,
+              sensor_info_.w - reference_point_.w;
+    }
 
     // CalControlCoefficient(p_RobotModel_->motion_state_.v);
     CalControlCoefficient(); 
@@ -109,9 +120,13 @@ ControlCommand TrackingMPC::CalControlCommand(
     u_(0) = u_(0) + u_optim(0);
     u_(1) = u_(1) + u_optim(1);
 
+    cout << u_(0) << " opt " << u_optim(0) << endl;
+
     ControlCommand control_command = { u_(0) + reference_point_.v,
                                        u_(1) + reference_point_.w,
                                        p_RobotModel_->motion_state_.t };
+
+    cout << control_command.t << "   " << control_command.speed_command << endl;
 
     p_savedata_->file << "[control_command] "
                       << " Time "             << control_command.t
@@ -173,8 +188,8 @@ void TrackingMPC::CalControlCoefficient()
     matrix_q_.resize(nx_, nx_);
     matrix_q_.setIdentity(nx_, nx_);
 
-    matrix_q_(0, 0) = 500.0;
-    matrix_q_(1, 1) = 500.0;
+    matrix_q_(0, 0) = 100.0;
+    matrix_q_(1, 1) = 100.0;
     matrix_q_(2, 2) = 1.5;
     matrix_q_(3, 3) = 0.1;
 
@@ -254,10 +269,15 @@ void TrackingMPC::UpdateErrorModel()
 
     xr << reference_point_.x,   reference_point_.y,
           reference_point_.yaw, reference_point_.w;
+    
+    cout << " x: " << x << endl;
+    cout << " xr: " << xr << endl;
 
     matrix_kesi << x - xr, u_;
 
     x_ = matrix_kesi;
+
+    cout << x_ << "err" << endl;
 
     double T1 = 0.07;
 

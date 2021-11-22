@@ -27,4 +27,6 @@ class RobotModel
      SaveData *p_savedata_;
 
      double simulation_step_;
+
+     double v_pre_;
 };

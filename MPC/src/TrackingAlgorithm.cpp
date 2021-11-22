@@ -137,6 +137,12 @@ void TrackingAlgorithm::FindRefPoint(
             ( trajectory_points.at(ref_point_index).v_ref * dis2 +
               trajectory_points.at(ref_point_index + 1).v_ref * dis1 ) /
               dis_total;
+
+    cout << trajectory_points.at(ref_point_index).v_ref * dis2 << endl;
+    cout << trajectory_points.at(ref_point_index + 1).v_ref * dis1 << endl;
+    cout << dis_total << endl;
+
+    cout << "ref_v  ref_v  ref_v  ref_v" << reference_point_.v << endl;
     
     reference_point_.w =
             ( trajectory_points.at(ref_point_index).w_ref * dis2 +

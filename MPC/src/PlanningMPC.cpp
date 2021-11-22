@@ -388,8 +388,8 @@ void PlanningMPC::CalControlCoefficient()
     matrix_q_.resize(nx_, nx_);
     matrix_q_.setIdentity(nx_, nx_);
 
-    matrix_q_(0, 0) = 500.0;
-    matrix_q_(1, 1) = 500.0;
+    matrix_q_(0, 0) = 80.0;
+    matrix_q_(1, 1) = 80.0;
     matrix_q_(2, 2) = 1.5;
     matrix_q_(3, 3) = 2.0;
 

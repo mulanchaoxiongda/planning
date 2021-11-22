@@ -8,6 +8,9 @@ struct RobotMotionStatePara
     double v;
     double w;
     double t;
+
+    double ax;
+    double ay;
 };
 
 struct TrajPoint
@@ -31,6 +34,9 @@ struct RefPoint
     double v;
     double w;
     double t;
+
+    double ax;
+    double ay;
 };
 
 struct SensorInfo
@@ -41,6 +47,9 @@ struct SensorInfo
     double v;
     double w;
     double t;
+
+    double ax;
+    double ay;
 };
 
 struct TrackingErr

@@ -25,7 +25,9 @@ class TrackingMPC: public TrackingAlgorithm
 
      double GetRunningTimeAverage();
 
+     void Reset();
 
+     
  private:
      double running_time_average_;
 
@@ -56,7 +58,7 @@ class TrackingMPC: public TrackingAlgorithm
 
      double running_time_sum_;
 
-     int loop_counter_;
+     int loop_counter_, control_start_;
 
      MatrixXd matrix_A_, matrix_B_, matrix_C_;
 

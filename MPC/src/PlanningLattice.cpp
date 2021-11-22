@@ -115,8 +115,11 @@ ControlCommand PlanningLattice::CalRefTrajectory(
 
         CalPolynomialCurve(
                 opt_time_, opt_speed_, opt_distance_, step_polynomial_curve_);
+
     } else {
         GetSensorInfo();
+
+        memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
 
         UpdatePlannerSensorInfo();
 
@@ -142,6 +145,15 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 &init_point_strong_planning,
                 &local_traj_points_.at(index_init_point_strong_planner_),
                 sizeof(TrajPoint));
+        /* init_point_strong_planning.x_ref   = sensor_info_.x;
+        init_point_strong_planning.y_ref   = sensor_info_.y;
+        init_point_strong_planning.yaw_ref = sensor_info_.yaw;
+        init_point_strong_planning.v_ref   = sensor_info_.v;
+        init_point_strong_planning.w_ref   = sensor_info_.w;
+        init_point_strong_planning.t_ref   = sensor_info_.t;
+
+        init_point_strong_planning.ax_ref = sensor_info_.ax;
+        init_point_strong_planning.ay_ref = sensor_info_.ay; */
 
         local_traj_points_.clear();
 
@@ -337,8 +349,8 @@ void PlanningLattice::CalPolynomialCurve(
         temp.w_ref   = sensor_info_planner_.w;
         temp.t_ref   = sensor_info_planner_.t;
 
-        temp.ax_ref = 0.0; // 应使用IMU量测信息
-        temp.ay_ref = 0.0;
+        temp.ax_ref = sensor_info_.ax;
+        temp.ay_ref = sensor_info_.ay;
 
         local_traj_points_.push_back(temp);
 
@@ -537,6 +549,34 @@ void PlanningLattice::CalPolynomialCurve(
         local_traj_points_.push_back(temp);
 
         double polynomial_step = step;
+
+        double min_speed = 0.01;
+
+        double acceleration = 0.0;
+
+        while (fabs(temp.v_ref) < min_speed) {
+            acceleration = 0.1;
+
+            temp.v_ref = temp.v_ref + acceleration * polynomial_step;
+            temp.w_ref = temp.w_ref;
+
+            temp.yaw_ref = temp.yaw_ref + temp.w_ref * polynomial_step;
+            
+            temp.x_ref = 
+                    temp.x_ref + temp.v_ref * cos(temp.yaw_ref) *
+                    polynomial_step;
+            
+            temp.y_ref =
+                    temp.y_ref + temp.v_ref * sin(temp.yaw_ref) *
+                    polynomial_step;
+            
+            temp.t_ref   = temp.t_ref + polynomial_step;
+
+            temp.ax_ref = acceleration * cos(temp.yaw_ref);
+            temp.ay_ref = acceleration * sin(temp.yaw_ref);
+
+            local_traj_points_.push_back(temp);
+        }
 
         double speed_except  = speed;
         double safe_distance = distance;
