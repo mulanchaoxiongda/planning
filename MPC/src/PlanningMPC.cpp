@@ -388,7 +388,8 @@ void PlanningMPC::CalControlCoefficient()
 
     matrix_q_.resize(nx_, nx_);
     matrix_q_.setIdentity(nx_, nx_);
-
+ 
+    // 规划层位置误差权重较控制层的小，起到平滑轨迹的作用
     matrix_q_(0, 0) = 80.0; // k_lon = fabs( k_x * cos(psi) + k_y * sin(psi) )
     matrix_q_(1, 1) = 80.0; // k_lat = fabs( k_x * sin(psi) + k_y * cos(psi) )
     matrix_q_(2, 2) = 1.5;

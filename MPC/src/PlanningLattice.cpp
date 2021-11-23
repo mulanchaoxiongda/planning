@@ -121,7 +121,8 @@ ControlCommand PlanningLattice::CalRefTrajectory(
             cout << "[error] there have no reference trajectory founded!"
                  << endl;
 
-            // 此处可重新撒点采样，建立新的备选轨迹集合 // Todo: 调较
+            // 此处可重新撒点采样，建立新的备选轨迹集合(增加采样点) // Todo: 调较
+            // 备选方案:折线运动到停车点
             
             return result;
         }
@@ -194,12 +195,13 @@ ControlCommand PlanningLattice::CalRefTrajectory(
         /* 没有找到可行轨迹，报错结束运行
         前提：假设AGV位姿精度较高，位姿变化由控制层处理
         处理：报错，结束运行
-        优化：重新撒点采样，搜索可行轨迹 */
+        优化：重新撒点采样（在原opt_speed/time/distance附近撒点），搜索可行轨迹 */
         if (score > 100000.0) {
             cout << "[error] there have no reference trajectory founded!"
                  << endl;
 
             // 此处可重新撒点采样，建立新的备选轨迹集合 // Todo: 调较
+            // 备选方案:折线运动到停车点
             
             return result;
         }
