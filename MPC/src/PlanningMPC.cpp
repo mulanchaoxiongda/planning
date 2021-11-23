@@ -25,10 +25,8 @@
 
 using namespace std;
 
-PlanningMPC::PlanningMPC(
-        RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state):
-        PlanningAlgorithm::PlanningAlgorithm(
-                p_robot_model, p_savedata, goal_state)
+PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata):
+        PlanningAlgorithm::PlanningAlgorithm(p_robot_model, p_savedata)
 {
     start_gate_ = false;
 
@@ -118,7 +116,8 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     MatrixXd matrix_H(nc_ * nu_, nc_ * nu_), matrix_E(nx_ * np_, 1);
     VectorXd matrix_g(nc_ * nu_, 1);
 
-    CalObjectiveFunc(matrix_H, matrix_E, matrix_g, x_, matrix_phi, matrix_theta);
+    CalObjectiveFunc(
+            matrix_H, matrix_E, matrix_g, x_, matrix_phi, matrix_theta);
 
     MatrixXd matrix_A(nc_ * nu_ * 2, nc_ * nu_);
     VectorXd lb(nc_ * nu_ * 2, 1), ub(nc_ * nu_ * 2, 1);
@@ -332,7 +331,9 @@ void PlanningMPC::UpdatePlannerSensorInfo()
     for (int i = 0; i < size_ref_traj; i++) {
         double delta_t, fabs_delta_t;
 
-        delta_t = p_robot_model_->motion_state_.t - opt_traj_points_.at(i).t_ref;
+        delta_t =
+                p_robot_model_->motion_state_.t - opt_traj_points_.at(i).t_ref;
+
         fabs_delta_t = -1.0 * fabs(delta_t);
 
         relative_time.push_back(delta_t);
@@ -420,7 +421,8 @@ void PlanningMPC::UpdateErrorModel()
 {
     VectorXd x(nx_), xr(nx_), matrix_kesi(nx_ + nu_);
 
-    x << sensor_info_planner_.x, sensor_info_planner_.y, sensor_info_planner_.yaw, sensor_info_planner_.w;
+    x << sensor_info_planner_.x, sensor_info_planner_.y,
+         sensor_info_planner_.yaw, sensor_info_planner_.w;
 
     xr << local_ref_traj_point_.x,   local_ref_traj_point_.y,
           local_ref_traj_point_.yaw, local_ref_traj_point_.w;
@@ -438,8 +440,8 @@ void PlanningMPC::UpdateErrorModel()
 
     matrix_b_ << predict_step_ * cos(local_ref_traj_point_.yaw), 0.0,
                  predict_step_ * sin(local_ref_traj_point_.yaw), 0.0,
-                 0.0,                                             0.0,
-                 0.0,                                             predict_step_ / T1;
+                 0.0,                                            0.0,
+                 0.0,                                            predict_step_ / T1;
 
     p_savedata_->file << " [plannin_tracking_error] "
                       << " Time "    << sensor_info_.t
@@ -762,7 +764,6 @@ void PlanningMPC::MatrixToCCS(
     sm_nnz = nz;
 }
 
-//Todo
 void PlanningMPC::UpdateReferenceTrajectory()
 {
     RobotMotionStatePara motion_state =
@@ -786,7 +787,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 ControlCommand control_command;
 
                 if (i < nc_) {
-                    control_command.speed_command = u_optimal_(nu_ * i);
+                    control_command.speed_command = u_optimal_(nu_ * i); // patch
                     control_command.yaw_rate_command =
                             u_optimal_(nu_ * i + 1);
                 } else {
@@ -841,9 +842,12 @@ void PlanningMPC::UpdateReferenceTrajectory()
                             u_optimal_(nu_ * (i - weak_planning_num_) - nu_);
 
                     control_command.yaw_rate_command =
-                            u_optimal_(nu_ * (i - weak_planning_num_) + 1 - nu_);
+                            u_optimal_(nu_ * (i - weak_planning_num_)
+                            + 1 - nu_);
                 } else {
-                    control_command.speed_command = u_optimal_(nu_ * nc_ - nu_);
+                    control_command.speed_command =
+                            u_optimal_(nu_ * nc_ - nu_);
+                            
                     control_command.yaw_rate_command =
                             u_optimal_(nu_ * nc_ + 1 - nu_);
                 }

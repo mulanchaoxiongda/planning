@@ -18,8 +18,7 @@ class SaveData;
 class PlanningMPC: public PlanningAlgorithm
 {
  public:
-     PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata,
-                 GoalState goal_state);
+     PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata);
      ~PlanningMPC() {};
 
      ControlCommand CalRefTrajectory(

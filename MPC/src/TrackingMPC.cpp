@@ -201,7 +201,7 @@ void TrackingMPC::CalControlCoefficient()
 
     u_max_ <<  1.5 - reference_point_.v,  40.0 / 57.3 - reference_point_.w;
 
-    //Todo  du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
+    // du_min_(0): * call_cycle_; du_min_(i)(i >= 1): * predict_step_
     du_min_ << -2.0 * predict_step_,    -120.0 / 57.3 * predict_step_;
     du_max_ <<  2.0 * predict_step_,     120.0 / 57.3 * predict_step_;
 }
@@ -249,7 +249,7 @@ void TrackingMPC::CalControlCoefficient(double v_sensor)
     dv_min = CustomFunction::interp_linear(v_para_, dv_min_para_, v_sensor);
     dv_max = CustomFunction::interp_linear(v_para_, dv_max_para_, v_sensor);
 
-    //Todo  dw_min(0): * call_cycle_; dw_min(i)(i >= 1): * predict_step_
+    // dw_min(0): * call_cycle_; dw_min(i)(i >= 1): * predict_step_
     dw_min = CustomFunction::interp_linear(v_para_, dw_min_para_, v_sensor);
     dw_max = CustomFunction::interp_linear(v_para_, dw_max_para_, v_sensor);
 

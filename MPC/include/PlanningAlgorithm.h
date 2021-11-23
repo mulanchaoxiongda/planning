@@ -15,8 +15,7 @@ class SaveData;
 class PlanningAlgorithm
 {
  public:
-     PlanningAlgorithm(RobotModel *p_robot_model, SaveData *p_savedata,
-                       GoalState goal_state);
+     PlanningAlgorithm(RobotModel *p_robot_model, SaveData *p_savedata);
      ~PlanningAlgorithm() {};
 
      virtual ControlCommand CalRefTrajectory(vector<TrajPoint> &local_traj_points) = 0;

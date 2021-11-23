@@ -19,8 +19,7 @@ class PlanningLattice: public PlanningAlgorithm
 {
  public:
      PlanningLattice(
-             RobotModel *p_robot_model, SaveData *p_savedata,
-             GoalState goal_state);
+             RobotModel *p_robot_model, SaveData *p_savedata);
 
      ~PlanningLattice() {};
 
@@ -86,11 +85,14 @@ class PlanningLattice: public PlanningAlgorithm
              double time, double speed, double distance, double step);
 
      void ScoringFunc(
-             double except_speed, int speed_index, int time_index, int num_time);
+             double except_speed, int speed_index, int time_index,
+             int num_time, int &num_alter_traj);
        
-     void SelectTrajFunc(int num_time, int &opt_traj_index);
+     double SelectTrajFunc(int num_time, int &opt_traj_index);
 
      void CalPolynomialCurve(
              double time, double speed, double distance,
              double step, TrajPoint traj_point);
+
+     double TrajDetection(double except_speed);
 };

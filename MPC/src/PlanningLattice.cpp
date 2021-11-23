@@ -26,9 +26,8 @@
 using namespace std;
 
 PlanningLattice::PlanningLattice(
-        RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state):
-        PlanningAlgorithm::PlanningAlgorithm(
-                p_robot_model, p_savedata, goal_state)
+        RobotModel *p_robot_model, SaveData *p_savedata):
+        PlanningAlgorithm::PlanningAlgorithm(p_robot_model, p_savedata)
 {
     start_gate_ = true;
 
@@ -90,19 +89,42 @@ ControlCommand PlanningLattice::CalRefTrajectory(
 
         step_polynomial_curve_ = 0.1;
 
+        int num_alter_traj = 0;
+
         for (int i = 0; i < num_speed; i++) {
             for (int j = 0; j < num_time; j++) {
                 CalPolynomialCurve(
                         sample_time.at(i * num_time + j), sample_speed.at(i),
                         sample_distance.at(i), step_polynomial_curve_);
 
-                ScoringFunc(sample_speed.at(i), i, j, num_time);
+                ScoringFunc(sample_speed.at(i), i, j, num_time, num_alter_traj);
             }
+        }
+
+        if (num_alter_traj == 0) {
+            cout << "[error] there is no reference trajectory founded!" << endl;
+            
+            return result;
         }
 
         int opt_traj_index;
 
-        SelectTrajFunc(num_time, opt_traj_index);
+        double score = SelectTrajFunc(num_time, opt_traj_index);
+
+        /* 没有找到可行轨迹，报错结束运行
+        前提：假设AGV位姿精度较高，位姿变化由控制层处理，
+            （AGV位姿跳动可由规划层同时处理，设计难度加大）
+             托盘位姿精度较高，位姿变化由规划层处理（初规划时AGV位姿偏差较小）
+        处理：报错，结束运行
+        优化：重新撒点采样，搜索可行轨迹 */
+        if (score > 100000.0) {
+            cout << "[error] there have no reference trajectory founded!"
+                 << endl;
+
+            // 此处可重新撒点采样，建立新的备选轨迹集合 // Todo: 调较
+            
+            return result;
+        }
 
         int speed_index = int(opt_traj_index / num_time);
 
@@ -121,8 +143,6 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     } else {
         GetSensorInfo();
 
-        // memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
-
         UpdatePlannerSensorInfo();
 
         distance_agv2goal_ =
@@ -130,7 +150,10 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
         if (distance_agv2goal_ < min_relative_dis_) {
-            cout << "[INFO] agv is too near to goal point!" << endl;
+            cout << "[INFO] agv is too near to goal point!  "
+                 << " t: " << sensor_info_planner_.t
+                 << " x: " << sensor_info_planner_.x
+                 << " y: " << sensor_info_planner_.y << endl;
 
             return result;
         }
@@ -147,15 +170,6 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 &init_point_strong_planning,
                 &local_traj_points_.at(index_init_point_strong_planner_),
                 sizeof(TrajPoint));
-        /* init_point_strong_planning.x_ref   = sensor_info_.x;
-        init_point_strong_planning.y_ref   = sensor_info_.y;
-        init_point_strong_planning.yaw_ref = sensor_info_.yaw;
-        init_point_strong_planning.v_ref   = sensor_info_.v;
-        init_point_strong_planning.w_ref   = sensor_info_.w;
-        init_point_strong_planning.t_ref   = sensor_info_.t; */
-
-        /* init_point_strong_planning.ax_ref = sensor_info_.ax;
-        init_point_strong_planning.ay_ref = sensor_info_.ay; */
 
         local_traj_points_.clear();
 
@@ -166,12 +180,29 @@ ControlCommand PlanningLattice::CalRefTrajectory(
         if (sensor_info_planner_.t < start_time_polynomial_) {
             opt_time = opt_time_;
         } else {
-            opt_time = start_time_polynomial_ + opt_time_ - sensor_info_planner_.t;
+            opt_time =
+                    start_time_polynomial_ + opt_time_ - sensor_info_planner_.t;
         }
 
         CalPolynomialCurve(
                 opt_time, opt_speed_, opt_distance_, 
                 step_polynomial_curve_, init_point_strong_planning);
+
+        double score;
+        score = TrajDetection(opt_speed_);
+
+        /* 没有找到可行轨迹，报错结束运行
+        前提：假设AGV位姿精度较高，位姿变化由控制层处理
+        处理：报错，结束运行
+        优化：重新撒点采样，搜索可行轨迹 */
+        if (score > 100000.0) {
+            cout << "[error] there have no reference trajectory founded!"
+                 << endl;
+
+            // 此处可重新撒点采样，建立新的备选轨迹集合 // Todo: 调较
+            
+            return result;
+        }
     }
 
     local_traj_points.assign(
@@ -276,8 +307,6 @@ void PlanningLattice::UpdatePlannerSensorInfo()
 
     /* weak planning time = weak_planning_num_ * step_polynomial_curve_ */
     index_init_point_strong_planner_ = ref_point_index + weak_planning_num_;
-
-    cout << index_init_point_strong_planner_ << " asdf " << local_traj_points_.size() << endl;
 
     sensor_info_planner_.t   =
             local_traj_points_.at(index_init_point_strong_planner_).t_ref;
@@ -424,11 +453,11 @@ void PlanningLattice::CalPolynomialCurve(
         MatrixXd T(6, 6);
         
         T << pow(t0, 5.0),         pow(t0, 4.0),         pow(t0, 3.0),        pow(t0, 2.0),  t0,   1.0,
-            5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
-            20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
-            pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
-            5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
-            20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
+             5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
+             20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
+             pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
+             5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
+             20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
 
         MatrixXd A(6, 1), B(6, 1);
 
@@ -616,11 +645,11 @@ void PlanningLattice::CalPolynomialCurve(
         MatrixXd T(6, 6);
         
         T << pow(t0, 5.0),         pow(t0, 4.0),         pow(t0, 3.0),        pow(t0, 2.0),  t0,   1.0,
-            5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
-            20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
-            pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
-            5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
-            20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
+             5.0 * pow(t0, 4.0),   4.0 * pow(t0, 3.0),   3.0 * pow(t0, 2.0),  2.0 * t0,      1.0,  0.0,
+             20.0 * pow(t0, 3.0),  12.0 * pow(t0, 2.0),  6.0 * t0,            2.0,           0.0,  0.0,
+             pow(t1, 5.0),         pow(t1, 4.0),         pow(t1, 3.0),        pow(t1, 2.0),  t1,   1.0,
+             5.0 * pow(t1, 4.0),   4.0 * pow(t1, 3.0),   3.0 * pow(t1, 2.0),  2.0 * t1,      1.0,  0.0,
+             20.0 * pow(t1, 3.0),  12.0 * pow(t1, 2.0),  6.0 * t1,            2.0,           0.0,  0.0;
 
         MatrixXd A(6, 1), B(6, 1);
 
@@ -756,7 +785,7 @@ void PlanningLattice::CalPolynomialCurve(
         temp.y_ref   = sensor_info_planner_.y;
         temp.yaw_ref = sensor_info_planner_.yaw;
         temp.v_ref   = sensor_info_planner_.v;
-        temp.w_ref   = 50.0/57.3;
+        temp.w_ref   = 50.0/57.3; // trajectory to be deleted
         temp.t_ref   = sensor_info_planner_.t;
 
         temp.ax_ref = 0.0;
@@ -771,7 +800,8 @@ void PlanningLattice::CalPolynomialCurve(
 }
 
 void PlanningLattice::ScoringFunc(
-        double except_speed, int speed_index, int time_index, int num_time)
+        double except_speed, int speed_index, int time_index,
+        int num_time, int &num_alter_traj)
 {
     int size_traj_points = local_traj_points_.size();
 
@@ -804,17 +834,29 @@ void PlanningLattice::ScoringFunc(
     double w_max = w_storage.at(wmax_index);
 
     for (int i = 0; i < size_traj_points - 1; i++) {
-        double acc =
+        double acc;
+
+        if (v_storage.at(i) == v_storage.at(i + 1)) {
+            acc = 0.0;
+        } else {
+            acc =
                 (v_storage.at(i + 1) - v_storage.at(i)) /
                 (t_storage.at(i + 1) - t_storage.at(i));
+        }
 
         a_storage.push_back(-1.0 * acc);
     }
     
     for (int i = 0; i < size_traj_points - 2; i++) {
-        double jerk =
+        double jerk;
+        
+        if (a_storage.at(i) == a_storage.at(i + 1)) {
+            jerk = 0.0;
+        } else {
+            jerk =
                 (a_storage.at(i + 1) - a_storage.at(i)) /
                 (t_storage.at(i + 1) - t_storage.at(i));
+        }
 
         j_storage.push_back(jerk);
     }
@@ -832,6 +874,8 @@ void PlanningLattice::ScoringFunc(
         a_min <= -0.05) {
         score = 100000000.0;
     } else {
+        num_alter_traj++;
+
         double score_vmax, score_time, score_jer, score_acc, score_w;
         double weight_vmax, weight_time, weight_jer, weight_acc, weight_w;
 
@@ -899,7 +943,7 @@ void PlanningLattice::ScoringFunc(
     local_traj_points_.clear();
 }
 
-void PlanningLattice::SelectTrajFunc(int num_time, int &opt_traj_index)
+double PlanningLattice::SelectTrajFunc(int num_time, int &opt_traj_index)
 {
     int size_score_data = score_data_.size();
 
@@ -916,10 +960,149 @@ void PlanningLattice::SelectTrajFunc(int num_time, int &opt_traj_index)
     
     opt_traj_index = score_data_.at(score_min_index).index;
 
+    double score = score_data_.at(opt_traj_index).score;
+
     score_data_.clear();
+
+    return score;
 }
 
 double PlanningLattice::GetTimeSimulation()
 {
     return time_simulation_;
+}
+
+double PlanningLattice::TrajDetection(double except_speed)
+{
+    int size_traj_points = local_traj_points_.size();
+
+    vector<double> t_storage; // time
+    vector<double> v_storage; // speed
+    vector<double> w_storage; // omega
+    vector<double> a_storage; // acc
+    vector<double> j_storage; // jerk
+
+    for (int i = 0; i < size_traj_points; i++) {
+        t_storage.push_back(local_traj_points_.at(i).t_ref);
+        
+        v_storage.push_back(local_traj_points_.at(i).v_ref);
+
+        w_storage.push_back(fabs(local_traj_points_.at(i).w_ref));
+    }
+
+    vector<double>::iterator biggest_v =
+            max_element(begin(v_storage), end(v_storage));
+
+    int vmax_index = distance(begin(v_storage), biggest_v);
+    
+    double v_max = v_storage.at(vmax_index);
+
+    vector<double>::iterator biggest_w =
+            max_element(begin(w_storage), end(w_storage));
+
+    int wmax_index = distance(begin(w_storage), biggest_w);
+
+    double w_max = w_storage.at(wmax_index);
+
+    for (int i = 0; i < size_traj_points - 1; i++) {
+        double acc;
+
+        if (v_storage.at(i) == v_storage.at(i + 1)) {
+            acc = 0.0;
+        } else {
+            acc =
+                (v_storage.at(i + 1) - v_storage.at(i)) /
+                (t_storage.at(i + 1) - t_storage.at(i));
+        }
+
+        a_storage.push_back(-1.0 * acc);
+    }
+    
+    for (int i = 0; i < size_traj_points - 2; i++) {
+        double jerk;
+        
+        if (a_storage.at(i) == a_storage.at(i + 1)) {
+            jerk = 0.0;
+        } else {
+            jerk =
+                (a_storage.at(i + 1) - a_storage.at(i)) /
+                (t_storage.at(i + 1) - t_storage.at(i));
+        }
+
+        j_storage.push_back(jerk);
+    }
+    
+    vector<double>::iterator biggest_a =
+            max_element(begin(a_storage), end(a_storage));
+
+    int amax_index = distance(begin(a_storage), biggest_a);
+
+    double a_min = -1.0 * a_storage.at(amax_index);
+
+    double score;
+
+    // 边界放宽，防止轨迹轻易无效 // Todo: 调较
+    if (v_max >= except_speed * 1.3 || fabs(w_max) >= 30.0 / 57.3 ||
+        a_min <= -0.15) {
+        score = 100000000.0;
+    } else {
+        double score_vmax, score_time, score_jer, score_acc, score_w;
+        double weight_vmax, weight_time, weight_jer, weight_acc, weight_w;
+
+        weight_vmax = 1.00;
+        weight_time = 0.05;
+        weight_jer = 2.0;
+        weight_acc = 1.0;
+        weight_w = 0.4;
+
+        score_vmax = v_max / except_speed - 1.0;        
+        
+        score_time =
+                local_traj_points_.at(size_traj_points - 1).t_ref;
+
+        score_jer = 0.0;
+        
+        int i;
+
+        for (i = 0; i < size_traj_points - 2; i++) {
+            double delta_time =
+                    local_traj_points_.at(i + 1).t_ref -
+                    local_traj_points_.at(i).t_ref;
+
+            score_jer = score_jer + fabs(j_storage.at(i)) * delta_time;
+        }
+
+        score_jer =
+                score_jer + fabs(j_storage.at(i - 1)) *
+                (t_storage.at(i + 1) -
+                 t_storage.at(i - 1));
+
+        score_acc = 0.0;
+        score_w = 0.0;
+
+        double delta_time;
+        
+        for (i = 0; i < size_traj_points-1; i++) {
+            delta_time =
+                    local_traj_points_.at(i + 1).t_ref -
+                    local_traj_points_.at(i).t_ref;
+
+            score_w = score_w + w_storage.at(i) * delta_time;
+
+            score_acc = score_acc + fabs(a_storage.at(i)) * delta_time;
+        }
+        score_w =
+                score_w + w_storage.at(i) *
+                (t_storage.at(i) - t_storage.at(i - 1));
+
+        score_acc =
+                score_acc + fabs(a_storage.at(i - 1)) *
+                (t_storage.at(i) - t_storage.at(i - 1));
+
+        score = weight_vmax * score_vmax + weight_time * score_time +
+                weight_jer * score_jer + weight_acc * score_acc +
+                weight_w * score_w;
+    }
+
+    return score;
 }

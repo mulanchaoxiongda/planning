@@ -23,12 +23,10 @@
 #include "PlanningAlgorithm.h"
 
 PlanningAlgorithm::PlanningAlgorithm(
-        RobotModel *p_robot_model, SaveData *p_savedata, GoalState goal_state)
+        RobotModel *p_robot_model, SaveData *p_savedata)
 {
     p_robot_model_ = p_robot_model;
     p_savedata_ = p_savedata;
-
-    goal_state_ = goal_state;
 
     GetSensorInfo();
 }

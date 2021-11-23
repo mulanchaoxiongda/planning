@@ -39,9 +39,9 @@ int main(int argc, char **argv)
 
     GoalState goal_state = {1.00, -0.10, 5.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
     
-    PlanningLattice planning_lattice(&robot_model, &save_result, goal_state);
+    PlanningLattice planning_lattice(&robot_model, &save_result);
 
-    PlanningMPC planning_mpc(&robot_model, &save_result, goal_state);
+    PlanningMPC planning_mpc(&robot_model, &save_result);
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
 
@@ -60,41 +60,20 @@ int main(int argc, char **argv)
 
     double time_simulation = 1.0;
 
-    int test_gate = 0;
-
     while (time <= time_simulation) {
-    /* while (time <= 0.02) { */
-        cout << "t:" << time << endl << endl << endl;
+        /* 边界条件没有摸清出，与相机识别算法品质、停车相对位姿场景、
+        停车运动过程品质要求、规划算法调较等相关 */
+        /* if (time >= 2.0) {
+             goal_state = {1.00, -0.15, 0.0/57.3, 0.0, 0.0/57.3};
+        } */
 
         if (loop_counter % num_planning == 0) {
-            if (test_gate <= 550000) {
-                planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
-
-                test_gate++;
-
-                for (int i = 0; i < (int)local_traj_points.size(); i++) {
-                     cout << local_traj_points.at(i).t_ref << "   "
-                          << local_traj_points.at(i).x_ref << "   "
-                          << local_traj_points.at(i).y_ref << "   "
-                          << local_traj_points.at(i).v_ref << "   "
-                          << endl;
-                }
-                cout << endl << endl << endl;
-            }
+            planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
 
             time_simulation = planning_lattice.GetTimeSimulation();
 
             planning_mpc.CalRefTrajectory(
                     optimal_traj_points, local_traj_points);
-               
-            for (int i = 0; i < (int)optimal_traj_points.size(); i++) {
-                 cout << optimal_traj_points.at(i).t_ref << "   "
-                      << optimal_traj_points.at(i).x_ref << "   "
-                      << optimal_traj_points.at(i).y_ref << "   "
-                      << optimal_traj_points.at(i).v_ref << "   "
-                      << endl;
-            }
-            cout << endl << endl << endl;
         }
 
         if (loop_counter % num_control == 0) {
