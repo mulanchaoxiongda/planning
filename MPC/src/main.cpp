@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         cout << "t:" << time << endl << endl << endl;
 
         if (loop_counter % num_planning == 0) {
-            if (test_gate <= 1) {
+            if (test_gate <= 550000) {
                 planning_lattice.CalRefTrajectory(local_traj_points, goal_state);
 
                 test_gate++;

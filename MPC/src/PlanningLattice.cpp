@@ -60,6 +60,8 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     gettimeofday(&t_start,NULL);
 
     ControlCommand result = {0.0, 0.0, 0.0};
+
+    goal_state_ = goal_state;
     
     if (start_gate_ == true) {
         start_gate_ = false;
@@ -119,7 +121,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     } else {
         GetSensorInfo();
 
-        memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
+        // memcpy(&sensor_info_planner_, &sensor_info_, sizeof(SensorInfo));
 
         UpdatePlannerSensorInfo();
 
@@ -145,24 +147,31 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 &init_point_strong_planning,
                 &local_traj_points_.at(index_init_point_strong_planner_),
                 sizeof(TrajPoint));
-        init_point_strong_planning.x_ref   = sensor_info_.x;
+        /* init_point_strong_planning.x_ref   = sensor_info_.x;
         init_point_strong_planning.y_ref   = sensor_info_.y;
         init_point_strong_planning.yaw_ref = sensor_info_.yaw;
         init_point_strong_planning.v_ref   = sensor_info_.v;
         init_point_strong_planning.w_ref   = sensor_info_.w;
-        init_point_strong_planning.t_ref   = sensor_info_.t;
+        init_point_strong_planning.t_ref   = sensor_info_.t; */
 
-        init_point_strong_planning.ax_ref = sensor_info_.ax;
-        init_point_strong_planning.ay_ref = sensor_info_.ay;
+        /* init_point_strong_planning.ax_ref = sensor_info_.ax;
+        init_point_strong_planning.ay_ref = sensor_info_.ay; */
 
         local_traj_points_.clear();
 
-        /* local_traj_points_.assign(temp.begin(), temp.end()); */
+        local_traj_points_.assign(temp.begin(), temp.end());
+
+        double opt_time;
+
+        if (sensor_info_planner_.t < start_time_polynomial_) {
+            opt_time = opt_time_;
+        } else {
+            opt_time = start_time_polynomial_ + opt_time_ - sensor_info_planner_.t;
+        }
 
         CalPolynomialCurve(
-                start_time_polynomial_ + opt_time_ - sensor_info_planner_.t,
-                opt_speed_, opt_distance_, step_polynomial_curve_,
-                init_point_strong_planning);
+                opt_time, opt_speed_, opt_distance_, 
+                step_polynomial_curve_, init_point_strong_planning);
     }
 
     local_traj_points.assign(
@@ -267,6 +276,8 @@ void PlanningLattice::UpdatePlannerSensorInfo()
 
     /* weak planning time = weak_planning_num_ * step_polynomial_curve_ */
     index_init_point_strong_planner_ = ref_point_index + weak_planning_num_;
+
+    cout << index_init_point_strong_planner_ << " asdf " << local_traj_points_.size() << endl;
 
     sensor_info_planner_.t   =
             local_traj_points_.at(index_init_point_strong_planner_).t_ref;
@@ -691,17 +702,55 @@ void PlanningLattice::CalPolynomialCurve(
             local_traj_points_.push_back(temp);
         }
 
-        temp.x_ref   = goal_state_.x;
-        temp.y_ref   = goal_state_.y;
+        double parking_distance = 0.1;
+
+        temp.x_ref   = goal_state_.x - parking_distance * cos(goal_state_.yaw);
+        temp.y_ref   = goal_state_.y - parking_distance * sin(goal_state_.yaw);
         temp.yaw_ref = goal_state_.yaw;
         temp.v_ref   = goal_state_.v + speed_except;
         temp.w_ref   = goal_state_.w;
-        temp.t_ref   = temp.t_ref + safe_distance / speed_except;
+        temp.t_ref   =
+                temp.t_ref + (safe_distance - parking_distance) / speed_except;
 
         temp.ax_ref = 0.0;
         temp.ay_ref = 0.0;
 
         local_traj_points_.push_back(temp);
+
+        temp.x_ref   = goal_state_.x;
+        temp.y_ref   = goal_state_.y;
+        temp.yaw_ref = goal_state_.yaw;
+        temp.v_ref   = goal_state_.v + speed_except;
+        temp.w_ref   = goal_state_.w;
+        temp.t_ref   = temp.t_ref + parking_distance / speed_except;
+
+        temp.ax_ref = 0.0;
+        temp.ay_ref = 0.0;
+
+        local_traj_points_.push_back(temp);
+
+        double parking_step = 0.000001;
+
+        // 基于规划轨迹的时间一致性处理方案，增加若干轨迹点，
+        // 防止强规划轨迹的起点超出vector容量
+        int traj_point_margin = 10;
+        for (int i = 0; i < traj_point_margin; i++) {
+            temp.x_ref   =
+                    goal_state_.x + i * parking_step *
+                    speed_except * cos(goal_state_.yaw);
+            temp.y_ref   =
+                    goal_state_.y + i * parking_step *
+                    speed_except * sin(goal_state_.yaw);
+            temp.yaw_ref = goal_state_.yaw;
+            temp.v_ref   = goal_state_.v + speed_except;
+            temp.w_ref   = goal_state_.w;
+            temp.t_ref   = temp.t_ref + i * parking_step;
+
+            temp.ax_ref = 0.0;
+            temp.ay_ref = 0.0;
+
+            local_traj_points_.push_back(temp);
+        }
     } else {
         temp.x_ref   = sensor_info_planner_.x;
         temp.y_ref   = sensor_info_planner_.y;

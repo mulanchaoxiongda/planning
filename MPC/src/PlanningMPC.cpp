@@ -822,7 +822,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
 
                 motion_state.t = motion_state.t + simulation_step;
             } else {
-                motion_state.v = u_optimal_(0);
+                motion_state.v = u_optimal_(0);  // patch
                 motion_state.w = u_optimal_(1);
             }
 
