@@ -389,9 +389,33 @@ void PlanningMPC::CalControlCoefficient()
     matrix_q_.resize(nx_, nx_);
     matrix_q_.setIdentity(nx_, nx_);
  
+    double k_lon, k_lat;
+
     // 规划层位置误差权重较控制层的小，起到平滑轨迹的作用
-    matrix_q_(0, 0) = 80.0; // k_lon = fabs( k_x * cos(psi) + k_y * sin(psi) )
-    matrix_q_(1, 1) = 80.0; // k_lat = fabs( k_x * sin(psi) + k_y * cos(psi) )
+    // 横向运动依存与纵向运动，与纵平面、水平面制导关系相似
+    k_lon = 5.0; // 纵向运动位置误差权重
+    k_lat = 4.0; // 横向运动位置误差权重
+
+    double psi;
+
+    psi = sensor_info_.yaw;
+
+    double psi_trans;
+
+    if (fabs(psi) >= M_PI / 2.0) {
+        psi_trans = M_PI - fabs(psi);
+    } else {
+        psi_trans = fabs(psi);
+    }
+    
+    double k_x, k_y;
+
+    // 分解公式有待进一步验证，目前推演暂未发现问题
+    k_x = k_lon * cos(psi_trans) + k_lat * sin(psi_trans);
+    k_y = k_lon * sin(psi_trans) + k_lat * cos(psi_trans);
+
+    matrix_q_(0, 0) = k_x;
+    matrix_q_(1, 1) = k_y;
     matrix_q_(2, 2) = 1.5;
     matrix_q_(3, 3) = 2.0;
 
