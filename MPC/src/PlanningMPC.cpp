@@ -209,7 +209,7 @@ void PlanningMPC::FindRefPoint()
     int size_ref_traj = local_traj_points_.size();
 
     if (size_ref_traj <= 1 ) {
-        cout << "[error] global reference trajectory has only "
+        cout << "[error] local reference trajectory has only "
              << size_ref_traj << " points " << endl << endl;
     }
 
@@ -333,7 +333,7 @@ void PlanningMPC::UpdatePlannerSensorInfo()
     int size_ref_traj = opt_traj_points_.size();
 
     if (size_ref_traj <= 1 ) {
-        cout << "[error] global reference trajectory has only "
+        cout << "[error] local reference trajectory has only "
              << size_ref_traj << " points " << endl << endl;
     }
 
@@ -405,8 +405,9 @@ void PlanningMPC::CalControlCoefficient()
 
     // 规划层位置误差权重较控制层的小，起到平滑轨迹的作用
     // 横向运动依存与纵向运动，与纵平面、水平面制导关系相似
-    k_lon = 5.0; // 纵向运动位置误差权重
-    k_lat = 4.0; // 横向运动位置误差权重
+    // 不宜过小，会导致规划轨迹不经过目标点
+    k_lon = 40.0; // 纵向运动位置误差权重
+    k_lat = 40.0; // 横向运动位置误差权重
 
     double psi;
 

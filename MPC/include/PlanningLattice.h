@@ -42,6 +42,9 @@ class PlanningLattice: public PlanningAlgorithm
      double opt_distance_;
 
      double min_relative_dis_;
+
+     // 避免AGV和托盘碰撞的最小起始停车相对距离，小于此距离规划轨迹需为直线
+     double min_init_parking_dis_;
      
      double distance_agv2goal_;
 

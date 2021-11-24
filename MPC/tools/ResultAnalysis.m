@@ -312,3 +312,10 @@ plot(  cell2mat(RefPoi(:, 12)), cell2mat(RefPoi(:, 10)) * 57.3, 'green',...
        cell2mat(StaRob(:, 12)), cell2mat(StaRob(:, 10)) * 57.3, 'b'); grid on;
 xlabel('时间(秒)'); ylabel('横摆角速度(度/秒)'); set(gca, 'FontSize', 16);
 title('横摆角速度-时间曲线'); legend('规划','指令','反馈');
+
+figure('name','trajectory planning');
+plot(  cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'green', ...        %% 近似局部轨迹
+         cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
+         cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'blacko'); grid on;
+xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16); axis equal;
+title('运动轨迹'); legend('规划', '反馈', '托盘位置');

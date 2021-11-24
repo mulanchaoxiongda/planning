@@ -33,6 +33,8 @@ PlanningLattice::PlanningLattice(
 
     min_relative_dis_ = 0.5;
 
+    min_init_parking_dis_ = 0.55;
+
     weak_planning_num_ = 5;
 
     call_cycle_ = 0.02;
@@ -122,7 +124,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                  << endl;
 
             // 此处可重新撒点采样，建立新的备选轨迹集合(增加采样点) // Todo: 调较
-            // 备选方案:折线运动到停车点
+            // 备选方案:折线运动到停车点，或者原地旋转后重规划（化为真正的泊车算法）
             
             return result;
         }
@@ -221,7 +223,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                  << endl;
 
             // 此处可重新撒点采样，建立新的备选轨迹集合 // Todo: 调较
-            // 备选方案:折线运动到停车点
+            // 备选方案:折线运动到停车点，或原地旋转后重规划（化为真正的泊车算法）
             
             return result;
         }
@@ -366,22 +368,27 @@ void PlanningLattice::SprinkleFunc(
         vector<double> &sample_speed, int &num_speed,
         vector<double> &sample_distance, int &num_distance)
 {
-    num_speed = 3;
+    num_speed = 6;
     sample_speed.resize(num_speed);
     
-    sample_speed.at(0) = 0.10;
-    sample_speed.at(1) = 0.15;
-    sample_speed.at(2) = 0.20;
-
+    for (int i = 0; i < num_speed; i++) {
+        sample_speed.at(i) = 0.05 * double(i + 1);
+    }
+    
+    // 欠阻尼电机AGV纵向停车控制响应时间 + 0.5s
     double time_to_goal = 2.5;
 
     num_distance = num_speed;
     sample_distance.resize(num_distance);
-    
-    sample_distance.at(0) = sample_speed.at(0) * time_to_goal;
-    sample_distance.at(1) = sample_speed.at(1) * time_to_goal;
-    sample_distance.at(2) = sample_speed.at(2) * time_to_goal;
 
+    for (int i = 0; i < num_distance; i++) {
+        sample_distance.at(i) = sample_speed.at(i) * time_to_goal;
+
+        if (sample_distance.at(i) < min_init_parking_dis_) {
+            sample_distance.at(i) = min_init_parking_dis_;
+        }
+    }
+    
     double time_interval; // 3.0
     double delta_time; // 1.0
 
@@ -392,9 +399,9 @@ void PlanningLattice::SprinkleFunc(
                 (distance_agv2goal_ - sample_distance.at(i)) /
                 sample_speed.at(i);
 
-        time_interval = time_benchmark * 0.3; // 采样区间
+        time_interval = time_benchmark * 1.0; // 采样区间
 
-        delta_time = time_benchmark * 0.1; // 采样间隔
+        delta_time = time_benchmark * 0.05; // 采样间隔
 
         num_time = round(time_interval / delta_time); // 采样点数
 
