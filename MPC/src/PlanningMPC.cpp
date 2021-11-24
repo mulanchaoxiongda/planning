@@ -258,6 +258,7 @@ void PlanningMPC::FindRefPoint()
               local_traj_points_.at(ref_point_index + 1).t_ref * dis1 ) /
               dis_total;
     
+    // Todo: 在v的求解中，暂未引入a的影响
     local_ref_traj_point_.v =
             ( local_traj_points_.at(ref_point_index).v_ref * dis2 +
               local_traj_points_.at(ref_point_index + 1).v_ref * dis1 ) /
@@ -266,6 +267,17 @@ void PlanningMPC::FindRefPoint()
     local_ref_traj_point_.w =
             ( local_traj_points_.at(ref_point_index).w_ref * dis2 +
               local_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
+              dis_total;
+
+    // 调试用，验证robot_model中AGV加速度解算的正确性，规划与控制中暂未使用加速度变量
+    local_ref_traj_point_.ax =
+            ( local_traj_points_.at(ref_point_index).ax_ref * dis2 +
+              local_traj_points_.at(ref_point_index + 1).ax_ref * dis1 ) /
+              dis_total;
+
+    local_ref_traj_point_.ay =
+            ( local_traj_points_.at(ref_point_index).ay_ref * dis2 +
+              local_traj_points_.at(ref_point_index + 1).ay_ref * dis1 ) /
               dis_total;
     
     double delta_t1, delta_t2;
@@ -304,7 +316,7 @@ void PlanningMPC::FindRefPoint()
             local_traj_points_.at(ref_point_index + 1).v_ref * delta_t2 *
             sin(local_traj_points_.at(ref_point_index + 1).yaw_ref * 0.5 +
             local_ref_traj_point_.yaw * 0.5)) * dis1 ) / dis_total;
-         
+
     p_savedata_->file << "[plainning_global_reference_point] "
                       << " Time "    << sensor_info_.t
                       << " x_ref "   << local_ref_traj_point_.x
