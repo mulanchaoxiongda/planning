@@ -940,16 +940,6 @@ void PlanningMPC::UpdateReferenceTrajectory()
     }
 
     start_gate_ = true;
-
-    p_savedata_->file << "[goal_state_planning] "
-                          << "Time "         << sensor_info_.t
-                          << "x_goal "       << goal_state_.x
-                          << "y_goal "       << goal_state_.y
-                          << "yaw_goal "     << goal_state_.yaw
-                          << "v_goal "       << goal_state_.v
-                          << "w_goal "       << goal_state_.w
-                          << "Time "         << sensor_info_planner_.t
-                          << "loop_counter " << (double)loop_counter_<< endl;
 }
 
 void PlanningMPC::CalPredictForwardCommand()
