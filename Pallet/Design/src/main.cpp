@@ -19,12 +19,11 @@ int main(int argc, char **argv)
     struct timeval t_start, t_end;
     gettimeofday(&t_start,NULL);
 
-    const char* full_result_path = "../tools/SimulationResult.txt";
-    SaveData save_result(full_result_path);
+    const char* result_path = "../tools/SimulationResult.txt";
+    SaveData save_result(result_path);
 
-    const char* full_trajectory_reference_path = "../data/TrajectoryPoints.txt";
-
-    SaveData save_trajectory_reference(full_trajectory_reference_path);
+    const char* trajectory_reference_path = "../data/TrajectoryPoints.txt";
+    SaveData save_trajectory_reference("../data/TrajectoryPoints.txt");
 
     TrajectoryCreator TrajCreator(&save_trajectory_reference, &save_result);
     TrajCreator.TrajCreator();
@@ -35,8 +34,8 @@ int main(int argc, char **argv)
 
      /* 边界性能测试 */
      RobotMotionStatePara motion_state = {0.00, -0.00, 45.0/57.3, // x, y, yaw
-                                         0.00,  0.0,   0.0,      // v, w, time
-                                         0.00,  0.00};           // ax, ay 
+                                          0.00,  0.00, 0.0,      // v, w, time
+                                          0.00,  0.00};           // ax, ay 
 
     double simulation_step = 0.01;
 
