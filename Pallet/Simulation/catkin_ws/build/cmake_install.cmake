@@ -131,6 +131,11 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/gtest/cmake_install.cmake")
+  include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/car_model/cmake_install.cmake")
+  include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/waypoint_loader/cmake_install.cmake")
+  include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/pure_persuit/cmake_install.cmake")
+  include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/styx_msgs/cmake_install.cmake")
+  include("/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/build/waypoint_updater/cmake_install.cmake")
 
 endif()
 

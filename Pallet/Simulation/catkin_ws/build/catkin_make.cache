@@ -1,2 +1,2 @@
-
+car_model:pure_persuit:styx_msgs:waypoint_loader:waypoint_updater
 -DCATKIN_DEVEL_PREFIX=/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/install -G Unix Makefiles
