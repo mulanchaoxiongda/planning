@@ -32,7 +32,7 @@ PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata):
 
     weak_planning_num_ = 3;
 
-    call_cycle_ = 0.02;
+    call_cycle_ = 0.1;
 
     nx_ = 4;
     nu_ = 2;
