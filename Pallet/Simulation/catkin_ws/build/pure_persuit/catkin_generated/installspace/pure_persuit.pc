@@ -1,8 +1,0 @@
-prefix=/home/mls/Documents/Git/Planning/planning/Pallet/Simulation/catkin_ws/install
-
-Name: pure_persuit
-Description: Description of pure_persuit
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
