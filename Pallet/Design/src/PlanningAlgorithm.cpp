@@ -51,6 +51,6 @@ void PlanningAlgorithm::FindNearestObsPos(double pos_x, double pos_y)
 
     // ESDF梯度求yaw_obs
 
-    obs_x_near_ = 0.0; // pos_x + dis_obs_near_ * cos(yaw_obs)
-    obs_y_near_ = 0.0;
+    obs_x_near_ = 10000.0; // pos_x + dis_obs_near_ * cos(yaw_obs)
+    obs_y_near_ = 10000.0;
 }
