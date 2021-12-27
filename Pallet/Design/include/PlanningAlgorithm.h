@@ -41,5 +41,7 @@ class PlanningAlgorithm
 
      vector<TrajPoint> local_traj_points_;
 
-     double obs_x_near_, obs_y_near_, dis_obs_near_;
+     double dis_obs_near_;
+
+     vector<double> obs_x_near_, obs_y_near_;
 };
