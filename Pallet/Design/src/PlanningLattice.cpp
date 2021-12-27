@@ -89,7 +89,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 sample_speed, num_speed,
                 sample_distance, num_distance);
 
-        step_polynomial_curve_ = 0.1;
+        step_polynomial_curve_ = 0.2;
 
         int num_alter_traj = 0;
 
@@ -173,10 +173,10 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
         if (distance_agv2goal_ < min_relative_dis_) {
-            cout << "[INFO] agv is too near to goal point!  "
+            /* cout << "[INFO] agv is too near to goal point!  "
                  << " t: " << sensor_info_planner_.t
                  << " x: " << sensor_info_planner_.x
-                 << " y: " << sensor_info_planner_.y << endl;
+                 << " y: " << sensor_info_planner_.y << endl; */
 
             return result;
         }
@@ -239,6 +239,15 @@ ControlCommand PlanningLattice::CalRefTrajectory(
     running_time_sum_ = running_time_sum_ + (t_end.tv_sec - t_start.tv_sec) +
                         (double)(t_end.tv_usec - t_start.tv_usec) / 1000000.0;
 
+    static bool gate_first_planning = 1;
+    if (gate_first_planning == 1) {
+        gate_first_planning = 0;
+        cout << "[planning] Lattice run time(first planning): "
+             << running_time_sum_ * 1000.0 << "ms." << endl;
+        
+        running_time_sum_ = 0.0;
+    }
+
     running_time_average_ = running_time_sum_ / (double)loop_counter_;
 
     p_savedata_->file << "[goal_state_planning] "
@@ -294,6 +303,11 @@ void PlanningLattice::ReadInGoalTraj()
     read_file.close();
     cout << "[INFO] read in reference local trajectory points successfully !"
          << endl;
+}
+
+void PlanningLattice::CollisionDetection()
+{
+    ;
 }
 
 void PlanningLattice::UpdatePlannerSensorInfo()
@@ -849,6 +863,7 @@ void PlanningLattice::ScoringFunc(
     vector<double> w_storage; // omega
     vector<double> a_storage; // acc
     vector<double> j_storage; // jerk
+    vector<double> pos_x, pos_y; // obs
 
     for (int i = 0; i < size_traj_points; i++) {
         t_storage.push_back(local_traj_points_.at(i).t_ref);
@@ -856,6 +871,9 @@ void PlanningLattice::ScoringFunc(
         v_storage.push_back(local_traj_points_.at(i).v_ref);
 
         w_storage.push_back(fabs(local_traj_points_.at(i).w_ref));
+
+        pos_x.push_back(local_traj_points_.at(i).x_ref);
+        pos_y.push_back(local_traj_points_.at(i).y_ref);
     }
 
     vector<double>::iterator biggest_v =
@@ -907,10 +925,25 @@ void PlanningLattice::ScoringFunc(
 
     double a_min = -1.0 * a_storage.at(amax_index);
 
+    double radius_agv = 0.5; // agv外接圆半径0.4 + 膨胀0.1
+    double dis_obs_min = 10000.0;
+
+    // 设计思路：在初始规划时，做障碍物检测，剔除碰撞轨迹
+    // 后续规划中，由托盘/AGV位姿信息跳变及环境地图改变引起的避障需求，
+    // Lattice规划层不做二次处理，转由MPC规划层实现避障功能
+    // PS：也可以在TrajDetection()里实现后续规划中障碍物检测功能
+    for (int i = 0; i < size_traj_points - 1; i++) {
+        FindNearestObsDis(pos_x.at(i), pos_y.at(i));
+
+        if (dis_obs_min > dis_obs_near_) {
+            dis_obs_min = dis_obs_near_;
+        }
+    }
+
     double score;
 
     if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 ||
-        a_min <= -0.05) {
+        a_min <= -0.05 || dis_obs_min <= radius_agv) {
         score = 100000000.0;
     } else {
         num_alter_traj++;
@@ -919,10 +952,10 @@ void PlanningLattice::ScoringFunc(
         double weight_vmax, weight_time, weight_jer, weight_acc, weight_w;
 
         weight_vmax = 1.00;
-        weight_time = 0.05;
-        weight_jer = 2.0;
-        weight_acc = 1.0;
-        weight_w = 0.4;
+        weight_time = 0.01;
+        weight_jer = 1.0;
+        weight_acc = 0.5;
+        weight_w = 0.2;
 
         score_vmax = v_max / except_speed - 1.0;        
         
@@ -971,6 +1004,14 @@ void PlanningLattice::ScoringFunc(
         score = weight_vmax * score_vmax + weight_time * score_time +
                 weight_jer * score_jer + weight_acc * score_acc +
                 weight_w * score_w;
+
+        /* cout << "[DEBUG] score:" << score
+             << " v:" << weight_vmax * score_vmax
+             << " t:" << weight_time * score_time
+             << " jer:" << weight_jer * score_jer
+             << " acc:" << weight_acc * score_acc
+             << " w:" << weight_w * score_w
+             << endl; */
     }
 
     ScoreData temp;
@@ -1020,6 +1061,7 @@ double PlanningLattice::TrajDetection(double except_speed)
     vector<double> w_storage; // omega
     vector<double> a_storage; // acc
     vector<double> j_storage; // jerk
+    vector<double> pos_x, pos_y; // obs
 
     for (int i = 0; i < size_traj_points; i++) {
         t_storage.push_back(local_traj_points_.at(i).t_ref);
@@ -1027,8 +1069,11 @@ double PlanningLattice::TrajDetection(double except_speed)
         v_storage.push_back(local_traj_points_.at(i).v_ref);
 
         w_storage.push_back(fabs(local_traj_points_.at(i).w_ref));
-    }
 
+        pos_x.push_back(local_traj_points_.at(i).x_ref);
+        pos_y.push_back(local_traj_points_.at(i).y_ref);
+    }
+    
     vector<double>::iterator biggest_v =
             max_element(begin(v_storage), end(v_storage));
 
@@ -1078,21 +1123,33 @@ double PlanningLattice::TrajDetection(double except_speed)
 
     double a_min = -1.0 * a_storage.at(amax_index);
 
+    // PS：需要引入逆膨胀么
+    double radius_agv = 0.35; // agv外接圆半径0.4 - 逆膨胀0.05
+    double dis_obs_min = 10000.0;
+
+    for (int i = 0; i < size_traj_points - 1; i++) {
+        FindNearestObsDis(pos_x.at(i), pos_y.at(i));
+
+        if (dis_obs_min > dis_obs_near_) {
+            dis_obs_min = dis_obs_near_;
+        }
+    }
+
     double score;
 
     // 边界放宽，防止轨迹轻易无效 // Todo: 调较
     if (v_max >= except_speed * 1.3 || fabs(w_max) >= 30.0 / 57.3 ||
-        a_min <= -0.15) {
+        a_min <= -0.15  || dis_obs_min <= radius_agv) {
         score = 100000000.0;
     } else {
         double score_vmax, score_time, score_jer, score_acc, score_w;
         double weight_vmax, weight_time, weight_jer, weight_acc, weight_w;
 
         weight_vmax = 1.00;
-        weight_time = 0.05;
-        weight_jer = 2.0;
-        weight_acc = 1.0;
-        weight_w = 0.4;
+        weight_time = 0.01;
+        weight_jer = 1.0;
+        weight_acc = 0.5;
+        weight_w = 0.2;
 
         score_vmax = v_max / except_speed - 1.0;        
         
@@ -1145,3 +1202,4 @@ double PlanningLattice::TrajDetection(double except_speed)
 
     return score;
 }
+

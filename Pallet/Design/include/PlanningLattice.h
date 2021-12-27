@@ -77,6 +77,8 @@ class PlanningLattice: public PlanningAlgorithm
 
      void ReadInGoalTraj();
 
+     void CollisionDetection();
+
      void UpdatePlannerSensorInfo();
 
      void SprinkleFunc(

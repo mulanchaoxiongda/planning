@@ -36,3 +36,21 @@ void PlanningAlgorithm::GetSensorInfo()
     memcpy(&sensor_info_, &p_robot_model_->motion_state_, sizeof(SensorInfo));
 }
 
+// Todo: ESDF数据格式与接口
+void PlanningAlgorithm::FindNearestObsDis(double pos_x, double pos_y)
+{
+    // pos_x, pos_y求取ESDF图索引值
+    dis_obs_near_ = 10000.0; // 查询ESDF图
+}
+
+// Todo: ESDF数据格式与接口
+void PlanningAlgorithm::FindNearestObsPos(double pos_x, double pos_y)
+{
+    // pos_x, pos_y求取ESDF图索引值
+    dis_obs_near_ = 10000.0; // 查询ESDF图
+
+    // ESDF梯度求yaw_obs
+
+    obs_x_near_ = 0.0; // pos_x + dis_obs_near_ * cos(yaw_obs)
+    obs_y_near_ = 0.0;
+}

@@ -79,6 +79,8 @@ class PlanningMPC: public PlanningAlgorithm
 
      void ReadInGoalTraj();
 
+     void CollisionDetection();
+
      void FindRefPoint();
 
      void UpdatePlannerSensorInfo();

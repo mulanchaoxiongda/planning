@@ -204,6 +204,11 @@ void PlanningMPC::ReadInGoalTraj()
     ;
 }
 
+void PlanningMPC::CollisionDetection()
+{
+    ;
+}
+
 void PlanningMPC::FindRefPoint()
 {
     int size_ref_traj = local_traj_points_.size();

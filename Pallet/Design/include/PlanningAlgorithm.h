@@ -26,6 +26,12 @@ class PlanningAlgorithm
 
      virtual void ReadInGoalTraj() = 0;
 
+     virtual void CollisionDetection() = 0;
+
+     void FindNearestObsDis(double pos_x, double pos_y);
+     
+     void FindNearestObsPos(double pos_x, double pos_y);
+
      SaveData *p_savedata_;
      RobotModel *p_robot_model_;
 
@@ -34,4 +40,6 @@ class PlanningAlgorithm
      SensorInfo sensor_info_; // AGV motion state
 
      vector<TrajPoint> local_traj_points_;
+
+     double obs_x_near_, obs_y_near_, dis_obs_near_;
 };
