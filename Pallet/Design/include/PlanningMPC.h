@@ -56,7 +56,7 @@ class PlanningMPC: public PlanningAlgorithm
 
      VectorXd u_min_, u_max_, du_min_, du_max_;
 
-     VectorXd x_; // control variable
+     VectorXd matrix_kesi_; // control variable
      MatrixXd matrix_a_, matrix_b_;
 
      double running_time_sum_;
@@ -93,9 +93,13 @@ class PlanningMPC: public PlanningAlgorithm
 
      void Predict(MatrixXd &phi, MatrixXd &theta);
 
+     void CalObsCostFunc(
+                MatrixXd &matrix_h_obs, MatrixXd &matrix_g_obs,
+                MatrixXd matrix_phi, MatrixXd matrix_theta);
+
      void CalObjectiveFunc(
              MatrixXd &matrix_h, MatrixXd &matrix_e, VectorXd &matrix_g,
-             MatrixXd matrix_kesi, MatrixXd matrix_phi, MatrixXd matrix_theta);
+             MatrixXd matrix_phi, MatrixXd matrix_theta);
 
      void CalConstraintConditions(
              MatrixXd &matrix_A, VectorXd &lb, VectorXd &ub);
@@ -120,4 +124,6 @@ class PlanningMPC: public PlanningAlgorithm
      void UpdateReferenceTrajectory();
 
      void CalPredictForwardCommand();
+
+     void CalRefPos();
 };

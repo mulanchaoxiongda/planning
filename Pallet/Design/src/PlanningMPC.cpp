@@ -37,7 +37,7 @@ PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata):
     nx_ = 4;
     nu_ = 2;
 
-    x_.resize(nx_ + nu_);
+    matrix_kesi_.resize(nx_ + nu_);
     matrix_a_.resize(nx_, nx_);
     matrix_b_.resize(nx_, nu_);
 
@@ -117,7 +117,7 @@ ControlCommand PlanningMPC::CalRefTrajectory(
     VectorXd matrix_g(nc_ * nu_, 1);
 
     CalObjectiveFunc(
-            matrix_H, matrix_E, matrix_g, x_, matrix_phi, matrix_theta);
+            matrix_H, matrix_E, matrix_g, matrix_phi, matrix_theta);
 
     MatrixXd matrix_A(nc_ * nu_ * 2, nc_ * nu_);
     VectorXd lb(nc_ * nu_ * 2, 1), ub(nc_ * nu_ * 2, 1);
@@ -462,7 +462,7 @@ void PlanningMPC::CalControlCoefficient()
 
 void PlanningMPC::UpdateErrorModel()
 {
-    VectorXd x(nx_), xr(nx_), matrix_kesi(nx_ + nu_);
+    VectorXd x(nx_), xr(nx_);
 
     x << sensor_info_planner_.x, sensor_info_planner_.y,
          sensor_info_planner_.yaw, sensor_info_planner_.w;
@@ -470,9 +470,7 @@ void PlanningMPC::UpdateErrorModel()
     xr << local_ref_traj_point_.x,   local_ref_traj_point_.y,
           local_ref_traj_point_.yaw, local_ref_traj_point_.w;
 
-    matrix_kesi << x - xr, u_pre_;
-
-    x_ = matrix_kesi;
+    matrix_kesi_ << x - xr, u_pre_;
 
     double T1 = 0.07;
 
@@ -488,9 +486,9 @@ void PlanningMPC::UpdateErrorModel()
 
     p_savedata_->file << " [plannin_tracking_error] "
                       << " Time "    << sensor_info_.t
-                      << " err_x "   << x_(0)
-                      << " err_y "   << x_(1)
-                      << " err_yaw " << x_(2)
+                      << " err_x "   << matrix_kesi_(0)
+                      << " err_y "   << matrix_kesi_(1)
+                      << " err_yaw " << matrix_kesi_(2)
                       << " t "       << sensor_info_planner_.t
                       << endl;
 }
@@ -547,9 +545,76 @@ void PlanningMPC::Predict(MatrixXd &matrix_phi, MatrixXd &matrix_theta)
     }
 }
 
+void PlanningMPC::CalObsCostFunc(
+        MatrixXd &matrix_h_obs, MatrixXd &matrix_g_obs,
+        MatrixXd matrix_phi, MatrixXd matrix_theta)
+{
+    FindNearestObsPos(sensor_info_planner_.x, sensor_info_planner_.y);
+
+    double k, v;
+
+    k = 1.0;
+    v = sensor_info_planner_.v;
+    if (v >= 0.0 && v < 0.05) {
+        v = 0.05;
+    } else if (v < 0.0 && v > -0.05) {
+        v = -0.05;
+    }
+
+    double dis2obs_x, dis2obs_y, dis2obs_square, weight_obs;
+
+    dis2obs_x = sensor_info_planner_.x - obs_x_near_.at(0);
+    dis2obs_y = sensor_info_planner_.y - obs_y_near_.at(0);
+    dis2obs_square = (pow(dis2obs_x, 2.0) + pow(dis2obs_y, 2.0)) + 1.0 - dis2obs_min_;
+    weight_obs = k * v;
+
+    double dJ_dx, dJ_dy, ddJ_ddx, ddJ_ddy, ddJ_dxdy;
+
+    dJ_dx = -2.0 * weight_obs / dis2obs_square * (dis2obs_x);
+    dJ_dy = -2.0 * weight_obs / dis2obs_square * (dis2obs_y);
+
+    ddJ_ddx =
+            4.0 * weight_obs / pow(dis2obs_square, 2.0) *
+            pow(dis2obs_x, 2.0) - 2.0 * weight_obs / dis2obs_square;
+    ddJ_ddy =
+            4.0 * weight_obs / pow(dis2obs_square, 2.0) *
+            pow(dis2obs_y, 2.0) - 2.0 * weight_obs / dis2obs_square;
+
+    ddJ_dxdy =
+            4.0 * weight_obs / pow(dis2obs_square, 2.0) *
+            dis2obs_x * dis2obs_y;
+
+    MatrixXd matrix_Ak(1, nx_), matrix_Hk(nx_, nx_);
+
+    matrix_Ak << dJ_dx,    dJ_dy,    0.0, 0.0;
+    matrix_Hk << ddJ_ddx,  ddJ_dxdy, 0.0, 0.0,
+                 ddJ_dxdy, ddJ_ddy,  0.0, 0.0,
+                 0.0,      0.0,      0.0, 0.0,
+                 0.0,      0.0,      0.0, 0.0;
+
+    MatrixXd matrix_N(1, np_ * nx_), matrix_M(np_ * nx_, np_ * nx_);
+
+    matrix_N =
+            CustomFunction::KroneckerProduct(MatrixXd::Ones(1, np_),
+                                             matrix_Ak);
+    matrix_M =
+            CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_),
+                                             matrix_Hk);
+
+    matrix_h_obs = matrix_theta.transpose() * matrix_M * matrix_theta;
+    matrix_h_obs = (matrix_h_obs + matrix_h_obs.transpose()) * 0.5;
+
+    MatrixXd matrix_e(np_ * nx_, 1);
+    matrix_e = matrix_phi * matrix_kesi_;
+
+    matrix_g_obs =
+            (matrix_N * matrix_theta +
+            (matrix_e.transpose()) * matrix_M * matrix_theta).transpose();
+}
+
 void PlanningMPC::CalObjectiveFunc(
         MatrixXd &matrix_h, MatrixXd &matrix_e, VectorXd &matrix_g,
-        MatrixXd matrix_kesi, MatrixXd matrix_phi, MatrixXd matrix_theta)
+        MatrixXd matrix_phi, MatrixXd matrix_theta)
 {
     MatrixXd matrix_Q(np_ * nx_, np_ * nx_), matrix_R(nc_ * nu_, nc_ * nu_);
 
@@ -562,10 +627,35 @@ void PlanningMPC::CalObjectiveFunc(
                                              matrix_r_);
 
     matrix_h = matrix_theta.transpose() * matrix_Q * matrix_theta + matrix_R;
-    matrix_h = (matrix_h+matrix_h.transpose()) * 0.5;
+    matrix_h = (matrix_h + matrix_h.transpose()) * 0.5;
 
-    matrix_e = matrix_phi * matrix_kesi;
+    matrix_e = matrix_phi * matrix_kesi_;
     matrix_g = ((matrix_e.transpose()) * matrix_Q * matrix_theta).transpose();
+
+    MatrixXd matrix_h_obs, matrix_g_obs;
+    CalObsCostFunc(matrix_h_obs, matrix_g_obs, matrix_phi, matrix_theta);
+
+    /* matrix_h += matrix_h_obs;
+    matrix_g += matrix_g_obs; */
+
+    static int gate = 0;
+    if (gate % 40 == 0) {
+        cout << " x: " << sensor_info_planner_.x
+             << " y: " << sensor_info_planner_.y << endl << endl;
+
+        cout << "matrix_g:" << endl << matrix_g
+             << endl << endl << endl;
+
+        cout << "matrix_g_obs:" << endl << matrix_g_obs
+             << endl << endl << endl;
+
+        cout << "matrix_h:" << endl << matrix_h
+             << endl << endl << endl;
+
+        cout << "matrix_h_obs:" << endl << matrix_h_obs
+             << endl << endl << endl;
+    }
+    gate++;
 }
 
 void PlanningMPC::CalConstraintConditions(
@@ -1019,7 +1109,15 @@ void PlanningMPC::CalPredictForwardCommand()
                 ( local_traj_points_.at(ref_point_index).w_ref * dis2 +
                 local_traj_points_.at(ref_point_index + 1).w_ref * dis1 ) /
                 dis_total;
-                                                                        
+
+        /* static int gate = 0;
+        if (gate % 20 == 0) {
+            cout << " time " << sensor_info_planner_.t
+                 << " ref_point_index " << ref_point_index
+                 << " vc_ref " << vc_ref << endl;
+        }
+        gate++; */
+
         time_predict += predict_step_;
 
         ref_point_command_.at(i * nu_) = vc_ref;

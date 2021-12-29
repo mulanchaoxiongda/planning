@@ -44,4 +44,6 @@ class PlanningAlgorithm
      double dis_obs_near_;
 
      vector<double> obs_x_near_, obs_y_near_;
+
+     double radius_agv_, dis2obs_min_;
 };

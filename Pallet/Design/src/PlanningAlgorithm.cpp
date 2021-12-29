@@ -30,8 +30,12 @@ PlanningAlgorithm::PlanningAlgorithm(
 
     GetSensorInfo();
 
-    obs_x_near_.resize(3);
-    obs_y_near_.resize(3);
+    obs_x_near_.resize(1);
+    obs_y_near_.resize(1);
+
+    // PS：需要引入逆膨胀么
+    radius_agv_  = 0.45; // agv外接圆半径0.4 - 逆膨胀0.05
+    dis2obs_min_ = 0.35; // agv外接圆半径0.4 - 逆膨胀0.05
 }
 
 void PlanningAlgorithm::GetSensorInfo()
@@ -61,18 +65,21 @@ void PlanningAlgorithm::FindNearestObsPos(double pos_x, double pos_y)
 
     // PS:添加两个障碍点，使得障碍物势场引导AGV沿着local_traj从非障碍物一侧，
     // 绕行避开障碍物
-    double rel_dis_obs = 0.1;
-    double rel_yaw_obs = 0.5;
+    /* double rel_dis_obs = 0.2;
+    double rel_yaw_obs = 0.5; */
 
     obs_x_near_.at(0) = center_x + dis_center2obs * cos(yaw_obs);
-    obs_x_near_.at(1) =
+    /* obs_x_near_.at(1) =
             obs_x_near_.at(0) + rel_dis_obs * cos(yaw_obs + rel_yaw_obs);
     obs_x_near_.at(1) =
-            obs_x_near_.at(0) + rel_dis_obs * cos(yaw_obs - rel_yaw_obs);
+            obs_x_near_.at(0) + rel_dis_obs * cos(yaw_obs - rel_yaw_obs); */
 
     obs_y_near_.at(0) = center_y + dis_center2obs * sin(yaw_obs);
-    obs_y_near_.at(1) =
+    /* obs_y_near_.at(1) =
             obs_y_near_.at(0) + rel_dis_obs * sin(yaw_obs + rel_yaw_obs);
     obs_y_near_.at(1) =
-            obs_y_near_.at(0) + rel_dis_obs * sin(yaw_obs - rel_yaw_obs);
+            obs_y_near_.at(0) + rel_dis_obs * sin(yaw_obs - rel_yaw_obs); */
+
+    obs_x_near_.at(0) = 10.15;
+    obs_y_near_.at(0) = 1.0;
 }

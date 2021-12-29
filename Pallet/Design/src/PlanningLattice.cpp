@@ -925,7 +925,6 @@ void PlanningLattice::ScoringFunc(
 
     double a_min = -1.0 * a_storage.at(amax_index);
 
-    double radius_agv = 0.5; // agv外接圆半径0.4 + 膨胀0.1
     double dis_obs_min = 10000.0;
 
     // 设计思路：在初始规划时，做障碍物检测，剔除碰撞轨迹
@@ -943,7 +942,7 @@ void PlanningLattice::ScoringFunc(
     double score;
 
     if (v_max >= except_speed * 1.1 || fabs(w_max) >= 20.0 / 57.3 ||
-        a_min <= -0.05 || dis_obs_min <= radius_agv) {
+        a_min <= -0.05 || dis_obs_min <= radius_agv_) {
         score = 100000000.0;
     } else {
         num_alter_traj++;
@@ -1123,8 +1122,6 @@ double PlanningLattice::TrajDetection(double except_speed)
 
     double a_min = -1.0 * a_storage.at(amax_index);
 
-    // PS：需要引入逆膨胀么
-    double radius_agv = 0.35; // agv外接圆半径0.4 - 逆膨胀0.05
     double dis_obs_min = 10000.0;
 
     for (int i = 0; i < size_traj_points - 1; i++) {
@@ -1139,7 +1136,7 @@ double PlanningLattice::TrajDetection(double except_speed)
 
     // 边界放宽，防止轨迹轻易无效 // Todo: 调较
     if (v_max >= except_speed * 1.3 || fabs(w_max) >= 30.0 / 57.3 ||
-        a_min <= -0.15  || dis_obs_min <= radius_agv) {
+        a_min <= -0.15  || dis_obs_min <= dis2obs_min_) {
         score = 100000000.0;
     } else {
         double score_vmax, score_time, score_jer, score_acc, score_w;
