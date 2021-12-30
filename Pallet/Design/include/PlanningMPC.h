@@ -125,5 +125,5 @@ class PlanningMPC: public PlanningAlgorithm
 
      void CalPredictForwardCommand();
 
-     void CalRefPos();
+     void CalRefState(MatrixXd &rel_ref_state);
 };

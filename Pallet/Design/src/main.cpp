@@ -33,7 +33,7 @@ int main(int argc, char **argv)
                                          0.00,  0.00};           // ax, ay  */
 
      /* 边界性能测试 */
-     RobotMotionStatePara motion_state = {0.00, -0.00, 45.0/57.3, // x, y, yaw
+     RobotMotionStatePara motion_state = {0.00, -0.00, 90.0/57.3, // x, y, yaw
                                           0.00,  0.00, 0.0,      // v, w, time
                                           0.00,  0.00};           // ax, ay 
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     /* GoalState goal_state = {1.00, -0.10, 5.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w */
 
     /* 边界性能测试 */
-    GoalState goal_state = {2.12, 2.12, 90.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
+    GoalState goal_state = {0.0, 3.0, 90.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w
     /* GoalState goal_state = {0.0, 3.0, 90.0/57.3, 0.0, 0.0/57.3}; // x, y, yaw, v, w */
     
     PlanningLattice planning_lattice(&robot_model, &save_result);

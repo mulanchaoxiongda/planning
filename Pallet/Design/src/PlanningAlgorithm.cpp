@@ -80,6 +80,11 @@ void PlanningAlgorithm::FindNearestObsPos(double pos_x, double pos_y)
     obs_y_near_.at(1) =
             obs_y_near_.at(0) + rel_dis_obs * sin(yaw_obs - rel_yaw_obs); */
 
-    obs_x_near_.at(0) = 10.15;
+    obs_x_near_.at(0) = 0.4;
     obs_y_near_.at(0) = 1.0;
+
+    p_savedata_->file << "[obs_info] "
+                      << "Time "         << sensor_info_.t
+                      << "x_obs "        << obs_x_near_.at(0)
+                      << "y_obs "        << obs_y_near_.at(0) << endl;
 }

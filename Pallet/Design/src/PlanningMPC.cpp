@@ -58,7 +58,7 @@ PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata):
     matrix_B_.resize(nx_ + nu_, nu_);
     matrix_C_.resize(nx_, nx_ + nu_);
 
-    ref_point_command_.resize(nc_ * nu_);
+    ref_point_command_.resize(nc_ * nu_, 1);
 }
 
 ControlCommand PlanningMPC::CalRefTrajectory(
@@ -551,9 +551,12 @@ void PlanningMPC::CalObsCostFunc(
 {
     FindNearestObsPos(sensor_info_planner_.x, sensor_info_planner_.y);
 
+    MatrixXd rel_ref_state(np_ * nx_, 1);
+    CalRefState(rel_ref_state);
+
     double k, v;
 
-    k = 1.0;
+    k = 0.2;
     v = sensor_info_planner_.v;
     if (v >= 0.0 && v < 0.05) {
         v = 0.05;
@@ -565,7 +568,7 @@ void PlanningMPC::CalObsCostFunc(
 
     dis2obs_x = sensor_info_planner_.x - obs_x_near_.at(0);
     dis2obs_y = sensor_info_planner_.y - obs_y_near_.at(0);
-    dis2obs_square = (pow(dis2obs_x, 2.0) + pow(dis2obs_y, 2.0)) + 1.0 - dis2obs_min_;
+    dis2obs_square = (pow(dis2obs_x, 2.0) + pow(dis2obs_y, 2.0));
     weight_obs = k * v;
 
     double dJ_dx, dJ_dy, ddJ_ddx, ddJ_ddy, ddJ_dxdy;
@@ -600,7 +603,7 @@ void PlanningMPC::CalObsCostFunc(
     matrix_M =
             CustomFunction::KroneckerProduct(MatrixXd::Identity(np_, np_),
                                              matrix_Hk);
-
+    
     matrix_h_obs = matrix_theta.transpose() * matrix_M * matrix_theta;
     matrix_h_obs = (matrix_h_obs + matrix_h_obs.transpose()) * 0.5;
 
@@ -608,8 +611,25 @@ void PlanningMPC::CalObsCostFunc(
     matrix_e = matrix_phi * matrix_kesi_;
 
     matrix_g_obs =
-            (matrix_N * matrix_theta +
-            (matrix_e.transpose()) * matrix_M * matrix_theta).transpose();
+            (matrix_N * matrix_theta + (matrix_e + 
+             rel_ref_state).transpose() *
+             matrix_M * matrix_theta).transpose();
+
+    cout << dis2obs_x << "  " << dis2obs_y << "  " << dis2obs_square << endl;
+
+    double obs_avoid_gain = 1.0;
+
+    if (dis2obs_square >= pow(0.6, 2.0)) {
+        obs_avoid_gain = 0.0;
+    } else if (dis2obs_square >= pow(dis2obs_min_, 2.0)) {
+        obs_avoid_gain =
+                1.0 - (dis2obs_square - dis2obs_min_) /
+                (pow(0.6, 2.0) - dis2obs_min_);
+    }
+
+    matrix_g_obs = matrix_g_obs * obs_avoid_gain;
+
+    matrix_h_obs = matrix_h_obs * obs_avoid_gain;
 }
 
 void PlanningMPC::CalObjectiveFunc(
@@ -635,10 +655,10 @@ void PlanningMPC::CalObjectiveFunc(
     MatrixXd matrix_h_obs, matrix_g_obs;
     CalObsCostFunc(matrix_h_obs, matrix_g_obs, matrix_phi, matrix_theta);
 
-    /* matrix_h += matrix_h_obs;
-    matrix_g += matrix_g_obs; */
+    matrix_h += matrix_h_obs;
+    matrix_g += matrix_g_obs;
 
-    static int gate = 0;
+    /* static int gate = 0;
     if (gate % 40 == 0) {
         cout << " x: " << sensor_info_planner_.x
              << " y: " << sensor_info_planner_.y << endl << endl;
@@ -655,7 +675,7 @@ void PlanningMPC::CalObjectiveFunc(
         cout << "matrix_h_obs:" << endl << matrix_h_obs
              << endl << endl << endl;
     }
-    gate++;
+    gate++; */
 }
 
 void PlanningMPC::CalConstraintConditions(
@@ -1128,4 +1148,91 @@ void PlanningMPC::CalPredictForwardCommand()
 double PlanningMPC::GetRunningTimeAverage()
 {
     return running_time_average_;
+}
+
+void PlanningMPC::CalRefState(MatrixXd &rel_ref_state)
+{
+    int size_ref_traj = local_traj_points_.size();
+
+    double time_predict = sensor_info_planner_.t;
+
+    double x_ref, y_ref;
+
+    MatrixXd ref_state(np_ * nx_, 1);
+
+    for (int i = 0; i < np_; i++) {
+        vector<double> relative_time;
+        vector<double> fabs_relative_time;
+
+        for (int i = 0; i < size_ref_traj; i++) {
+            double delta_t, fabs_delta_t;
+
+            delta_t = time_predict - local_traj_points_.at(i).t_ref;
+            fabs_delta_t = -1.0 * fabs(delta_t);
+
+            relative_time.push_back(delta_t);
+            fabs_relative_time.push_back(fabs_delta_t);
+        }
+
+        vector<double>::iterator biggest =
+                max_element(begin(fabs_relative_time),
+                            end(fabs_relative_time));
+
+        int ref_point_index;
+
+        ref_point_index = distance(begin(fabs_relative_time), biggest);
+
+        if (relative_time.at(ref_point_index) <= 0.0) {
+            ref_point_index = ref_point_index - 1;
+
+            if(ref_point_index == -1) {
+                ref_point_index = 0;
+            }
+        } else {
+            ref_point_index = ref_point_index;
+
+            if (ref_point_index == (size_ref_traj - 1)) {
+                ref_point_index = size_ref_traj - 2;
+            }
+        }
+
+        double dis1, dis2, dis_total;
+
+        dis1 = fabs_relative_time.at(ref_point_index);
+        dis2 = fabs_relative_time.at(ref_point_index + 1);
+
+        dis_total = dis1 + dis2;
+
+        // Todo: 精细求解
+        x_ref =
+                ( local_traj_points_.at(ref_point_index).x_ref * dis2 +
+                local_traj_points_.at(ref_point_index + 1).x_ref * dis1 ) /
+                dis_total;
+        y_ref =
+                ( local_traj_points_.at(ref_point_index).y_ref * dis2 +
+                local_traj_points_.at(ref_point_index + 1).y_ref * dis1 ) /
+                dis_total;
+
+        time_predict += predict_step_;
+
+        int ind = i * nx_;
+        ref_state(ind)     = x_ref;
+        ref_state(ind + 1) = y_ref;
+        ref_state(ind + 2) = 0.0;
+        ref_state(ind + 3) = 0.0;
+    }
+
+    rel_ref_state(0) = 0.0;
+    rel_ref_state(1) = 0.0;
+    rel_ref_state(2) = 0.0;
+    rel_ref_state(3) = 0.0;
+
+    for (int i = 1; i < np_; i++) {
+        int ind = i * nx_;
+
+        rel_ref_state(ind)     = ref_state(ind) - ref_state(ind - 4);
+        rel_ref_state(ind + 1) = ref_state(ind + 1) - ref_state(ind - 3);
+        rel_ref_state(ind + 2) = 0.0;
+        rel_ref_state(ind + 3) = 0.0;
+    }
 }

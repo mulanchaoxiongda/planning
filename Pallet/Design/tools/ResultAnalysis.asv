@@ -30,13 +30,13 @@ RefTrajPlan_Index   = 1;
 GoalState_Index     = 1;
 GlobalRefPoint_Index = 1;
 PlanCmd_Index       = 1;
-ObsInfo_Index = 1;
+ObsInfo_index = 1;
 
 RefTrajPlan_Ide   = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
 GoalState_Ide     = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
 GlobalRefPoint_Ide = "%s %s %f %s %f %s %f %s %f %s %f %s %f %s %f";
 PlanCmd_Ide       = "%s %s %f %s %f %s %f %s %f";
-ObsInfo_Ide = "%s %s %f %s %f %s %f";
+ObsInfo_Ide = "%s ";
 
 %% Searching Info: Tracking && Planning
 i = 0;
@@ -108,13 +108,6 @@ while ~feof(fid)
         data = textscan(t1 , PlanCmd_Ide);
         PlanCmd(PlanCmd_Index, (1 : 6)) = data(1, (4 : 9));
         PlanCmd_Index = PlanCmd_Index + 1;
-    end
-    
-    id_MOTOR = strfind(t1, '[obs_info]');
-    if ~isempty(id_MOTOR)
-        data = textscan(t1 , ObsInfo_Ide);
-        ObsInfo(ObsInfo_Index, (1 : 4)) = data(1, (4 : 7));
-        ObsInfo_Index = ObsInfo_Index + 1;
     end
 end
 
@@ -336,7 +329,6 @@ title('曲率'); legend('规划');
 figure('name','trajectory planning');
 plot(  cell2mat(RefPoi(:, 2)), cell2mat(RefPoi(:, 4)), 'green', ...        %% 近似局部轨迹
          cell2mat(StaRob(:, 2)), cell2mat(StaRob(:, 4)), 'b', ...
-         cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'blacko', ...
-         cell2mat(ObsInfo(:, 2)), cell2mat(ObsInfo(:, 4)), 'red*'); grid on;
+         cell2mat(GoalState(:, 2)), cell2mat(GoalState(:, 4)), 'blacko'); grid on;
 xlabel('横向位置(米)'); ylabel('纵向位置(米)'); set(gca, 'FontSize', 16); axis equal;
-title('运动轨迹'); legend('规划', '反馈', '托盘位置','最近障碍物');
+title('运动轨迹'); legend('规划', '反馈', '托盘位置');
