@@ -30,7 +30,7 @@ PlanningMPC::PlanningMPC(RobotModel *p_robot_model, SaveData *p_savedata):
 {
     start_gate_ = false;
 
-    weak_planning_num_ = 3;
+    weak_planning_num_ = 1;
 
     call_cycle_ = 0.1;
 
@@ -556,7 +556,7 @@ void PlanningMPC::CalObsCostFunc(
 
     double k, v;
 
-    k = 0.2;
+    k = 1.0;
     v = sensor_info_planner_.v;
     if (v >= 0.0 && v < 0.05) {
         v = 0.05;
@@ -615,21 +615,21 @@ void PlanningMPC::CalObsCostFunc(
              rel_ref_state).transpose() *
              matrix_M * matrix_theta).transpose();
 
-    cout << dis2obs_x << "  " << dis2obs_y << "  " << dis2obs_square << endl;
+    /* cout << dis2obs_x << "  " << dis2obs_y << "  " << dis2obs_square << endl; */
 
     double obs_avoid_gain = 1.0;
 
-    if (dis2obs_square >= pow(0.6, 2.0)) {
+    if (dis2obs_square >= pow(200.0, 2.0)) {
         obs_avoid_gain = 0.0;
     } else if (dis2obs_square >= pow(dis2obs_min_, 2.0)) {
         obs_avoid_gain =
                 1.0 - (dis2obs_square - dis2obs_min_) /
-                (pow(0.6, 2.0) - dis2obs_min_);
+                (pow(2.0, 2.0) - dis2obs_min_);
     }
 
-    matrix_g_obs = matrix_g_obs * obs_avoid_gain;
+    matrix_g_obs = matrix_g_obs * obs_avoid_gain * 1.0;
 
-    matrix_h_obs = matrix_h_obs * obs_avoid_gain;
+    matrix_h_obs = matrix_h_obs * obs_avoid_gain * 1.0;
 }
 
 void PlanningMPC::CalObjectiveFunc(
@@ -961,6 +961,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 double simulation_step = predict_step_;
 
                 motion_state.v = motion_state.v + acceleration*simulation_step;
+                if (motion_state.v>0.25){motion_state.v=0.25;}
                 motion_state.w = 
                         motion_state.w + yaw_acceleration*simulation_step;
 
@@ -1017,6 +1018,7 @@ void PlanningMPC::UpdateReferenceTrajectory()
                 double simulation_step = predict_step_;
 
                 motion_state.v = motion_state.v + acceleration*simulation_step;
+                if (motion_state.v>0.25){motion_state.v=0.25;}
                 motion_state.w = 
                         motion_state.w + yaw_acceleration*simulation_step;
 
@@ -1160,6 +1162,8 @@ void PlanningMPC::CalRefState(MatrixXd &rel_ref_state)
 
     MatrixXd ref_state(np_ * nx_, 1);
 
+    int ref_point_index;
+
     for (int i = 0; i < np_; i++) {
         vector<double> relative_time;
         vector<double> fabs_relative_time;
@@ -1177,8 +1181,6 @@ void PlanningMPC::CalRefState(MatrixXd &rel_ref_state)
         vector<double>::iterator biggest =
                 max_element(begin(fabs_relative_time),
                             end(fabs_relative_time));
-
-        int ref_point_index;
 
         ref_point_index = distance(begin(fabs_relative_time), biggest);
 
@@ -1232,6 +1234,19 @@ void PlanningMPC::CalRefState(MatrixXd &rel_ref_state)
 
         rel_ref_state(ind)     = ref_state(ind) - ref_state(ind - 4);
         rel_ref_state(ind + 1) = ref_state(ind + 1) - ref_state(ind - 3);
+        rel_ref_state(ind + 2) = 0.0;
+        rel_ref_state(ind + 3) = 0.0;
+    }
+
+    for (int i = 1; i < np_; i++) {
+        int ind = i * nx_;
+
+        rel_ref_state(ind)     =
+                rel_ref_state(ind - nx_) + local_traj_points_.at(ref_point_index).v_ref *
+                cos(local_traj_points_.at(ref_point_index).yaw_ref) * 0.1;
+        rel_ref_state(ind + 1) =
+                rel_ref_state(ind - nx_ + 1) + local_traj_points_.at(ref_point_index).v_ref *
+                sin(local_traj_points_.at(ref_point_index).yaw_ref) * 0.1;
         rel_ref_state(ind + 2) = 0.0;
         rel_ref_state(ind + 3) = 0.0;
     }

@@ -35,7 +35,7 @@ PlanningLattice::PlanningLattice(
 
     min_init_parking_dis_ = 0.55;
 
-    weak_planning_num_ = 5;
+    weak_planning_num_ = 0;
 
     call_cycle_ = 0.02;
 

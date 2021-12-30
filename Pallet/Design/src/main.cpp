@@ -73,7 +73,7 @@ int main(int argc, char **argv)
         停车运动过程品质要求、规划算法调较等相关 */
         /* 目标点变化鲁棒性测试 */
         /* if (time >= 2.0) {
-             goal_state = {1.00, -0.15, 0.0/57.3, 0.0, 0.0/57.3};
+             goal_state = {-0.10, 3.0, 80.0/57.3, 0.0, 0.0/57.3};
         } */
 
         if (loop_counter % num_planning == 0) {
