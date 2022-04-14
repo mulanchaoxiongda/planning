@@ -45,7 +45,7 @@ class CurveSmoother {
         vector<double> pos_x_;
         vector<double> pos_y_;
         vector<double> pos_theta_;
-        queue<CurvePoints> smooth_line_; // deque
+        vector<CurvePoints> smooth_line_; // deque
 
         SaveData *p_savedata_; // debug
         RobotModel *p_RobotModel_; // debug
@@ -61,9 +61,10 @@ class QpSplineSmoother : public CurveSmoother {
 
     private:
         void CalSamplingPoints();
-        void CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f);
+        void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f);
         void CalEqualityConstraint(MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ);
         void CalInequalityConstraint(MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ);
+        void CalSmoothTraj(VectorXd& poly_coefficient);
         
         int  OptimizationSolver(VectorXd &optimal_solution, MatrixXd matrix_p, VectorXd vector_q, MatrixXd matrix_Ac, VectorXd vector_l, VectorXd vector_u, c_int max_iteration, c_float eps_abs);
         void MatrixToCCS(MatrixXd matrix_a, vector<c_float> *sm_x, c_int &sm_nnz, vector<c_int> *sm_i, vector<c_int> *sm_p);
@@ -93,8 +94,8 @@ class QpSplineSmoother : public CurveSmoother {
         double weight_jerk_y_ = 0.02;
         double weight_pos_y_  = 2000.0;
 
-        double max_pos_err_x_ = 0.02;
-        double max_pos_err_y_ = 0.02;
+        double max_pos_err_x_ = 0.01;
+        double max_pos_err_y_ = 0.01;
 
         int nums_fragments_ = len_line_ / len_fragment_;
         int nums_in_fragment_ = len_fragment_ / interval_sampling_;

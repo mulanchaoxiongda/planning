@@ -23,48 +23,96 @@ QpSplineSmoother::QpSplineSmoother(RobotModel* p_RobotModel, SaveData* p_savedat
     SetCurvePoints(test);
 };
 
-SmootherStatus QpSplineSmoother::GetSmoothCurve(vector<CurvePoints>& smooth_line_points) {    
+SmootherStatus QpSplineSmoother::GetSmoothCurve(vector<CurvePoints>& smooth_line_points) {
     CalSamplingPoints();
 
     MatrixXd matrix_h = MatrixXd::Zero(12 * nums_fragments_, 12 * nums_fragments_);
-    MatrixXd matrix_f = MatrixXd::Zero(12 * nums_fragments_, 1);
+    VectorXd matrix_f = MatrixXd::Zero(12 * nums_fragments_, 1);
     CalObjectiveFunc(matrix_h, matrix_f);
     
-    // for (int i = 0; i < 66; ++i) {
-    //     cout << matrix_h.block(i * 6, i * 6, 6, 6) << endl << endl << endl;
-    //     cout << matrix_f.block(i * 6, 0, 6, 1) << endl << endl << endl;
+    // for (int i = 0; i < matrix_h.rows() / 6; ++i) {
+    //     for (int j = 0; j < matrix_h.cols() / 12; ++j) {
+    //         cout << i << "  " << j << endl;
+    //         cout << matrix_h.block(i * 6, j * 12, 6, 12) << endl << endl;
+    //     }
+    // }
+
+    // for (int i = 0; i < matrix_h.rows() / 6; ++i) {
+    //     cout << i << endl;
+    //     cout << matrix_f.block(i * 6, 0, 6, 1) << endl << endl;
     // }
 
     MatrixXd matrix_a_equ = MatrixXd::Zero(6 + 6 * (nums_fragments_ - 1) + 6, 12 * nums_fragments_);
     MatrixXd matrix_b_equ = MatrixXd::Zero(6 + 6 * (nums_fragments_ - 1) + 6, 1);
     CalEqualityConstraint(matrix_a_equ, matrix_b_equ);
-    cout << matrix_a_equ << endl;
-
-    // MatrixXd matrix_a_inequ = MatrixXd::Zero((2 + 2) * (nums_fragments_ * nums_in_fragment_ - 1), 12 * nums_fragments_);
-    // MatrixXd matrix_b_inequ = MatrixXd::Zero((2 + 2) * (nums_fragments_ * nums_in_fragment_ - 1), 1);
-    // CalInequalityConstraint(matrix_a_inequ, matrix_b_inequ);
-
-    // VectorXd optimal_coefficient(nums_fragments_ * 12);
-
-    // c_int max_iteration = 200;
-    // c_float eps_abs = 0.01;
-
-    // MatrixXd matrix_a = MatrixXd::Zero(matrix_a_equ.rows() + matrix_a_inequ.rows(), matrix_a_equ.cols());
-    // matrix_a << matrix_a_inequ, matrix_a_equ;
-
-    // VectorXd vector_lb = VectorXd::Zero(matrix_b_equ.rows() + matrix_b_inequ.rows());
-    // VectorXd matrix_bl_inequ(matrix_b_inequ.rows());
-    // for (int i = 0; i < matrix_b_inequ.rows(); ++i) {
-    //     matrix_bl_inequ(i, 0) = -100000000.0;
-    // }
-    // vector_lb << matrix_bl_inequ, matrix_b_equ; // to do : optimize interface
     
-    // VectorXd vector_ub = VectorXd::Zero(matrix_b_equ.rows() + matrix_b_inequ.rows());
-    // VectorXd matrix_bu_inequ(matrix_b_inequ.rows());
-    // matrix_bu_inequ = matrix_b_inequ;
-    // vector_ub << matrix_bu_inequ, matrix_b_equ;
+    // for (int i = 0; i < matrix_a_equ.rows() / 6; ++i) {
+    //     for (int j = 0; j < matrix_a_equ.cols() / 12; ++j) {
+    //         cout << i * 6 + 1 << "   " << j * 12 + 1 << " : " << endl;
+    //         cout << matrix_a_equ.block(i * 6, j * 12, 6, 12) << endl << endl << endl << endl;
+    //     }
+    // }
+    // cout << matrix_b_equ << endl << endl;
 
-    // OptimizationSolver(optimal_coefficient, matrix_h, matrix_f, matrix_a, vector_lb, vector_ub, max_iteration, eps_abs);
+    MatrixXd matrix_a_inequ = MatrixXd::Zero((2 + 2) * (nums_fragments_ * nums_in_fragment_ - 1), 12 * nums_fragments_);
+    MatrixXd matrix_b_inequ = MatrixXd::Zero((2 + 2) * (nums_fragments_ * nums_in_fragment_ - 1), 1);
+    CalInequalityConstraint(matrix_a_inequ, matrix_b_inequ);
+    
+    // cout << matrix_a_inequ.rows() << endl;
+    // cout << matrix_a_inequ.cols() << endl;
+    // for (int i = 0; i < matrix_a_inequ.rows() / 6; ++i) {
+    //     for (int j = 0; j < matrix_a_inequ.cols() / 12; ++j) {
+    //         cout << i * 6 + 1 << "   " << j * 12 + 1 << " : " << endl;
+    //         cout << matrix_a_inequ.block(i * 6, j * 12, 6, 12) << endl << endl << endl << endl;
+    //     }
+    // }    
+    // cout << matrix_b_inequ << endl;
+    // cout << matrix_b_inequ.size() << endl;
+
+    VectorXd optimal_coefficient(nums_fragments_ * 12);
+
+    c_int max_iteration = 200;
+    c_float eps_abs = 0.001;
+
+    MatrixXd matrix_a = MatrixXd::Zero(matrix_a_equ.rows() + matrix_a_inequ.rows(), matrix_a_equ.cols());
+    matrix_a << matrix_a_inequ, matrix_a_equ;
+    
+    // cout << matrix_a.rows() << "  " << matrix_a.cols() << endl << endl;
+    // for (int i = 0; i < matrix_a.rows() / 6; ++i) {
+    //     for (int j = 0; j < matrix_a.cols() / 12; ++j) {
+    //         cout << i * 6 + 1 << "  " << j * 12 + 1 <<endl;
+    //         cout << matrix_a.block(i * 6, j * 12, 6, 12) << endl << endl;
+    //     }
+    // }
+
+    VectorXd vector_lb = VectorXd::Zero(matrix_b_equ.rows() + matrix_b_inequ.rows());
+    VectorXd matrix_bl_inequ(matrix_b_inequ.rows());
+    for (int i = 0; i < matrix_b_inequ.rows(); ++i) {
+        matrix_bl_inequ(i) = -10000000000.0;
+    }
+    vector_lb << matrix_bl_inequ, matrix_b_equ; // to do : optimize interface
+    
+    // for (int i = 0; i < vector_lb.size() / 6; ++i) {
+    //     cout << i * 6 + 1 << "  " << 1 << endl;
+    //     cout << vector_lb.block(i * 6, 0, 6, 1) << endl << endl << endl;
+    // }
+    
+    VectorXd vector_ub = VectorXd::Zero(matrix_b_equ.rows() + matrix_b_inequ.rows());
+    VectorXd matrix_bu_inequ(matrix_b_inequ.rows());
+    matrix_bu_inequ = matrix_b_inequ;
+    vector_ub << matrix_bu_inequ, matrix_b_equ;
+    
+    // for (int i = 0; i < vector_lb.size() / 6; ++i) {
+    //     cout << i * 6 + 1 << "  " << 1 << endl;
+    //     cout << vector_ub.block(i * 6, 0, 6, 1) << endl << endl << endl;
+    // }
+
+    OptimizationSolver(optimal_coefficient, matrix_h, matrix_f, matrix_a, vector_lb, vector_ub, max_iteration, eps_abs);
+    
+    // cout << optimal_coefficient.rows() << "   " << optimal_coefficient.cols() << endl << endl;
+    // cout << optimal_coefficient << endl;
+
+    CalSmoothTraj(optimal_coefficient);
 
     return SmootherStatus::success;
 }
@@ -100,7 +148,7 @@ void QpSplineSmoother::CalSamplingPoints() {
     }
 }
 
-void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f) {
+void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f) {
     double s = len_fragment_;
 
     for (int i = 0; i < nums_fragments_; ++i) {
@@ -115,7 +163,7 @@ void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f) 
                                             72.0 * pow(s, 2.0),   192.0 * pow(s, 3.0),   360.0 * pow(s, 4.0),
                                            120.0 * pow(s, 3.0),   360.0 * pow(s, 4.0),   720.0 * pow(s, 5.0);
 
-        MatrixXd matrix_h_pos(6, 6);
+        MatrixXd matrix_h_pos = MatrixXd::Zero(6, 6);
         matrix_h_pos << pow(s, 0.0),  pow(s, 1.0),  pow(s, 2.0),  pow(s, 3.0),  pow(s, 4.0),  pow(s, 5.0),
                         pow(s, 1.0),  pow(s, 2.0),  pow(s, 3.0),  pow(s, 4.0),  pow(s, 5.0),  pow(s, 6.0),
                         pow(s, 2.0),  pow(s, 3.0),  pow(s, 4.0),  pow(s, 5.0),  pow(s, 6.0),  pow(s, 7.0),
@@ -123,7 +171,7 @@ void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f) 
                         pow(s, 4.0),  pow(s, 5.0),  pow(s, 6.0),  pow(s, 7.0),  pow(s, 8.0),  pow(s, 9.0),
                         pow(s, 5.0),  pow(s, 6.0),  pow(s, 7.0),  pow(s, 8.0),  pow(s, 9.0),  pow(s, 10.0);
 
-        MatrixXd matrix_hx(6, 6), matrix_hy(6, 6);
+        MatrixXd matrix_hx = MatrixXd::Zero(6, 6), matrix_hy = MatrixXd::Zero(6, 6);
         matrix_hx = 
                 2.0 * (weight_acc_x_ * matrix_h_acc + 
                        weight_jerk_x_ * matrix_h_jerk + 
@@ -141,7 +189,7 @@ void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f) 
         idx = i * 12 + 0;
         matrix_h.block(idx, idx, 12, 12) = matrix_h_xy;
 
-        MatrixXd matrix_fx(6, 1), matrix_fy(6, 1), matrix_f_xy(6, 1);
+        MatrixXd matrix_fx = MatrixXd::Zero(6, 1), matrix_fy = MatrixXd::Zero(6, 1), matrix_f_xy = MatrixXd::Zero(6, 1);
         matrix_f_xy << 1, pow(s, 1.0), pow(s, 2.0), pow(s, 3.0), pow(s, 4.0), pow(s, 5.0);
         matrix_fx = -2.0 * sampling_points_.at((i + 1) * 5).x * weight_pos_x_ * matrix_f_xy;
         matrix_fy = -2.0 * sampling_points_.at((i + 1) * 5).y * weight_pos_y_ * matrix_f_xy;
@@ -149,6 +197,8 @@ void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, MatrixXd& matrix_f) 
         matrix_f.block(idx, 0, 6, 1) =  matrix_fx;
         matrix_f.block(idx + 6, 0, 6, 1) =  matrix_fy;
     }
+
+    matrix_h = (matrix_h + matrix_h.transpose()) * 0.5; // debug
 }
 
 void QpSplineSmoother::CalEqualityConstraint(MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ) {
@@ -206,7 +256,7 @@ void QpSplineSmoother::CalEqualityConstraint(MatrixXd& matrix_a_equ, MatrixXd& m
 
     matrix_b_equ.block(idx_row_end - 5, 0, 6, 1) << x_end, vx_end, ax_end, y_end, vy_end, ay_end;
 
-    MatrixXd matrix_a_x_continuity(3, 24), matrix_a_y_continuity(3, 24);
+    MatrixXd matrix_a_x_continuity = MatrixXd::Zero(3, 24), matrix_a_y_continuity = MatrixXd::Zero(3, 24);
 
     for (int i = 0; i < nums_fragments_ - 1; ++i) {
         s = len_fragment_;
@@ -214,31 +264,31 @@ void QpSplineSmoother::CalEqualityConstraint(MatrixXd& matrix_a_equ, MatrixXd& m
         matrix_a_x_continuity.block(0, 0, 3, 6) << 1.0,    s,     pow(s, 2.0),  pow(s, 3.0),        pow(s, 4.0),         pow(s, 5.0),
                                                   0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
                                                   0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
-        
+
         matrix_a_y_continuity.block(0, 6, 3, 6) << 1.0,    s,     pow(s, 2.0),  pow(s, 3.0),        pow(s, 4.0),         pow(s, 5.0),
-                                                  0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
-                                                  0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
+                                                   0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
+                                                   0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
         
         s = 0.0;
         
         matrix_a_x_continuity.block(0, 12, 3, 6) << 1.0,    s,     pow(s, 2.0),  pow(s, 3.0),        pow(s, 4.0),         pow(s, 5.0),
-                                                   0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
-                                                   0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
+                                                    0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
+                                                    0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
         matrix_a_x_continuity.block(0, 12, 3, 6) = -1.0 * matrix_a_x_continuity.block(0, 12, 3, 6);
 
         matrix_a_y_continuity.block(0, 18, 3, 6) << 1.0,    s,     pow(s, 2.0),  pow(s, 3.0),        pow(s, 4.0),         pow(s, 5.0),
-                                                   0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
-                                                   0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
+                                                    0.0,    1.0,   2.0 * s,      3.0 * pow(s, 2.0),  4.0 * pow(s, 3.0),   5.0 * pow(s, 4.0),
+                                                    0.0,    0.0,   2.0,          6.0 * s,            12.0 * pow(s, 2.0),  20.0 * pow(s, 3.0);
         matrix_a_y_continuity.block(0, 18, 3, 6) = -1.0 * matrix_a_y_continuity.block(0, 18, 3, 6);
 
-        int idx_row = 6 * i, idx_col = 12 * i;
+        int idx_row = 6 * (i + 1), idx_col = 12 * i;
         matrix_a_equ.block(idx_row, idx_col, 3, 24) = matrix_a_x_continuity;
         matrix_a_equ.block(idx_row + 3, idx_col, 3, 24) = matrix_a_y_continuity;
     }
 }
 
 void QpSplineSmoother::CalInequalityConstraint(MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ) {
-    MatrixXd matrix_ax_inequ(2, 12), matrix_ay_inequ(2, 12);
+    MatrixXd matrix_ax_inequ = MatrixXd::Zero(2, 12), matrix_ay_inequ = MatrixXd::Zero(2, 12);
 
     double s = 0;
     
@@ -251,31 +301,31 @@ void QpSplineSmoother::CalInequalityConstraint(MatrixXd& matrix_a_inequ, MatrixX
             matrix_ax_inequ.setZero(2, 12);
             matrix_ay_inequ.setZero(2, 12);
 
-            s = j / nums_in_fragment_ * len_fragment_;
+            s = double(j + 1) / nums_in_fragment_ * len_fragment_;
 
-            matrix_ax_inequ.block(0, 0, 0, 5) << 1.0,  s,  pow(s, 2.0), pow(s, 3.0), pow(s, 4.0), pow(s, 5.0);
-            matrix_ax_inequ.block(1, 1, 0, 5) = -1.0 * matrix_ax_inequ.block(0, 0, 0, 5);
+            matrix_ax_inequ.block(0, 0, 1, 6) << 1.0,  s,  pow(s, 2.0), pow(s, 3.0), pow(s, 4.0), pow(s, 5.0);
+            matrix_ax_inequ.block(1, 0, 1, 6) = -1.0 * matrix_ax_inequ.block(0, 0, 1, 6);
 
-            matrix_ay_inequ.block(0, 0, 6, 11) << 1.0,  s,  pow(s, 2.0), pow(s, 3.0), pow(s, 4.0), pow(s, 5.0);
-            matrix_ay_inequ.block(1, 1, 6, 11) = -1.0 * matrix_ax_inequ.block(0, 0, 0, 5);
+            matrix_ay_inequ.block(0, 6, 1, 6) << 1.0,  s,  pow(s, 2.0), pow(s, 3.0), pow(s, 4.0), pow(s, 5.0);
+            matrix_ay_inequ.block(1, 6, 1, 6) = -1.0 * matrix_ax_inequ.block(0, 0, 1, 6);
 
             int idx_row, idx_col;
-            idx_row = nums_in_fragment_ * (2 + 2) * (i - 1) + (2 + 2) * (j - 1);
-            idx_col = 12 * (i - 1);
+            idx_row = nums_in_fragment_ * (2 + 2) * i + (2 + 2) * j;
+            idx_col = 12 * i;
 
-            matrix_a_inequ.block(idx_row, idx_col, idx_row + 1, idx_col + 11) = matrix_ax_inequ;
-            matrix_a_inequ.block(idx_row + 2, idx_col, idx_row + 3, idx_col + 11) = matrix_ay_inequ;
+            matrix_a_inequ.block(idx_row, idx_col, 2, 12) = matrix_ax_inequ;
+            matrix_a_inequ.block(idx_row + 2, idx_col, 2, 12) = matrix_ay_inequ;
 
-            int idx_ref_point = nums_in_fragment_ * (i - 1) + j;
+            int idx_ref_point = nums_in_fragment_ * i + j + 1;
             double x_ref = sampling_points_.at(idx_ref_point).x;
             double y_ref = sampling_points_.at(idx_ref_point).y;
 
-            MatrixXd matrix_bx_inequ(2, 1), matrix_by_inequ(2, 1);
-            matrix_bx_inequ << x_ref + max_pos_err_x_, x_ref - max_pos_err_x_;
-            matrix_by_inequ << y_ref + max_pos_err_y_, y_ref - max_pos_err_y_;
+            MatrixXd matrix_bx_inequ = MatrixXd::Zero(2, 1), matrix_by_inequ = MatrixXd::Zero(2, 1);
+            matrix_bx_inequ << x_ref + max_pos_err_x_, -x_ref + max_pos_err_x_;
+            matrix_by_inequ << y_ref + max_pos_err_y_, -y_ref + max_pos_err_y_;
 
-            matrix_b_inequ.block(idx_row, 0, idx_row + 1, 0) = matrix_bx_inequ;
-            matrix_b_inequ.block(idx_row + 2, 0, idx_row + 3, 0) = matrix_by_inequ;
+            matrix_b_inequ.block(idx_row, 0, 2, 1) = matrix_bx_inequ;
+            matrix_b_inequ.block(idx_row + 2, 0, 2, 1) = matrix_by_inequ;
         }
     }
 }
@@ -524,4 +574,35 @@ void QpSplineSmoother::Txt2Vector(vector<CurvePoints>& res, string pathname)
     }
 
     read_file.close();
+}
+
+void QpSplineSmoother::CalSmoothTraj(VectorXd& poly_coefficient) {
+    vector<double> poly_coef(12, 0);
+    double s = 0.0, x, y;
+
+    smooth_line_.clear(); // debug
+
+    for (int i = 0; i < nums_fragments_; ++i) {
+        for (int j = 0; j < 12; ++j) {
+            poly_coef[j] = poly_coefficient[i * 12 + j];
+        }
+
+        if (i != 0) {
+            s = interval_sampling_;
+        }
+
+        while (s < len_fragment_ + 0.001) {
+            x = poly_coef[0] + poly_coef[1] * s + poly_coef[2] * pow(s, 2.0) + poly_coef[3] * pow(s, 3.0) + poly_coef[4] * pow(s, 4.0) + poly_coef[5] * pow(s, 5.0);
+            y = poly_coef[6] + poly_coef[7] * s + poly_coef[8] * pow(s, 2.0) + poly_coef[9] * pow(s, 3.0) + poly_coef[10] * pow(s, 4.0) + poly_coef[11] * pow(s, 5.0);
+
+            smooth_line_.push_back({x, y, s}); // debug
+
+            s += interval_sampling_;
+        }
+    }
+    
+    cout << endl << endl;
+    for (int i = 0; i < smooth_line_.size(); ++i) {
+        cout << smooth_line_[i].x << "  " << smooth_line_[i].y << "  " << smooth_line_[i].theta << endl;
+    }
 }
