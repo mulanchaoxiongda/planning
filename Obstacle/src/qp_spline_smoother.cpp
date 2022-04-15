@@ -160,10 +160,15 @@ void QpSplineSmoother::Reset() {
 };
 
 void QpSplineSmoother::CalSamplingPoints() {
+    accumulative_length_.clear();
+    pos_x_.clear();
+    pos_y_.clear();
+    pos_theta_.clear();
+
     int num_points = curve_points_.size();
     LocalTrajPoints sampling_strating_point;
 
-    vector<double> dis_robot2points(num_points, -1.0);
+    vector<double> dis_robot2points(num_points, -1.0); // todo : 参考线平滑不需要考虑s-l系匹配点奇异性 && 路径平滑需要考虑s-l系匹配点奇异性
     vector<double> vec_point2robot(2, 0.0);
 
     for (int i = 0; i < num_points; ++i) {
@@ -216,11 +221,12 @@ void QpSplineSmoother::CalSamplingPoints() {
     }
 
     double len = 0.0, min_margin = 0.001;
+    int idx_init = 0;
     double len_line = len_line_ + min_margin, len_max = floor(s) + min_margin;
     while (len <= len_line && len <= len_max) {
-        double x = InterpLinear(accumulative_length_, pos_x_, len);
-        double y = InterpLinear(accumulative_length_, pos_y_, len);
-        double theta = InterpLinear(accumulative_length_, pos_theta_, len);
+        double x = QuickInterpLinear(accumulative_length_, pos_x_, len, idx_init);
+        double y = QuickInterpLinear(accumulative_length_, pos_y_, len, idx_init);
+        double theta = QuickInterpLinear(accumulative_length_, pos_theta_, len, idx_init);
 
         sampling_points_.push_back({x, y, theta, len});
 
@@ -653,6 +659,36 @@ double QpSplineSmoother::InterpLinear(
     return y_result;
 }
 
+double QpSplineSmoother::QuickInterpLinear(
+        vector<double>& x, vector<double>& y, double x0, int& idx_init)
+{
+    long unsigned int i = x.size() - 1;
+    long unsigned int j;
+
+    if (x0 < x.at(idx_init)) {
+        x0 = x.at(idx_init) + 0.0001;
+    }
+    else if (x0 > x.at(i)) {
+        x0 = x.at(i) - 0.0001;
+    }
+
+    for (j = idx_init; j < i; j++) {
+        double temp = (x0 - x.at(j)) * (x0 - x.at(j + 1));
+
+        if (temp <= 0.0) {
+            break;
+        }
+    }
+
+    double y_result =
+            y.at(j) + (x0 - x.at(j)) * (y.at(j + 1) -
+            y.at(j)) / (x.at(j + 1) - x.at(j));
+
+    idx_init = j;
+
+    return y_result;
+}
+
 void QpSplineSmoother::Txt2Vector(vector<CurvePoints>& res, string pathname)
 {
     string string_;
@@ -804,7 +840,7 @@ void QpSplineSmoother::SaveLog() {
     }
 
     for (int i = 0; i < nums_smooth_points; ++i) {
-        //cout << smooth_line_[i].x << "  " << smooth_line_[i].y << "  " << smooth_line_[i].theta << endl; // debug
+        // cout << smooth_line_[i].x << "  " << smooth_line_[i].y << "  " << smooth_line_[i].theta << endl; // debug
 
         p_savedata_->file << " [smooth_line_points] "
                           << " x "               << smooth_line_[i].x

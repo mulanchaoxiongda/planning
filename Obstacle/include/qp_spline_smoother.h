@@ -113,6 +113,7 @@ class QpSplineSmoother : public CurveSmoother {
         }
 
         double InterpLinear(vector<double>& x, vector<double>& y, double x0);
+        double QuickInterpLinear(vector<double>& x, vector<double>& y, double x0, int& idx_init);
         double Norm(const vector<double> & x);
         double VecDotMultip(const vector<double> &x, const vector<double> &y);
 
@@ -151,7 +152,7 @@ class QpSplineSmoother : public CurveSmoother {
         double running_time_ = 0.0;
 };
 
-// todo : 画图  容器优化
+// todo : 画图
 
 // experience_01 : 处理Frenet系局部路径转Global系局部路径奇异性，构思以下三种方案：
 //                 [方案一] 机器人转弯半径小，为了防止障碍物映射到s-l坐标系时在内弧侧出现奇异性，参考线必须平滑路径全长，l不超出内弧半径范围；
