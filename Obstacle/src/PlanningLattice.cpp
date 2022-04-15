@@ -76,7 +76,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
         if (distance_agv2goal_ < min_relative_dis_) {
-            cout << "[INFO] agv is too near to goal point!" << endl;
+            cout << "[info] agv is too near to goal point!" << endl;
 
             return result;
         }
@@ -173,7 +173,7 @@ ControlCommand PlanningLattice::CalRefTrajectory(
                 pow(goal_state_.y - sensor_info_planner_.y, 2.0), 0.5);
 
         if (distance_agv2goal_ < min_relative_dis_) {
-            /* cout << "[INFO] agv is too near to goal point!  "
+            /* cout << "[info] agv is too near to goal point!  "
                  << " t: " << sensor_info_planner_.t
                  << " x: " << sensor_info_planner_.x
                  << " y: " << sensor_info_planner_.y << endl; */
@@ -301,7 +301,7 @@ void PlanningLattice::ReadInGoalTraj()
     }
 
     read_file.close();
-    cout << "[INFO] read in reference local trajectory points successfully !"
+    cout << "[info] read in reference local trajectory points successfully !"
          << endl;
 }
 

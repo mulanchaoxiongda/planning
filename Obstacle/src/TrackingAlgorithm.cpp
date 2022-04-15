@@ -66,7 +66,7 @@ void TrackingAlgorithm::ReadInTrajPoints()
     }
 
     read_file.close();
-    cout << "[INFO] read in reference trajectory points successfully !" << endl;
+    cout << "[info] read in reference trajectory points successfully !" << endl;
 }
 
 void TrackingAlgorithm::ReadInTrajPoints(vector<TrajPoint> local_traj_points)

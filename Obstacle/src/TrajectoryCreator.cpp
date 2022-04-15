@@ -73,5 +73,5 @@ void TrajectoryCreator::TrajCreator()
                                            << trajectory_point.t_ref   << endl;
     }
 
-    cout << "[INFO] creat trajectory successfully !" << endl;
+    cout << "[info] creat trajectory successfully !" << endl;
 }
