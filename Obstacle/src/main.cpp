@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     PlanningMPC planning_mpc(&robot_model, &save_result);
 
     QpSplineSmoother qp_spline_smoother(&save_result);
-    vector<LocalTrajPoints> test_line; // debug
+    deque<LocalTrajPoints> test_line; // debug
     RobotPose test_pose = {0.0, 0.0, 0.0};
     qp_spline_smoother.GetSmoothCurve(test_line, test_pose);
 

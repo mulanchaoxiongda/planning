@@ -5,7 +5,7 @@ CurveSmoother::CurveSmoother(SaveData* p_savedata) {
     p_savedata_ = p_savedata;
 }
 
-bool CurveSmoother::SetCurvePoints(const vector<CurvePoints>& curve_points) {
+bool CurveSmoother::SetCurvePoints(const deque<CurvePoints>& curve_points) {
     if (curve_points.empty()) {
         cout << "[error] there is no global path received!" << endl;
         return false;
@@ -22,13 +22,13 @@ void CurveSmoother::SetRobotPose(RobotPose& pose) {
 
 QpSplineSmoother::QpSplineSmoother(
         SaveData* p_savedata) : CurveSmoother(p_savedata) {
-    vector<CurvePoints> test; // debug
+    deque<CurvePoints> test; // debug
     Txt2Vector(test, "../data/RoutingLine.txt");
     SetCurvePoints(test);
 };
 
-SmootherStatus QpSplineSmoother::GetSmoothCurve( // todo : 业务逻辑优化
-        vector<LocalTrajPoints>& smooth_line_points, RobotPose& pose) {
+SmootherStatus QpSplineSmoother::GetSmoothCurve(
+        deque<LocalTrajPoints>& smooth_line_points, RobotPose& pose) {
     SetRobotPose(pose); // debug
 
     struct timeval t_start, t_end; // debug
@@ -46,6 +46,16 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve( // todo : 业务逻辑优化
         SaveLog();
 
         return SmootherStatus::fail_no_global_path;
+    }
+
+    if (smoother_state_ == SmootherState::finished) {
+        return SmootherStatus::finish;
+    }
+
+    SmootherParaCfg();
+
+    if (smoother_state_ == SmootherState::waiting) {
+        return SmootherStatus::wait;
     }
 
     CalSamplingPoints();
@@ -99,13 +109,8 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve( // todo : 业务逻辑优化
     if (exitflag != 0) { // 二次规划求解失败，则输出上一帧规划路径smooth_line_/ 上层下发的全局路径curve_points_，并上报warning / fail
         if (smooth_line_.empty()) {
             for (auto point : curve_points_) {
-                LocalTrajPoints local_point;
-                local_point.x = point.x;
-                local_point.y = point.y;
-                local_point.theta = point.theta;
-                local_point.kappa = point.kappa;
-
-                smooth_line_.push_back(local_point);
+                smooth_line_.push_back({point.x, point.y, point.theta,
+                                        point.kappa, 0.0});
             }
         }
 
@@ -151,12 +156,19 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve( // todo : 业务逻辑优化
     return SmootherStatus::success;
 }
 
-void QpSplineSmoother::Reset() {
+void QpSplineSmoother::Reset() { // 每次规划任务前均需要重置配置
     times_osqp_failed_ = 0;
     max_pos_err_x_ = 0.02;
     max_pos_err_y_ = 0.02;
 
     times_smoothing_ =0;
+
+    smoother_state_ = SmootherState::init;
+
+    len_line_ = 6.0;
+    len_fragment_ = 1.0;
+    interval_sampling_ = 0.2;
+    interval_sample_ = 0.01;
 };
 
 void QpSplineSmoother::CalSamplingPoints() {
@@ -166,41 +178,6 @@ void QpSplineSmoother::CalSamplingPoints() {
     pos_theta_.clear();
 
     int num_points = curve_points_.size();
-    LocalTrajPoints sampling_strating_point;
-
-    vector<double> dis_robot2points(num_points, -1.0); // todo : 参考线平滑不需要考虑s-l系匹配点奇异性 && 路径平滑需要考虑s-l系匹配点奇异性
-    vector<double> vec_point2robot(2, 0.0);
-
-    for (int i = 0; i < num_points; ++i) {
-        vec_point2robot = {
-                robot_pose_.x - curve_points_[i].x,
-                robot_pose_.y - curve_points_[i].y };
-        dis_robot2points[i] = Norm(vec_point2robot);
-
-        if (i >= 1 && dis_robot2points[i] > dis_robot2points[i - 1]) {
-            int dis_margin = 5; // todo : 期望值0.5m
-
-            if (i <= dis_margin) {
-                cout << "[warning] global path is too short to cover robot's pose!" << endl;
-
-                sampling_strating_point.x = curve_points_[0].x;
-                sampling_strating_point.y = curve_points_[0].y;
-                sampling_strating_point.theta = curve_points_[0].theta;
-
-                sampling_strating_point.s = 0.0;
-            } else {
-                int idx = i - dis_margin;
-
-                sampling_strating_point.x = curve_points_[idx].x;
-                sampling_strating_point.y = curve_points_[idx].y;
-                sampling_strating_point.theta = curve_points_[idx].theta;
-
-                sampling_strating_point.s = 0.0;
-            }
-
-            break;
-        }
-    }
 
     double s = 0.0;
     accumulative_length_.push_back(s);
@@ -224,9 +201,12 @@ void QpSplineSmoother::CalSamplingPoints() {
     int idx_init = 0;
     double len_line = len_line_ + min_margin, len_max = floor(s) + min_margin;
     while (len <= len_line && len <= len_max) {
-        double x = QuickInterpLinear(accumulative_length_, pos_x_, len, idx_init);
-        double y = QuickInterpLinear(accumulative_length_, pos_y_, len, idx_init);
-        double theta = QuickInterpLinear(accumulative_length_, pos_theta_, len, idx_init);
+        double x =
+                QuickInterpLinear(accumulative_length_, pos_x_, len, idx_init);
+        double y =
+                QuickInterpLinear(accumulative_length_, pos_y_, len, idx_init);
+        double theta =
+                QuickInterpLinear(accumulative_length_, pos_theta_, len, idx_init);
 
         sampling_points_.push_back({x, y, theta, len});
 
@@ -689,7 +669,7 @@ double QpSplineSmoother::QuickInterpLinear(
     return y_result;
 }
 
-void QpSplineSmoother::Txt2Vector(vector<CurvePoints>& res, string pathname)
+void QpSplineSmoother::Txt2Vector(deque<CurvePoints>& res, string pathname)
 {
     string string_;
 
@@ -840,7 +820,7 @@ void QpSplineSmoother::SaveLog() {
     }
 
     for (int i = 0; i < nums_smooth_points; ++i) {
-        // cout << smooth_line_[i].x << "  " << smooth_line_[i].y << "  " << smooth_line_[i].theta << endl; // debug
+        cout << smooth_line_[i].x << "  " << smooth_line_[i].y << "  " << smooth_line_[i].theta << endl; // debug
 
         p_savedata_->file << " [smooth_line_points] "
                           << " x "               << smooth_line_[i].x
@@ -851,4 +831,131 @@ void QpSplineSmoother::SaveLog() {
                           << " times_smoothing " << times_smoothing_
                           << endl;
     }
+}
+
+void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增量求解2 / 4 m在线拼接，如果rel_s<10.0m,增量2m，如果遇到折线转弯，增量+2m，如果搜到终点，则根据距离调整采点参数
+    if (smoother_state_ == SmootherState::init) {
+        smoother_state_ = SmootherState::splicing;
+        
+        vector<double> pos_robot(2);
+        pos_robot = {robot_pose_.x, robot_pose_.y};
+
+        int idx = FindNearestPoint(pos_robot, curve_points_);
+        sample_start_point_.x = curve_points_[idx].x;
+        sample_start_point_.y = curve_points_[idx].y;
+        sample_start_point_.theta = curve_points_[idx].theta;
+        sample_start_point_.s = 0.0;
+
+        len_line_ = 6.0;
+    } else if (
+            smoother_state_ == SmootherState::splicing ||
+            smoother_state_ == SmootherState::waiting) {
+        if (smooth_line_.back().s - smooth_line_.front().s >= ub_line_len_) {
+            smoother_state_ = SmootherState::waiting;
+            return;
+        } else {
+            smoother_state_ = SmootherState::splicing;
+
+            sample_start_point_.x = smooth_line_.back().x;
+            sample_start_point_.y = smooth_line_.back().y;
+            sample_start_point_.theta = smooth_line_.back().theta;
+            sample_start_point_.s = smooth_line_.back().s;
+
+            len_line_ = 2.0;
+        }
+    } else if (smoother_state_ == SmootherState::finished) {
+        return;
+    }
+
+    double len_examine = len_line_ + 2.0, dis2goal = 0.0;;
+    vector<double> pos = {sample_start_point_.x, sample_start_point_.y};
+
+    if (GoalPointExamine(pos, len_examine, dis2goal)) {
+        len_line_ = dis2goal;
+        smoother_state_ = SmootherState::finished;
+
+        len_fragment_ = len_line_ / (int(len_line_) + 1);
+        interval_sampling_ = len_fragment_ / 5.0;
+        interval_sample_ = len_fragment_ / 100.0;
+
+        return;
+    }
+
+    if(QuarterTurnExamine(pos, len_examine)) {
+        len_line_ = len_examine;
+
+        len_fragment_ = 1.0;
+        interval_sampling_ = 0.2;
+        interval_sample_ = 0.01;
+    }
+}
+
+bool QpSplineSmoother::QuarterTurnExamine(vector<double>& point_pos,double len_examined) {
+    int idx = FindNearestPoint(point_pos, curve_points_);
+
+    double sum_s = 0.0, rel_theta = 0.0, max_turn_angle = 20.0 / 57.3;
+    vector<double> vec_adjacent_point(2, 0.0);
+
+    while (sum_s <= len_examined) {
+        vec_adjacent_point = {
+                curve_points_[idx + 1].x - curve_points_[idx].x,
+                curve_points_[idx + 1].y - curve_points_[idx].y };
+        sum_s += Norm(vec_adjacent_point);
+
+        idx++;
+
+        rel_theta =  curve_points_[idx + 1].theta - curve_points_[idx].theta;
+        if (fabs(rel_theta) >= max_turn_angle) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoints>& curve_points) {
+    int num_points = curve_points.size();
+
+    vector<double> rel_dis(num_points, -1.0);
+    vector<double> rel_vec(2, 0.0);
+
+    int i;
+    for (i = 0; i < num_points; ++i) {
+        rel_vec = {
+                position[0] - curve_points[i].x,
+                position[1] - curve_points[i].y };
+        rel_dis[i] = Norm(rel_vec);
+
+        if (i >= 1 && rel_dis[i] > rel_dis[i - 1]) {
+            return i - 1;
+        }
+    }
+
+    return -1;
+}
+
+bool QpSplineSmoother::GoalPointExamine(
+        vector<double>& point_pos,double len_examined, double& dis2goal) {
+    int idx_goal = curve_points_.size() - 1;
+
+    int idx = FindNearestPoint(point_pos, curve_points_);
+
+    double sum_s = 0.0;
+    vector<double> vec_adjacent_point(2, 0.0);
+
+    while (sum_s <= len_examined) {
+        vec_adjacent_point = {
+                curve_points_[idx + 1].x - curve_points_[idx].x,
+                curve_points_[idx + 1].y - curve_points_[idx].y };
+        sum_s += Norm(vec_adjacent_point);
+
+        idx++;
+        
+        if (idx == idx_goal) {
+            dis2goal = sum_s;
+            return true;
+        }
+    }
+
+    return false;;
 }

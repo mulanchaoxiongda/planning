@@ -43,10 +43,19 @@ struct SamplingPoints {
 
 typedef enum {
     success,
+    wait,
+    finish,
     warning_optimize,
     fail_optimize,
     fail_no_global_path
 } SmootherStatus;
+
+typedef enum {
+    init,
+    splicing,
+    waiting,
+    finished
+} SmootherState;
 
 class CurveSmoother {
     public:
@@ -54,9 +63,9 @@ class CurveSmoother {
         virtual ~CurveSmoother() {};
 
         virtual SmootherStatus GetSmoothCurve(
-                vector<LocalTrajPoints>& smooth_line_points, RobotPose& pose) = 0;
+                deque<LocalTrajPoints>& smooth_line_points, RobotPose& pose) = 0;
 
-        bool SetCurvePoints(const vector<CurvePoints>& curve_points);
+        bool SetCurvePoints(const deque<CurvePoints>& curve_points);
 
         virtual void Reset() = 0;
 
@@ -65,12 +74,12 @@ class CurveSmoother {
     protected:
         virtual void SaveLog() = 0;
 
-        vector<CurvePoints> curve_points_; // queue
+        deque<CurvePoints> curve_points_; // queue
         vector<double> accumulative_length_; // deque
         vector<double> pos_x_;
         vector<double> pos_y_;
         vector<double> pos_theta_;
-        vector<LocalTrajPoints> smooth_line_; // deque
+        deque<LocalTrajPoints> smooth_line_; // deque
 
         RobotPose robot_pose_;
 
@@ -83,12 +92,14 @@ class QpSplineSmoother : public CurveSmoother {
         virtual ~QpSplineSmoother() {};
 
         virtual SmootherStatus GetSmoothCurve(
-                vector<LocalTrajPoints>& smooth_line_points, RobotPose& pose);
+                deque<LocalTrajPoints>& smooth_line_points, RobotPose& pose);
 
         virtual void Reset();
 
     private:
+        void SmootherParaCfg();
         void CalSamplingPoints();
+        void CalSplicingPoint();
         void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f);
         void CalEqualityConstraint(
                 MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ);
@@ -117,14 +128,21 @@ class QpSplineSmoother : public CurveSmoother {
         double Norm(const vector<double> & x);
         double VecDotMultip(const vector<double> &x, const vector<double> &y);
 
+        bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
+        int FindNearestPoint(
+                vector<double> position, deque<CurvePoints>& curve_points);
+        bool GoalPointExamine(
+                vector<double>& point_pos,double len_examined, double& dis2goal);
+
         virtual void SaveLog();
 
-        void Txt2Vector(vector<CurvePoints>& res, string pathname); // debug
+        void Txt2Vector(deque<CurvePoints>& res, string pathname); // debug
 
         double len_line_ = 6.0;
         double len_fragment_ = 1.0;
         double interval_sampling_ = 0.2;
         double interval_sample_ = 0.01;
+        double ub_line_len_ = 10.0;
 
         vector<SamplingPoints> sampling_points_;
 
@@ -147,9 +165,13 @@ class QpSplineSmoother : public CurveSmoother {
         int times_osqp_failed_ = 0;
         int max_times_failed_ = 3;
 
-        int times_smoothing_ =0;
+        int times_smoothing_ = 0;
 
         double running_time_ = 0.0;
+
+        LocalTrajPoints sample_start_point_;
+
+        SmootherState smoother_state_ = init;
 };
 
 // todo : 画图
