@@ -95,6 +95,8 @@ class QpSplineSmoother : public CurveSmoother {
                 deque<LocalTrajPoints>& smooth_line_points, RobotPose& pose);
 
         virtual void Reset();
+        
+        void InfoShow();
 
     private:
         void SmootherParaCfg();
@@ -127,6 +129,7 @@ class QpSplineSmoother : public CurveSmoother {
         double QuickInterpLinear(vector<double>& x, vector<double>& y, double x0, int& idx_init);
         double Norm(const vector<double> & x);
         double VecDotMultip(const vector<double> &x, const vector<double> &y);
+        int Double2Int(double var) { return (int)(var + 0.5); }
 
         bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
         int FindNearestPoint(
@@ -156,8 +159,8 @@ class QpSplineSmoother : public CurveSmoother {
         double max_pos_err_x_ = 0.02;
         double max_pos_err_y_ = 0.02;
 
-        int nums_fragments_ = len_line_ / len_fragment_;
-        int nums_in_fragment_ = len_fragment_ / interval_sampling_;
+        int nums_fragments_ = Double2Int(len_line_ / len_fragment_);
+        int nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
 
         c_int osqp_max_iteration_ = 200;
         c_float osqp_eps_abs_ = 0.001;
@@ -174,9 +177,12 @@ class QpSplineSmoother : public CurveSmoother {
         SmootherState smoother_state_ = init;
 };
 
-// todo : 画图
+// todo : 画图 + 拼接剪裁 + s
+// todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
+// todo : review
+// todo : 分段加加速度优化架构
 
-// experience_01 : 处理Frenet系局部路径转Global系局部路径奇异性，构思以下三种方案：
+// experience_01 : 处理Frenet系局部路径转Global系局部路径奇异性，构思以下两种种方案：
 //                 [方案一] 机器人转弯半径小，为了防止障碍物映射到s-l坐标系时在内弧侧出现奇异性，参考线必须平滑路径全长，l不超出内弧半径范围；
 //                         算力优化：记录s-l系各采样基准点的(s_base_i, stheta_base_i)信息，以空间换时间；
 //                 [方案二] 参考线平滑只需要覆盖max_times_failed_ + 1帧对应的弧段即可，如果存在局部路径后端优化器，同样仅优化并输出max_times_failed_ + 1帧对应的弧段即可；
@@ -185,8 +191,7 @@ class QpSplineSmoother : public CurveSmoother {
 //                                  3.静态障碍物映射到global系(Hybrid Astar)，仅平滑局部路径即可；
 //                                  4.记录s-l系各采样基准点的(s_base_i, stheta_base_i)信息，以空间换时间，同时避免了求解优化后(s_i_opti, l_i_opti)点的s-l系基准点的奇异性问题；
 //                                  5.建议s-l系各采样点的l_i不超出相应基准点(s_base_i, 0)的内弧半径范围；
-// experience_02 : 增量平滑 + 拼接方案：选取上帧终点前置1m点作为拼接帧起点，平滑增量采样点后与上帧首尾截断后剩余弧线拼接
+// experience_02 : 增量平滑 + 拼接方案：选取上帧终点作为拼接帧起点，平滑增量采样点后与上帧首尾截断后剩余弧线拼接
 //                 [实现] 1.CalSamplingPoints()实现了首帧采点，可重载实现拼接帧采点；截断与拼接可通过重载或修改现有函数实现；
-//                       2.上帧终点前置1m作为拼接帧起点 + 末端大角度折线转弯时多平滑1m长度，两者结合保证折线转弯平滑路径品质。
+//                       2.上帧终点作为拼接帧起点 + 末端大角度折线转弯时多平滑2m长度，两者结合保证折线转弯平滑路径品质。
 // experience_03 : osqp warm_start
-// experience_04 : 1m * 6 用时6ms，暂不需要做算力优化

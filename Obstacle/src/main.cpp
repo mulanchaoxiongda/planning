@@ -45,6 +45,7 @@ int main(int argc, char **argv)
     deque<LocalTrajPoints> test_line; // debug
     RobotPose test_pose = {0.0, 0.0, 0.0};
     qp_spline_smoother.GetSmoothCurve(test_line, test_pose);
+    qp_spline_smoother.InfoShow();
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
 
