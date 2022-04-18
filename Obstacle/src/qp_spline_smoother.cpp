@@ -22,25 +22,46 @@ void CurveSmoother::SetRobotPose(RobotPose& pose) {
 
 QpSplineSmoother::QpSplineSmoother(
         SaveData* p_savedata) : CurveSmoother(p_savedata) {
-    deque<CurvePoints> test; // debug
-    Txt2Vector(test, "../data/RoutingLine.txt");
-    SetCurvePoints(test);
+    len_line_ = 6.0;
+    len_init_ = 6.0;
+    len_increment_ = 2.0;
+    len_fragment_ = 1.0;
+    interval_sampling_ = 0.2;
+    interval_sample_ = 0.01;
+    ub_line_len_ = 10.0;
+    nums_fragments_ = Double2Int(len_line_ / len_fragment_);
+    nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
+
+    weight_acc_x_  = 1.0;
+    weight_jerk_x_ = 1.0;
+    weight_pos_x_  = 2000.0;
+    weight_acc_y_  = 1.0;
+    weight_jerk_y_ = 1.0;
+    weight_pos_y_  = 2000.0;
+    max_pos_err_x_ = 0.04;
+    max_pos_err_y_ = 0.04;
+    max_pos_err_init_ = 0.04;
+    pos_err_incre_ = 0.02;
+
+    times_osqp_failed_ = 0;
+    max_times_failed_ = 3;
+    times_smoothing_ = 0;
+
+    smoother_state_ = SmootherState::init;
+
+    osqp_max_iteration_ = 200;
+    osqp_eps_abs_ = 0.001;
+
+    osqp_solver_exitflag_ = -1;
 };
 
 SmootherStatus QpSplineSmoother::GetSmoothCurve(
-        deque<LocalTrajPoints>& smooth_line_points, RobotPose& pose) {
-    SetRobotPose(pose); // debug
-
+        deque<LocalTrajPoints>& smooth_line_points) {
     struct timeval t_start, t_end; // debug
     gettimeofday(&t_start,NULL);
 
-    ++times_smoothing_;
-
     if (curve_points_.empty()) { // 没有接收到下发的全局路径，报错并下发上帧局部路径
         times_osqp_failed_ = 0;
-        max_pos_err_x_ = 0.02;
-        max_pos_err_y_ = 0.02;
-
         cout << "[error] there is no global path received!" << endl;
 
         SaveLog();
@@ -55,6 +76,7 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve(
     SmootherParaCfg();
 
     if (smoother_state_ == SmootherState::waiting) {
+        SaveLog();
         return SmootherStatus::wait;
     }
 
@@ -101,77 +123,62 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve(
     matrix_bu_inequ = matrix_b_inequ;
     vector_ub << matrix_bu_inequ, matrix_b_equ;
 
-    c_int exitflag =
+    osqp_solver_exitflag_ =
             OptimizationSolver(optimal_coefficient, matrix_h, matrix_f, matrix_a,
                                vector_lb, vector_ub, osqp_max_iteration_,
                                osqp_eps_abs_);
 
-    if (exitflag != 0) { // 二次规划求解失败，则输出上一帧规划路径smooth_line_/ 上层下发的全局路径curve_points_，并上报warning / fail
+    if (osqp_solver_exitflag_ != 0) { // 二次规划求解失败，则输出上一帧规划路径smooth_line_/ 上层下发的全局路径curve_points_，并上报warning / fail
         if (smooth_line_.empty()) {
             for (auto point : curve_points_) {
                 smooth_line_.push_back({point.x, point.y, point.theta,
-                                        point.kappa, 0.0});
+                                        point.kappa, 0.0}); // todo : theta kappa s OR 轻度平滑
             }
         }
 
         if (times_osqp_failed_ > max_times_failed_) { // osqp求解失败，报警并输出上帧局部路径；osqp连续3次求解失败，报错并输出上帧结果
-            times_osqp_failed_ = 0;
-            max_pos_err_x_ = 0.02;
-            max_pos_err_y_ = 0.02;
-            
             cout << "[error] global path is failed to be smoothed!" << endl;
-
             SaveLog();
 
             return SmootherStatus::fail_optimize;
         } else {
-            ++times_osqp_failed_;
-            max_pos_err_x_ += 0.01;
-            max_pos_err_y_ += 0.01;
             cout << "[warning] global path is failed to be smoothed : " 
                  << times_osqp_failed_ << " times!"
                  << endl;
-
             SaveLog();
 
             return SmootherStatus::warning_optimize;
         }
+    } else {
+        CalSmoothTraj(optimal_coefficient);
+
+        SaveLog();
+
+        gettimeofday(&t_end, NULL);
+        running_time_ =
+                (t_end.tv_sec - t_start.tv_sec) +
+                (double)(t_end.tv_usec - t_start.tv_usec) / 1000000.0;
+        cout << "[smoother] " << "qp_spline function running time : "
+                << running_time_ * 1000.0 << " ms." << endl;
+
+        return SmootherStatus::success;
     }
-    
-    CalSmoothTraj(optimal_coefficient);
-
-    times_osqp_failed_ = 0;
-    max_pos_err_x_ = 0.02;
-    max_pos_err_y_ = 0.02;
-
-    SaveLog();
-
-    gettimeofday(&t_end, NULL);
-    running_time_ =
-            (t_end.tv_sec - t_start.tv_sec) +
-            (double)(t_end.tv_usec - t_start.tv_usec) / 1000000.0;
-    cout << "[smoother] " << "qp_spline function running time : "
-         << running_time_ * 1000.0 << " ms." << endl;
-
-    return SmootherStatus::success;
 }
 
 void QpSplineSmoother::Reset() { // 每次规划任务前均需要重置配置
-    times_osqp_failed_ = 0;
-    max_pos_err_x_ = 0.02;
-    max_pos_err_y_ = 0.02;
-
-    times_smoothing_ =0;
-
-    smoother_state_ = SmootherState::init;
-
-    len_line_ = 6.0;
+    len_line_ = len_init_;
     len_fragment_ = 1.0;
     interval_sampling_ = 0.2;
     interval_sample_ = 0.01;
-
+    ub_line_len_ = 10.0;
     nums_fragments_ = Double2Int(len_line_ / len_fragment_);
     nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
+
+    times_osqp_failed_ = 0;
+    times_smoothing_ = 0;
+
+    smoother_state_ = SmootherState::init;
+    osqp_solver_exitflag_ = -1;
 };
 
 void QpSplineSmoother::CalSamplingPoints() {
@@ -432,7 +439,7 @@ void QpSplineSmoother::CalInequalityConstraint(
     }
 }
 
-int QpSplineSmoother::OptimizationSolver(
+c_int QpSplineSmoother::OptimizationSolver(
         VectorXd &optimal_solution, MatrixXd matrix_p, VectorXd vector_q, 
         MatrixXd matrix_Ac, VectorXd vector_l, VectorXd vector_u,
         c_int max_iteration, c_float eps_abs) {
@@ -694,6 +701,9 @@ void QpSplineSmoother::Txt2Vector(deque<CurvePoints>& res, string pathname)
 
             double data_;
             vector<double> temp;
+times_osqp_failed_ = 0;
+        max_pos_err_x_ = 0.02;
+        max_pos_err_y_ = 0.02;
 
             while (!is.eof()) {
                 is >> data_;
@@ -840,24 +850,28 @@ void QpSplineSmoother::SaveLog() {
 }
 
 void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增量求解2 / 4 m在线拼接，如果rel_s<10.0m,增量2m，如果遇到折线转弯，增量+2m，如果搜到终点，则根据距离调整采点参数
-    // return;
+    ++times_smoothing_;
 
     if (smoother_state_ == SmootherState::init) {
-        smoother_state_ = SmootherState::splicing;
-        
-        vector<double> pos_robot(2);
-        pos_robot = {robot_pose_.x, robot_pose_.y};
+        if (osqp_solver_exitflag_ == 0) {
+            smoother_state_ = SmootherState::splicing;
+        } else {
+            vector<double> pos_robot(2);
+            pos_robot = {robot_pose_.x, robot_pose_.y};
 
-        int idx = FindNearestPoint(pos_robot, curve_points_);
-        sample_start_point_.x = curve_points_[idx].x;
-        sample_start_point_.y = curve_points_[idx].y;
-        sample_start_point_.theta = curve_points_[idx].theta;
-        sample_start_point_.s = 0.0;
+            int idx = FindNearestPoint(pos_robot, curve_points_);
+            idx = (idx >= 1) ? idx - 1 : idx;
+            sample_start_point_.x = curve_points_[idx].x;
+            sample_start_point_.y = curve_points_[idx].y;
+            sample_start_point_.theta = curve_points_[idx].theta;
+            sample_start_point_.s = 0.0;
 
-        len_line_ = 6.0;
-    } else if (
-            smoother_state_ == SmootherState::splicing ||
-            smoother_state_ == SmootherState::waiting) {
+            len_line_ = len_init_;
+        }
+    }
+
+    if (smoother_state_ == SmootherState::splicing ||
+        smoother_state_ == SmootherState::waiting) {
         if (smooth_line_.back().s - smooth_line_.front().s >= ub_line_len_) {
             smoother_state_ = SmootherState::waiting;
             return;
@@ -869,22 +883,18 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
             sample_start_point_.theta = smooth_line_.back().theta;
             sample_start_point_.s = smooth_line_.back().s;
 
-            len_line_ = 2.0;
-
-            nums_fragments_ = Double2Int(len_line_ / len_fragment_);
-            nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
+            len_line_ = len_increment_;
         }
     } else if (smoother_state_ == SmootherState::finished) {
         return;
     }
 
-    double len_examine = len_line_ + 2.0, dis2goal = 0.0;;
+    double len_margin = 2.0;
+    double len_examine = len_line_ + len_margin, dis2goal = 0.0;;
     vector<double> pos = {sample_start_point_.x, sample_start_point_.y};
 
     if (GoalPointExamine(pos, len_examine, dis2goal)) {
         len_line_ = dis2goal;
-        smoother_state_ = SmootherState::finished;
-
         len_fragment_ = len_line_ / (int(len_line_) + 1);
         interval_sampling_ = len_fragment_ / 5.0;
         interval_sample_ = len_fragment_ / 100.0;
@@ -892,18 +902,28 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
         nums_fragments_ = Double2Int(len_line_ / len_fragment_);
         nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
 
+        smoother_state_ = SmootherState::finished;
         return;
     }
 
     if(QuarterTurnExamine(pos, len_examine)) {
         len_line_ = len_examine;
+    }
+    
+    nums_fragments_ = Double2Int(len_line_ / len_fragment_);
+    nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
 
-        len_fragment_ = 1.0;
-        interval_sampling_ = 0.2;
-        interval_sample_ = 0.01;
-
-        nums_fragments_ = Double2Int(len_line_ / len_fragment_);
-        nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
+    if (osqp_solver_exitflag_ != 0 && times_smoothing_ > 1) { // 二次规划求解失败
+        if (times_osqp_failed_ > max_times_failed_) {
+            return;
+        } else {
+            max_pos_err_x_ += pos_err_incre_;
+            max_pos_err_y_ += pos_err_incre_;
+        }
+    } else {
+        times_osqp_failed_ = 0;
+        max_pos_err_x_ = max_pos_err_init_;
+        max_pos_err_y_ = max_pos_err_init_;
     }
 }
 
