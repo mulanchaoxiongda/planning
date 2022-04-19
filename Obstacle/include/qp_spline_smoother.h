@@ -73,10 +73,6 @@ class CurveSmoother {
         virtual void SaveLog() = 0;
 
         deque<CurvePoints> curve_points_; // queue
-        vector<double> accumulative_length_; // deque
-        vector<double> pos_x_;
-        vector<double> pos_y_;
-        vector<double> pos_theta_;
         deque<LocalTrajPoints> smooth_line_; // deque
 
         RobotPose robot_pose_;
@@ -146,6 +142,8 @@ class QpSplineSmoother : public CurveSmoother {
         double ub_line_len_;
         int nums_fragments_;
         int nums_in_fragment_;
+
+        double max_turn_angle_;
 
         double weight_acc_x_;
         double weight_jerk_x_;
