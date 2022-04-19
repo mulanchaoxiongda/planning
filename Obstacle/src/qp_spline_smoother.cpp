@@ -161,7 +161,6 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve(
 }
 
 void QpSplineSmoother::Reset() { // 每次规划任务前均需要重置配置
-len_init_ = 8.0;
     len_line_ = len_init_;
     len_fragment_ = 1.0;
     interval_sampling_ = 0.2;
@@ -177,9 +176,15 @@ len_init_ = 8.0;
 
     smoother_state_ = SmootherState::init;
     osqp_solver_exitflag_ = -1;
+
+    curve_points_.clear();
+    sampling_points_.clear();
+    smooth_line_.clear();
 };
 
 void QpSplineSmoother::CalSamplingPoints() {
+    sampling_points_.clear();
+
     vector<double> accumulative_length;
     vector<double> pos_x;
     vector<double> pos_y;
@@ -187,42 +192,42 @@ void QpSplineSmoother::CalSamplingPoints() {
 
     int num_points = curve_points_.size();
 
-    double len = 0.0;
-    accumulative_length.push_back(len);
-    pos_x.push_back(curve_points_.at(0).x); // todo : 起点替换
-    pos_y.push_back(curve_points_.at(0).y);
-    pos_theta.push_back(curve_points_.at(0).theta);
+    double s = 0.0;
+    accumulative_length.push_back(s);
+    pos_x.push_back(sample_start_point_.x);
+    pos_y.push_back(sample_start_point_.y);
+    pos_theta.push_back(sample_start_point_.theta);
 
     double min_margin = 0.001, len_line = len_line_ + min_margin;
     for (int i = 1; i < num_points; ++i) {
         double rel_dis =
                 sqrt(pow(curve_points_.at(i).x - curve_points_.at(i - 1).x, 2.0) +
                      pow(curve_points_.at(i).y - curve_points_.at(i - 1).y, 2.0));
-        len += rel_dis;
+        s += rel_dis;
 
-        accumulative_length.push_back(len);
+        accumulative_length.push_back(s);
         pos_x.push_back(curve_points_.at(i).x);
         pos_y.push_back(curve_points_.at(i).y);
         pos_theta.push_back(curve_points_.at(i).theta);
 
-        if (len > len_line) {
+        if (s > len_line) {
             break;
         }
     }
 
-    len = 0.0;
+    s = 0.0;
     int idx_init = 0;
-    while (len <= len_line) {
+    while (s <= len_line) {
         double x =
-                QuickInterpLinear(accumulative_length, pos_x, len, idx_init);
+                QuickInterpLinear(accumulative_length, pos_x, s, idx_init);
         double y =
-                QuickInterpLinear(accumulative_length, pos_y, len, idx_init);
+                QuickInterpLinear(accumulative_length, pos_y, s, idx_init);
         double theta =
-                QuickInterpLinear(accumulative_length, pos_theta, len, idx_init);
+                QuickInterpLinear(accumulative_length, pos_theta, s, idx_init);
 
-        sampling_points_.push_back({x, y, theta, len});
+        sampling_points_.push_back({x, y, theta});
 
-        len += interval_sampling_;
+        s += interval_sampling_;
     }
 }
 
@@ -698,16 +703,13 @@ void QpSplineSmoother::Txt2Vector(deque<CurvePoints>& res, string pathname)
 
             double data_;
             vector<double> temp;
-times_osqp_failed_ = 0;
-        max_pos_err_x_ = 0.02;
-        max_pos_err_y_ = 0.02;
 
             while (!is.eof()) {
                 is >> data_;
                 temp.push_back(data_);
             }
 
-            res.push_back({temp[0], temp[1], temp[2]}); // todo : 添加曲率
+            res.push_back({temp[0], temp[1], temp[2]});
             temp.clear();
             string_.clear();
         }
@@ -719,16 +721,18 @@ times_osqp_failed_ = 0;
 void QpSplineSmoother::CalSmoothTraj(VectorXd& poly_coefficient) {
     double nums_coef = 12;
     vector<double> poly_coef(nums_coef, 0);
-    double s = 0.0, x, y, theta, kappa;
+    double s = 0.0, x, y, theta, kappa, s_accumulative;
     double dx, ddx, dy, ddy;
     double len_margin =0.001, len_fragment = len_fragment_ + len_margin;
+    
+    s_accumulative = (smooth_line_.empty()) ? 0.0 : smooth_line_.back().s;
 
     for (int i = 0; i < nums_fragments_; ++i) {
         for (int j = 0; j < nums_coef; ++j) {
             poly_coef[j] = poly_coefficient[i * nums_coef + j];
         }
 
-        if (i != 0) {
+        if (i != 0 || smoother_state_ != SmootherState::init) {
             s = interval_sample_;
         }
 
@@ -760,15 +764,30 @@ void QpSplineSmoother::CalSmoothTraj(VectorXd& poly_coefficient) {
                     12.0 * poly_coef[10] * pow(s, 2.0) +
                     20.0 * poly_coef[11] * pow(s, 3.0);
             
-            theta = atan2(dy, dx); // todo : 核对航向角与曲率
+            theta = atan2(dy, dx);
             kappa =
                     fabs(dx * ddy - dy * ddx) / pow(pow(dx, 2.0) +
                     pow(dy, 2.0), 1.5);
 
-            smooth_line_.push_back({x, y, theta, kappa, 0.0}); // todo : s求解
+            smooth_line_.push_back({x, y, theta, kappa, s_accumulative + s});
 
             s += interval_sample_;
         }
+
+        s_accumulative += s;
+    }
+
+    ShearCutTraj();
+}
+
+void QpSplineSmoother::ShearCutTraj() { // 剪切掉s-l系下，s值小于机器人当前位置的smooth_point点
+    vector<double> robot_pos = {robot_pose_.x, robot_pose_.y};
+
+    int idx_int = FindNearestPoint(robot_pos, smooth_line_);
+    idx_int = idx_int > 1 ? (idx_int -1) : idx_int;
+
+    for (int i = 0; i < idx_int; ++i) {
+        smooth_line_.pop_front();
     }
 }
 
@@ -807,8 +826,6 @@ void QpSplineSmoother::SaveLog() {
                           << " x "               << curve_points_[i].x
                           << " y "               << curve_points_[i].y
                           << " theta "           << curve_points_[i].theta
-                          << " kappa "           << 0.0
-                          << " s "               << 0.0
                           << " times_smoothing " << times_smoothing_
                           << endl;
     }
@@ -823,8 +840,6 @@ void QpSplineSmoother::SaveLog() {
                           << " x "               << sampling_points_[i].x
                           << " y "               << sampling_points_[i].y
                           << " theta "           << sampling_points_[i].theta
-                          << " kappa "           << 0.0
-                          << " s "               << sampling_points_[i].s
                           << " times_smoothing " << times_smoothing_
                           << endl;
     }
@@ -860,7 +875,6 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
             sample_start_point_.x = curve_points_[idx].x;
             sample_start_point_.y = curve_points_[idx].y;
             sample_start_point_.theta = curve_points_[idx].theta;
-            sample_start_point_.s = 0.0;
 
             len_line_ = len_init_;
         }
@@ -877,7 +891,6 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
             sample_start_point_.x = smooth_line_.back().x;
             sample_start_point_.y = smooth_line_.back().y;
             sample_start_point_.theta = smooth_line_.back().theta;
-            sample_start_point_.s = smooth_line_.back().s;
 
             len_line_ = len_increment_;
         }
@@ -968,6 +981,28 @@ int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoint
     return -1;
 }
 
+int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<LocalTrajPoints>& smooth_traj) {
+    int num_points = smooth_traj.size();
+
+    double dis, dis_pre;
+    vector<double> rel_vec(2, 0.0);
+
+    for (int i = 0; i < num_points; ++i) { // 忽略点在s-l系坐标的奇异性
+        rel_vec = {
+                position[0] - smooth_traj[i].x,
+                position[1] - smooth_traj[i].y };
+        dis = Norm(rel_vec);
+
+        if (i >= 1 && dis >= dis_pre) {
+            return i - 1;
+        }
+
+        dis_pre = dis;
+    }
+
+    return -1;
+}
+
 bool QpSplineSmoother::GoalPointExamine(
         vector<double>& point_pos,double len_examined, double& dis2goal) {
     int idx_goal = curve_points_.size() - 1;
@@ -1002,14 +1037,15 @@ void QpSplineSmoother::InfoShow() {
     //          << endl;;
     // }
 
-    // cout << "[InfoShow] " << " smooth_line_end "
-    //      << smooth_line_.back().x << "  "
-    //      << smooth_line_.back().y << endl;
+    cout << "[InfoShow] " << " smooth_line_end "
+         << smooth_line_.back().x << "  "
+         << smooth_line_.back().y << endl;
 
-    // for (int i = 0; i < smooth_line_.size(); ++i) {
+    // for (int i = 0; i < (int)smooth_line_.size(); ++i) {
     //     cout << "[InfoShow]" << " smooth_line_points "
-    //          << smooth_line_[i].x << "  "
+    //          << smooth_line_[i].x << "  " 
     //          << smooth_line_[i].y << "  "
+    //          << smooth_line_[i].s << "  "
     //          << endl;;
     // }
     

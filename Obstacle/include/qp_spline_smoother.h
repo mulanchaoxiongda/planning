@@ -21,7 +21,6 @@ struct CurvePoints {
     double x;
     double y;
     double theta;
-    double kappa;
 };
 
 struct LocalTrajPoints {
@@ -37,8 +36,6 @@ struct SamplingPoints {
     double x;
     double y;
     double theta;
-
-    double s;
 };
 
 typedef enum {
@@ -88,7 +85,7 @@ class QpSplineSmoother : public CurveSmoother {
         virtual SmootherStatus GetSmoothCurve(
                 deque<LocalTrajPoints>& smooth_line_points);
         virtual void Reset();
-        
+
         void InfoShow();
 
         void Txt2Vector(deque<CurvePoints>& res, string pathname); // debug
@@ -100,6 +97,8 @@ class QpSplineSmoother : public CurveSmoother {
         bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
         int  FindNearestPoint(
                 vector<double> position, deque<CurvePoints>& curve_points);
+        int  FindNearestPoint(
+                vector<double> position, deque<LocalTrajPoints>& smooth_traj);
         bool GoalPointExamine(
                 vector<double>& point_pos,double len_examined, double& dis2goal);
 
@@ -109,7 +108,8 @@ class QpSplineSmoother : public CurveSmoother {
         void CalInequalityConstraint(
                 MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ);
         void CalSmoothTraj(VectorXd& poly_coefficient);
-        
+        void ShearCutTraj();
+
         c_int OptimizationSolver(
                 VectorXd &optimal_solution, MatrixXd matrix_p,
                 VectorXd vector_q, MatrixXd matrix_Ac,
@@ -169,15 +169,12 @@ class QpSplineSmoother : public CurveSmoother {
         double running_time_;
 
         vector<SamplingPoints> sampling_points_;
-        LocalTrajPoints sample_start_point_;
+        SamplingPoints sample_start_point_;
 };
 
-// todo : 画图 + 拼接剪裁 + s
+// todo : 画图
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
-// todo : review
-// todo : 分段加加速度优化架构
-// todo : 折线转弯 放宽位置误差约束 增大平滑软约束权重
-// todo : clear traj
+// todo : 默认global_paht点列增序方向就是机器人期望行驶方向
 
 // experience_01 : 处理Frenet系局部路径转Global系局部路径奇异性，构思以下两种种方案：
 //                 [方案一] 机器人转弯半径小，为了防止障碍物映射到s-l坐标系时在内弧侧出现奇异性，参考线必须平滑路径全长，l不超出内弧半径范围；
@@ -192,6 +189,4 @@ class QpSplineSmoother : public CurveSmoother {
 //                 [实现] 1.CalSamplingPoints()实现了首帧采点，可重载实现拼接帧采点；截断与拼接可通过重载或修改现有函数实现；
 //                       2.上帧终点作为拼接帧起点 + 末端大角度折线转弯时多平滑2m长度，两者结合保证折线转弯平滑路径品质。
 // experience_03 : osqp warm_start
-// times_smoothing_
-// times_osqp_failed_
-// max_pos_err_x_
+// experience_04 : 折线转弯 放宽位置误差硬约束，依靠位置误差软约束提高位置拟合精度 增大平滑软约束权重
