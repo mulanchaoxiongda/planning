@@ -11,34 +11,34 @@
 using namespace std;
 using namespace Eigen;
 
-struct RobotPose {
+struct RobotPose { // 机器人位姿
     double x;
     double y;
     double yaw;
 };
 
-struct CurvePoint {
+struct CurvePoint { // 读入的粗糙轨迹信息
     double x;
     double y;
     double theta;
 };
 
-struct SmoothTrajPoint {
+struct SmoothTrajPoint { // 输出的平滑后轨迹信息
     double x;
     double y;
     double theta;
     double kappa;
 
-    double s; // 增量求解与拼接使用 && s-t速度规划使用
+    double s; // s-t速度规划使用
 };
 
-struct SamplingPoint {
+struct SamplingPoint { // 采点信息
     double x;
     double y;
     double theta;
 };
 
-typedef enum {
+typedef enum { // 对外输出的平滑器状态
     success,
     wait,
     finish,
@@ -47,32 +47,32 @@ typedef enum {
     fail_no_global_path
 } SmootherStatus;
 
-typedef enum {
+typedef enum { // 内部参数配置使用的平滑器状态
     init,
     splicing,
     waiting,
     finished
 } SmootherState;
 
-class CurveSmoother {
+class CurveSmoother { // 平滑器父类
     public:
         CurveSmoother(SaveData* p_savedata);
         virtual ~CurveSmoother() {};
 
-        virtual SmootherStatus GetSmoothCurve(
+        virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
                 deque<SmoothTrajPoint>& smooth_line_points) = 0;
         virtual void Reset() = 0;
 
-        bool SetCurvePoints(const deque<CurvePoint>& curve_points);
-        void SetRobotPose(RobotPose& pose);
+        bool SetCurvePoints(const deque<CurvePoint>& curve_points); // 写入粗糙轨迹点信息序列
+        void SetRobotPose(RobotPose& pose); // 写入机器人位姿信息
 
     protected:
-        virtual void SaveLog() = 0;
+        virtual void SaveLog() = 0; // 保存日志
 
-        deque<CurvePoint> curve_points_; // queue
-        deque<SmoothTrajPoint> smooth_line_; // deque
+        deque<CurvePoint> curve_points_; // 粗糙轨迹点信息序列
+        deque<SmoothTrajPoint> smooth_line_; // 平滑后轨迹点信息序列
 
-        RobotPose robot_pose_;
+        RobotPose robot_pose_; // 机器人位姿
 
         SaveData *p_savedata_; // debug
 };
@@ -82,11 +82,11 @@ class QpSplineSmoother : public CurveSmoother {
         QpSplineSmoother(SaveData* p_savedata);
         virtual ~QpSplineSmoother() {};
 
-        virtual SmootherStatus GetSmoothCurve( // 输出平滑轨迹点序列
+        virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
                 deque<SmoothTrajPoint>& smooth_line_points);
         virtual void Reset();
 
-        void PrintInfo();
+        void PrintInfo(); // 打印运行信息
 
         void Txt2Vector(deque<CurvePoint>& res, string pathname); // debug
 
@@ -170,6 +170,11 @@ class QpSplineSmoother : public CurveSmoother {
         vector<SamplingPoint> sampling_points_; // 采点序列
         SamplingPoint sample_start_point_; // 采点起始点
 };
+
+
+
+
+
 
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
 // todo : 默认global_paht点列增序方向就是机器人期望行驶方向
