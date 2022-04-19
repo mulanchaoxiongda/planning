@@ -5,7 +5,7 @@ CurveSmoother::CurveSmoother(SaveData* p_savedata) {
     p_savedata_ = p_savedata;
 }
 
-bool CurveSmoother::SetCurvePoints(const deque<CurvePoints>& curve_points) {
+bool CurveSmoother::SetCurvePoints(const deque<CurvePoint>& curve_points) {
     if (curve_points.empty()) {
         cout << "[error] there is no global path received!" << endl;
         return false;
@@ -58,7 +58,7 @@ QpSplineSmoother::QpSplineSmoother(
 };
 
 SmootherStatus QpSplineSmoother::GetSmoothCurve(
-        deque<LocalTrajPoints>& smooth_line_points) {
+        deque<SmoothTrajPoint>& smooth_line_points) {
     struct timeval t_start, t_end; // debug
     gettimeofday(&t_start,NULL);
 
@@ -686,7 +686,7 @@ double QpSplineSmoother::FastInterpLinear(
     return y_result;
 }
 
-void QpSplineSmoother::Txt2Vector(deque<CurvePoints>& res, string pathname)
+void QpSplineSmoother::Txt2Vector(deque<CurvePoint>& res, string pathname)
 {
     string string_;
 
@@ -959,7 +959,7 @@ bool QpSplineSmoother::QuarterTurnExamine(vector<double>& point_pos,double len_e
     return false;
 }
 
-int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoints>& curve_points) {
+int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoint>& curve_points) {
     int num_points = curve_points.size();
 
     double dis, dis_pre;
@@ -981,7 +981,7 @@ int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoint
     return -1;
 }
 
-int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<LocalTrajPoints>& smooth_traj) {
+int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<SmoothTrajPoint>& smooth_traj) {
     int num_points = smooth_traj.size();
 
     double dis, dis_pre;

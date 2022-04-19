@@ -17,13 +17,13 @@ struct RobotPose {
     double yaw;
 };
 
-struct CurvePoints {
+struct CurvePoint {
     double x;
     double y;
     double theta;
 };
 
-struct LocalTrajPoints {
+struct SmoothTrajPoint {
     double x;
     double y;
     double theta;
@@ -32,7 +32,7 @@ struct LocalTrajPoints {
     double s; // 增量求解与拼接使用 && s-t速度规划使用
 };
 
-struct SamplingPoints {
+struct SamplingPoint {
     double x;
     double y;
     double theta;
@@ -60,17 +60,17 @@ class CurveSmoother {
         virtual ~CurveSmoother() {};
 
         virtual SmootherStatus GetSmoothCurve(
-                deque<LocalTrajPoints>& smooth_line_points) = 0;
+                deque<SmoothTrajPoint>& smooth_line_points) = 0;
         virtual void Reset() = 0;
 
-        bool SetCurvePoints(const deque<CurvePoints>& curve_points);
+        bool SetCurvePoints(const deque<CurvePoint>& curve_points);
         void SetRobotPose(RobotPose& pose);
 
     protected:
         virtual void SaveLog() = 0;
 
-        deque<CurvePoints> curve_points_; // queue
-        deque<LocalTrajPoints> smooth_line_; // deque
+        deque<CurvePoint> curve_points_; // queue
+        deque<SmoothTrajPoint> smooth_line_; // deque
 
         RobotPose robot_pose_;
 
@@ -83,20 +83,20 @@ class QpSplineSmoother : public CurveSmoother {
         virtual ~QpSplineSmoother() {};
 
         virtual SmootherStatus GetSmoothCurve( // 输出平滑轨迹点序列
-                deque<LocalTrajPoints>& smooth_line_points);
+                deque<SmoothTrajPoint>& smooth_line_points);
         virtual void Reset();
 
         void PrintInfo();
 
-        void Txt2Vector(deque<CurvePoints>& res, string pathname); // debug
+        void Txt2Vector(deque<CurvePoint>& res, string pathname); // debug
 
     private:
         void SmootherParaCfg(); // 参数配置
         bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
         int  FindNearestPoint(
-                vector<double> position, deque<CurvePoints>& curve_points);
+                vector<double> position, deque<CurvePoint>& curve_points);
         int  FindNearestPoint(
-                vector<double> position, deque<LocalTrajPoints>& smooth_traj);
+                vector<double> position, deque<SmoothTrajPoint>& smooth_traj);
         bool GoalPointExamine(
                 vector<double>& point_pos,double len_examined, double& dis2goal);
 
@@ -167,8 +167,8 @@ class QpSplineSmoother : public CurveSmoother {
         
         double running_time_; // debug
 
-        vector<SamplingPoints> sampling_points_; // 采点序列
-        SamplingPoints sample_start_point_; // 采点起始点
+        vector<SamplingPoint> sampling_points_; // 采点序列
+        SamplingPoint sample_start_point_; // 采点起始点
 };
 
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
