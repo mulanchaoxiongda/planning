@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     RobotPose test_pose = {0.0, 0.0, 0.0};
     qp_spline_smoother.SetRobotPose(test_pose);
     qp_spline_smoother.GetSmoothCurve(test_line);
-    qp_spline_smoother.InfoShow();
+    qp_spline_smoother.PrintInfo();
 
     TrackingMPC tracking_mpc(&robot_model, &save_result);
 

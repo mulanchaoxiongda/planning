@@ -82,18 +82,16 @@ class QpSplineSmoother : public CurveSmoother {
         QpSplineSmoother(SaveData* p_savedata);
         virtual ~QpSplineSmoother() {};
 
-        virtual SmootherStatus GetSmoothCurve(
+        virtual SmootherStatus GetSmoothCurve( // 输出平滑轨迹点序列
                 deque<LocalTrajPoints>& smooth_line_points);
         virtual void Reset();
 
-        void InfoShow();
+        void PrintInfo();
 
         void Txt2Vector(deque<CurvePoints>& res, string pathname); // debug
 
     private:
-        void SmootherParaCfg();
-        void CalSamplingPoints();
-        void CalSplicingPoint();
+        void SmootherParaCfg(); // 参数配置
         bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
         int  FindNearestPoint(
                 vector<double> position, deque<CurvePoints>& curve_points);
@@ -102,15 +100,17 @@ class QpSplineSmoother : public CurveSmoother {
         bool GoalPointExamine(
                 vector<double>& point_pos,double len_examined, double& dis2goal);
 
-        void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f);
+        void CalSamplingPoints(); // 路径点序列增量求解、拼接与剪切
+        void ShearCutTraj();
+        
+        void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f); // 分段五次多项式拟合优化问题构建
         void CalEqualityConstraint(
                 MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ);
         void CalInequalityConstraint(
                 MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ);
         void CalSmoothTraj(VectorXd& poly_coefficient);
-        void ShearCutTraj();
 
-        c_int OptimizationSolver(
+        c_int OptimizationSolver( // 二次规划问题求解
                 VectorXd &optimal_solution, MatrixXd matrix_p,
                 VectorXd vector_q, MatrixXd matrix_Ac,
                 VectorXd vector_l, VectorXd vector_u,
@@ -125,15 +125,15 @@ class QpSplineSmoother : public CurveSmoother {
             return data;
         }
 
-        double InterpLinear(vector<double>& x, vector<double>& y, double x0);
-        double QuickInterpLinear(vector<double>& x, vector<double>& y, double x0, int& idx_init);
+        double InterpLinear(vector<double>& x, vector<double>& y, double x0); // 数学计算函数
+        double FastInterpLinear(vector<double>& x, vector<double>& y, double x0, int& idx_init);
         double Norm(const vector<double> & x);
         double VecDotMultip(const vector<double> &x, const vector<double> &y);
         int Double2Int(double var) { return (int)(var + 0.5); }
 
-        virtual void SaveLog();
+        virtual void SaveLog(); // 保存日志
 
-        double len_line_;
+        double len_line_; // 采点相关参数
         double len_init_;
         double len_increment_;
         double len_fragment_;
@@ -143,9 +143,9 @@ class QpSplineSmoother : public CurveSmoother {
         int nums_fragments_;
         int nums_in_fragment_;
 
-        double max_turn_angle_;
+        double max_turn_angle_; // 折线转弯判据
 
-        double weight_acc_x_;
+        double weight_acc_x_; // 二次规划软、硬约束相关参数
         double weight_jerk_x_;
         double weight_pos_x_;
         double weight_acc_y_;
@@ -156,23 +156,21 @@ class QpSplineSmoother : public CurveSmoother {
         double max_pos_err_init_;
         double pos_err_incre_;
 
+        SmootherState smoother_state_; // 平滑器状态相关参数
         int times_osqp_failed_;
         int max_times_failed_;
         int times_smoothing_;
 
-        SmootherState smoother_state_;
-        int osqp_solver_exitflag_;
-
+        int osqp_solver_exitflag_; // osqp求解器相关参数
         c_int osqp_max_iteration_;
         c_float osqp_eps_abs_;
         
-        double running_time_;
+        double running_time_; // debug
 
-        vector<SamplingPoints> sampling_points_;
-        SamplingPoints sample_start_point_;
+        vector<SamplingPoints> sampling_points_; // 采点序列
+        SamplingPoints sample_start_point_; // 采点起始点
 };
 
-// todo : 画图
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
 // todo : 默认global_paht点列增序方向就是机器人期望行驶方向
 

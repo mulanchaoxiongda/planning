@@ -219,11 +219,11 @@ void QpSplineSmoother::CalSamplingPoints() {
     int idx_init = 0;
     while (s <= len_line) {
         double x =
-                QuickInterpLinear(accumulative_length, pos_x, s, idx_init);
+                FastInterpLinear(accumulative_length, pos_x, s, idx_init);
         double y =
-                QuickInterpLinear(accumulative_length, pos_y, s, idx_init);
+                FastInterpLinear(accumulative_length, pos_y, s, idx_init);
         double theta =
-                QuickInterpLinear(accumulative_length, pos_theta, s, idx_init);
+                FastInterpLinear(accumulative_length, pos_theta, s, idx_init);
 
         sampling_points_.push_back({x, y, theta});
 
@@ -656,7 +656,7 @@ double QpSplineSmoother::InterpLinear(
     return y_result;
 }
 
-double QpSplineSmoother::QuickInterpLinear(
+double QpSplineSmoother::FastInterpLinear(
         vector<double>& x, vector<double>& y, double x0, int& idx_init)
 {
     long unsigned int i = x.size() - 1;
@@ -1029,30 +1029,32 @@ bool QpSplineSmoother::GoalPointExamine(
     return false;;
 }
 
-void QpSplineSmoother::InfoShow() {
-    // for (int i = 0; i < sampling_points_.size(); ++i) {
-    //     cout << "[InfoShow]" << " sampling_points "
-    //          << sampling_points_[i].x << "  "
-    //          << sampling_points_[i].y << "  "
-    //          << endl;;
-    // }
+void QpSplineSmoother::PrintInfo() {
+    return;
+    
+    for (int i = 0; i < (int)sampling_points_.size(); ++i) {
+        cout << "[PrintInfo]" << " sampling_points "
+             << sampling_points_[i].x << "  "
+             << sampling_points_[i].y << "  "
+             << endl;;
+    }
 
-    cout << "[InfoShow] " << " smooth_line_end "
+    cout << "[PrintInfo] " << " smooth_line_end "
          << smooth_line_.back().x << "  "
          << smooth_line_.back().y << endl;
 
-    // for (int i = 0; i < (int)smooth_line_.size(); ++i) {
-    //     cout << "[InfoShow]" << " smooth_line_points "
-    //          << smooth_line_[i].x << "  " 
-    //          << smooth_line_[i].y << "  "
-    //          << smooth_line_[i].s << "  "
-    //          << endl;;
-    // }
-    
-    // cout << "[InfoShow] " << " para "
-    //      << smoother_state_ - interval_sampling_ << "  "
-    //      << ub_line_len_ << "  "
-    //      << len_line_ << "  "
-    //      << interval_sampling_ << "  "
-    //      << len_fragment_ << endl;
+    for (int i = 0; i < (int)smooth_line_.size(); ++i) {
+        cout << "[PrintInfo]" << " smooth_line_points "
+             << smooth_line_[i].x << "  " 
+             << smooth_line_[i].y << "  "
+             << smooth_line_[i].s << "  "
+             << endl;;
+    }
+
+    cout << "[PrintInfo] " << " para "
+         << smoother_state_ - interval_sampling_ << "  "
+         << ub_line_len_ << "  "
+         << len_line_ << "  "
+         << interval_sampling_ << "  "
+         << len_fragment_ << endl;
 }
