@@ -16,7 +16,7 @@ bool CurveSmoother::SetCurvePoints(const deque<CurvePoint>& curve_points) {
     return true;
 }
 
-void CurveSmoother::SetRobotPose(RobotPose& pose) {
+void CurveSmoother::SetRobotPose(const RobotPose& pose) {
     robot_pose_ = pose;
 }
 
@@ -58,7 +58,7 @@ QpSplineSmoother::QpSplineSmoother(
 };
 
 SmootherStatus QpSplineSmoother::GetSmoothCurve(
-        deque<SmoothTrajPoint>& smooth_line_points) {
+        deque<SmoothLinePoint>& smooth_line_points) {
     struct timeval t_start, t_end; // debug
     gettimeofday(&t_start,NULL);
 
@@ -231,7 +231,8 @@ void QpSplineSmoother::CalSamplingPoints() {
     }
 }
 
-void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f) {
+void QpSplineSmoother::CalObjectiveFunc(
+    MatrixXd& matrix_h, VectorXd& matrix_f) const {
     double s = len_fragment_;
 
     for (int i = 0; i < nums_fragments_; ++i) {
@@ -294,7 +295,7 @@ void QpSplineSmoother::CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f) 
 }
 
 void QpSplineSmoother::CalEqualityConstraint(
-        MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ) {
+        MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ) const {
     double s = 0.0;
 
     MatrixXd matrix_ax_start = MatrixXd::Zero(3, 12);
@@ -392,7 +393,7 @@ void QpSplineSmoother::CalEqualityConstraint(
 }
 
 void QpSplineSmoother::CalInequalityConstraint(
-        MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ) {
+        MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ) const {
     MatrixXd matrix_ax_inequ = MatrixXd::Zero(2, 12),
              matrix_ay_inequ = MatrixXd::Zero(2, 12);
 
@@ -629,8 +630,7 @@ void QpSplineSmoother::MatrixToCCS(
 }
 
 double QpSplineSmoother::InterpLinear(
-        vector<double>& x, vector<double>& y, double x0)
-{
+        const vector<double>& x, const vector<double>& y, double x0) const {
     long unsigned int i = x.size() - 1;
     long unsigned int j;
 
@@ -657,8 +657,8 @@ double QpSplineSmoother::InterpLinear(
 }
 
 double QpSplineSmoother::FastInterpLinear(
-        vector<double>& x, vector<double>& y, double x0, int& idx_init)
-{
+        const vector<double>& x, const vector<double>& y,
+        double x0, int& idx_init) const {
     long unsigned int i = x.size() - 1;
     long unsigned int j;
 
@@ -686,8 +686,8 @@ double QpSplineSmoother::FastInterpLinear(
     return y_result;
 }
 
-void QpSplineSmoother::Txt2Vector(deque<CurvePoint>& res, string pathname)
-{
+void QpSplineSmoother::Txt2Vector(
+        deque<CurvePoint>& res, const string& pathname) {
     string string_;
 
     ifstream read_file;
@@ -718,7 +718,7 @@ void QpSplineSmoother::Txt2Vector(deque<CurvePoint>& res, string pathname)
     read_file.close();
 }
 
-void QpSplineSmoother::CalSmoothTraj(VectorXd& poly_coefficient) {
+void QpSplineSmoother::CalSmoothTraj(const VectorXd& poly_coefficient) {
     double nums_coef = 12;
     vector<double> poly_coef(nums_coef, 0);
     double s = 0.0, x, y, theta, kappa, s_accumulative;
@@ -791,8 +791,7 @@ void QpSplineSmoother::ShearCutTraj() { // 剪切掉s-l系下，s值小于机器
     }
 }
 
-double QpSplineSmoother::Norm(const vector<double> &x)
-{
+double QpSplineSmoother::Norm(const vector<double> &x) const {
     double val = 0.0;
 
     for (auto elem: x) {
@@ -802,8 +801,8 @@ double QpSplineSmoother::Norm(const vector<double> &x)
     return sqrt(val);
 }
 
-double QpSplineSmoother::VecDotMultip(const vector<double> &x, const vector<double> &y)
-{
+double QpSplineSmoother::VecDotMultip(
+        const vector<double> &x, const vector<double> &y) const {
     assert(x.size() == y.size());
 
     double sum = 0.0;
@@ -936,7 +935,8 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
     }
 }
 
-bool QpSplineSmoother::QuarterTurnExamine(vector<double>& point_pos,double len_examined) {
+bool QpSplineSmoother::QuarterTurnExamine(
+        const vector<double>& point_pos, const double& len_examined) {
     int idx = FindNearestPoint(point_pos, curve_points_);
 
     double sum_s = 0.0, rel_theta = 0.0;
@@ -959,7 +959,8 @@ bool QpSplineSmoother::QuarterTurnExamine(vector<double>& point_pos,double len_e
     return false;
 }
 
-int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoint>& curve_points) {
+int QpSplineSmoother::FindNearestPoint(
+        const vector<double>& position, const deque<CurvePoint>& curve_points) {
     int num_points = curve_points.size();
 
     double dis, dis_pre;
@@ -981,7 +982,9 @@ int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<CurvePoint
     return -1;
 }
 
-int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<SmoothTrajPoint>& smooth_traj) {
+int QpSplineSmoother::FindNearestPoint(
+        const vector<double>& position,
+        const deque<SmoothLinePoint>& smooth_traj) {
     int num_points = smooth_traj.size();
 
     double dis, dis_pre;
@@ -1004,7 +1007,8 @@ int QpSplineSmoother::FindNearestPoint(vector<double> position, deque<SmoothTraj
 }
 
 bool QpSplineSmoother::GoalPointExamine(
-        vector<double>& point_pos,double len_examined, double& dis2goal) {
+        const vector<double>& point_pos, const double& len_examined,
+        double& dis2goal) {
     int idx_goal = curve_points_.size() - 1;
 
     int idx = FindNearestPoint(point_pos, curve_points_) + 1;
@@ -1029,7 +1033,7 @@ bool QpSplineSmoother::GoalPointExamine(
     return false;;
 }
 
-void QpSplineSmoother::PrintInfo() {
+void QpSplineSmoother::PrintInfo() const {
     return;
     
     for (int i = 0; i < (int)sampling_points_.size(); ++i) {

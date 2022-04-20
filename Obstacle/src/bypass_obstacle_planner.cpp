@@ -2,6 +2,6 @@
 
 #include "bypass_obstacle_planner.h"
 
-void BypassObstaclePlanner::SetAGVPose(const PoseInfo& pos) {
+void BypassObstaclePlanner::SetRobotPose(const RobotPose& pos) {
       pose_ = pos;
 }

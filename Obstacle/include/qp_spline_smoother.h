@@ -23,7 +23,7 @@ struct CurvePoint { // 读入的粗糙轨迹信息
     double theta;
 };
 
-struct SmoothTrajPoint { // 输出的平滑后轨迹信息
+struct SmoothLinePoint { // 输出的平滑后轨迹信息
     double x;
     double y;
     double theta;
@@ -60,17 +60,17 @@ class CurveSmoother { // 平滑器父类
         virtual ~CurveSmoother() {};
 
         virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
-                deque<SmoothTrajPoint>& smooth_line_points) = 0;
+                deque<SmoothLinePoint>& smooth_line_points) = 0;
         virtual void Reset() = 0;
 
         bool SetCurvePoints(const deque<CurvePoint>& curve_points); // 写入粗糙轨迹点信息序列
-        void SetRobotPose(RobotPose& pose); // 写入机器人位姿信息
+        void SetRobotPose(const RobotPose& pose); // 写入机器人位姿信息
 
     protected:
         virtual void SaveLog() = 0; // 保存日志
 
         deque<CurvePoint> curve_points_; // 粗糙轨迹点信息序列
-        deque<SmoothTrajPoint> smooth_line_; // 平滑后轨迹点信息序列
+        deque<SmoothLinePoint> smooth_line_; // 平滑后轨迹点信息序列
 
         RobotPose robot_pose_; // 机器人位姿
 
@@ -79,36 +79,39 @@ class CurveSmoother { // 平滑器父类
 
 class QpSplineSmoother : public CurveSmoother {
     public:
+        QpSplineSmoother() = delete;
         QpSplineSmoother(SaveData* p_savedata);
-        virtual ~QpSplineSmoother() {};
+        virtual ~QpSplineSmoother() = default;
 
         virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
-                deque<SmoothTrajPoint>& smooth_line_points);
+                deque<SmoothLinePoint>& smooth_line_points);
         virtual void Reset();
 
-        void PrintInfo(); // 打印运行信息
+        void PrintInfo() const; // 打印运行信息
 
-        void Txt2Vector(deque<CurvePoint>& res, string pathname); // debug
+        void Txt2Vector(deque<CurvePoint>& res, const string& pathname); // debug
 
     private:
         void SmootherParaCfg(); // 参数配置
-        bool QuarterTurnExamine(vector<double>& point_pos,double len_examined);
+        bool QuarterTurnExamine(
+                const vector<double>& point_pos, const double& len_examined);
         int  FindNearestPoint(
-                vector<double> position, deque<CurvePoint>& curve_points);
+                const vector<double>& position, const deque<CurvePoint>& curve_points);
         int  FindNearestPoint(
-                vector<double> position, deque<SmoothTrajPoint>& smooth_traj);
+                const vector<double>& position, const deque<SmoothLinePoint>& smooth_traj);
         bool GoalPointExamine(
-                vector<double>& point_pos,double len_examined, double& dis2goal);
+                const vector<double>& point_pos, const double& len_examined,
+                double& dis2goal);
 
         void CalSamplingPoints(); // 路径点序列增量求解、拼接与剪切
         void ShearCutTraj();
         
-        void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f); // 分段五次多项式拟合优化问题构建
+        void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f) const; // 分段五次多项式拟合优化问题构建
         void CalEqualityConstraint(
-                MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ);
+                MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ) const;
         void CalInequalityConstraint(
-                MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ);
-        void CalSmoothTraj(VectorXd& poly_coefficient);
+                MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ) const;
+        void CalSmoothTraj(const VectorXd& poly_coefficient);
 
         c_int OptimizationSolver( // 二次规划问题求解
                 VectorXd &optimal_solution, MatrixXd matrix_p,
@@ -125,10 +128,12 @@ class QpSplineSmoother : public CurveSmoother {
             return data;
         }
 
-        double InterpLinear(vector<double>& x, vector<double>& y, double x0); // 数学计算函数
-        double FastInterpLinear(vector<double>& x, vector<double>& y, double x0, int& idx_init);
-        double Norm(const vector<double> & x);
-        double VecDotMultip(const vector<double> &x, const vector<double> &y);
+        double InterpLinear( // 数学计算函数
+                const vector<double>& x, const vector<double>& y, double x0) const;
+        double FastInterpLinear(
+                const vector<double>& x, const vector<double>& y, double x0, int& idx_init) const;
+        double Norm(const vector<double> & x) const;
+        double VecDotMultip(const vector<double> &x, const vector<double> &y) const;
         int Double2Int(double var) { return (int)(var + 0.5); }
 
         virtual void SaveLog(); // 保存日志
@@ -167,7 +172,7 @@ class QpSplineSmoother : public CurveSmoother {
         
         double running_time_; // debug
 
-        vector<SamplingPoint> sampling_points_; // 采点序列
+        vector<SamplingPoint> sampling_points_; // 采点信息序列
         SamplingPoint sample_start_point_; // 采点起始点
 };
 
@@ -175,7 +180,7 @@ class QpSplineSmoother : public CurveSmoother {
 
 
 
-
+// todo : 画图
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
 // todo : 默认global_paht点列增序方向就是机器人期望行驶方向
 

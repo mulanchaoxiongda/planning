@@ -1,5 +1,6 @@
 #pragma once
 
+#include <deque>
 #include <vector>
 #include <eigen3/Eigen/Eigen>
 
@@ -8,11 +9,29 @@
 
 using namespace std;
 
-struct PoseInfo {
+struct RobotPose {
     double x;
     double y;
 
     double theta;
+};
+
+struct SmoothLinePoint {
+    double x;
+    double y;
+    double theta;
+    double kappa;
+
+    double s; // s-t速度规划使用
+};
+
+struct LocalPathPoint {
+    double x;
+    double y;
+    double theta;
+    double kappa;
+
+    double s;
 };
 
 typedef enum {
@@ -20,15 +39,24 @@ typedef enum {
       run_out_of_time,
       no_path_find,
       unknown_err
-} PlanStatus;
+} PlannerStatus;
+
+typedef enum {
+    init,
+    splicing,
+    waiting,
+    finished
+} PlannerState;
 
 class BypassObstaclePlanner {
       public:
       BypassObstaclePlanner() {};
       virtual ~BypassObstaclePlanner() {};
 
-      void SetAGVPose(const PoseInfo& pos); // void SetCurrentPose(const NaviPose &pos);
+      virtual PlannerStatus GetLocalPath(deque<LocalPathPoint>& local_path_) = 0;
+
+      void SetRobotPose(const RobotPose& pos);
 
       private:
-      PoseInfo pose_;
+      RobotPose pose_;
 };
