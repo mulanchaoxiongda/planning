@@ -11,7 +11,7 @@
 #include "PlanningMPC.h"
 #include "PlanningLattice.h"
 #include "TrajectoryCreator.h"
-#include "qp_spline_smoother.h"
+#include "bypass_obstacle_planner.h"
 
 using namespace std;
 
@@ -40,18 +40,32 @@ int main(int argc, char **argv)
     PlanningLattice planning_lattice(&robot_model, &save_result);
 
     PlanningMPC planning_mpc(&robot_model, &save_result);
+/////////////////////////////////////////////////////////////////////////////////////////
+//     QpSplineSmoother qp_spline_smoother(&save_result);
+    
+//     deque<CurvePoint> test; // debug
+//     qp_spline_smoother.Txt2Vector(test, "../data/RoutingLine.txt");
+//     qp_spline_smoother.SetCurvePoints(test);
 
+//     RobotPose test_pose = {0.0, 0.0, 0.0};
+//     qp_spline_smoother.SetRobotPose(test_pose);
+     
+//     deque<SmoothLinePoint> test_line; // debug
+//     qp_spline_smoother.GetSmoothLine(test_line);
+    
     QpSplineSmoother qp_spline_smoother(&save_result);
-    deque<CurvePoint> test; // debug
-    qp_spline_smoother.Txt2Vector(test, "../data/RoutingLine.txt");
-    qp_spline_smoother.SetCurvePoints(test);
+    PiecewiseJerkPathOptimization piecewise_jerk_path_optimization(&save_result);
+    
+    deque<CurvePoint> curve_points;
+    qp_spline_smoother.Txt2Vector(curve_points, "../data/RoutingLine.txt");
+    piecewise_jerk_path_optimization.SetCurvePoints(curve_points);
 
-    deque<SmoothLinePoint> test_line; // debug
-    RobotPose test_pose = {0.0, 0.0, 0.0};
-    qp_spline_smoother.SetRobotPose(test_pose);
-    qp_spline_smoother.GetSmoothCurve(test_line);
-    qp_spline_smoother.PrintInfo();
+    RobotPose robot_pose = {0.0, 0.0, 0.0};
+    piecewise_jerk_path_optimization.SetRobotPose(robot_pose);
 
+    deque<LocalPathPoint> local_path;
+    piecewise_jerk_path_optimization.GetLocalPath(local_path);
+//////////////////////////////////////////////////////////////////////////////////
     TrackingMPC tracking_mpc(&robot_model, &save_result);
 
     ControlCommand control_command = {motion_state.v, motion_state.w, 0.0};

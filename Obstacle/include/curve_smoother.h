@@ -59,7 +59,7 @@ class CurveSmoother { // 平滑器父类
         CurveSmoother(SaveData* p_savedata);
         virtual ~CurveSmoother() {};
 
-        virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
+        virtual SmootherStatus GetSmoothLine( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
                 deque<SmoothLinePoint>& smooth_line_points) = 0;
         virtual void Reset() = 0;
 
@@ -83,11 +83,9 @@ class QpSplineSmoother : public CurveSmoother {
         QpSplineSmoother(SaveData* p_savedata);
         virtual ~QpSplineSmoother() = default;
 
-        virtual SmootherStatus GetSmoothCurve( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
+        virtual SmootherStatus GetSmoothLine( // 核心函数 : 计算平滑后轨迹点信息序列，返回求解器状态
                 deque<SmoothLinePoint>& smooth_line_points);
         virtual void Reset();
-
-        void PrintInfo() const; // 打印运行信息
 
         void Txt2Vector(deque<CurvePoint>& res, const string& pathname); // debug
 
@@ -111,7 +109,9 @@ class QpSplineSmoother : public CurveSmoother {
                 MatrixXd& matrix_a_equ, MatrixXd& matrix_b_equ) const;
         void CalInequalityConstraint(
                 MatrixXd& matrix_a_inequ, MatrixXd& matrix_b_inequ) const;
-        void CalSmoothTraj(const VectorXd& poly_coefficient);
+        void CalSmoothTraj(
+                const VectorXd& poly_coefficient,
+                deque<SmoothLinePoint>& smooth_line);
 
         c_int OptimizationSolver( // 二次规划问题求解
                 VectorXd &optimal_solution, MatrixXd matrix_p,
@@ -137,6 +137,7 @@ class QpSplineSmoother : public CurveSmoother {
         int Double2Int(double var) { return (int)(var + 0.5); }
 
         virtual void SaveLog(); // 保存日志
+        void PrintInfo() const; // 打印运行信息
 
         double len_line_; // 采点相关参数
         double len_init_;

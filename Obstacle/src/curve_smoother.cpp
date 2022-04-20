@@ -1,5 +1,5 @@
 #include <osqp/osqp.h>
-#include "qp_spline_smoother.h"
+#include "curve_smoother.h"
 
 CurveSmoother::CurveSmoother(SaveData* p_savedata) {
     p_savedata_ = p_savedata;
@@ -57,7 +57,7 @@ QpSplineSmoother::QpSplineSmoother(
     osqp_solver_exitflag_ = -1;
 };
 
-SmootherStatus QpSplineSmoother::GetSmoothCurve(
+SmootherStatus QpSplineSmoother::GetSmoothLine(
         deque<SmoothLinePoint>& smooth_line_points) {
     struct timeval t_start, t_end; // debug
     gettimeofday(&t_start,NULL);
@@ -145,7 +145,7 @@ SmootherStatus QpSplineSmoother::GetSmoothCurve(
             return SmootherStatus::warning_optimize;
         }
     } else {
-        CalSmoothTraj(optimal_coefficient);
+        CalSmoothTraj(optimal_coefficient, smooth_line_points);
 
         SaveLog();
 
@@ -718,7 +718,8 @@ void QpSplineSmoother::Txt2Vector(
     read_file.close();
 }
 
-void QpSplineSmoother::CalSmoothTraj(const VectorXd& poly_coefficient) {
+void QpSplineSmoother::CalSmoothTraj(
+    const VectorXd& poly_coefficient, deque<SmoothLinePoint>& smooth_line) {
     double nums_coef = 12;
     vector<double> poly_coef(nums_coef, 0);
     double s = 0.0, x, y, theta, kappa, s_accumulative;
@@ -778,6 +779,8 @@ void QpSplineSmoother::CalSmoothTraj(const VectorXd& poly_coefficient) {
     }
 
     ShearCutTraj();
+
+    smooth_line = smooth_line_;
 }
 
 void QpSplineSmoother::ShearCutTraj() { // 剪切掉s-l系下，s值小于机器人当前位置的smooth_point点
@@ -858,6 +861,8 @@ void QpSplineSmoother::SaveLog() {
                           << " times_smoothing " << times_smoothing_
                           << endl;
     }
+
+    PrintInfo();
 }
 
 void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增量求解2 / 4 m在线拼接，如果rel_s<10.0m,增量2m，如果遇到折线转弯，增量+2m，如果搜到终点，则根据距离调整采点参数
