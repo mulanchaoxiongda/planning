@@ -63,6 +63,8 @@ int main(int argc, char **argv)
     RobotPose robot_pose = {0.0, 0.0, 0.0};
     piecewise_jerk_path_optimization.SetRobotPose(robot_pose);
 
+    piecewise_jerk_path_optimization.LoadOccupyMap("../data/OccupyMap.txt");
+
     deque<LocalPathPoint> local_path;
     piecewise_jerk_path_optimization.GetLocalPath(local_path);
 //////////////////////////////////////////////////////////////////////////////////
