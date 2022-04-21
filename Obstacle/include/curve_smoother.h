@@ -166,6 +166,7 @@ class QpSplineSmoother : public CurveSmoother {
         int times_osqp_failed_;
         int max_times_failed_;
         int times_smoothing_;
+        bool gate_smoother_start_;
 
         int osqp_solver_exitflag_; // osqp求解器相关参数
         c_int osqp_max_iteration_;

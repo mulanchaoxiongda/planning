@@ -27,7 +27,7 @@ QpSplineSmoother::QpSplineSmoother(
     len_increment_ = 2.0;
     len_fragment_ = 1.0;
     interval_sampling_ = 0.2;
-    interval_sample_ = 0.01;
+    interval_sample_ = 0.05; // 取栅格图分辨率
     ub_line_len_ = 10.0;
     nums_fragments_ = Double2Int(len_line_ / len_fragment_);
     nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
@@ -50,6 +50,7 @@ QpSplineSmoother::QpSplineSmoother(
     times_smoothing_ = 0;
 
     smoother_state_ = SmootherState::init;
+    gate_smoother_start_ = false;
 
     osqp_max_iteration_ = 200;
     osqp_eps_abs_ = 0.001;
@@ -164,7 +165,7 @@ void QpSplineSmoother::Reset() { // 每次规划任务前均需要重置配置
     len_line_ = len_init_;
     len_fragment_ = 1.0;
     interval_sampling_ = 0.2;
-    interval_sample_ = 0.01;
+    interval_sample_ = 0.05;
     nums_fragments_ = Double2Int(len_line_ / len_fragment_);
     nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
 
@@ -175,6 +176,7 @@ void QpSplineSmoother::Reset() { // 每次规划任务前均需要重置配置
     times_smoothing_ = 0;
 
     smoother_state_ = SmootherState::init;
+    gate_smoother_start_ = false;
     osqp_solver_exitflag_ = -1;
 
     curve_points_.clear();
@@ -732,8 +734,8 @@ void QpSplineSmoother::CalSmoothTraj(
         for (int j = 0; j < nums_coef; ++j) {
             poly_coef[j] = poly_coefficient[i * nums_coef + j];
         }
-
-        if (i != 0 || smoother_state_ != SmootherState::init) {
+        
+        if (i != 0 || gate_smoother_start_ != false) {
             s = interval_sample_;
         }
 
@@ -867,9 +869,10 @@ void QpSplineSmoother::SaveLog() {
 
 void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增量求解2 / 4 m在线拼接，如果rel_s<10.0m,增量2m，如果遇到折线转弯，增量+2m，如果搜到终点，则根据距离调整采点参数
     ++times_smoothing_;
-
+    
     if (smoother_state_ == SmootherState::init) {
         if (osqp_solver_exitflag_ == 0) {
+            gate_smoother_start_ = true;
             smoother_state_ = SmootherState::splicing;
         } else {
             vector<double> pos_robot = {robot_pose_.x, robot_pose_.y};
@@ -910,12 +913,13 @@ void QpSplineSmoother::SmootherParaCfg() { // 逻辑 : 判断折线转弯，增�
         len_line_ = dis2goal;
         len_fragment_ = len_line_ / (int(len_line_) + 1);
         interval_sampling_ = len_fragment_ / 5.0;
-        interval_sample_ = len_fragment_ / 100.0;
+        interval_sample_ = len_fragment_ / 20.0;
 
         nums_fragments_ = Double2Int(len_line_ / len_fragment_);
         nums_in_fragment_ = Double2Int(len_fragment_ / interval_sampling_);
 
         smoother_state_ = SmootherState::finished;
+        gate_smoother_start_ = false;
         return;
     }
 

@@ -11,17 +11,25 @@
 using namespace std;
 
 struct FesiableRegion {
+    double x;
+    double y;
+    double theta;
+    double kappa;
+
     double s;
     double l_min;
     double l_max;
-    double theta;
 };
 
 struct BasePoint {
+    double x;
+    double y;
+    double theta;
+    double kappa;
+
     double s;
     double l_min;
     double l_max;
-    double theta;
 };
 
 struct LocalPathPoint {
@@ -108,7 +116,7 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
         void SmootherParaCfg(); // 参数配置
 
         bool SmoothGlobalPath(); // 平滑全局路径
-        bool CalFesiableRegion(); // 栅格障碍信息映射到s-l系求可行域
+        bool CalPathFesiableRegion(); // 栅格障碍信息映射到s-l系求可行域
         void SamplingBasePoints(); // 采点
 
         void CalObjectiveFunc(MatrixXd& matrix_h, VectorXd& matrix_f) const; // 分段五次多项式拟合优化问题构建
@@ -123,6 +131,8 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
 
         void CalGlobalSystemPath();
 
+        bool CalPointFesiableRegion(
+                double& l_min, double& l_max, const SmoothLinePoint point_info);
         vector<int> CalPathLenWithinMap(); // 返回值 : global_paht_smoothed_位于栅格图内的起点和边界点的索引值
         int  FindNearestPoint(
                 const vector<double>& position, const deque<SmoothLinePoint>& smooth_traj);
@@ -176,7 +186,23 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
             return false;
         }
 
-        double running_time_; // debug
+        bool IsPointOccupied(const double x, const double y) {
+            int idx_x = (int)(x) / 0.05;
+            int idx_y = (int)(y) / 0.05;
+
+            return false; // debug
+        
+            if (occupy_map_(idx_x, idx_y)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        double running_time_;
+
+        const double pi_half_ = 3.1415926536 / 2.0;
+        const double pi_ = 3.1415926536;
 };
 
 // todo : 按照自己理解，架构流程函数，并实现非优化相关函数功能 ： 
