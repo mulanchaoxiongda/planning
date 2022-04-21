@@ -180,7 +180,7 @@ class QpSplineSmoother : public CurveSmoother {
 
 
 
-
+// todo : curve_points_ 和 robot_pose_ 的更新，若在planner中调用类的话
 // todo : 画图
 // todo : 拼接剪裁测试 ParaCfg()测试 折线转弯测试 goal_point测试
 // todo : 默认global_paht点列增序方向就是机器人期望行驶方向

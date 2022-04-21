@@ -39,16 +39,11 @@ PlannerStatus PiecewiseJerkPathOptimization::GetLocalPath(
         deque<LocalPathPoint>& local_path) {
     struct timeval t_start, t_end; // debug
     gettimeofday(&t_start,NULL);
-
-    SmootherStatus smoother_status =
-            curve_smoother_ptr_->GetSmoothLine(global_path_smoothed_);
-
-    if (smoother_status == SmootherStatus::fail_no_global_path) {
-        return PlannerStatus::smoother_no_global_path;
-    } else if (smoother_status == SmootherStatus::fail_optimize) {
+    
+    if (!SmoothGlobalPath()) {
         return PlannerStatus::smoother_failed;
     }
-    
+
     // LoadOccupyMap();
 
     SaveLog();
@@ -70,6 +65,8 @@ void PiecewiseJerkPathOptimization::Reset() {
 
     global_path_smoothed_.clear();
     local_path_.clear();
+    base_points_.clear();
+    fesiable_region_.clear();
 
     planner_state_ = PlannerState::start;
 }
@@ -90,6 +87,94 @@ void PiecewiseJerkPathOptimization::LoadOccupyMap(string pathname) {
 
 void PiecewiseJerkPathOptimization::LoadOccupyMap() {
     ; // occupy_map_ = map_ptr_->GetOccupyMap();
+}
+
+void PiecewiseJerkPathOptimization::SmootherParaCfg() {
+    ;
+}
+
+bool PiecewiseJerkPathOptimization::SmoothGlobalPath() {
+    SmootherStatus smoother_status =
+            curve_smoother_ptr_->GetSmoothLine(global_path_smoothed_);
+
+    if (smoother_status == SmootherStatus::fail_no_global_path || smoother_status == SmootherStatus::fail_optimize) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool PiecewiseJerkPathOptimization::CalFesiableRegion() {
+    vector<int> idx_range(2);
+    idx_range = CalPathLenWithinMap();
+
+    double sample_res = 0.05; // 采点间隔
+    int nums_sample_point = (int) (len_ref_s_ / sample_res);
+
+    // fesiable_region_;
+
+    for (int i = 0; i < nums_sample_point; ++i) {
+        ;
+    }
+
+    return true;
+}
+
+vector<int> PiecewiseJerkPathOptimization::CalPathLenWithinMap() {
+    len_ref_s_ = 0.001;
+
+    vector<double> robot_pos = {robot_pose_.x, robot_pose_.y};
+    int idx_start = FindNearestPoint(robot_pos, global_path_smoothed_), idx_end;
+
+    int len_global_path = global_path_smoothed_.size();
+    for (int i = idx_start + 1; i < len_global_path; ++i) {
+        if (!IsPointInMap(global_path_smoothed_[i].x, global_path_smoothed_[i].y,
+                          robot_pose_.x, robot_pose_.y)) {
+            idx_end = i - 1;
+
+            break;
+        }
+
+        vector<double> rel_vec(2);
+        rel_vec[0] = global_path_smoothed_[i].x - global_path_smoothed_[i -1].x;
+        rel_vec[1] = global_path_smoothed_[i].y - global_path_smoothed_[i -1].y;
+        len_ref_s_ += Norm(rel_vec);
+    }
+
+    return vector<int> {idx_start, idx_end};
+}
+
+double PiecewiseJerkPathOptimization::Norm(const vector<double> &x) const {
+    double val = 0.0;
+
+    for (auto elem: x) {
+        val += elem * elem;
+    }
+
+    return sqrt(val);
+}
+
+int  PiecewiseJerkPathOptimization::FindNearestPoint(
+                const vector<double>& position, const deque<SmoothLinePoint>& smooth_traj) {
+    int num_points = smooth_traj.size();
+
+    double dis, dis_pre;
+    vector<double> rel_vec(2, 0.0);
+
+    for (int i = 0; i < num_points; ++i) { // 忽略点在s-l系坐标的奇异性
+        rel_vec = {
+                position[0] - smooth_traj[i].x,
+                position[1] - smooth_traj[i].y };
+        dis = Norm(rel_vec);
+
+        if (i >= 1 && dis >= dis_pre) {
+            return i - 1;
+        }
+
+        dis_pre = dis;
+    }
+
+    return -1;
 }
 
 void PiecewiseJerkPathOptimization::SaveLog() {
