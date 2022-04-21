@@ -71,6 +71,7 @@ void PiecewiseJerkPathOptimization::Reset() {
     local_path_.clear();
     base_points_.clear();
     fesiable_region_.clear();
+    expand_intervals_.clear();
 
     planner_state_ = PlannerState::start;
 }
@@ -134,21 +135,128 @@ bool PiecewiseJerkPathOptimization::CalPathFesiableRegion() {
         fesiable_region_.push_back({x, y, theta, kappa, s, lmin, lmax});
     }
 
+    if(!ExpandObstacles()) { // todo ： 膨胀障碍物考量因素 : 车身尺寸、定位与建图精度、分段加价速度优化算法需求的空间余量
+        cout << "[bypass_obatacle] there is no fesiable region after expandind obstalce！ " << endl;
+        return false;
+    }
+
+    return true;
+}
+
+bool PiecewiseJerkPathOptimization::ExpandObstacles() {
+    int nums_points = fesiable_region_.size();
+
+    vector<bool> obstacle_sign(nums_points, 0);
+
+    double road_wid_margin = 0.001;
+    double road_half_wid = robot_wid_ * 4.0 + road_wid_margin; // 虚拟车道宽度
+
+    double step_l = 0.05; // todo : step_l取栅格图分辨率----point_kappa大时，存在障碍物漏检的风险，视运算速度适当调小该值
+    int nums_l_occupy = (int)(2.0 * road_half_wid / step_l) + 2;
+    double modified_road_half_wid =
+            (double)((nums_l_occupy - 1) / 2) * step_l + road_wid_margin; // 修正车道宽度
+
+    for (int i = 0; i < nums_points; ++i) {
+        if (fesiable_region_[i].l_max < road_half_wid ||
+            fesiable_region_[i].l_min > -road_half_wid) {
+            obstacle_sign[i] = 1;
+        }
+    }
+    int left = 0, right = 0;
+    double lmin_max = -road_half_wid, lmax_min = road_half_wid;
+    bool occupy_sign = false;
+
+    expand_intervals_.clear();
+    while (right < nums_points) {
+        if (occupy_sign) {
+            if (obstacle_sign[right]) {
+                lmin_max = max(lmin_max, fesiable_region_[right].l_min);
+                lmax_min = min(lmax_min, fesiable_region_[right].l_max);
+            } else {
+                occupy_sign = false;
+
+                expand_intervals_.push_back({left, right - 1, lmax_min, lmin_max});
+
+                lmin_max = -road_half_wid;
+                lmax_min = road_half_wid;
+            }
+        } else {
+            if (obstacle_sign[right]) {
+                occupy_sign = true;
+
+                left = right;
+                lmin_max = max(lmin_max, fesiable_region_[right].l_min);
+                lmax_min = min(lmax_min, fesiable_region_[right].l_max);
+            }
+        }
+
+        ++right;
+    }
+
+    if(ExpandObstacle(modified_road_half_wid)) {
+        return true;
+    }
+
+    return false;
+}
+
+bool PiecewiseJerkPathOptimization::ExpandObstacle(const double& modified_road_half_wid) {
+    int nums_points = fesiable_region_.size();
+
+    double l_bound = robot_wid_ * 3.0; // 车体中心虚拟可通行道路半宽值
+    double l_bound_obs = modified_road_half_wid - 0.01; // 虚拟可通行道路边缘外无障碍物判判据
+
+    int idx_start, idx_end;
+    double lmin_max, lmax_min;
+
+    double map_error, s_planning_margin, l_planning_margin;
+    map_error = 0.3; // todo : 
+    s_planning_margin = robot_len_ * 0.5 + 0.3; // todo : 调试
+    l_planning_margin = robot_wid_ * 0.5 + 0.2;
+
+    double s_expand, l_expand;
+    s_expand = map_error + s_planning_margin;
+    l_expand = map_error + l_planning_margin;
+
+    double min_fesiable_wid = robot_wid_ + 0.4; // todo : 调试
+
+    int idx_expend = (int)(s_expand / fesiable_region_[1].s - fesiable_region_[0].s) + 1;
+
+    for (auto number : expand_intervals_) {
+        idx_start = max(number.idx_start - idx_expend, 0);
+        idx_end   = min(number.idx_end + idx_expend, nums_points - 1);
+
+        lmin_max  = number.lmin_max >= -l_bound_obs ? number.lmin_max + l_expand : number.lmin_max;
+        lmin_max  = max(lmin_max, -l_bound);
+        
+        lmax_min  = number.lmax_min <=  l_bound_obs ? number.lmax_min - l_expand : number.lmax_min;
+        lmax_min  = min(lmax_min, l_bound);
+
+        if (lmax_min - lmin_max < min_fesiable_wid) {
+            return false;
+        }
+
+        for (int i = idx_start; i <= idx_end; ++i) {
+            fesiable_region_[i].l_max = lmax_min;
+            fesiable_region_[i].l_min = lmin_max;
+        }
+    }
+
     return true;
 }
 
 bool PiecewiseJerkPathOptimization::CalPointFesiableRegion(
         double& l_min, double& l_max, const SmoothLinePoint point_info) {
     double road_wid_margin = 0.001;
-    double road_half_wid = robot_wid_ * 3.0 + road_wid_margin; // 虚拟车道宽度
+    double road_half_wid = robot_wid_ * 4.0 + road_wid_margin; // 虚拟车道宽度
     
-    double step_l = 0.05; // step_l取栅格图分辨率
+    double step_l = 0.05; // todo : step_l取栅格图分辨率----point_kappa大时，存在障碍物漏检的风险，视运算速度适当调小该值
     double step_x = step_l * cos(point_info.theta + pi_half_);
     double step_y = step_l * sin(point_info.theta + pi_half_);
 
-    int nums_l_occupy = (int)(2.0 * road_half_wid / step_l) + 1;
+    int nums_l_occupy = (int)(2.0 * road_half_wid / step_l) + 2;
     double modified_road_half_wid =
-            (double)((nums_l_occupy - 1) / 2) * step_l +  + road_wid_margin; // 修正车道宽度
+            (double)((nums_l_occupy - 1) / 2) * step_l + road_wid_margin; // 修正车道宽度
 
     double sample_l = -modified_road_half_wid;
     double sample_x =
@@ -163,7 +271,7 @@ bool PiecewiseJerkPathOptimization::CalPointFesiableRegion(
     double r_min = 1.0 / point_info.kappa;
 
     for (int i = 0; i <= nums_l_occupy; ++i) { // 在global_path_基准点切线的垂线段上以栅格地图分辨率采点，并判断占用情况
-        if (point_info.kappa >= 0.0) { // s-l系下有奇异性的点视为障碍物占用点
+        if (point_info.kappa >= 0.0) { // s-l系下有奇异性的点视为障碍物占用点 [说明：theta是速度矢量方向角--航向角，则对前行 && 后退时的奇异点判断均有效]
             if (sample_l >= r_min) {
                 continue;
             }
@@ -173,8 +281,12 @@ bool PiecewiseJerkPathOptimization::CalPointFesiableRegion(
             }
         }
         
-        l_occupy[i] = IsPointOccupied(sample_x, sample_y); // todo : 暂定超出局部障碍栅格图范围的点为自由点
-        
+        if (IsPointInMap(sample_x, sample_y, robot_pose_.x, robot_pose_.y)) { // todo : 根据NaviCostMap类的栅格地图数据细节 && IsInMap()函数细节，决定是否需要重写函数
+            l_occupy[i] = IsPointOccupied(sample_x, sample_y);
+        } else {
+            l_occupy[i] = false; // todo : 暂定超出局部障碍栅格图范围的点为自由点
+        }
+
         sample_l += step_l;
         sample_x += step_x;
         sample_y += step_y;
@@ -223,7 +335,7 @@ bool PiecewiseJerkPathOptimization::CalPointFesiableRegion(
     l_min = -modified_road_half_wid + left_widest * step_l;
     l_max = -modified_road_half_wid + right_widest * step_l;
 
-    double road_wid_min = robot_wid_ * 2.5; // todo : 最窄可通行路宽
+    double wid_margin = 1.0, road_wid_min = robot_wid_ + wid_margin; // todo : 最窄可通行路宽
     if (l_max - l_min >= road_wid_min) {
         return true;
     } else {
@@ -253,6 +365,11 @@ vector<int> PiecewiseJerkPathOptimization::CalPathLenWithinMap() {
     }
 
     return vector<int> {idx_start, idx_end};
+}
+
+void PiecewiseJerkPathOptimization::SamplingBasePoints() {
+    // deque<BasePoint> base_points_
+    ;
 }
 
 double PiecewiseJerkPathOptimization::Norm(const vector<double> &x) const {
@@ -374,4 +491,27 @@ void PiecewiseJerkPathOptimization::txt_to_vectordouble(
     }
 
     read_file.close();
+}
+
+bool PiecewiseJerkPathOptimization::IsPointInMap(double x, double y, double x_agv, double y_agv) {
+    double dis_x = fabs(x - x_agv), dis_y = fabs(y - y_agv);
+
+    if (dis_x <= 6.0 && dis_y <= 6.0) {
+        return true;
+    }
+
+    return false;
+}
+
+bool PiecewiseJerkPathOptimization::IsPointOccupied(const double x, const double y) {
+    int idx_x = (int)(x) / 0.05;
+    int idx_y = (int)(y) / 0.05;
+
+    return false; // debug
+
+    if (occupy_map_(idx_x, idx_y)) {
+        return true;
+    } else {
+        return false;
+    }
 }

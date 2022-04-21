@@ -10,6 +10,13 @@
 
 using namespace std;
 
+struct ExpandInterval {
+    int idx_start;
+    int idx_end;
+    double lmax_min;
+    double lmin_max;
+};
+
 struct FesiableRegion {
     double x;
     double y;
@@ -133,6 +140,8 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
 
         bool CalPointFesiableRegion(
                 double& l_min, double& l_max, const SmoothLinePoint point_info);
+        bool ExpandObstacles();
+        bool ExpandObstacle(const double& modified_road_half_wid);
         vector<int> CalPathLenWithinMap(); // 返回值 : global_paht_smoothed_位于栅格图内的起点和边界点的索引值
         int  FindNearestPoint(
                 const vector<double>& position, const deque<SmoothLinePoint>& smooth_traj);
@@ -162,6 +171,8 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
         double Norm(const vector<double> & x) const;
         double VecDotMultip(const vector<double> &x, const vector<double> &y) const;
         int Double2Int(double var) { return (int)(var + 0.5); }
+        double MaxDouble(double& x, double& y) {return x > y ? x : y;}
+        double MinDouble(double& x, double& y) {return x < y ? x : y;}
 
         virtual void SaveLog(); // 保存日志
         void DisplayInfo() const; // 打印信息
@@ -170,34 +181,15 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
 
         deque<FesiableRegion> fesiable_region_;
         deque<BasePoint> base_points_; // todo : 注意s值的对齐，如果对不齐，6m结束规划不可行
+        vector<ExpandInterval> expand_intervals_;
 
         double len_ref_s_;
         
         int planning_times_;
 
     private: // debug
-        bool IsPointInMap(double x, double y, double x_agv, double y_agv) {
-            double dis_x = fabs(x - x_agv), dis_y = fabs(y - y_agv);
-
-            if (dis_x <= 6.0 && dis_y <= 6.0) {
-                return true;
-            }
-
-            return false;
-        }
-
-        bool IsPointOccupied(const double x, const double y) {
-            int idx_x = (int)(x) / 0.05;
-            int idx_y = (int)(y) / 0.05;
-
-            return false; // debug
-        
-            if (occupy_map_(idx_x, idx_y)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        bool IsPointInMap(double x, double y, double x_agv, double y_agv);
+        bool IsPointOccupied(const double x, const double y);
 
         double running_time_;
 
