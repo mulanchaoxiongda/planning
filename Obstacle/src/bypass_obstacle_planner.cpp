@@ -99,11 +99,11 @@ void PiecewiseJerkPathOptimization::SmootherParaCfg() {
 }
 
 bool PiecewiseJerkPathOptimization::SmoothGlobalPath() {
-    SmootherStatus smoother_status =
+    smoother_status_ =
             curve_smoother_ptr_->GetSmoothLine(global_path_smoothed_);
 
-    if (smoother_status == SmootherStatus::fail_no_global_path ||
-        smoother_status == SmootherStatus::fail_optimize) {
+    if (smoother_status_ == SmootherStatus::fail_no_global_path ||
+        smoother_status_ == SmootherStatus::fail_optimize) {
         return false;
     } else {
         return true;
@@ -362,7 +362,35 @@ vector<int> PiecewiseJerkPathOptimization::CalPathLenWithinMap() {
 
 void PiecewiseJerkPathOptimization::SamplingBasePoints() {
     // deque<BasePoint> base_points_
+    base_points_.clear();
+
+    fesiable_region_;
+
+    double step_s = 0.05; // 取值 : 地图分辨率
+    double delta_s = 0.5;
     ;
+}
+
+vector<double> PiecewiseJerkPathOptimization::FindMatchPoint(
+        const double& x, const double& y) {
+    vector<double> pos_match_point(2, -100000000.0);
+
+    double dis, dis_pre;
+    vector<double> rel_vec(2, 0.0), direction_vec(2, 0.0);
+
+    int idx = 0;
+    for (auto member : fesiable_region_) {
+        rel_vec = {x - member.x, y - member.y};
+        direction_vec = {cos(member.theta), sin(member.theta)};
+
+        if (VecDotMultip(rel_vec, direction_vec) <= 0.0) {
+            break;
+        }
+
+        ++idx;
+    }
+
+    return pos_match_point;
 }
 
 double PiecewiseJerkPathOptimization::Norm(const vector<double> &x) const {
@@ -507,4 +535,17 @@ bool PiecewiseJerkPathOptimization::IsPointOccupied(const double x, const double
     } else {
         return false;
     }
+}
+
+double PiecewiseJerkPathOptimization::VecDotMultip(
+        const vector<double> &x, const vector<double> &y) const {
+    assert(x.size() == y.size());
+
+    double sum = 0.0;
+
+    for (size_t i = 0; i < x.size(); ++i) {
+        sum += x[i] * y[i];
+    }
+
+    return sum;
 }

@@ -102,6 +102,7 @@ class BypassObstaclePlanner { // 输入 : 车辆位姿 && 代价地图 && 参考
         double map_resolution_;
 
         PlannerState planner_state_;
+        SmootherStatus smoother_status_;
 
         SaveData *p_savedata_; // debug
 };
@@ -148,6 +149,7 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
         int  FindNearestPoint(
                 const vector<double>& position,
                 const deque<SmoothLinePoint>& smooth_traj);
+        vector<double> FindMatchPoint(const double& x, const double& y);
         bool GoalPointExamine(
                 const vector<double>& point_pos, const double& len_examined,
                 double& dis2goal);

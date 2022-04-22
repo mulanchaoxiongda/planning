@@ -79,7 +79,9 @@ SmootherStatus QpSplineSmoother::GetSmoothLine(
     SmootherParaCfg();
 
     if (smoother_state_ == SmootherState::waiting) {
+        ShearCutTraj();
         SaveLog();
+        
         return SmootherStatus::wait;
     }
 
@@ -138,6 +140,8 @@ SmootherStatus QpSplineSmoother::GetSmoothLine(
 
             return SmootherStatus::fail_optimize;
         } else {
+            ShearCutTraj();
+
             cout << "[warning] global path is failed to be smoothed : " 
                  << times_osqp_failed_ << " times!"
                  << endl;

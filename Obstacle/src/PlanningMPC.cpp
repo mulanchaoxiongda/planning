@@ -172,7 +172,7 @@ ControlCommand PlanningMPC::CalRefTrajectory(
                     ref_point_command_.at(nu_ * i + j);    
         }
     }
-    
+
     UpdateReferenceTrajectory();
 
     optimal_traj_points.assign(opt_traj_points_.begin(),

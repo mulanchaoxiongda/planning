@@ -171,7 +171,7 @@ class QpSplineSmoother : public CurveSmoother {
         int osqp_solver_exitflag_; // osqp求解器相关参数
         c_int osqp_max_iteration_;
         c_float osqp_eps_abs_;
-        
+
         double running_time_; // debug
 
         vector<SamplingPoint> sampling_points_; // 采点信息序列
