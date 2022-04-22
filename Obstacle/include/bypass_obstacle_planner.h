@@ -141,10 +141,13 @@ class PiecewiseJerkPathOptimization : public BypassObstaclePlanner {
         bool CalPointFesiableRegion(
                 double& l_min, double& l_max, const SmoothLinePoint point_info);
         bool ExpandObstacles();
-        bool ExpandObstacle(const double& modified_road_half_wid);
+        bool ExpandObstacle(
+                const ExpandInterval expand_interval,
+                const double& modified_road_half_wid);
         vector<int> CalPathLenWithinMap(); // 返回值 : global_paht_smoothed_位于栅格图内的起点和边界点的索引值
         int  FindNearestPoint(
-                const vector<double>& position, const deque<SmoothLinePoint>& smooth_traj);
+                const vector<double>& position,
+                const deque<SmoothLinePoint>& smooth_traj);
         bool GoalPointExamine(
                 const vector<double>& point_pos, const double& len_examined,
                 double& dis2goal);
